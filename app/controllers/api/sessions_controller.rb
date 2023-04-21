@@ -1,6 +1,7 @@
 class Api::SessionsController < ApplicationController
     # retrieving current user GET '/api/session'
     def show
+        banana
         if current_user
             @user = current_user
             render 'api/users/show'

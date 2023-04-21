@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   # SPIRE
   def self.find_by_credentials(username, password)
-    user = User.find_by(username)
+    user = User.find_by(username: username)
     # return matching user if password is correct; else return falsey value
     user&.authenticate(password) # authenticate instance method is defined by has_secure_password
   end

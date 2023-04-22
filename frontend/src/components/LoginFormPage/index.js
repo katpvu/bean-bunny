@@ -3,7 +3,8 @@ import { useState } from 'react';
 import './index.css'
 import { login } from '../../store/session';
 import { Redirect } from 'react-router-dom';
-// import { checkErrors } from '../../utils';
+import { checkErrors } from '../../utils';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const LoginFormPage = (props) => {
     // hooks
@@ -22,22 +23,22 @@ const LoginFormPage = (props) => {
             password: password
         };
         dispatch(login(user))
-            // .catch(res => {
-            //     let errors = await checkErrors(res)
-            //     console.log(errors)
-            //     setErrors(errors)
-            // })
-            .catch(async (res) => {
-                let data;
-                try {
-                    data = await res.clone().json();
-                } catch {
-                    data = await res.text();
-                }
-                if (data?.errors) setErrors(data.errors);
-                else if (data) setErrors([data]);
-                else setErrors([res.statusText]);
+            .catch(async res => {
+                let errors = await checkErrors(res)
+                console.log(errors)
+                setErrors(errors)
             })
+            // .catch(async (res) => {
+            //     let data;
+            //     try {
+            //         data = await res.clone().json();
+            //     } catch {
+            //         data = await res.text();
+            //     }
+            //     if (data?.errors) setErrors(data.errors);
+            //     else if (data) setErrors([data]);
+            //     else setErrors([res.statusText]);
+            // })
     };
 
     const handleDemoLogIn = (e) => {
@@ -69,10 +70,12 @@ const LoginFormPage = (props) => {
                         </label>
                     </div>
                 </div>
-                
+                <div className="create-acc-line">
+                    <p >Not a member yet? <Link to="/signup">Create an account</Link></p>
+                </div>
                 <div className="submit-buttons-container">
                     <button>Sign In</button>
-                    <br></br>
+
                     <button onClick={handleDemoLogIn}>Log In as Demo User!</button>
                 </div>
             </form>

@@ -1,18 +1,24 @@
 .form-container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
 }
 
 .form-input-container {
-    display: block;
-    margin: 0 auto;
-    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid blue; */
+}
+
+.form-input-container * {
+    margin: 5px;
 }
 
 .input-container {
     display: flex;
     margin: 0 auto;
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
 }
 .input-container * {
     display: block;
@@ -20,27 +26,34 @@
 
 label {
     display: block;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     margin: 0 auto;
 }
 
+.submit-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid darkblue */
+}
+
 .submit-buttons-container * {
-    display: block;
-    margin: 0 auto;
+    margin: 5px;
 }
 
 button {
     width: 300px;
     height: 30px;
     border-radius: 999px;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     cursor: pointer;
     transition: all 0.3s ease;
 }
 button:hover {
     background-color: #e7e7e7;
     color: red;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     
 }
 button:focus {
@@ -51,4 +64,12 @@ input[type=text], input[type=password] {
     padding: 5px;
     border-radius: 6px;
     border: 1px solid gray
+}
+
+.create-acc-line {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
 }

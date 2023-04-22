@@ -1,0 +1,54 @@
+.form-container {
+    border: 1px solid black;
+
+}
+
+.form-input-container {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid blue;
+}
+
+.input-container {
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid orange;
+}
+.input-container * {
+    display: block;
+}
+
+label {
+    display: block;
+    border: 1px solid yellow;
+    margin: 0 auto;
+}
+
+.submit-buttons-container * {
+    display: block;
+    margin: 0 auto;
+}
+
+button {
+    width: 300px;
+    height: 30px;
+    border-radius: 999px;
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button:hover {
+    background-color: #e7e7e7;
+    color: red;
+    border: 1px solid blue;
+    
+}
+button:focus {
+    box-shadow: inset 0px 1px 2px #6e6e6e;
+}
+
+input[type=text], input[type=password] {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid gray
+}

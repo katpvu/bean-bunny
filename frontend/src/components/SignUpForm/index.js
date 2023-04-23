@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import './index.css'
-import { login, signup } from '../../store/session';
+import { signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
-import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const SignUpForm = (props) => {
 

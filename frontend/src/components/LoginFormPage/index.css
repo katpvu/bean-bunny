@@ -1,24 +1,31 @@
-.form-container {
-    /* border: 1px solid black; */
+.login-container {
+    border: 1px solid black;
+}
 
+.login-container h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 28px;
+    margin: 10px
+}
+.form-container {
+    border: 1px solid black;
 }
 
 .form-input-container {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
 }
 
 .form-input-container * {
     margin: 5px;
 }
 
+
 .input-container {
     display: flex;
     margin: 0 auto;
-    /* border: 1px solid orange; */
+    border: 1px solid orange;
 }
 .input-container * {
     display: block;
@@ -26,16 +33,13 @@
 
 label {
     display: block;
-    /* border: 1px solid yellow; */
+    border: 1px solid yellow;
     margin: 0 auto;
 }
 
 .submit-buttons-container {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid darkblue */
+    border: 1px solid darkblue
 }
 
 .submit-buttons-container * {
@@ -46,7 +50,7 @@ label {
     width: 300px;
     height: 30px;
     border-radius: 999px;
-    /* border: 1px solid gray; */
+    border: 1px solid gray;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -67,9 +71,19 @@ input[type=text], input[type=password] {
 }
 
 .create-acc-line {
-    /* border: 1px solid green; */
+    border: 1px solid green;
+    margin: 5px;
+}
+
+.center {
+    /* background-color: blue; */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
+}
+
+.errors {
+    color: red;
+    flex-direction: column;
+    margin: 10px;
 }

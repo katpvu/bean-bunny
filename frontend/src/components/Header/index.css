@@ -1,0 +1,11 @@
+.header-container {
+    /* display: flex; */
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid blue;
+}
+
+#bunny-logo {
+    font-size: 40px;
+}

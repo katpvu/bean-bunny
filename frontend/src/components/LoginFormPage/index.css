@@ -42,7 +42,7 @@ label {
     margin: 5px;
 }
 
-button {
+.login-button {
     width: 300px;
     height: 30px;
     border-radius: 999px;
@@ -50,13 +50,13 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-button:hover {
+.login-button:hover {
     background-color: #e7e7e7;
     color: red;
     /* border: 1px solid blue; */
     
 }
-button:focus {
+.login-button:focus {
     box-shadow: inset 0px 1px 2px #6e6e6e;
 }
 

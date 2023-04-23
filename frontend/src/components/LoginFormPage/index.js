@@ -4,11 +4,12 @@ import './index.css'
 import { login } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const LoginFormPage = (props) => {
     // hooks
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -47,7 +48,8 @@ const LoginFormPage = (props) => {
             username: 'demobunny',
             password: 'password'
         }
-        dispatch(login(demoUser));
+        dispatch(login(demoUser))
+            .then(history.push("/"))
     }
 
     return (
@@ -74,9 +76,9 @@ const LoginFormPage = (props) => {
                     <p >Not a member yet? <Link to="/signup">Create an account</Link></p>
                 </div>
                 <div className="submit-buttons-container">
-                    <button>Sign In</button>
+                    <button className="login-button">Sign In</button>
 
-                    <button onClick={handleDemoLogIn}>Log In as Demo User!</button>
+                    <button className="login-button" onClick={handleDemoLogIn}>Log In as Demo User!</button>
                 </div>
             </form>
         </div>

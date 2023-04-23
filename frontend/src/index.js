@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
@@ -17,6 +17,9 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
 }
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 function Root() {
   return (
     <Provider store={store}>
@@ -27,24 +30,19 @@ function Root() {
   );
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
 const renderApplication = () => {
-  ReactDOM.render(
+  root.render(
     <React.StrictMode>
       <Root />
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
   );
 }
 
-if (sessionStorage.getItem("X-CSRF-Token") === null) {
-  restoreCSRF().then(renderApplication);
+if (
+  sessionStorage.getItem("currentUser") === null ||
+  sessionStorage.getItem("X-CSRF-Token") === null 
+) {
+  store.dispatch(sessionActions.restoreSession()).then(renderApplication());
 } else {
   renderApplication();
 }

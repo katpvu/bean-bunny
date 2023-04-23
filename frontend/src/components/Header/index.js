@@ -11,6 +11,7 @@ const Header = (props) => {
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout())
+            // .then(console.log("logging out"))
             .then(history.push("/login"))
     }
     return (

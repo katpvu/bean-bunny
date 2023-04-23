@@ -17,6 +17,7 @@ const LoginFormPage = (props) => {
 
     if (sessionUser) return <Redirect to="/" />;
 
+
     const handleSubmit = e => {
         e.preventDefault();
         const user = {
@@ -50,6 +51,7 @@ const LoginFormPage = (props) => {
         }
         dispatch(login(demoUser))
             .then(history.push("/"))
+            .then(res => console.log(sessionUser, "sessionUser logging in"))
     }
 
     return (
@@ -62,13 +64,13 @@ const LoginFormPage = (props) => {
 
                 <div className="form-input-container">
                     <div className="input-container">
-                        <label forhtml="username">Username
-                            <input required id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        <label >Username
+                            <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </label>
                     </div>
                     <div className="input-container">
                         <label>Password
-                            <input required type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </label>
                     </div>
                 </div>

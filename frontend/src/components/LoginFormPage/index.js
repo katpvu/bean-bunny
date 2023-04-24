@@ -5,6 +5,7 @@ import { login } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import bean from '../../assets/bean.png'
 
 const LoginFormPage = (props) => {
     // hooks
@@ -47,12 +48,15 @@ const LoginFormPage = (props) => {
         center: "center",
         B: "create-acc-line",
         C: "form-input-container",
-        D: "submit-buttons-container"
+        D: "submit-buttons-container",
+        E: "bunny-logo",
+        F: "center"
     };
 
     return (
         <div className="login-container">
-            <h2 className="login-form-title">Sign In</h2>
+            <div className={`${styles.F}`}><img src={bean} className={`${styles.E}`} alt="logo"/></div>
+            <h2 className="login-form-title">Create an Account</h2>
             <form onSubmit={handleSubmit} className="form-container">
                 <ul>
                     {errors.map(error => <li key={error}>{error}</li>)}
@@ -61,12 +65,12 @@ const LoginFormPage = (props) => {
                 <div className={`${styles.center} ${styles.C}`}>
                     <div className="input-container">
                         <label >Username
-                            <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <input required className="sign-in-text-box" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </label>
                     </div>
                     <div className="input-container">
                         <label>Password
-                            <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input required className="sign-in-text-box" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </label>
                     </div>
                 </div>

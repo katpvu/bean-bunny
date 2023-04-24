@@ -1,0 +1,67 @@
+.profile-drop-down-container {
+    /* border: 1px solid black; */
+    width: 10vw;
+    height: 38px;
+    position: absolute;
+    top: 40px;
+    right: 5vw;
+}
+
+/* styled for mobile */
+.profile-dropdown {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid black;
+    border-radius: 10px 0px 0px 10px;
+    padding: 10px;
+    width: 70vw;
+    height: 100vw;
+    background-color: white;
+}
+
+.profile-dropdown-list-item {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    transition: all 0.3s ease;
+
+}
+
+.profile-dropdown-list-item:hover:not(:first-child) {
+    background-color: rgb(240, 240, 240);
+}
+
+.profile-dropdown-list-item:last-child {
+    border-bottom: 0;
+}
+
+.logout-button {
+    /* border: none; */
+    cursor: pointer;
+    font-weight: 700;
+
+}
+
+.username-profile-dd {
+    line-height: 2;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* When the screen size is larger than 600px */
+@media (min-width: 600px) {
+    .profile-drop-down-container {
+        width: 10vw;
+        height: 38px;
+        position: static;
+    }
+
+    .profile-dropdown {
+        top: 8vh; /* need to do some math on this*/
+        right: 4vw;
+        border-radius: 10px;
+        padding: 10px;
+        width: 200px;
+        height: auto;
+    }
+}

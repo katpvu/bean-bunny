@@ -5,6 +5,9 @@
     font-family: 'Comfortaa', cursive;
 }
 
+#root {
+    position: relative;
+}
 body {
     font-family: 'Comfortaa', cursive;
 }

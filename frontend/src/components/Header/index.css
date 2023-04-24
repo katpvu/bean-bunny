@@ -1,11 +1,23 @@
 .header-container {
-    /* display: flex; */
     display: block;
     justify-content: space-between;
     align-items: center;
     border: 1px solid blue;
+    position: relative;
 }
 
-#bunny-logo {
-    font-size: 40px;
+.bunny-logo {
+    width: 40vw;
+}
+
+@media (min-width: 600px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid blue;
+    }
+    .bunny-logo {
+        width: 10vw;
+    }
 }

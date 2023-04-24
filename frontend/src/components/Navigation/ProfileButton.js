@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useEffect } from 'react';
+import './index.css'
 
 const ProfileButton = ({user}) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -40,18 +41,27 @@ const ProfileButton = ({user}) => {
             .then(history.push("/login"))
     }
 
+    const styles = {
+        A: "profile-drop-down-container",
+        B: "center",
+        C: "profile-dropdown",
+        D: "profile-dropdown-list-item",
+        E: "logout-button",
+        F: "username-profile-dd"
+    }
+
     return (
         <>
-            <button onClick={openMenu}>
-                <FontAwesomeIcon icon={faUser} style={{color: "#3e3c3c",}} />    
-            </button>
+            <div onClick={openMenu} className={`${styles.A} ${styles.B}`}>
+                <FontAwesomeIcon icon={faUser} style={{color: "#3e3c3c", cursor: 'pointer'}} />    
+            </div>
             {showMenu && (
                 <div>
-                    <ul className="profile-dropdown">
-                        <li>Welcome, {user.username}</li>
-                        <li>Link to lists</li>
-                        <li>
-                            <button onClick={handleLogout}>Logout</button>
+                    <ul className={`${styles.C}`}>
+                        <li className={`${styles.D}`}>Welcome, <br></br><h2 className={`${styles.F}`}>{user.username}</h2></li>
+                        <li className={`${styles.D}`}>Link to lists</li>
+                        <li className={`${styles.D}`}>
+                            <div onClick={handleLogout} className={`${styles.E}`}>Logout</div>
                         </li>
                     </ul>
                 </div>

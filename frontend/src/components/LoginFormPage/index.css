@@ -1,5 +1,5 @@
 .login-container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .login-container h2 {
@@ -9,12 +9,12 @@
     margin: 10px
 }
 .form-container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .form-input-container {
     flex-direction: column;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .form-input-container * {
@@ -25,7 +25,7 @@
 .input-container {
     display: flex;
     margin: 0 auto;
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
 }
 .input-container * {
     display: block;
@@ -33,13 +33,13 @@
 
 label {
     display: block;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     margin: 0 auto;
 }
 
 .submit-buttons-container {
     flex-direction: column;
-    border: 1px solid darkblue
+    /* border: 1px solid darkblue */
 }
 
 .submit-buttons-container * {
@@ -64,14 +64,15 @@ label {
     box-shadow: inset 0px 1px 2px #6e6e6e;
 }
 
-input[type=text], input[type=password] {
+
+.sign-in-text-box, input[type=password] {
     padding: 5px;
     border-radius: 6px;
     border: 1px solid gray
 }
 
 .create-acc-line {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     margin: 5px;
 }
 

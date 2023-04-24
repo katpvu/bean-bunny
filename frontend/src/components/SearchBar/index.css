@@ -1,3 +1,10 @@
 .search-bar {
-    width: 80%;
+    width: 60%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid gray
+}
+
+.search-bar:focus {
+    outline: 2px solid rgb(243, 235, 235);
 }

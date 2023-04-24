@@ -51,11 +51,12 @@ const LoginFormPage = (props) => {
         D: "submit-buttons-container",
         E: "bunny-logo",
         F: "center",
-        G: "errors"
+        G: "errors",
+        H: "login-container"
     };
 
     return (
-        <div className="login-container">
+        <div className={`${styles.center} ${styles.H}`}>
             <div className={`${styles.F}`}><img src={bean} className={`${styles.E}`} alt="logo"/></div>
             <h2 className="login-form-title">Welcome back!</h2>
             <form onSubmit={handleSubmit} className="form-container">

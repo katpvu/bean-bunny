@@ -13,6 +13,7 @@ const SignUpForm = (props) => {
     const sessionUser = useSelector(state => state.session.user);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
@@ -21,6 +22,7 @@ const SignUpForm = (props) => {
         e.preventDefault();
         const newUser = {
             username: username,
+            email: email,
             password: password
         };
         dispatch(signup(newUser))
@@ -37,12 +39,14 @@ const SignUpForm = (props) => {
         C: "form-input-container",
         D: "submit-buttons-container",
         E: "errors",
-        F: "bunny-logo"
+        F: "bunny-logo",
+        G: "input-container",
+        H: "login-container"
     }
 
 
     return (
-        <div className="login-container">
+        <div className={`${styles.A} ${styles.H}`}>
             <div className={`${styles.A}`}><img src={bean} className={`${styles.F}`} alt="logo"/></div>
             <h2 className="login-form-title">Create an Account</h2>
             <form onSubmit={handleSubmit} className="form-container">
@@ -51,12 +55,17 @@ const SignUpForm = (props) => {
                 </ul>
 
                 <div className={`${styles.A} ${styles.C}`}>
-                    <div className="input-container">
+                    <div className={`${styles.G} ${styles.A}`}>
+                        <label >Email
+                            <input required className="sign-in-text-box" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </label>
+                    </div>
+                    <div className={`${styles.G} ${styles.A}`}>
                         <label >Username
                             <input required className="sign-in-text-box" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </label>
                     </div>
-                    <div className="input-container">
+                    <div className={`${styles.G} ${styles.A}`}>
                         <label>Password
                             <input required className="sign-in-text-box" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </label>

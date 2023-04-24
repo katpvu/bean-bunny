@@ -2,9 +2,21 @@ class User < ApplicationRecord
   has_secure_password
 
   # validations
-  validates :username, length: { in: 3..30 }, uniqueness: true
-  validates :password, length: { minimum: 6 }, allow_nil: true
-  validates :session_token, presence: true, uniqueness: true
+  validates :username, 
+    length: { in: 3..30 }, 
+    uniqueness: true,
+    format: { without: URI::MailTo::EMAIL_REGEXP, message: "can't be an email"}
+  validates :password, 
+    length: { minimum: 6 }, 
+    allow_nil: true
+  validates :session_token, 
+    presence: true, 
+    uniqueness: true
+  validates :email, 
+    presence: true, 
+    uniqueness: true, 
+    length: { in: 3..255 }, 
+    format: {with: URI::MailTo::EMAIL_REGEXP}
 
   before_validation :ensure_session_token
 
@@ -12,8 +24,9 @@ class User < ApplicationRecord
   # associations
 
   # SPIRE
-  def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+  def self.find_by_credentials(credential, password)
+    field = credential =~  URI::MailTo::EMAIL_REGEXP ? :email : :username
+    user = User.find_by(field => credential)
     # return matching user if password is correct; else return falsey value
     user&.authenticate(password) # authenticate instance method is defined by has_secure_password
   end

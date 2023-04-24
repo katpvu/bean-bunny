@@ -17,9 +17,6 @@ const SearchBar = (props) => {
             .catch(err => console.error(err));
     }
 
-      
-
-
     const styles = {
         center: "center",
         A: "search-bar",

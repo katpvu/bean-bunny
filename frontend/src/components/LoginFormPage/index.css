@@ -26,6 +26,7 @@
     display: flex;
     margin: 0 auto;
     /* border: 1px solid orange; */
+    width: 70%;
 }
 .input-container * {
     display: block;
@@ -35,6 +36,7 @@ label {
     display: block;
     /* border: 1px solid yellow; */
     margin: 0 auto;
+    width: 100%;
 }
 
 .submit-buttons-container {
@@ -68,7 +70,8 @@ label {
 .sign-in-text-box {
     padding: 5px;
     border-radius: 6px;
-    border: 1px solid gray
+    border: 1px solid gray;
+    width: 90%;
 }
 /* 
 input[type=password] {
@@ -93,4 +96,18 @@ input[type=password] {
     color: red;
     flex-direction: column;
     margin: 10px;
+}
+
+@media (min-width: 600px) {
+    .login-container {
+        flex-direction: column;
+        width: 100vw;
+        height: 80vh;
+    }
+    .input-container {
+        display: flex;
+        margin: 0 auto;
+        /* border: 1px solid orange; */
+        width: 300px;
+    }
 }

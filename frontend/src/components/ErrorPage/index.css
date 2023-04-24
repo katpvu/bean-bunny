@@ -1,0 +1,15 @@
+.error-content-container {
+    flex-direction: column;
+    width: 100vw;
+    height: 80vh;
+}
+
+.sorry {
+    color: red;
+    font-size: 150px;
+}
+
+.page-not-found {
+    font-weight: 700;
+    font-size: 30px;
+}

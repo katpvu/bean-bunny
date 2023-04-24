@@ -13,16 +13,11 @@ const ProfileButton = ({user}) => {
     const history = useHistory();
 
     const openMenu = () => {
-        console.log(showMenu, "before")
         if (showMenu) return;
         setShowMenu(true);
-        // }
-        console.log(showMenu, "after")
       };
       
       useEffect(() => {
-        console.log("hello")
-        console.log(showMenu)
         if (!showMenu) return;
     
         const closeMenu = () => {

@@ -50,16 +50,17 @@ const LoginFormPage = (props) => {
         C: "form-input-container",
         D: "submit-buttons-container",
         E: "bunny-logo",
-        F: "center"
+        F: "center",
+        G: "errors"
     };
 
     return (
         <div className="login-container">
             <div className={`${styles.F}`}><img src={bean} className={`${styles.E}`} alt="logo"/></div>
-            <h2 className="login-form-title">Create an Account</h2>
+            <h2 className="login-form-title">Welcome back!</h2>
             <form onSubmit={handleSubmit} className="form-container">
                 <ul>
-                    {errors.map(error => <li key={error}>{error}</li>)}
+                    {errors.map(error => <li className={`${styles.G} ${styles.center}`}key={error}>{error}</li>)}
                 </ul>
 
                 <div className={`${styles.center} ${styles.C}`}>

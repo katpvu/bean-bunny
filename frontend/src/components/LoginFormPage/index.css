@@ -65,11 +65,17 @@ label {
 }
 
 
-.sign-in-text-box, input[type=password] {
+.sign-in-text-box {
     padding: 5px;
     border-radius: 6px;
     border: 1px solid gray
 }
+/* 
+input[type=password] {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid gray
+} */
 
 .create-acc-line {
     /* border: 1px solid green; */

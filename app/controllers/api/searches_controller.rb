@@ -25,13 +25,13 @@ class Api::SearchesController < ApplicationController
         # object = self.as_json.with_indifferent_access
         parsed = JSON.parse response.read_body, symbolize_names: true
         @businesses = []
-    
+        
+        p parsed
         parsed[:businesses].each do |business_obj|
             @businesses << business_obj
         end
 
         
-        p @businesses
         render :index
         # @businesses = @response[:businesses]
         # render json: @businesses

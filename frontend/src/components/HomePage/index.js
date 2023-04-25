@@ -8,7 +8,6 @@ const HomePage = (props) => {
     const sessionUser = useSelector(state => state.session.user);
 
     const searchResults = useSelector(state => Object.values(state.searches))
-    console.log(searchResults)
     if (sessionUser === null) return <Redirect to="/login" />;
     return (
         <>

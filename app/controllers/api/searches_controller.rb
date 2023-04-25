@@ -26,7 +26,7 @@ class Api::SearchesController < ApplicationController
             @businesses << business_obj
         end
 
-        
+        p parsed
         render :index
         # @businesses = @response[:businesses]
         # render json: @businesses

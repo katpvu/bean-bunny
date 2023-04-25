@@ -28,7 +28,6 @@ const SignUpForm = (props) => {
         dispatch(signup(newUser))
             .catch(async res => {
                 let errors = await checkErrors(res)
-                console.log(errors)
                 setErrors(errors)
             });
     };

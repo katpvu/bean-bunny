@@ -28,7 +28,6 @@ const LoginFormPage = (props) => {
         dispatch(login(user))
             .catch(async res => {
                 let errors = await checkErrors(res)
-                console.log(errors)
                 setErrors(errors)
             });
     };
@@ -41,7 +40,6 @@ const LoginFormPage = (props) => {
         }
         dispatch(login(demoUser))
             .then(history.push("/"))
-            .then(res => console.log(sessionUser, "sessionUser logging in"));
     };
 
     const styles = {

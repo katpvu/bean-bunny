@@ -13,7 +13,6 @@ const SearchBar = (props) => {
     const handleSearchSubmit = () => {
         fetch('https://api.yelp.com/v3/businesses/search?location=San%20Jose&term=coffee&radius=5000&open_now=true&sort_by=best_match&limit=10', options)
             .then(response => response.json())
-            .then(response => console.log(response))
             .catch(err => console.error(err));
     }
 

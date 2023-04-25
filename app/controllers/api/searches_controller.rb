@@ -19,14 +19,9 @@ class Api::SearchesController < ApplicationController
         request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
 
         response = http.request(request)
-        # test = response.read_body
-        # render json: response.read_body
-        # json_response = JSON.parse(response.body)
-        # object = self.as_json.with_indifferent_access
         parsed = JSON.parse response.read_body, symbolize_names: true
         @businesses = []
-        
-        p parsed
+    
         parsed[:businesses].each do |business_obj|
             @businesses << business_obj
         end

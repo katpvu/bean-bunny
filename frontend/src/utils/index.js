@@ -9,3 +9,4 @@ export const checkErrors = async (res) => {
     else if (data) return [data];
     else return [res.statusText];
 }
+

@@ -1,31 +1,35 @@
+import { useState } from 'react';
 import './index.css'
+import { fetchSearches } from '../../store/search';
+import { useDispatch } from 'react-redux';
+
 
 const SearchBar = (props) => {
+    const dispatch = useDispatch()
+    const [search, setSearch] = useState("");
 
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        const location = {
+            location: encodeURIComponent(search)
         }
-      };
-
-    const handleSearchSubmit = () => {
-        fetch('https://api.yelp.com/v3/businesses/search?location=San%20Jose&term=coffee&radius=5000&open_now=true&sort_by=best_match&limit=10', options)
-            .then(response => response.json())
-            .catch(err => console.error(err));
+        console.log(location)
+        dispatch(fetchSearches(location))
     }
 
     const styles = {
         center: "center",
         A: "search-bar",
-        B: "search-bar-container"
+        B: "search-bar-container",
+        C: "search-form"
     }
+    
     return (
         <div className={`${styles.B} ${styles.center}`}>
-            {/* <form onSubmit={handleSearchSubmit}> */}
-                <input className={`${styles.A}`} type="text" placeholder="search bar" />
-            {/* </form> */}
+            <form className={`${styles.C} ${styles.center}`} onSubmit={handleSearchSubmit}>
+                <input className={`${styles.A}`} type="text" placeholder="search bar" onChange={(e) => setSearch(e.target.value)}/>
+            </form>
         </div>
     )
 };

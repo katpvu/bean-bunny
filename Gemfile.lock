@@ -85,6 +85,10 @@ GEM
     crass (1.0.6)
     date (3.3.3)
     debug_inspector (1.1.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -161,6 +165,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rexml (3.2.5)
     thor (1.2.1)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -182,12 +187,14 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   byebug
+  dotenv-rails
   faker
   jbuilder
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  rexml (~> 3.2, >= 3.2.4)
   tzinfo-data
 
 RUBY VERSION

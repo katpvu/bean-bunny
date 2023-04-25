@@ -9,8 +9,6 @@ export const getSearches = (searches) => ({
     searches
 })
 
-// SELECTORS
-
 // THUNK ACTION CREATORS
 
 export const fetchSearches = (location) => async dispatch => {

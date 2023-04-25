@@ -19,7 +19,8 @@ export const fetchSearches = (location) => async dispatch => {
         body: JSON.stringify(location)
     });
     const data = await res.json();
-    // dispatch(getSearches(data));
+    console.log(data, "data from backend")
+    dispatch(getSearches(data));
 }
 
 // REDUCER

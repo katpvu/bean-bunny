@@ -30,3 +30,4 @@
 
 .byebug_history
 .DS_Store
+.env.development.local

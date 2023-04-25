@@ -34,3 +34,4 @@
 
 /public
 /vars
+.env.development.local

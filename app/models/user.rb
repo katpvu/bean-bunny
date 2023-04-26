@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  username        :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  email           :string
+#
 class User < ApplicationRecord
   has_secure_password
 
@@ -22,6 +34,7 @@ class User < ApplicationRecord
 
 
   # associations
+  has_many :lists
 
   # SPIRE
   def self.find_by_credentials(credential, password)

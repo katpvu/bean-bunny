@@ -1,4 +1,4 @@
-
+import csrfFetch from "./csrf";
 
 // SELECTORS
 export const getList = (listId) => state => (
@@ -6,7 +6,7 @@ export const getList = (listId) => state => (
 );
 
 export const getLists = state => (
-    state.posts ? Object.values(state.posts) : []
+    state.lists ? Object.values(state.lists) : []
 );
 
 // CONSTANTS
@@ -34,7 +34,7 @@ export const removeList = (listId) => ({
 export const fetchLists = () => async dispatch => {
     let res = await csrfFetch('/api/lists');
     let data = await res.json();
-    dispatch(receiveLists)
+    return dispatch(receiveLists(data));
 };
 
 export const fetchList = (listId) => async dispatch => {
@@ -73,11 +73,13 @@ const ListsReducer = (state={}, action) => {
     let newState = { ...state };
     switch (action.type) {
         case RECEIVE_LIST:
-            return newState[action.list.id] = action.list;
+            newState = { ...newState, [action.list.id]: action.list}
+            return newState
         case RECEIVE_LISTS:
             return { ...action.lists };
         case REMOVE_LIST:
             delete newState[action.postId];
+            return newState;
         default:
             return state;
     };

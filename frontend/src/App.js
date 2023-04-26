@@ -4,6 +4,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import HomePage from "./components/HomePage";
 import SignUpForm from "./components/SignUpForm";
 import ErrorPage from "./components/ErrorPage";
+import ListIndex from "./components/List/ListIndex";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <>
       <Switch>
         <Route path="/error"><ErrorPage /></Route>
+        <Route path="/lists"><ListIndex /></Route>
         <Route exact path="/login"><LoginFormPage /></Route>
         <Route exact path="/signup"><SignUpForm /></Route>
         <Route exact path="/"><HomePage /></Route>

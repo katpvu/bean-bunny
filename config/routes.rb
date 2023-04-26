@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post '/searches', to: 'searches#create'
     resources :users, only: :create
     resource :session, only: [:show, :create, :destroy]
+    resources :lists
   end
 
   get '*path', to: "static_pages#frontend_index"

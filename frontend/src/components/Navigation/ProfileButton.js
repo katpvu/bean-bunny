@@ -3,7 +3,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useEffect } from 'react';
 import './index.css'
 
@@ -54,7 +54,7 @@ const ProfileButton = ({user}) => {
                 <div>
                     <ul className={`${styles.C}`}>
                         <li className={`${styles.D}`}>Welcome, <br></br><h2 className={`${styles.F}`}>{user.username}</h2></li>
-                        <li className={`${styles.D}`}>Link to lists</li>
+                        <li className={`${styles.D}`}><Link to="/lists">Your Lists</Link></li>
                         <li className={`${styles.D}`}>
                             <div onClick={handleLogout} className={`${styles.E}`}>Logout</div>
                         </li>

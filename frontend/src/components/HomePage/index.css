@@ -2,8 +2,7 @@
 .main-content-container {
     width: 100vw;
     height: 100vh;
-    position: relative;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     position: relative;
     margin: 0 auto;
     z-index: 10;
@@ -12,29 +11,21 @@
 .placeholder-for-map {
     width: 0;
     height: 0;
-    border: 1px solid green;
     float: left;
 
 }
 
-
-
 /* for big screen */
 @media (min-width: 600px) {
     .main-content-container {
-        width: 80vw;
-        height: 100vh;
-        border: 1px solid yellow;
-        position: relative;
-        margin: 0 auto;
+        width: 100vw;
     }
     .placeholder-for-map {
-        width: 40%;
+        width: 45%;
         height: 90%;
         border: 1px solid green;
         margin-top: 50px;
         margin-left: 30px;
-        float: left;
         position: absolute;
     }
 }
@@ -43,17 +34,12 @@
     .main-content-container {
         width: 80vw;
         height: 100vh;
-        border: 1px solid yellow;
+        /* border: 1px solid yellow; */
         position: relative;
         margin: 0 auto;
     }
     .placeholder-for-map {
         width: 60%;
         height: 90%;
-        border: 1px solid green;
-        margin-top: 50px;
-        margin-left: 30px;
-        float: left;
-        position: absolute;
     }
 }

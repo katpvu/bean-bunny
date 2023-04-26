@@ -6,10 +6,16 @@
 
 .sorry {
     color: red;
-    font-size: 150px;
+    font-size: 70px;
 }
 
 .page-not-found {
     font-weight: 700;
     font-size: 30px;
+}
+
+@media (min-width: 600px) {
+    .sorry {
+        font-size: 150px;
+    }   
 }

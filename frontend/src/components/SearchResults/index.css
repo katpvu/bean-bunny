@@ -16,6 +16,8 @@
 @media (min-width: 600px) {
     .search-results-container {
         width: 50%;
+        overflow-x: hidden;
+        overflow-y: scroll;
         margin-top: 30px;
         float: right;
         margin-right: 0;
@@ -26,6 +28,8 @@
 @media (min-width: 1200px) {
     .search-results-container {
         width: 30%;
+        /* height: 80%; */
+        /* overflow: scroll; */
         position: absolute;
         top: 0;
         right: 0;

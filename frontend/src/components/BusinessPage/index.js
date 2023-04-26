@@ -5,7 +5,10 @@ import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 const BusinessPage = ({business}) => {
     console.log(business)
 
-    
+    const handleBookmark = (e) => {
+        
+    }
+
     return (
         <div>
             <img src={`${business.imageUrl}`} alt={business.name} className="fitting-image"/>
@@ -20,7 +23,7 @@ const BusinessPage = ({business}) => {
                 </div>
                 <div className="buttons-container">
                     <div className="rating-button">Create Rating</div>
-                    <FontAwesomeIcon className="bookmark-button" icon={faBookmark} size="2xl" style={{color: "#919191"}}/>
+                    <FontAwesomeIcon onClick={(e) => handleBookmark}className="bookmark-button" icon={faBookmark} size="2xl" style={{color: "#919191"}}/>
                 </div>
                 
             </div>
@@ -53,18 +56,6 @@ const BusinessPage = ({business}) => {
                 </div>
             </div>
             
-            <h1 className="business-section-title">Photos from Bean Bunny members</h1>
-            <div className="photos-container">
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-                <div className="dummy-img"></div>
-            </div>
             <h1 className="business-section-title">Your notes and photos</h1>
 
             <h1 className="business-section-title">What your friends think</h1>

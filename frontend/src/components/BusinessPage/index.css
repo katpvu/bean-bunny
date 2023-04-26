@@ -77,21 +77,6 @@
     margin: 10px
 }
 
-.photos-container {
-    margin: 15px;
-    border: 1px solid green;
-    height: 70px;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-    grid-gap: 5px;
-}
-
-.dummy-img {
-    width: 70px;
-    height: 70px;
-    border: 1px solid orange;
-    border-radius: 8px;
-}
 .business-info-header {
     display: flex;
     justify-content: space-between;
@@ -107,14 +92,17 @@
     align-items: center;;
     width: 150px;
     height: 30px;
-    border: 2px solid #dbd8d8;
+    transition: all 0.3s ease;
     border-radius: 999px;
+    background-color: rgba(231, 229, 229, 0.411);
+    border: 1px solid rgb(216, 215, 215)
 
 }
 
 .rating-button:hover {
-    background-color: rgba(212, 211, 211, 0.37);
+    background-color: rgba(252, 247, 247, 0.37);
     cursor: pointer;
+    border: 1px solid #dbd8d8;
 }
 
 .bookmark-button:hover {
@@ -128,30 +116,17 @@
     margin: 10px;
 }
 @media (min-width: 600px) {
-    .business-page-title {
-        position: absolute;
-        color: white;
-        bottom: 0;
-        font-size: 46px;
-        font-family: 'Archivo', sans-serif;
-        font-weight: 700
-    }
-    
     .bp-header-overlay {
         display:flex;
         justify-content: center;
     }
 
     .scores {
-        margin: 15px;
-        display:flex;
         flex-direction: row;
-
     }
 
     .score-item {
         margin: 5px;
-        height: 70px;
     }
     
 }

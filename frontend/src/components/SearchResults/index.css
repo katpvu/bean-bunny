@@ -16,7 +16,6 @@
 @media (min-width: 600px) {
     .search-results-container {
         width: 50%;
-        
         overflow-x: hidden;
         overflow-y: scroll;
         margin-top: 30px;

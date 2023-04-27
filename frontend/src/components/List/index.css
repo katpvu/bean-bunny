@@ -39,22 +39,16 @@
     margin: 5px 0px;
 }
 
-.create-list-input:hover {
-    width: 200px;
-
-}
 
 .create-list-container {
     display:flex;
     justify-content: center;
-    margin-right: 50px;
+    align-items: center;
+
 }
 
 .list-add-to-list-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
+    font-size: 20px;
     padding: 10px;
     margin: 20px;
     border-radius: 999px;

@@ -43,7 +43,7 @@ const ListForm = ({listId}) => {
     }
 
     return (
-        <div>
+
             <form onSubmit={handleSubmit}>
                 {errors && (
                     <ul>
@@ -51,9 +51,9 @@ const ListForm = ({listId}) => {
                     </ul>
                 )}
                  
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder={ listId ? "New title" : " + Create a list "}/>
+                <input className="create-list-input" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder={ listId ? "New title" : " + Create a list "}/>
             </form>
-        </div>
+
     )
 };
 

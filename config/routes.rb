@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     post '/searches', to: 'searches#create'
     get '/searches/:business_id', to: 'searches#show'
+    get '/businesses/:business_yelp_id', to: 'businesses#fetch'
+    resources :businesses, only: :create
     resources :users, only: :create
     resource :session, only: [:show, :create, :destroy]
     resources :lists

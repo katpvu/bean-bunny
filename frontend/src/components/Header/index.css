@@ -7,7 +7,7 @@
 }
 
 .bunny-logo {
-    width: 40vw;
+    width: 200px;
 }
 
 @media (min-width: 600px) {
@@ -18,6 +18,6 @@
         /* border: 1px solid blue; */
     }
     .bunny-logo {
-        width: 10vw;
+        width: 200px;
     }
 }

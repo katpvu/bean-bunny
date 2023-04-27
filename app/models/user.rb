@@ -34,7 +34,8 @@ class User < ApplicationRecord
 
 
   # associations
-  has_many :lists
+  has_many :lists,
+    dependent: :destroy
 
   # SPIRE
   def self.find_by_credentials(credential, password)

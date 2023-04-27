@@ -1,14 +1,14 @@
 import csrfFetch from "./csrf";
 
 // SELECTOR
-export const getBusiness = (businessId) => state => (
-    state.searches[businessId] ? state.searches[businessId] : null
-)
+// export const getBusiness = (businessId) => state => (
+//     state.searches[businessId] ? state.searches[businessId] : null
+// )
 
 // CONSTANTS
 export const GET_SEARCHES = 'searches/GET_SEARCHES'
-export const GET_SEARCH = 'searches/GET_SEARCH'
-export const CLEAR_SEARCHES = 'searches/CLEAR_SEARCHES'
+// export const GET_SEARCH = 'searches/GET_SEARCH'
+// export const CLEAR_SEARCHES = 'searches/CLEAR_SEARCHES'
 
 // ACTION CREATORS
 export const getSearches = (searches) => ({
@@ -16,14 +16,15 @@ export const getSearches = (searches) => ({
     searches
 })
 
-export const getSearch = (business) => ({
-    type: GET_SEARCH,
-    business
-});
+// export const getSearch = (business) => ({
+//     type: GET_SEARCH,
+//     business
+// });
 
-export const clearSearches = () => ({
-    type: CLEAR_SEARCHES
-})
+// export const clearSearches = () => ({
+//     type: CLEAR_SEARCHES
+// })
+
 
 // THUNK ACTION CREATORS
 
@@ -36,11 +37,11 @@ export const fetchSearches = (location) => async dispatch => {
     return dispatch(getSearches(data));
 }
 
-export const fetchSearch = (businessId) => async dispatch => {
-    const res = await csrfFetch(`/api/searches/${businessId}`);
-    const data = await res.json();
-    return dispatch(getSearch(data));
-}
+// export const fetchSearch = (businessId) => async dispatch => {
+//     const res = await csrfFetch(`/api/searches/${businessId}`);
+//     const data = await res.json();
+//     return dispatch(getSearch(data));
+// }
 
 
 // REDUCER
@@ -48,12 +49,12 @@ const SearchesReducer = (state={}, action) => {
     switch (action.type) {
         case GET_SEARCHES:
             return action.searches;
-        case GET_SEARCH:
-            let newState = { ...state }
-            newState = { ...state, [action.business.id]: action.business}
-            return newState
-        case CLEAR_SEARCHES:
-            return state;
+        // case GET_SEARCH:
+        //     let newState = { ...state }
+        //     newState = { ...state, [action.business.id]: action.business}
+        //     return newState
+        // case CLEAR_SEARCHES:
+        //     return state;
         default:
             return state;
     }

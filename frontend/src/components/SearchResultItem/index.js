@@ -14,10 +14,10 @@ const SearchResultItem = ({business}) => {
     return (
         <>
             <div onClick={handleShowModal} className="search-item-container">
-                <img src={`${business.imageUrl}`} alt={business.name} className="item-img"/>
+                <img src={`${business?.imageUrl}`} alt={business?.name} className="item-img"/>
                 <div className="search-item-info">
-                    <h1 className="search-business-name">{business.name}</h1>
-                    <p>{business.location.address1}</p>
+                    <h1 className="search-business-name">{business?.name}</h1>
+                    <p>{business?.location.address1}</p>
                 </div>
             </div>
             {showModal && (

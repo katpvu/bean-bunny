@@ -4,13 +4,15 @@ import sessionReducer from './session.js'
 import SearchesReducer from "./search.js";
 import ListsReducer from "./list.js";
 import ListItemsReducer from "./list_items.js";
+import BusinessesReducer from "./business.js";
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
     session: sessionReducer,
     searches: SearchesReducer,
     lists: ListsReducer,
-    listItems: ListItemsReducer
+    listItems: ListItemsReducer,
+    businesses: BusinessesReducer
 })
 
 // ENHANCER

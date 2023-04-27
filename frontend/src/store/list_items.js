@@ -65,7 +65,7 @@ const ListItemsReducer = (state={}, action) => {
     let newState = { ...state }
     switch (action.type) {
         case RECEIVE_LIST_CONTENTS:
-            return { ...newState ,...action.payload.listItems }
+            return { ...action.payload.listItems }
         case RECEIVE_LIST_ITEMS:
             return action.listItems
         case RECEIVE_LIST_ITEM:

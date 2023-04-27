@@ -14,8 +14,8 @@ const HomePage = (props) => {
         <>
             <Header />
             <div className="main-content-container">
-                <div className="placeholder-for-map"></div>
                 <SearchResults searchResults={searchResults}/>
+                <div className="placeholder-for-map"></div>
             </div>
         </>
     )

@@ -16,8 +16,58 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: calc(100vh - 800px);
+    height: calc(100vh - 1200px);
+    border-radius: 15px;
+}
 
+.list-item a {
+    text-decoration: none;
+}
+
+.list-item a:visited {
+    color: black;
+}
+
+.create-list-input {
+    width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    /* border: 1px solid gray; */
+    transition: width 2s;
+    outline: none;
+    font-size: 18px;
+}
+
+.create-list-input:hover {
+    width: 200px;
+
+}
+
+.create-list-container {
+    display:flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+}
+
+.list-add-to-list-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: rgba(231, 229, 229, 0.411);
+    border: 1px solid rgb(216, 215, 215);
+}
+
+.list-index-title {
+    text-align: center;
+    font-size: 30px;
+    margin: 15px 0px;
+    /* border: 1px solid black; */
+    font-family: 'Archivo', sans-serif;
 }
 
 @media (min-width: 600px) {
@@ -28,13 +78,22 @@
     .list-index-container {
         flex: 1;
         width: 80%;
-        grid-template-columns: 250px 250px 250px 250px;
+        grid-template-columns: 330px 330px;
+        
     }
-    
+    .list-index-title {
+        font-size: 70px;
+    }
     .list-item {
         padding: 40px;
         font-size: 1.5em;
         border: 1px solid black;
     }
     
+}
+
+@media (min-width: 1050px) {
+    .list-index-container {
+        grid-template-columns: 250px 250px 250px 250px;
+    }
 }

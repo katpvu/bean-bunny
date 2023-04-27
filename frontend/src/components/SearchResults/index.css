@@ -2,43 +2,54 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-
+    /* border: 1px solid black; */
     align-items: center;
-    margin-top: 30px;
-    margin-right: 50px;
+    box-sizing: border-box;
+    position: relative;
+    /* top:900px; */
 }
 
 .search-res-header {
-    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    display:block;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(209, 209, 209, 0.955);
+    width: 100%;
+    padding: 30px;
+}
+
+.search-res-header p {
+    font-size: 15px;
+}
+
+.search-location {
+    font-size: 30px;
+    font-family: 'Archivo', sans-serif;
 }
 
 /* medium screen */
 @media (min-width: 600px) {
     .search-results-container {
         box-sizing: border-box;
-        width: 50%;
+        width: 40%;
         height: 90%;
         overflow-x: hidden;
         overflow-y: scroll;
-        margin-top: 30px;
-        float: right;
-        margin-right: 0;
-        /* padding-top: 930px; */
+        position: static;
+        top:0;
     }
 }
 
 /* bigger screen */
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
     .search-results-container {
-        width: 30%;
-        top: 0;
+        width: 40%;
         /* overflow: scroll; */
         box-sizing: border-box;
-        position: absolute;
-        right: 0;
-        float: right;
+        /* position: absolute; */
         /* padding-top: 930px; need to fix this */
     }
-
-    
 }

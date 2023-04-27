@@ -1,23 +1,18 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./index.css"
-import { deleteList } from "../../store/list";
 import { useState } from "react";
-import ListForm from "./ListForm";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { getListItem, getListItems } from "../../store/list_items";
 
 const ListIndexItem = ({list}) => {
-    const [openEditForm, setOpenEditForm] = useState(false);
-    const dispatch = useDispatch();
-    
+    console.log(list)
+
+    const listItems = useSelector(getListItems);
+    const listItemCount = listItems.length;
     return (
         <>
             <div className="list-item">
-            <Link to={`/lists/${list.id}`}><h1>{list.title}</h1></Link>
-                <button onClick={() => dispatch(deleteList(list.id))}>Delete</button>
-                <button onClick={() => setOpenEditForm(true)}>Edit</button>
-                {openEditForm && (
-                <ListForm listId={list.id}/>
-            )}
+                <Link to={`/lists/${list.id}`}><h1>{list?.title}</h1></Link>
             </div>
             
         </>

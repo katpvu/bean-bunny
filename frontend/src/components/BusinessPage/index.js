@@ -6,11 +6,14 @@ import { getLists, fetchLists } from "../../store/list";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { createListItem } from "../../store/list_items";
+import { checkErrors } from '../../utils';
 
 const BusinessPage = ({business}) => {
     const dispatch = useDispatch();
     const lists = useSelector(getLists);
     const [toggleMenu, setToggleMenu] = useState(false)
+    const [errors, setErrors] = useState([]);
 
 
     useEffect(() => {
@@ -20,7 +23,18 @@ const BusinessPage = ({business}) => {
 
 
     const handleAddToList = (e, list) => {
-        console.log("saving to a list")
+        console.log(list)
+        console.log("hi")
+        const newListItem = {
+            business_yelp_id: business.id,
+            list_id: list.id
+        };
+        dispatch(createListItem(newListItem))
+            .catch(async res => {
+                let errors = await checkErrors(res)
+                setErrors(errors)
+            });
+
     }
 
     const handleToggle = () => {
@@ -52,7 +66,7 @@ const BusinessPage = ({business}) => {
                         <ListForm />
                     </div>
                     { lists.map(list => 
-                        <li onClick={(e, list) =>handleAddToList}>
+                        <li key={list.id} onClick={(e) => handleAddToList(e, list)}>
                             <FontAwesomeIcon icon={faListUl} />
                             <h3>{list.title}</h3>
                         </li>

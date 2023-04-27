@@ -1,0 +1,1 @@
+json.extract! @business, :id, :name, :coordinates, :rating, :location, :image_url, :is_closed 

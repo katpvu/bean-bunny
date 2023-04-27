@@ -5,6 +5,8 @@ class Api::ListsController < ApplicationController
     end
 
     def show
+        @list = List.find_by(id: params[:id])
+        render :show
     end
 
     def create

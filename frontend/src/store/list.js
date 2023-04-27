@@ -1,3 +1,4 @@
+
 import csrfFetch from "./csrf";
 
 // SELECTORS
@@ -13,6 +14,7 @@ export const getLists = state => (
 export const RECEIVE_LIST = 'lists/RECEIVE_LIST'
 export const RECEIVE_LISTS = 'lists/RECEIVE_LISTS'
 export const REMOVE_LIST = 'lists/REMOVE_LIST'
+export const RECEIVE_LIST_CONTENTS = 'lists/RECEIVE_LIST_CONTENTS'
 
 // ACTION CREATORS
 export const receiveList = (list) => ({
@@ -30,6 +32,11 @@ export const removeList = (listId) => ({
     listId
 });
 
+export const receiveListContents = payload => ({
+    type: RECEIVE_LIST_CONTENTS,
+    payload
+})
+
 // THUNK ACTION CREATORS
 export const fetchLists = () => async dispatch => {
     let res = await csrfFetch('/api/lists');
@@ -42,13 +49,19 @@ export const fetchList = (listId) => async dispatch => {
     let data = await res.json();
     dispatch(receiveList(data))
 };
+
+export const fetchListContents = (listId) => async dispatch => {
+    let res = await csrfFetch(`/api/lists/${listId}`)
+    let data = await res.json();
+    dispatch(receiveListContents(data))
+}
 export const createList = (list) => async dispatch => {
     let res = await csrfFetch('/api/lists', {
         method: 'POST',
         body: JSON.stringify(list)
     });
     let data = await res.json();
-    return dispatch(receiveList(data));
+    return dispatch(receiveList(data.list));
 };
 
 export const updateList = (list) => async dispatch => {
@@ -61,7 +74,7 @@ export const updateList = (list) => async dispatch => {
 };
 
 export const deleteList = (listId) => async dispatch => {
-    let res = await csrfFetch(`/api/lists/${listId}`, {
+    await csrfFetch(`/api/lists/${listId}`, {
         method: 'DELETE',
     });
     dispatch(removeList(listId));

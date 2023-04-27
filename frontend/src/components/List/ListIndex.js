@@ -14,9 +14,8 @@ const ListIndex = (props) => {
     useEffect(() => {
         dispatch(fetchLists(lists))
     }, [])
-    // need to grab lists from state
+
     
-    // need to fetch lists from backend
     return (
         <>
             <Header />

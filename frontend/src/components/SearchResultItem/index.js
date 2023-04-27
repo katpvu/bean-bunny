@@ -9,6 +9,8 @@ const SearchResultItem = ({business}) => {
     const handleShowModal = () => {
         setShowModal(true)
     }
+
+
     return (
         <>
             <div onClick={handleShowModal} className="search-item-container">

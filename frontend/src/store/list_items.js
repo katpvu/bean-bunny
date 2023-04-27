@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf"
+import { RECEIVE_LIST_CONTENTS } from "./list";
 
 // SELECTORS
 export const getListItems = state => (
@@ -31,37 +32,48 @@ export const removeListItem = (listItemId) => ({
 
 // THUNK ACTION CREATORS
 export const fetchListItems = () => async dispatch => {
-    let res = await csrfFetch('/api/listItems');
+    let res = await csrfFetch('/api/list_items');
     let data = await res.json();
     return dispatch(receiveListItems(data));
 };
 
 export const fetchListItem = (listItemId) => async dispatch => {
-    let res = await csrfFetch(`/api/listItems/${listItemId}`);
+    let res = await csrfFetch(`/api/list_items/${listItemId}`);
     let data = await res.json();
     return dispatch(receiveListItem(data));
 };
 
 export const createListItem = (listItem) => async dispatch => {
-    let res = await csrfFetch('/api/listItems', {
+    let res = await csrfFetch('/api/list_items', {
         method: 'POST',
         body: JSON.stringify(listItem)
     });
     let data = await res.json();
+    console.log(data)
     return dispatch(receiveListItem(data));
 };
 
 export const deleteListItem = (listItemId) => async dispatch => {
-    let res = await csrfFetch(`/api/listItems/${listItemId}`, {
+    let res = await csrfFetch(`/api/list_items/${listItemId}`, {
         method: 'DELETE'
     });
     dispatch(removeListItem(listItemId))
 };
 
 // REDUCER
-
 const ListItemsReducer = (state={}, action) => {
+    let newState = { ...state }
     switch (action.type) {
+        case RECEIVE_LIST_CONTENTS:
+            return { ...newState ,...action.payload.listItems }
+        case RECEIVE_LIST_ITEMS:
+            return action.listItems
+        case RECEIVE_LIST_ITEM:
+            newState = { ...newState, [action.listItem.id]: action.listItem}
+            return newState
+        case REMOVE_LIST_ITEM:
+            delete newState[action.listItemId]
+            return newState;
         default:
             return state;
     };

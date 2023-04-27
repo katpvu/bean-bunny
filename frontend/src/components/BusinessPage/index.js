@@ -1,12 +1,33 @@
 import "./index.css"
+import ListForm from "../List/ListForm";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getLists, fetchLists } from "../../store/list";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faListUl } from "@fortawesome/free-solid-svg-icons";
 
 const BusinessPage = ({business}) => {
-    console.log(business)
+    const dispatch = useDispatch();
+    const lists = useSelector(getLists);
+    const [toggleMenu, setToggleMenu] = useState(false)
 
-    const handleBookmark = (e) => {
-        
+
+    useEffect(() => {
+        dispatch(fetchLists(lists))
+    }, [])
+
+
+
+    const handleAddToList = (e, list) => {
+        console.log("saving to a list")
+    }
+
+    const handleToggle = () => {
+        setToggleMenu(true)
+        if (toggleMenu) {
+            setToggleMenu(false)
+        }
     }
 
     return (
@@ -23,8 +44,20 @@ const BusinessPage = ({business}) => {
                 </div>
                 <div className="buttons-container">
                     <div className="rating-button">Create Rating</div>
-                    <FontAwesomeIcon onClick={(e) => handleBookmark}className="bookmark-button" icon={faBookmark} size="2xl" style={{color: "#919191"}}/>
+                    <div className="add-to-list-button" onClick={handleToggle}>+</div>
                 </div>
+                <ul className={toggleMenu ? "list-index-drop-down" : "hidden"}>
+                    <h2>Add to Collection:</h2>
+                    <div className="form-container-in-bp">
+                        <ListForm />
+                    </div>
+                    { lists.map(list => 
+                        <li onClick={(e, list) =>handleAddToList}>
+                            <FontAwesomeIcon icon={faListUl} />
+                            <h3>{list.title}</h3>
+                        </li>
+                    )}
+                </ul>
                 
             </div>
             <br></br>

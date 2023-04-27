@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getLists, fetchLists } from "../../store/list";
 import Header from "../Header";
 import ListForm from "./ListForm";
+import "./index.css"
 
 const ListIndex = (props) => {
     const lists = useSelector(getLists);
@@ -20,11 +21,13 @@ const ListIndex = (props) => {
         <>
             <Header />
             <ListForm />
-            <ul>
-                { lists.map(list => 
-                    <ListIndexItem key={list.id} list={list} />
-                )}
-            </ul>
+            <div className="page-container">
+                <div className="list-index-container">
+                    { lists.map(list => 
+                        <ListIndexItem key={list.id} list={list} />
+                    )}
+                </div>
+            </div>
         </>
     )
 };

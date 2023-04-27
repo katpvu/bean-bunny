@@ -15,20 +15,20 @@ const ProfileButton = ({user}) => {
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
-      };
+    };
       
-      useEffect(() => {
-        if (!showMenu) return;
+    useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+        setShowMenu(false);
+    };
+
+    const doc = document.querySelector("#root")
+    doc.addEventListener('click', closeMenu);
     
-        const closeMenu = () => {
-          setShowMenu(false);
-        };
-    
-        const doc = document.querySelector("#root")
-        doc.addEventListener('click', closeMenu);
-      
-        return () => doc.removeEventListener("click", closeMenu);
-      }, [showMenu]);
+    return () => doc.removeEventListener("click", closeMenu);
+    }, [showMenu]);
 
     const handleLogout = (e) => {
         e.preventDefault();

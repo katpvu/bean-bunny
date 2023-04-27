@@ -8,8 +8,6 @@ const SearchResultItem = ({business}) => {
 
     const handleShowModal = () => {
         setShowModal(true)
-        console.log("hi")
-        console.log(showModal)
     }
     return (
         <>

@@ -2,10 +2,12 @@ import { useState } from 'react';
 import './index.css'
 import { fetchSearches } from '../../store/search';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const SearchBar = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory();
     const [search, setSearch] = useState("");
 
 
@@ -14,7 +16,7 @@ const SearchBar = (props) => {
         const location = {
             location: encodeURIComponent(search)
         }
-        console.log(location)
+        history.push("/")
         dispatch(fetchSearches(location))
     }
 

@@ -17,6 +17,12 @@ class Api::ListsController < ApplicationController
     end
 
     def update
+        @list = List.find_by(id: params[:id]);
+        if @list.update(list_params)
+            render :show
+        else
+            render json: { errors: @list.errors.full_messages }, status: 422
+        end
     end
 
     def destroy

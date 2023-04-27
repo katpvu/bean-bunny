@@ -29,6 +29,13 @@
     text-shadow: 2px 2px 3px #f0f0f070;
 }
 
+.business-info-header {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+
 .scores {
     margin: 15px;
     display:flex;
@@ -44,6 +51,72 @@
     display: flex;
     /* align-items: center; */
 }
+
+.add-to-list-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(231, 229, 229, 0.411);
+    border: 1px solid rgb(216, 215, 215);
+}
+
+.list-index-drop-down {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    border: 1px solid rgb(180, 180, 180);
+    box-shadow: 0px 5px 5px rgb(187, 185, 185);
+
+}
+
+.list-index-drop-down h2 {
+    font-family: 'Archivo', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin: 15px;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+}
+
+.list-index-drop-down li {
+    padding: 5px;
+    margin: 0px 10px;
+    display: flex;
+    letter-spacing: 0.08rem;
+    transition: all 0.3s ease;
+}
+
+.form-container-in-bp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-container-in-bp input[type="text"] {
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    width: 200px;
+    outline: none;
+}
+
+.list-index-drop-down li:hover {
+    background-color: #dbd8d891;
+    cursor: pointer;
+}
+.list-index-drop-down li h3 {
+    padding-left: 5px;
+}
+
 .rating {
     display: flex;
     justify-content: center;
@@ -77,10 +150,6 @@
     margin: 10px
 }
 
-.business-info-header {
-    display: flex;
-    justify-content: space-between;
-}
 
 .business-info-header p {
     margin-left: 11px;
@@ -99,15 +168,12 @@
 
 }
 
-.rating-button:hover {
+.rating-button:hover, .add-to-list-button:hover{
     background-color: rgba(252, 247, 247, 0.37);
     cursor: pointer;
     border: 1px solid #dbd8d8;
 }
 
-.bookmark-button:hover {
-    cursor: pointer;
-}
 .buttons-container {
     display: flex;
     margin-right: 10px;
@@ -115,6 +181,13 @@
 .buttons-container * {
     margin: 10px;
 }
+
+.hidden {
+    display: none;
+
+}
+
+
 @media (min-width: 600px) {
     .bp-header-overlay {
         display:flex;
@@ -128,5 +201,12 @@
     .score-item {
         margin: 5px;
     }
-    
+
+    .list-index-drop-down {
+        box-sizing: border-box;
+        left: 830px;
+        width: 300px;
+        height: 330px;
+    }
+
 }

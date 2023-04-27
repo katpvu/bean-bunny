@@ -13,7 +13,6 @@ const HomePage = (props) => {
     return (
         <>
             <Header />
-            <ListForm />
             <div className="main-content-container">
                 <div className="placeholder-for-map"></div>
                 <SearchResults searchResults={searchResults}/>

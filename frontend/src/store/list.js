@@ -6,7 +6,7 @@ export const getList = (listId) => state => (
 );
 
 export const getLists = state => (
-    state.lists ? Object.values(state.lists) : []
+    state.lists ? Object.values(state.lists).reverse() : []
 );
 
 // CONSTANTS
@@ -78,7 +78,7 @@ const ListsReducer = (state={}, action) => {
         case RECEIVE_LISTS:
             return { ...action.lists };
         case REMOVE_LIST:
-            delete newState[action.postId];
+            delete newState[action.listId];
             return newState;
         default:
             return state;

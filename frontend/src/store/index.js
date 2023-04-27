@@ -3,12 +3,14 @@ import thunk from 'redux-thunk'
 import sessionReducer from './session.js'
 import SearchesReducer from "./search.js";
 import ListsReducer from "./list.js";
+import ListItemsReducer from "./list_items.js";
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
     session: sessionReducer,
     searches: SearchesReducer,
-    lists: ListsReducer
+    lists: ListsReducer,
+    listItems: ListItemsReducer
 })
 
 // ENHANCER

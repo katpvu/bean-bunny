@@ -1,7 +1,7 @@
 /* for mobile */
 .main-content-container {
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     /* border: 1px solid yellow; */
     position: relative;
     margin: 0 auto;
@@ -33,7 +33,7 @@
 @media (min-width: 1200px) {
     .main-content-container {
         width: 80vw;
-        height: 100vh;
+        height: 80vh;
         /* border: 1px solid yellow; */
         position: relative;
         margin: 0 auto;

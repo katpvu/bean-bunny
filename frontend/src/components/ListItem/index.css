@@ -23,7 +23,8 @@
 .list-header-container {
     border: 1px solid green;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 0px 30px;
     align-items: center;
 }
 
@@ -32,6 +33,21 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+.list-options-menu {
+    width: 200px;
+    border: 1px solid orange;
+    padding: 5px;
+    position: absolute;
+    right: 30px;
+    background-color: white;
+    
+}
+.list-options-menu div {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid green
 }
 
 @media (min-width: 600px) {

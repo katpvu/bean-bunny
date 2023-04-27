@@ -36,6 +36,7 @@
     transition: width 2s;
     outline: none;
     font-size: 18px;
+    margin: 5px 0px;
 }
 
 .create-list-input:hover {
@@ -45,7 +46,7 @@
 
 .create-list-container {
     display:flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-right: 50px;
 }
 
@@ -54,12 +55,18 @@
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    width: 30px;
-    height: 30px;
+    padding: 10px;
     margin: 20px;
-    border-radius: 50%;
-    background-color: rgba(231, 229, 229, 0.411);
+    border-radius: 999px;
+    background-color: rgba(91, 89, 89, 0.411);
     border: 1px solid rgb(216, 215, 215);
+    transition: all 0.3s ease;
+}
+
+.list-add-to-list-button:hover {
+    background-color: rgba(227, 227, 227, 0.24);
+    color: rgb(26, 26, 26);
+    cursor: pointer;
 }
 
 .list-index-title {
@@ -72,7 +79,7 @@
 
 @media (min-width: 600px) {
     .page-container {
-        border: 1px solid green;
+        /* border: 1px solid green; */
         display: flex;
     }
     .list-index-container {

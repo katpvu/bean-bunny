@@ -23,6 +23,7 @@ const BusinessPage = ({business}) => {
 
 
     const handleAddToList = (e, list) => {
+        setToggleMenu(false)
         console.log(list)
         console.log("hi")
         const newListItem = {
@@ -58,7 +59,7 @@ const BusinessPage = ({business}) => {
                 </div>
                 <div className="buttons-container">
                     <div className="rating-button">Create Rating</div>
-                    <div className="add-to-list-button" onClick={handleToggle}>+</div>
+                    <div className="add-to-list-button" onClick={handleToggle}>{toggleMenu ? "x" : "+"}</div>
                 </div>
                 <ul className={toggleMenu ? "list-index-drop-down" : "hidden"}>
                     <h2>Add to Collection:</h2>

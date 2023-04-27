@@ -27,7 +27,7 @@ const ListIndex = (props) => {
                     onClick={(e)=>setHover(true)} 
                     className={!hover ? "list-add-to-list-button" : "create-list-input"}
                         >
-                    {!hover ? "+" : <ListForm />}
+                    {!hover ? "Create New Collection" : <ListForm />}
                 </div>
             </div>
             

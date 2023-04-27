@@ -18,12 +18,20 @@ const ListItemIndex = (props) => {
     const list = useSelector(getList(listId))
     const history = useHistory()
     const [openEditForm, setOpenEditForm] = useState(false);
+    const [toggleMenu, setToggleMenu] = useState(false)
     
     console.log(list)
 
     useEffect(() => {
         dispatch(fetchListContents(listId));
     }, []);
+
+    const handleToggle = () => {
+        setToggleMenu(true)
+        if (toggleMenu) {
+            setToggleMenu(false)
+        }
+    }
 
     return (
         <>
@@ -33,16 +41,17 @@ const ListItemIndex = (props) => {
                     <div className="list-header-container">
                         <FontAwesomeIcon onClick={()=> history.push("/lists")}className="back-button"icon={faArrowLeft} style={{color: "#404040",}} />
                         <h1 className="list-title">{list?.title}</h1>
-                        <FontAwesomeIcon icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
+                        <FontAwesomeIcon  onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
                     </div>
-                    <div>
-                            <button onClick={() => dispatch(deleteList(list.id))}>Delete</button>
-                            <button onClick={() => setOpenEditForm(true)}>Edit</button>
-                            {openEditForm && (
-                                <ListForm listId={list.id}/>
-                            )}
+                    <div className={toggleMenu ? "list-options-menu" : "hidden"}>
+                        <div onClick={() => dispatch(deleteList(list.id))}>Delete Collection</div>
+                        <div onClick={() => setOpenEditForm(true)}>Edit Collection Name</div>
+                        {openEditForm && (
+                            <ListForm listId={list.id}/>
+                        )}
                     </div>
                 </div>
+
                 
                 <div className="list-contents-container">
                     {listItems.map(listItem => (

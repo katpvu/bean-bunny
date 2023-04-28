@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import "./index.css"
 import SearchResults from "../SearchResults";
 import ListForm from "../List/ListForm";
+import MapWrapper from "../Map";
 
 const HomePage = (props) => {
     const sessionUser = useSelector(state => state.session.user);
@@ -15,7 +16,7 @@ const HomePage = (props) => {
             <Header />
             <div className="main-content-container">
                 <SearchResults searchResults={searchResults}/>
-                <div className="placeholder-for-map"></div>
+                <div className="placeholder-for-map"><MapWrapper businesses={searchResults}/></div>
             </div>
         </>
     )

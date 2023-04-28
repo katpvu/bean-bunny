@@ -9,21 +9,36 @@ import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { createListItem } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { getBusiness } from "../../store/business";
+import { fetchBusiness } from "../../store/business";
 
 const BusinessPage = ({business}) => {
     const dispatch = useDispatch();
     const lists = useSelector(getLists);
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
+    const { businessId } = useParams();
 
-
-    let mapOptions = {
-        center: {
-            lat: business.coordinates.latitude,
-            lng: business.coordinates.longitude
-        },
-        zoom: 12
+    if (businessId) {
+        business = useSelector(getBusiness(businessId))
     }
+    
+    useEffect(() =>{
+        if (businessId) {
+            dispatch(fetchBusiness(businessId))
+        }
+    }, [businessId])
+    
+
+    let mapOptions;
+        mapOptions = {
+            center: {
+                lat: business?.coordinates.latitude,
+                lng: business?.coordinates.longitude
+            },
+            zoom: 15
+        }
 
 
     const handleAddToList = (e, list) => {
@@ -61,7 +76,7 @@ const BusinessPage = ({business}) => {
                     <div>
                         <h1 className="business-section-title">Location</h1>
                         <p>{business.location.address1}</p>
-                        <p>{business.location.city}, {business.location.state}</p>
+                        <p>{business.location.city}, {business?.location.state}</p>
                     </div>
                     <div className="buttons-container">
                         <div className="rating-button">Create Rating</div>
@@ -101,7 +116,7 @@ const BusinessPage = ({business}) => {
                         
                     </div>
                     <div className="score-item">
-                        <div className="rating">{business.rating}</div>
+                        <div className="rating">{business?.rating}</div>
                         <div className="rating-info">
                             <h3>Current Yelp Rating</h3>
                             <p>Compare everyone's rating vs. just coffee lovers!</p>

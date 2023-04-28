@@ -2,41 +2,8 @@ import { useRef, useState } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper"
 import { useEffect } from "react";
 import "./index.css"
-  
-//     // Add event handlers to map
-//     useEffect(() => {
-//       if (map) {
-//         const listeners = Object.entries(mapEventHandlers).map(([event, handler]) =>
-//           window.google.maps.event.addListener(
-//             map,
-//             event,
-//             (...args) => handler(...args, map)
-//           )
-//         );
-  
-//         return () => listeners.forEach(window.google.maps.event.removeListener);
-//       }
-//     }, [map, mapEventHandlers]);
-  
-//     // Change the style for post marker on hover
-//     useEffect(() => {
-//       Object.entries(markers.current).forEach(([postId, marker]) => {
-//         const label = marker.getLabel();
-//         const icon = marker.getIcon();
-  
-//         if (parseInt(postId) === highlightedPost) {
-//           marker.setLabel({ ...label, color: 'white' });
-//           marker.setIcon({ ...icon, fillColor: 'black' });
-//         } else {
-//           marker.setLabel({ ...label, color: 'black' });
-//           marker.setIcon({ ...icon, fillColor: 'white' });
-//         }
-//       });
-//     }, [markers, highlightedPost]);
 
-  
-
-const BeanMap = ({ mapOptions={}, businesses }) => {
+const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandlers={}}) => {
     const [map, setMap] = useState(null);
     const mapRef = useRef(null);
     const markers = useRef({});
@@ -58,7 +25,7 @@ const BeanMap = ({ mapOptions={}, businesses }) => {
         console.log(markerKeys, "keys")
         markerKeys.forEach(markerKey => {
             if (!businessIds.includes(markerKey)) {
-                console.log(markers.current[markerKey], "marker object")
+                // console.log(markers.current[markerKey], "marker object")
                 markers.current[markerKey].setMap(null)
             }
         });
@@ -78,6 +45,13 @@ const BeanMap = ({ mapOptions={}, businesses }) => {
                 };
                 markers.current[business.id] = new window.google.maps.Marker(markerOptions)
             };
+            if (markerEventHandlers) {
+                let eventHandlers = Object.entries(markerEventHandlers)
+                console.log(eventHandlers)
+                eventHandlers.forEach(eHandler => (
+                    window.google.maps.event.addListener(markers.current[business.id], eHandler[0], () => eHandler[1](business.id))
+                ))
+            }
             businessIds.push(business.id)
         });
     }, [map, markers, businesses])
@@ -88,11 +62,15 @@ const BeanMap = ({ mapOptions={}, businesses }) => {
     );
 };
 
-const MapWrapper = ({businesses, mapOptions}) => {
+const MapWrapper = ({businesses, mapOptions, mapEventHandlers, markerEventHandlers}) => {
     return (
         <>
             <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} >
-                <BeanMap businesses={businesses} mapOptions={mapOptions}/>
+                <BeanMap 
+                    businesses={businesses} 
+                    mapOptions={mapOptions} 
+                    mapEventHandlers={mapEventHandlers} 
+                    markerEventHandlers={markerEventHandlers}/>
             </Wrapper> 
         </>
     );

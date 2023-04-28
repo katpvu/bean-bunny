@@ -16,7 +16,7 @@ const SearchBar = (props) => {
         const location = {
             location: encodeURIComponent(search)
         }
-        history.push("/")
+        history.push("/search")
         dispatch(fetchSearches(location))
     }
 

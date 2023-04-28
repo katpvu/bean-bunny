@@ -14,10 +14,7 @@ const HomePage = (props) => {
     return (
         <>
             <Header />
-            <div className="main-content-container">
-                <SearchResults searchResults={searchResults}/>
-                <div className="placeholder-for-map"><MapWrapper businesses={searchResults}/></div>
-            </div>
+            <h1>hi</h1>
         </>
     )
 };

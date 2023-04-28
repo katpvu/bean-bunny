@@ -20,7 +20,7 @@ export const fetchBusiness = (businessId) => async dispatch => {
     const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();
     dispatch(createBusiness(businessId));
-    console.log(data, "data after fetching from yelp in backend")
+    // console.log(data, "data after fetching from yelp in backend")
     return dispatch(receiveBusiness(data));
 }
 

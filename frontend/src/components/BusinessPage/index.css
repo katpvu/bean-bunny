@@ -1,3 +1,8 @@
+.business-page-container {
+    position: absolute;
+    overflow: auto;
+}
+
 .fitting-image{
     width: 100%;
     height: 30vh;
@@ -6,6 +11,12 @@
     z-index: 20;
     border-radius: 10px 10px 0 0;
     /* object-position: 0% 80%; */
+}
+
+.business-info-wrapper {
+    /* border: 1px solid red; */
+    overflow-y: scroll;
+    height: 63vh;
 }
 
 .bp-header-overlay {
@@ -187,7 +198,12 @@
 
 }
 
-
+.bp-map-container {
+    margin: 0 auto;
+    width: 90%;
+    border: 1px solid black;
+    height: 20vh;
+}
 @media (min-width: 600px) {
     .bp-header-overlay {
         display:flex;
@@ -206,8 +222,17 @@
         box-sizing: border-box;
         left: calc(100% - 330px);
         width: 300px;
-        height: 330px;
+        height: 320px;
         overflow: auto;
+        z-index: 50;
     }
+
+    .business-info-wrapper {
+        
+        /* border: 1px solid red; */
+        overflow-y: scroll;
+        height: 39vh;
+    }
+    
 
 }

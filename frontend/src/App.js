@@ -6,6 +6,8 @@ import SignUpForm from "./components/SignUpForm";
 import ErrorPage from "./components/ErrorPage";
 import ListIndex from "./components/List/ListIndex";
 import ListItemIndex from "./components/ListItem/ListItemIndex";
+import BusinessPage from "./components/BusinessPage";
+import SearchPage from "./components/SearchPage";
 
 
 function App() {
@@ -16,8 +18,10 @@ function App() {
         <Route path="/error"><ErrorPage /></Route>
         <Route path="/lists/:listId"><ListItemIndex /></Route>
         <Route path="/lists"><ListIndex /></Route>
+        <Route path="/businesses/:businessId"><BusinessPage /></Route>
         <Route exact path="/login"><LoginFormPage /></Route>
         <Route exact path="/signup"><SignUpForm /></Route>
+        <Route exact path="/search"><SearchPage /></Route>
         <Route exact path="/"><HomePage /></Route>
         <Redirect to={'/error'} />
       </Switch>

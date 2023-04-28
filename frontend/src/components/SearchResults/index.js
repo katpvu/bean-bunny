@@ -7,7 +7,7 @@ const SearchResults = ({searchResults}) => {
     const [userSearch, setUserSearch] = useState(false)
     const [searchCity, setSearchCity] = useState("");
     const [searchState, setSearchState] = useState("")
-    console.log(searchResults)
+    // console.log(searchResults)
 
     useEffect(() => {
         setUserSearch(true)

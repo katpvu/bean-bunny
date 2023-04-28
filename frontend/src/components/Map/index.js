@@ -1,35 +1,7 @@
 import { useRef, useState } from "react";
-import { Wrapper, Status } from "@googlemaps/react-wrapper"
+import { Wrapper } from "@googlemaps/react-wrapper"
 import { useEffect } from "react";
 import "./index.css"
-import { useMemo } from "react";
-
-// function PostMap({
-//     // posts,
-//     highlightedPost,
-//     mapOptions = {},
-//     mapEventHandlers = {}
-  
-//   }) {
-//     const [map, setMap] = useState(null);
-//     const mapRef = useRef(null);
-//     const markers = useRef({});
-  
-  
-//     // Create the map
-//     useEffect(() => {
-//       if (!map) {
-//         setMap(new window.google.maps.Map(mapRef.current, {
-//           center: {
-//             lat: 37.773972,
-//             lng: -122.431297
-//           }, // San Francisco coordinates
-//           zoom: 13,
-//           clickableIcons: false,
-//           ...mapOptions,
-//         }));
-//       }
-//     }, [mapRef, map, mapOptions]);
   
 //     // Add event handlers to map
 //     useEffect(() => {
@@ -61,21 +33,7 @@ import { useMemo } from "react";
 //         }
 //       });
 //     }, [markers, highlightedPost]);
-  
-//     return (
-//       <div ref={mapRef} className="map">
-//         Map
-//       </div>
-//     );
-//   }
-  
-//   export default function PostMapWrapper(props) {
-//     return (
-//       <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY}>
-//         <PostMap {...props} />
-//       </Wrapper>
-//     );
-//   }
+
   
 
 const BeanMap = ({ mapOptions={}, businesses }) => {
@@ -84,57 +42,59 @@ const BeanMap = ({ mapOptions={}, businesses }) => {
     const markers = useRef({});
 
     useEffect(()=>{
-        if (!map) {
+
             setMap(new window.google.maps.Map(
             mapRef.current, 
             {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8,
+                center: { lat: 37.7749, lng: -122.4194 },
+                zoom: 12,
+                ...mapOptions
             }))
-        }
         
-    },[mapRef, map]);
+    },[mapRef, mapOptions, markers]);
 
+    useEffect(() => {
+        let markerKeys = Object.keys(markers.current)        
+        console.log(markerKeys, "keys")
+        markerKeys.forEach(markerKey => {
+            if (!businessIds.includes(markerKey)) {
+                console.log(markers.current[markerKey], "marker object")
+                markers.current[markerKey].setMap(null)
+            }
+        });
+    }, [businesses])
+
+    // for every business that pops up on the page, render markers or remove markers
+    let businessIds = []
     useEffect(()=>{
         businesses.forEach(business => {
             if (!markers[business.id]) {
-                let latLng = {
-                    lat: business.coordinates.latitude,
-                    lng: business.coordinates.longitude
-                }
-                markers[business.id] = new window.google.maps.Marker({
-                    position: latLng,
-                    title: business.name,
-                    map
-                })
-            }
-        })
-    },)
+                let markerOptions = {
+                    position: {
+                        lat: business.coordinates.latitude,
+                        lng: business.coordinates.longitude
+                    },
+                    map: map
+                };
+                markers.current[business.id] = new window.google.maps.Marker(markerOptions)
+            };
+            businessIds.push(business.id)
+        });
+    }, [map, markers, businesses])
 
 
     return (
         <div ref={mapRef} id="map"><h1>map</h1></div>
-    )
-}
+    );
+};
 
-const MapWrapper = ({businesses}) => {
-    // const render = (status) => {
-    //     switch (status) {
-    //       case Status.LOADING:
-    //         return <div>Loading...</div>
-    //       case Status.FAILURE:
-    //         return <div>ERROR</div>
-    //       case Status.SUCCESS:
-    //         return <BeanMap />;
-    //     }
-    //   };
+const MapWrapper = ({businesses, mapOptions}) => {
     return (
         <>
             <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} >
-                <BeanMap businesses={businesses}/>
+                <BeanMap businesses={businesses} mapOptions={mapOptions}/>
             </Wrapper> 
         </>
-    )
-}
-
-export default MapWrapper
+    );
+};
+export default MapWrapper;

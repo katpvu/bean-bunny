@@ -16,19 +16,19 @@
 .list-contents-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     align-items: center;
 }
 
 .list-header-container {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     display: flex;
     justify-content: space-between;
     margin: 0px 30px;
     align-items: center;
 }
 
-.back-button {
+.back-button, .more-options-icon {
 
     width: 20px;
     height: 20px;
@@ -37,19 +37,39 @@
 
 .list-options-menu {
     width: 200px;
-    border: 1px solid orange;
+    border: 1px solid rgb(133, 132, 132);
     padding: 5px;
     position: absolute;
     right: 30px;
     background-color: white;
+    border-radius: 10px;
+    padding: 10px;
     
 }
 .list-options-menu div {
     text-align: center;
-    padding: 5px;
-    border: 1px solid green
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+.list-options-menu div:first-child {
+    border-bottom: 1px solid rgb(197, 197, 197);
+}
+.list-options-menu div:hover {
+    cursor: pointer;
+    background-color: rgb(236, 234, 234);
 }
 
+.list-item-card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-btn-container {
+    cursor: pointer; 
+    color: red;
+}
 @media (min-width: 600px) {
     .list-title {
         font-size: 70px;
@@ -58,5 +78,9 @@
     .back-button {
         top: 40px;
         left: 60px;
+    }
+
+    .list-item-card-container {
+        width: 50%;
     }
 }

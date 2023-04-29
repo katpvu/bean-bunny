@@ -10,14 +10,22 @@
     /* justify-items: center; */
     padding: 40px;
     font-size: 1.5em;
-    border: 1px solid black;
+    border: 1px solid rgb(199, 195, 195);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: calc(100vh - 1200px);
+    height: calc(100vh - 900px);
     border-radius: 15px;
+    text-decoration: none;
+    color: rgb(87, 67, 37);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.list-item:hover  {
+    background-color: rgba(145, 195, 245, 0.356);
 }
 
 .list-item a {
@@ -88,7 +96,6 @@
     .list-item {
         padding: 40px;
         font-size: 1.5em;
-        border: 1px solid black;
     }
     
 }

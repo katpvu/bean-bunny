@@ -29,6 +29,14 @@
 
 }
 
+.profile-dropdown-list-item a {
+    text-decoration: none;
+}
+
+.profile-dropdown-list-item a:visited {
+    color: black;
+}
+
 .profile-dropdown-list-item:hover:not(:first-child) {
     background-color: rgb(240, 240, 240);
 }

@@ -98,11 +98,12 @@
 }
 
 .list-index-drop-down li {
-    padding: 5px;
+    padding: 10px;
     margin: 0px 10px;
     display: flex;
     letter-spacing: 0.08rem;
     transition: all 0.3s ease;
+    border-radius: 10px;
 }
 
 .form-container-in-bp {

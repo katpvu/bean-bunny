@@ -10,6 +10,7 @@ import { faArrowLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-ico
 import ListForm from "../List/ListForm";
 import { deleteList } from "../../store/list";
 import "./index.css"
+import { deleteListItem } from "../../store/list_items";
 
 const ListItemIndex = (props) => {
     const { listId } = useParams();
@@ -19,8 +20,6 @@ const ListItemIndex = (props) => {
     const history = useHistory()
     const [openEditForm, setOpenEditForm] = useState(false);
     const [toggleMenu, setToggleMenu] = useState(false)
-    
-    console.log(list)
 
     useEffect(() => {
         dispatch(fetchListContents(listId));
@@ -43,9 +42,9 @@ const ListItemIndex = (props) => {
             <div className="list-main-content">
                 <div className="list-title-container">
                     <div className="list-header-container">
-                        <FontAwesomeIcon onClick={()=> history.push("/lists")}className="back-button"icon={faArrowLeft} style={{color: "#404040",}} />
+                        <FontAwesomeIcon onClick={()=> history.push("/lists")} className="back-button"icon={faArrowLeft} style={{color: "#404040",}} />
                         <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list.id}/> : list?.title}</h1>
-                        <FontAwesomeIcon  onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
+                        <FontAwesomeIcon className="more-options-icon" onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
                     </div>
                     <div className={toggleMenu ? "list-options-menu" : "hidden"}>
                         <div onClick={handleDelete}>Delete Collection</div>
@@ -56,7 +55,12 @@ const ListItemIndex = (props) => {
                 
                 <div className="list-contents-container">
                     {listItems.map(listItem => (
-                        <ListItemCard key={listItem.id} listItem={listItem}/>
+                        <>
+                            <ListItemCard key={listItem.id} listItem={listItem}/>
+                            <div onClick={() => dispatch(deleteListItem(listItem.id))} className="remove-btn-container">
+                                remove
+                            </div>
+                        </>
                     ))}
                 </div>
             </div>

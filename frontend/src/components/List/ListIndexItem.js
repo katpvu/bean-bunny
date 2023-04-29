@@ -11,10 +11,7 @@ const ListIndexItem = ({list}) => {
     const listItemCount = listItems.length;
     return (
         <>
-            <div className="list-item">
-                <Link to={`/lists/${list.id}`}><h1>{list?.title}</h1></Link>
-            </div>
-            
+            <Link  className="list-item" to={`/lists/${list.id}`}><h1>{list?.title}</h1></Link>
         </>
     )
 };

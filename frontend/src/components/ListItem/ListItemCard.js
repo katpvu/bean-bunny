@@ -8,6 +8,7 @@ import { getBusiness } from "../../store/business";
 import SearchResultItem from "../SearchResultItem"
 
 
+
 const ListItemCard = ({listItem}) => {
     const dispatch = useDispatch();
     console.log(listItem, "listItem")
@@ -20,9 +21,10 @@ const ListItemCard = ({listItem}) => {
     }, [])
 
     return (
-        <>
+        <div className="list-item-card-container">
             <SearchResultItem business={business}/>
-        </>
+
+        </div>
     )
 };
 

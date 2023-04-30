@@ -33,7 +33,7 @@ const ListItemIndex = (props) => {
     }
 
     const handleDelete = () => {
-        dispatch(deleteList(list.id))
+        dispatch(deleteList(list?.id))
         history.push("/lists")
     }
     return (
@@ -43,7 +43,7 @@ const ListItemIndex = (props) => {
                 <div className="list-title-container">
                     <div className="list-header-container">
                         <FontAwesomeIcon onClick={()=> history.push("/lists")} className="back-button"icon={faArrowLeft} style={{color: "#404040",}} />
-                        <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list.id}/> : list?.title}</h1>
+                        <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list?.id}/> : list?.title}</h1>
                         <FontAwesomeIcon className="more-options-icon" onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
                     </div>
                     <div className={toggleMenu ? "list-options-menu" : "hidden"}>

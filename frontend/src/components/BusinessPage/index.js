@@ -12,23 +12,20 @@ import MapWrapper from "../Map";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getBusiness } from "../../store/business";
 import { fetchBusiness } from "../../store/business";
+import Header from "../Header";
 
-const BusinessPage = ({business}) => {
+const BusinessPage = () => {
+    const { businessId } = useParams();
     const dispatch = useDispatch();
     const lists = useSelector(getLists);
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
-    const { businessId } = useParams();
-
-    if (businessId) {
-        business = useSelector(getBusiness(businessId))
-    }
+    const business = useSelector(getBusiness(businessId))
+    console.log(businessId)
     
     useEffect(() =>{
-        if (businessId) {
-            dispatch(fetchBusiness(businessId))
-        }
-    }, [businessId])
+        dispatch(fetchBusiness(businessId))
+    }, [])
     
 
     let mapOptions;
@@ -46,8 +43,8 @@ const BusinessPage = ({business}) => {
         // console.log(list)
         // console.log("hi")
         const newListItem = {
-            business_yelp_id: business.id,
-            list_id: list.id
+            business_yelp_id: business?.id,
+            list_id: list?.id
         };
         dispatch(createListItem(newListItem))
             .catch(async res => {
@@ -65,18 +62,22 @@ const BusinessPage = ({business}) => {
     }
 
     return (
+        <>
+        
+
+        <Header />
         <div className="business-page-container">
-            <img src={`${business?.imageUrl}`} alt={business.name} className="fitting-image"/>
+            <img src={`${business?.imageUrl}`} alt={business?.name} className="fitting-image"/>
             <div className="bp-header-overlay">
-                <h1 className="business-page-title">{business.name}</h1>
+                <h1 className="business-page-title">{business?.name}</h1>
             </div>
 
             <div className="business-info-wrapper">
                 <div className="business-info-header">
                     <div>
                         <h1 className="business-section-title">Location</h1>
-                        <p>{business.location.address1}</p>
-                        <p>{business.location.city}, {business?.location.state}</p>
+                        <p>{business?.location.address1}</p>
+                        <p>{business?.location.city}, {business?.location.state}</p>
                     </div>
                     <div className="buttons-container">
                         <div className="rating-button">Create Rating</div>
@@ -88,9 +89,9 @@ const BusinessPage = ({business}) => {
                             <ListForm />
                         </div>
                         { lists.map(list => 
-                            <li key={list.id} onClick={(e) => handleAddToList(e, list)}>
+                            <li key={list?.id} onClick={(e) => handleAddToList(e, list)}>
                                 <FontAwesomeIcon icon={faListUl} />
-                                <h3>{list.title}</h3>
+                                <h3>{list?.title}</h3>
                             </li>
                         )}
                     </ul>
@@ -131,6 +132,7 @@ const BusinessPage = ({business}) => {
                 <h1 className="business-section-title">What your friends think</h1>
             </div>
             </div>
+            </>
             
     )
 };

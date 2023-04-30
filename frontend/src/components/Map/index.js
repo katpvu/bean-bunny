@@ -35,24 +35,24 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
     let businessIds = []
     useEffect(()=>{
         businesses.forEach(business => {
-            if (!markers[business.id]) {
+            if (!markers[business?.id]) {
                 let markerOptions = {
                     position: {
-                        lat: business.coordinates.latitude,
-                        lng: business.coordinates.longitude
+                        lat: business?.coordinates.latitude,
+                        lng: business?.coordinates.longitude
                     },
                     map: map
                 };
-                markers.current[business.id] = new window.google.maps.Marker(markerOptions)
+                markers.current[business?.id] = new window.google.maps.Marker(markerOptions)
             };
             if (markerEventHandlers) {
                 let eventHandlers = Object.entries(markerEventHandlers)
                 console.log(eventHandlers)
                 eventHandlers.forEach(eHandler => (
-                    window.google.maps.event.addListener(markers.current[business.id], eHandler[0], () => eHandler[1](business.id))
+                    window.google.maps.event.addListener(markers.current[business?.id], eHandler[0], () => eHandler[1](business?.id))
                 ))
             }
-            businessIds.push(business.id)
+            businessIds.push(business?.id)
         });
     }, [map, markers, businesses])
 

@@ -30,21 +30,16 @@ const SearchPage = (props) => {
 
     const markerEventHandlers = {
         'click': (business) => history.push(`/businesses/${business?.id}`)
-        // 'mouseover': (map, marker, infoWindow) => infoWindow.open({
-        //     anchor: marker,
-        //     map
-        // }),
-        // 'mouseout': () => infoWindow.close()
     }
 
     return (
         <>
             <Header />
             <div className="main-content-container">
-                <SearchResults searchResults={searchResults}/>
                 <div className="placeholder-for-map">
                     <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
                 </div>
+                <SearchResults searchResults={searchResults}/>
             </div>
         </>
     )

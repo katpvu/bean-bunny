@@ -1,6 +1,7 @@
 .business-page-container {
     position: absolute;
-    /* top: 0; */
+    width: 100%;
+    top: 0;
 }
 
 .fitting-image{
@@ -15,8 +16,9 @@
 
 .business-info-wrapper {
     /* border: 1px solid red; */
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     height: 63vh;
+
 }
 
 .bp-header-overlay {
@@ -47,7 +49,7 @@
 }
 
 
-.scores {
+.scores:not(:first-child) {
     margin: 15px;
     display:flex;
     flex-direction: column;
@@ -61,6 +63,7 @@
     /* border: 1px solid green; */
     display: flex;
     /* align-items: center; */
+    margin: 10px;
 }
 
 .add-to-list-button {
@@ -205,14 +208,40 @@
     border: 1px solid black;
     height: 20vh;
 }
+
+.bp-back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
 @media (min-width: 600px) {
+
+    .business-page-container {
+        position: relative;
+    }
     .bp-header-overlay {
         display:flex;
         justify-content: center;
     }
 
+    .float-scores-and-map {
+        position: relative;
+    }
+
     .scores {
-        flex-direction: row;
+        /* border: 1px solid green; */
+        width: 49%;
+        float: right;
+        top: 0;
+        height: 30vh;
+        margin: 0;
+    }
+
+    .scores h1 {
+        text-align: left;
     }
 
     .score-item {
@@ -229,11 +258,16 @@
     }
 
     .business-info-wrapper {
-        
-        border: 1px solid red;
-        /* overflow-y: scroll; */
-        /* height: 39vh; */
+        /* border: 1px solid red; */
+        width: 80%;
+        margin: 0 auto;
+
     }
     
+    .bp-map-container {
+        width: 49%;
+        height: 30vh;
+        float: left;
+    }
 
 }

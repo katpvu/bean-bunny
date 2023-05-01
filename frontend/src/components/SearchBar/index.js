@@ -30,7 +30,7 @@ const SearchBar = (props) => {
     return (
         <div className={`${styles.B} ${styles.center}`}>
             <form className={`${styles.C} ${styles.center}`} onSubmit={handleSearchSubmit}>
-                <input className={`${styles.A}`} type="text" placeholder="search bar" onChange={(e) => setSearch(e.target.value)}/>
+                <input className={`${styles.A}`} type="text" placeholder="Search a city" onChange={(e) => setSearch(e.target.value)}/>
             </form>
         </div>
     )

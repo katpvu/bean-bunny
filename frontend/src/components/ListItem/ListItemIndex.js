@@ -57,7 +57,7 @@ const ListItemIndex = (props) => {
                 <div className="list-contents-container">
                     {listItems.map(listItem => (
                         <>
-                            <ListItemCard key={listItem.id} listItem={listItem}/>
+                            <ListItemCard key={listItem.id} listItem={listItem} />
                             <div onClick={() => dispatch(deleteListItem(listItem.id))} className="remove-btn-container">
                                 remove
                             </div>

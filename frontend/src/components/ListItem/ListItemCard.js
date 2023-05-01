@@ -21,7 +21,7 @@ const ListItemCard = ({listItem}) => {
 
     return (
         <div className="list-item-card-container">
-            <SearchResultItem business={business}/>
+            <SearchResultItem business={business} prevPage={`/lists/${listId}`}/>
 
         </div>
     )

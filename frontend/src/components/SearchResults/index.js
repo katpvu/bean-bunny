@@ -3,7 +3,7 @@ import { useState } from "react";
 import SearchResultItem from "../SearchResultItem";
 import "./index.css"
 
-const SearchResults = ({searchResults}) => {
+const SearchResults = ({searchResults, prevPage}) => {
     const [userSearch, setUserSearch] = useState(false)
     const [searchCity, setSearchCity] = useState("");
     const [searchState, setSearchState] = useState("")

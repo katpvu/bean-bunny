@@ -1,32 +1,35 @@
 import "./index.css"
 import ListForm from "../List/ListForm";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getLists, fetchLists } from "../../store/list";
-import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faListUl, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { createListItem } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { getBusiness } from "../../store/business";
-import { fetchBusiness } from "../../store/business";
+import { fetchBusiness, getBusiness } from "../../store/business";
 import Header from "../Header";
 
 const BusinessPage = () => {
-    const { businessId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
+    const { from } = location.state;
+    const { businessId } = useParams();
+    console.log(from, "from")
+
     const lists = useSelector(getLists);
+    const business = useSelector(getBusiness(businessId))
+
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
-    const business = useSelector(getBusiness(businessId))
     
     useEffect(() =>{
         dispatch(fetchLists())
         dispatch(fetchBusiness(businessId))
     }, [])
-    
 
     let mapOptions;
         mapOptions = {
@@ -36,7 +39,6 @@ const BusinessPage = () => {
             },
             zoom: 15
         }
-
 
     const handleAddToList = (e, list) => {
         setToggleMenu(false)
@@ -70,6 +72,12 @@ const BusinessPage = () => {
             <img src={`${business?.imageUrl}`} alt={business?.name} className="fitting-image"/>
             <div className="bp-header-overlay">
                 <h1 className="business-page-title">{business?.name}</h1>
+                <FontAwesomeIcon 
+                    onClick={()=> history.push(from)} 
+                    className="bp-back-button" 
+                    icon={faArrowLeft} 
+                    style={{color: "#ffffff",}} />
+
             </div>
 
             <div className="business-info-wrapper">
@@ -97,39 +105,42 @@ const BusinessPage = () => {
                     </ul>
                 </div>
                 <br></br>
-                <h1 className="business-section-title">Scores</h1>
-    
-                <div className="scores">
-                    <div className="score-item">
-                        <div className="rating">-</div>
-                        <div className="rating-info">
-                            <h3>Your Bean Rating</h3>
-                            <p>What you think</p>
+                <div className="float-scores-and-map">
+                    <div className="scores">
+                        <h1 className="business-section-title">Scores</h1>
+                        <div className="score-item">
+                            <div className="rating">-</div>
+                            <div className="rating-info">
+                                <h3>Your Bean Rating</h3>
+                                <p>What you think</p>
+                            </div>
+                            
                         </div>
-                        
+                        <div className="score-item">
+                            <div className="rating">-</div>
+                            <div className="rating-info">
+                                <h3>Overall Bean Rating</h3>
+                                <p>Average rating from Bean Bunny users!</p>
+                            </div>
+                            
+                        </div>
+                        <div className="score-item">
+                            <div className="rating">{business?.rating}</div>
+                            <div className="rating-info">
+                                <h3>Current Yelp Rating</h3>
+                                <p>Compare everyone's rating vs. just coffee lovers!</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="score-item">
-                        <div className="rating">-</div>
-                        <div className="rating-info">
-                            <h3>Overall Bean Rating</h3>
-                            <p>Average rating from Bean Bunny users!</p>
-                        </div>
-                        
-                    </div>
-                    <div className="score-item">
-                        <div className="rating">{business?.rating}</div>
-                        <div className="rating-info">
-                            <h3>Current Yelp Rating</h3>
-                            <p>Compare everyone's rating vs. just coffee lovers!</p>
-                        </div>
+                    
+                    <div className="bp-map-container">
+                        <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
                     </div>
                 </div>
-                
-                <h1 className="business-section-title">Your notes and photos</h1>
-                <div className="bp-map-container">
-                    <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
-                </div>
-                <h1 className="business-section-title">What your friends think</h1>
+                {/* <div>
+                    <h1 className="business-section-title">Your notes and photos</h1>
+                    <h1 className="business-section-title">What your friends think</h1>
+                </div> */}
             </div>
             </div>
             </>

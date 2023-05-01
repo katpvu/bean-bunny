@@ -10,7 +10,7 @@
 /* styled for mobile */
 .profile-dropdown {
     position: absolute;
-    z-index: 15;
+    z-index: 90;
     top: 0;
     right: 0;
     border: 1px solid rgb(230, 225, 225);

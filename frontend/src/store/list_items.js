@@ -55,7 +55,7 @@ export const createListItem = (listItem) => async dispatch => {
 };
 
 export const deleteListItem = (listItemId) => async dispatch => {
-    let res = await csrfFetch(`/api/list_items/${listItemId}`, {
+    await csrfFetch(`/api/list_items/${listItemId}`, {
         method: 'DELETE'
     });
     dispatch(removeListItem(listItemId))

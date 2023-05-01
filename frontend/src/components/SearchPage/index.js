@@ -1,16 +1,20 @@
 import Header from "../Header";
 import {  useSelector } from 'react-redux';
-import { Redirect, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./index.css"
 import SearchResults from "../SearchResults";
-import ListForm from "../List/ListForm";
+// import ListForm from "../List/ListForm";
 import MapWrapper from "../Map";
-import { useEffect } from "react";
+// import { useEffect } from "react";
+// import { fetchSearches, getSearches } from "../../store/search";
 
 const SearchPage = (props) => {
-    const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
+
+    const sessionUser = useSelector(state => state.session.user);
     const searchResults = useSelector(state => Object.values(state.searches));
+    // const { location } = useParams();
+    // console.log(location)
     if (sessionUser === null) return <Redirect to="/login" />;
 
     
@@ -25,7 +29,12 @@ const SearchPage = (props) => {
     }
 
     const markerEventHandlers = {
-        'click': (businessId) => history.push(`/businesses/${businessId}`)
+        'click': (business) => history.push(`/businesses/${business?.id}`)
+        // 'mouseover': (map, marker, infoWindow) => infoWindow.open({
+        //     anchor: marker,
+        //     map
+        // }),
+        // 'mouseout': () => infoWindow.close()
     }
 
     return (

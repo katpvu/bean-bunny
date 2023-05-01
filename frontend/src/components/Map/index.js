@@ -9,52 +9,68 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
     const markers = useRef({});
 
     useEffect(()=>{
-
-            setMap(new window.google.maps.Map(
-            mapRef.current, 
-            {
-                center: { lat: 37.7749, lng: -122.4194 },
-                zoom: 12,
-                ...mapOptions
-            }))
-        
+        setMap(new window.google.maps.Map(
+        mapRef.current, 
+        {
+            center: { lat: 37.7749, lng: -122.4194 },
+            zoom: 12,
+            ...mapOptions
+        }))
     },[mapRef, mapOptions, markers]);
 
-    useEffect(() => {
-        let markerKeys = Object.keys(markers.current)        
-        console.log(markerKeys, "keys")
-        markerKeys.forEach(markerKey => {
-            if (!businessIds.includes(markerKey)) {
-                // console.log(markers.current[markerKey], "marker object")
-                markers.current[markerKey].setMap(null)
-            }
-        });
-    }, [businesses])
 
     // for every business that pops up on the page, render markers or remove markers
     let businessIds = []
     useEffect(()=>{
         businesses.forEach(business => {
             if (!markers[business?.id]) {
-                let markerOptions = {
+                // create new marker for business
+                let marker = new window.google.maps.Marker({
                     position: {
                         lat: business?.coordinates.latitude,
                         lng: business?.coordinates.longitude
                     },
-                    map: map
-                };
-                markers.current[business?.id] = new window.google.maps.Marker(markerOptions)
+                    map: map,
+                    label: `${business?.rating}`
+                });
+
+                // add info window for each business marker
+                const contentString = 
+                    `<div class="tooltip-container">` +
+                        `<img src=${business?.imageUrl} />` + 
+                        `<h1>${business?.name}</h1>` +
+                    
+                    `</div>`
+
+                let infoWindow = new window.google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                marker.addListener('mouseover', () => infoWindow.open(map, marker))
+                marker.addListener('mouseout', () => infoWindow.close());
+
+
+                // add event handlers to each marker
+                Object.entries(markerEventHandlers).forEach(([event, handler]) => {
+                    marker.addListener(event, () => handler(business));
+                });
+
+
+                // add marker to markers ref
+                markers.current[business?.id] = marker
+                businessIds.push(business?.id)
             };
-            if (markerEventHandlers) {
-                let eventHandlers = Object.entries(markerEventHandlers)
-                console.log(eventHandlers)
-                eventHandlers.forEach(eHandler => (
-                    window.google.maps.event.addListener(markers.current[business?.id], eHandler[0], () => eHandler[1](business?.id))
-                ))
-            }
-            businessIds.push(business?.id)
         });
-    }, [map, markers, businesses])
+    }, [map, markers, businesses, markerEventHandlers])
+
+    useEffect(() => {
+        let markerKeys = Object.keys(markers.current)        
+        markerKeys.forEach(markerKey => {
+            if (!businessIds.includes(markerKey)) {
+                markers.current[markerKey].setMap(null)
+            }
+        });
+    }, [businesses])
 
 
     return (

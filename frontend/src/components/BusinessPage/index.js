@@ -21,7 +21,6 @@ const BusinessPage = () => {
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
     const business = useSelector(getBusiness(businessId))
-    console.log(businessId)
     
     useEffect(() =>{
         dispatch(fetchLists())

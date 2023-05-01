@@ -11,10 +11,9 @@ import SearchResultItem from "../SearchResultItem"
 
 const ListItemCard = ({listItem}) => {
     const dispatch = useDispatch();
-    console.log(listItem, "listItem")
-    const business = useSelector(getBusiness(listItem.businessYelpId))
     const {listId} = useParams();
-    // console.log(business, "getting business")
+
+    const business = useSelector(getBusiness(listItem.businessYelpId))
 
     useEffect(() =>{
         dispatch(fetchBusiness(listItem.businessYelpId))

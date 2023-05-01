@@ -8,23 +8,23 @@ import ListItemCard from "./ListItemCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import ListForm from "../List/ListForm";
-import { fetchList } from "../../store/list";
 import { deleteList } from "../../store/list";
 import "./index.css"
 import { deleteListItem } from "../../store/list_items";
 
 const ListItemIndex = (props) => {
-    const { listId } = useParams();
     const dispatch = useDispatch();
-    const listItems = useSelector(getListItems);
-    const list = useSelector(getList(listId));
+    const { listId } = useParams();
     const history = useHistory();
     const [openEditForm, setOpenEditForm] = useState(false);
-    const [toggleMenu, setToggleMenu] = useState(false)
+    const [toggleMenu, setToggleMenu] = useState(false);
+
+    const listItems = useSelector(getListItems);
+    const list = useSelector(getList(listId));
 
     useEffect(() => {
         dispatch(fetchListContents(listId));
-    }, []);
+    }, [dispatch, listId]);
 
     const handleToggle = () => {
         setToggleMenu(true)

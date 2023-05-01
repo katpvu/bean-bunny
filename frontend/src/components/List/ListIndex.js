@@ -7,9 +7,10 @@ import ListForm from "./ListForm";
 import "./index.css"
 
 const ListIndex = (props) => {
-    const lists = useSelector(getLists);
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
+    
+    const lists = useSelector(getLists);
 
     useEffect(() => {
         dispatch(fetchLists(lists))

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { getListItem, getListItems } from "../../store/list_items";
 
 const ListIndexItem = ({list}) => {
-    // console.log(list)
 
     const listItems = useSelector(getListItems);
     const listItemCount = listItems.length;

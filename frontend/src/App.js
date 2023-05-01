@@ -19,6 +19,7 @@ function App() {
         <Route path="/lists/:listId"><ListItemIndex /></Route>
         <Route path="/lists"><ListIndex /></Route>
         <Route path="/businesses/:businessId"><BusinessPage /></Route>
+        <Route path="/search/:location"><SearchPage /></Route>
         <Route exact path="/login"><LoginFormPage /></Route>
         <Route exact path="/signup"><SignUpForm /></Route>
         <Route exact path="/search"><SearchPage /></Route>

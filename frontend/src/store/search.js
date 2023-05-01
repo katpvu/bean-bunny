@@ -1,11 +1,17 @@
 import csrfFetch from "./csrf";
 
+// SELECTORS
+export const getSearches = state => (
+    state.searches ? Object.values(state.searches) : []
+)
+
+
 // CONSTANTS
-export const GET_SEARCHES = 'searches/GET_SEARCHES'
+export const RECEIVE_SEARCHES = 'searches/RECEIVE_SEARCHES'
 
 // ACTION CREATORS
-export const getSearches = (searches) => ({
-    type: GET_SEARCHES,
+export const receiveSearches = (searches) => ({
+    type: RECEIVE_SEARCHES,
     searches
 })
 
@@ -18,14 +24,14 @@ export const fetchSearches = (location) => async dispatch => {
     });
     const data = await res.json();
     // console.log(data)
-    return dispatch(getSearches(data));
+    return dispatch(receiveSearches(data));
 }
 
 
 // REDUCER
 const SearchesReducer = (state={}, action) => {
     switch (action.type) {
-        case GET_SEARCHES:
+        case RECEIVE_SEARCHES:
             return action.searches;
         default:
             return state;

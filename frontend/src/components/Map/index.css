@@ -2,3 +2,15 @@
     width:100%;
     height: 100%;
 }
+
+.tooltip-container {
+    font-size: 25px;
+    width: 200px;
+    text-align: center;
+}
+
+.tooltip-container img {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}

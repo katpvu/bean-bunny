@@ -93,6 +93,8 @@ const ListsReducer = (state={}, action) => {
         case REMOVE_LIST:
             delete newState[action.listId];
             return newState;
+        case RECEIVE_LIST_CONTENTS:
+            return { [action.payload.list.id]: action.payload.list }
         default:
             return state;
     };

@@ -24,6 +24,7 @@ const BusinessPage = () => {
     console.log(businessId)
     
     useEffect(() =>{
+        dispatch(fetchLists())
         dispatch(fetchBusiness(businessId))
     }, [])
     
@@ -89,9 +90,9 @@ const BusinessPage = () => {
                             <ListForm />
                         </div>
                         { lists.map(list => 
-                            <li key={list?.id} onClick={(e) => handleAddToList(e, list)}>
+                            <li key={list.id} onClick={(e) => handleAddToList(e, list)}>
                                 <FontAwesomeIcon icon={faListUl} />
-                                <h3>{list?.title}</h3>
+                                <h3>{list.title}</h3>
                             </li>
                         )}
                     </ul>

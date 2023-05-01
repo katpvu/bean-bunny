@@ -27,7 +27,8 @@ export const receiveListItems = (listItems) => ({
 });
 
 export const removeListItem = (listItemId) => ({
-    type: REMOVE_LIST_ITEM
+    type: REMOVE_LIST_ITEM,
+    listItemId
 });
 
 // THUNK ACTION CREATORS

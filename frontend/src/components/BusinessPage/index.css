@@ -230,9 +230,9 @@
 
     .business-info-wrapper {
         
-        /* border: 1px solid red; */
-        overflow-y: scroll;
-        height: 39vh;
+        border: 1px solid red;
+        /* overflow-y: scroll; */
+        /* height: 39vh; */
     }
     
 

@@ -29,7 +29,7 @@ const SearchPage = (props) => {
     }
 
     const markerEventHandlers = {
-        'click': (business) => history.push(`/businesses/${business?.id}`)
+        'click': (business) => history.push(`/businesses/${business?.id}`, {from: "/search"})
     }
 
     return (

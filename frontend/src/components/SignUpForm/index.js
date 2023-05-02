@@ -5,7 +5,8 @@ import { signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import bean from '../../assets/bean.png'
+import bean from '../../assets/bean-logo-black.png'
+import loginBeans from '../../assets/login-beans.jpg'
 
 const SignUpForm = (props) => {
 
@@ -46,37 +47,45 @@ const SignUpForm = (props) => {
 
     return (
         <div className={`${styles.A} ${styles.H}`}>
-            <div className={`${styles.A}`}><img src={bean} className={`${styles.F}`} alt="logo"/></div>
-            <h2 className="login-form-title">Create an Account</h2>
-            <form onSubmit={handleSubmit} className="form-container">
-                <ul className={`${styles.A} ${styles.E}`}>
-                    {errors.map(error => <li key={error}>{error}</li>)}
-                </ul>
+            <div className="left-half">
+                <img src={loginBeans} />
+            </div>
 
-                <div className={`${styles.A} ${styles.C}`}>
-                    <div className={`${styles.G} ${styles.A}`}>
-                        <label >Email
-                            <input required className="sign-in-text-box" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        </label>
+            <div className="right-half">
+                <div className={`${styles.A}`}><img src={bean} className={`${styles.F}`} alt="logo"/></div>
+                <h2 className="login-form-title">Create an Account</h2>
+                <form onSubmit={handleSubmit} className="form-container">
+                    <ul className={`${styles.A} ${styles.E}`}>
+                        {errors.map(error => <li key={error}>{error}</li>)}
+                    </ul>
+
+                    <div className={`${styles.A} ${styles.C}`}>
+                        <div className={`${styles.G} ${styles.A}`}>
+                            <label >Email
+                                <input required className="sign-in-text-box" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className={`${styles.G} ${styles.A}`}>
+                            <label >Username
+                                <input required className="sign-in-text-box" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className={`${styles.G} ${styles.A}`}>
+                            <label>Password
+                                <input required className="sign-in-text-box" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            </label>
+                        </div>
                     </div>
-                    <div className={`${styles.G} ${styles.A}`}>
-                        <label >Username
-                            <input required className="sign-in-text-box" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                        </label>
+                    <div className={`${styles.A} ${styles.B}`}>
+                        <p >Already have an account? <Link to="/login">Sign in here!</Link></p>
                     </div>
-                    <div className={`${styles.G} ${styles.A}`}>
-                        <label>Password
-                            <input required className="sign-in-text-box" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        </label>
+                    <div className={`${styles.A} ${styles.D}`}>
+                        <button className="login-button">Sign Up</button>
                     </div>
-                </div>
-                <div className={`${styles.A} ${styles.B}`}>
-                    <p >Already have an account? <Link to="/login">Sign in here!</Link></p>
-                </div>
-                <div className={`${styles.A} ${styles.D}`}>
-                    <button className="login-button">Sign Up</button>
-                </div>
-            </form>
+                </form>
+
+
+            </div>
         </div>
     )
 };

@@ -11,10 +11,10 @@ export const getLists = state => (
 );
 
 // CONSTANTS
-export const RECEIVE_LIST = 'lists/RECEIVE_LIST'
-export const RECEIVE_LISTS = 'lists/RECEIVE_LISTS'
-export const REMOVE_LIST = 'lists/REMOVE_LIST'
-export const RECEIVE_LIST_CONTENTS = 'lists/RECEIVE_LIST_CONTENTS'
+export const RECEIVE_LIST = 'lists/RECEIVE_LIST';
+export const RECEIVE_LISTS = 'lists/RECEIVE_LISTS';
+export const REMOVE_LIST = 'lists/REMOVE_LIST';
+export const RECEIVE_LIST_CONTENTS = 'lists/RECEIVE_LIST_CONTENTS';
 
 // ACTION CREATORS
 export const receiveList = (list) => ({

@@ -10,15 +10,17 @@ import { createListItem } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
 import { fetchBusiness, getBusiness } from "../../store/business";
+import { fetchSearches } from "../../store/search";
 import Header from "../Header";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
+    
     const { from } = location.state;
+    console.log(from)
     const { businessId } = useParams();
-    console.log(from, "from")
 
     const lists = useSelector(getLists);
     const business = useSelector(getBusiness(businessId))
@@ -42,8 +44,6 @@ const BusinessPage = () => {
 
     const handleAddToList = (e, list) => {
         setToggleMenu(false)
-        // console.log(list)
-        // console.log("hi")
         const newListItem = {
             business_yelp_id: business?.id,
             list_id: list?.id
@@ -53,13 +53,28 @@ const BusinessPage = () => {
                 let errors = await checkErrors(res)
                 setErrors(errors)
             });
-
     }
 
     const handleToggle = () => {
         setToggleMenu(true)
         if (toggleMenu) {
             setToggleMenu(false)
+        }
+    }
+
+    const handleCreateRating = () => {
+
+    }
+
+    const handleBackButton = () => {
+        if (from.includes(' ')) {
+            const location = {
+                location: encodeURIComponent(from)
+            }
+            history.push(`/search/${location?.location}`)
+            dispatch(fetchSearches(location))
+        } else {
+            history.push(from)
         }
     }
 
@@ -73,11 +88,10 @@ const BusinessPage = () => {
             <div className="bp-header-overlay">
                 <h1 className="business-page-title">{business?.name}</h1>
                 <FontAwesomeIcon 
-                    onClick={()=> history.push(from)} 
+                    onClick={handleBackButton} 
                     className="bp-back-button" 
                     icon={faArrowLeft} 
                     style={{color: "#ffffff",}} />
-
             </div>
 
             <div className="business-info-wrapper">

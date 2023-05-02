@@ -5,6 +5,7 @@ import SearchesReducer from "./search.js";
 import ListsReducer from "./list.js";
 import ListItemsReducer from "./list_items.js";
 import BusinessesReducer from "./business.js";
+import RatingsReducer from "./ratings.js";
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ export const rootReducer = combineReducers({
     searches: SearchesReducer,
     lists: ListsReducer,
     listItems: ListItemsReducer,
-    businesses: BusinessesReducer
+    businesses: BusinessesReducer,
+    ratings: RatingsReducer
 })
 
 // ENHANCER

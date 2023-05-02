@@ -13,8 +13,8 @@ const SearchPage = (props) => {
 
     const sessionUser = useSelector(state => state.session.user);
     const searchResults = useSelector(state => Object.values(state.searches));
-    // const { location } = useParams();
-    // console.log(location)
+    const { location } = useParams();
+    
     if (sessionUser === null) return <Redirect to="/login" />;
 
     
@@ -39,7 +39,7 @@ const SearchPage = (props) => {
                 <div className="placeholder-for-map">
                     <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
                 </div>
-                <SearchResults searchResults={searchResults}/>
+                <SearchResults searchResults={searchResults} prevPage={location}/>
             </div>
         </>
     )

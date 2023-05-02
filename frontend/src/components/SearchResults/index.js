@@ -41,7 +41,7 @@ const SearchResults = ({searchResults, prevPage}) => {
                         </div>
                         
                         {searchResults.map(business => (
-                            <SearchResultItem business={business} key={business.id} prevPage={`/search`}/>
+                            <SearchResultItem business={business} key={business.id} prevPage={prevPage}/>
                         ))}
 
                         

@@ -19,24 +19,7 @@ const SplashPage = ({eHandler}) => {
 
                 <div className="splash-contents">
                     <img src={beanLogo} />
-                    {/* <Flickity className={'splash-cards-container'}>
-                        <div className="splash-cards">
-                            <img src={coffeeStand} />
-                            <h2>DISCOVER</h2>
-                            <p>Explore top rated coffee shops found in a given location.</p>
-                        </div>
-                        <div className="splash-cards">
-                            <img src={keepingTrack} />
-                            <h2>ORGANIZE</h2>
-                            <p>Keep track of your favorite coffee shops and ones that you want to try!</p>
 
-                        </div>
-                        <div className="splash-cards">
-                        <img src={friends} />
-                            <h2>SHARE</h2>
-                            <p>Connect with others and read up on their thoughts on a coffee shop!</p>
-                        </div>
-                    </Flickity> */}
                     <div className="splash-cards-container">
                         <div className="splash-cards">
                             <img src={coffeeStand} />

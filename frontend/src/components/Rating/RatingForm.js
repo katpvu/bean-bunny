@@ -4,18 +4,18 @@ import { createRating } from "../../store/ratings";
 import BunnyRatingInput from "./BunnyRatingInput";
 import { createBusiness } from "../../store/business";
 import { useSelector } from "react-redux";
+import { updateRating } from "../../store/ratings";
 
 
-const RatingForm = ({business}) => {
+const RatingForm = ({business, closeModal, currentUserRating}) => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
     console.log(business)
-    const [rating, setRating] = useState(0);
-    const [notes, setNotes] = useState("");
-    const [favOrders, setFavOrders] = useState("");
-    const [photoFiles, setPhotoFiles] = useState ([]);
-    const [photoUrls, setPhotoUrls] = useState ([]);
+    const [rating, setRating] = useState(currentUserRating ? currentUserRating?.rating : 0);
+    const [notes, setNotes] = useState(currentUserRating ? currentUserRating?.notes : "");
+    const [favOrders, setFavOrders] = useState(currentUserRating ? currentUserRating?.favOrders : "");
+    const [photoFiles, setPhotoFiles] = useState (currentUserRating ? currentUserRating?.photoUrls : []);
 
     const handleFiles = ({ currentTarget }) => {
         const files = currentTarget.files;
@@ -37,8 +37,15 @@ const RatingForm = ({business}) => {
                 formData.append('rating[photos][]', photo);
             })
         };
-        dispatch(createBusiness(business.id))
-        dispatch(createRating(formData));
+
+        if (currentUserRating) {
+            formData.append('rating[id]', currentUserRating.id)
+            dispatch(updateRating(formData))
+        } else {
+            dispatch(createBusiness(business.id))
+            dispatch(createRating(formData))
+        }
+        closeModal();
     }
 
     const onChange = (number) => {
@@ -54,7 +61,7 @@ const RatingForm = ({business}) => {
 
             </div>
 
-            <div className="form-container">
+            <div className="rating-form-container">
                 <form>
                     <h1>Creating a Rating</h1>
                     <label>How would you rate your experience?

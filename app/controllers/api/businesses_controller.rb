@@ -6,6 +6,8 @@ require 'json'
 
 class Api::BusinessesController < ApplicationController
     def fetch
+
+        #fetch business from yelp api
         business_id = params[:business_yelp_id]
         url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
 
@@ -18,6 +20,9 @@ class Api::BusinessesController < ApplicationController
 
         response = http.request(request)
         @business = JSON.parse response.read_body, symbolize_names: true
+
+        #fetch ratings from Business model
+        @db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
 
         render :fetch
     end

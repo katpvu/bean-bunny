@@ -10,3 +10,9 @@ export const checkErrors = async (res) => {
     else return [res.statusText];
 }
 
+export const findAvg = (array) => {
+    let total = 0;
+    array.forEach(num => total += num)
+    let average = total / array.length
+    return average
+}

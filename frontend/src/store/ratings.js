@@ -1,4 +1,10 @@
 import csrfFetch from "./csrf";
+import { RECEIVE_BUSINESS } from "./business";
+
+// SELECTORS
+export const getBusinessRatings = state => (
+    state.ratings ? Object.values(state.ratings) : []
+);
 
 // CONSTANTS
 export const RECEIVE_RATING = 'ratings/RECEIVE_RATING';
@@ -22,17 +28,17 @@ export const removeRating = (ratingId) => ({
 });
 
 // THUNK ACTION CREATORS
-export const fetchRating = (ratingId) => async dispatch => {
-    const res = await csrfFetch(`/api/ratings/${ratingId}`);
-    const data = await res.json();
-    return dispatch(receiveRating(data));
-};
+// export const fetchRating = (ratingId) => async dispatch => {
+//     const res = await csrfFetch(`/api/ratings/${ratingId}`);
+//     const data = await res.json();
+//     return dispatch(receiveRating(data));
+// };
 
-export const fetchRatings = () => async dispatch => {
-    const res = await csrfFetch('/api/ratings');
-    const data = await res.json();
-    return dispatch(receiveRatings(data));
-};
+// export const fetchRatings = () => async dispatch => {
+//     const res = await csrfFetch('/api/ratings');
+//     const data = await res.json();
+//     return dispatch(receiveRatings(data));
+// };
 
 export const createRating = (rating) => async dispatch => {
     const res = await csrfFetch('/api/ratings', {
@@ -41,7 +47,7 @@ export const createRating = (rating) => async dispatch => {
     });
     const data = await res.json();
     console.log(data, "create rating data from backend")
-    // return dispatch(receiveRating(data));
+    return dispatch(receiveRating(data));
 };
 
 export const updateRating = (rating) => async dispatch => {
@@ -65,11 +71,9 @@ const RatingsReducer = (state={}, action) => {
     let newState = { ...state };
     switch (action.type) {
         case RECEIVE_RATING:
-
-        case RECEIVE_RATINGS:
-
-        case REMOVE_RATING:
-
+            return action.rating
+        case RECEIVE_BUSINESS: 
+            return { ...action.payload.ratings }
         default:
             return state;
     };

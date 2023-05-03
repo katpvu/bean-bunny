@@ -1,4 +1,5 @@
 .business-page-container {
+    border: 1px solid green;
     position: relative;
     width: 100%;
     top: 0;
@@ -15,7 +16,7 @@
 }
 
 .business-info-wrapper {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     /* overflow-y: scroll; */
     height: 63vh;
 
@@ -150,23 +151,23 @@
     line-height: 1.3;
 }
 
-.score-item h3 {
+.score-item h3, .user-notes-section h2 {
     font-weight: 700;
 }
 
-.score-item p {
+.score-item p, .user-notes-section p {
     font-size: 14px;
     color: rgb(97, 97, 97);
 }
 
-.business-section-title {
+.business-section-title, .user-notes-section h1 {
     font-size: 17px;
     font-weight: 700;
     margin: 10px
 }
 
 
-.business-info-header p {
+.business-info-header p, .user-notes-section h2, .user-notes-section p {
     margin-left: 11px;
 }
 
@@ -217,6 +218,37 @@
     height: 20px;
     cursor: pointer;
 }
+
+.photos-section, .user-notes-section {
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid green;
+    display: block;
+    width: 100%;
+}
+.photos-section h1 {
+    text-align: left;
+}
+
+.photo-gallery {
+    display: grid;
+    border: 1px solid blue;
+    padding: 10px;
+    grid-template-columns: 100px 100px 100px;
+
+}
+.photo-gallery img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    object-fit: cover;
+
+}
+
+.user-notes-section h2 {
+    font-size: 15px;
+}
+
 @media (min-width: 600px) {
 
     .business-page-container {
@@ -228,7 +260,10 @@
     }
 
     .float-scores-and-map {
-        position: relative;
+        position: static;
+        border: 1px solid orange;
+        width: 100%;
+        height: 250px;
     }
 
     .scores {
@@ -270,5 +305,22 @@
         height: 30vh;
         float: left;
     }
+    .photo-gallery {
+        display: grid;
+        border: 1px solid blue;
+        grid-template-columns: 100px 100px 100px 100px 100px;
+        grid-gap: 10px;
+    
+    }
+
+    .input-notes-container {
+        display: flex;
+    }
+
+    .input-notes-container div {
+        width: 50%;
+        margin-bottom: 10px;
+    }
+
 
 }

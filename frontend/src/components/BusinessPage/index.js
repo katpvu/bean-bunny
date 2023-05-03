@@ -1,11 +1,10 @@
 import "./index.css"
-import ListForm from "../List/ListForm";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getLists, fetchLists } from "../../store/list";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListUl, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { createListItem } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
@@ -14,6 +13,11 @@ import { fetchSearches } from "../../store/search";
 import Header from "../Header";
 import { Modal } from "../../context/Modal"
 import RatingForm from "../Rating/RatingForm";
+import ScoresPanel from "./ScoresPanel";
+import ListDropDown from "./ListDropDown";
+import { getBusinessRatings } from "../../store/ratings";
+import PhotoGallery from "./PhotoGallery";
+import UserNotes from "./UserNotes";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -21,11 +25,13 @@ const BusinessPage = () => {
     const location = useLocation();
     
     const { from } = location.state;
-    console.log(from)
     const { businessId } = useParams();
 
     const lists = useSelector(getLists);
     const business = useSelector(getBusiness(businessId))
+    const sessionUser = useSelector(state => state.session.user);
+    const ratings = useSelector(getBusinessRatings);
+
 
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
@@ -33,8 +39,15 @@ const BusinessPage = () => {
     
     useEffect(() =>{
         dispatch(fetchLists())
-        dispatch(fetchBusiness(businessId))
+        dispatch(fetchBusiness(businessId)) //this will trigger createBusiness
     }, [])
+
+    let currentUserRating = {};
+    ratings.forEach( rating => {
+        if (rating.userId === sessionUser.id) {
+            currentUserRating = rating
+        }
+    })
 
     let mapOptions;
         mapOptions = {
@@ -65,10 +78,6 @@ const BusinessPage = () => {
         }
     }
 
-    const handleCreateRating = () => {
-
-    }
-
     const handleBackButton = () => {
         if (from.includes(' ')) {
             const location = {
@@ -83,8 +92,6 @@ const BusinessPage = () => {
 
     return (
         <>
-        
-
         <Header />
         <div className="business-page-container">
             <img src={`${business?.imageUrl}`} alt={business?.name} className="fitting-image"/>
@@ -105,64 +112,36 @@ const BusinessPage = () => {
                         <p>{business?.location.city}, {business?.location.state}</p>
                     </div>
                     <div className="buttons-container">
-                        <div className="rating-button" onClick={() => setShowModal(true)}>Create Rating</div>
+                        <div className="rating-button" 
+                            onClick={() => setShowModal(true)}
+                            >{currentUserRating ? "Update Rating" : "Create Rating" }
+                        </div>
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
-                                <RatingForm business={business}/>
+                                <RatingForm business={business} closeModal={() => setShowModal(false)} currentUserRating={currentUserRating}/>
                             </Modal>
                         )}
                         <div className="add-to-list-button" onClick={handleToggle}>{toggleMenu ? "x" : "+"}</div>
                     </div>
                     <ul className={toggleMenu ? "list-index-drop-down" : "hidden"}>
-                        <h2>Add to Collection:</h2>
-                        <div className="form-container-in-bp">
-                            <ListForm />
-                        </div>
-                        { lists.map(list => 
-                            <li key={list.id} onClick={(e) => handleAddToList(e, list)}>
-                                <FontAwesomeIcon icon={faListUl} />
-                                <h3>{list.title}</h3>
-                            </li>
-                        )}
+                        <ListDropDown lists={lists} handleAddToList={handleAddToList} />
                     </ul>
                 </div>
                 <br></br>
                 <div className="float-scores-and-map">
-                    <div className="scores">
-                        <h1 className="business-section-title">Scores</h1>
-                        <div className="score-item">
-                            <div className="rating">-</div>
-                            <div className="rating-info">
-                                <h3>Your Bean Rating</h3>
-                                <p>What you think</p>
-                            </div>
-                            
-                        </div>
-                        <div className="score-item">
-                            <div className="rating">-</div>
-                            <div className="rating-info">
-                                <h3>Overall Bean Rating</h3>
-                                <p>Average rating from Bean Bunny users!</p>
-                            </div>
-                            
-                        </div>
-                        <div className="score-item">
-                            <div className="rating">{business?.rating}</div>
-                            <div className="rating-info">
-                                <h3>Current Yelp Rating</h3>
-                                <p>Compare everyone's rating vs. just coffee lovers!</p>
-                            </div>
-                        </div>
-                    </div>
+                    <ScoresPanel businessYelpRating={business?.rating} sessionUser={sessionUser} ratings={ratings}/>
                     
                     <div className="bp-map-container">
                         <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
                     </div>
                 </div>
-                {/* <div>
-                    <h1 className="business-section-title">Your notes and photos</h1>
-                    <h1 className="business-section-title">What your friends think</h1>
-                </div> */}
+                <div className="photos-section">
+                    <PhotoGallery ratings={ratings} sessionUser={sessionUser}/>
+                </div>
+                <div className="user-notes-section">
+                    <UserNotes ratings={ratings} sessionUser={sessionUser} />
+                </div>
+
             </div>
             </div>
             </>

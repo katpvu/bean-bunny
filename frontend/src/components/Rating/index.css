@@ -1,3 +1,44 @@
+
+.rating-form-page-container {
+    /* border: 1px solid green; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.banner-display {
+    width: 0;
+    height: 0;
+}
+
+.banner-display img {
+    width: 0;
+    height: 0;
+}
+
+.banner-display h1 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    position: relative;
+    text-align: center;
+    margin-top: 150px;
+    margin-left: 50px;
+    width: 300px;
+    color: rgb(0, 0, 0);
+}
+
+.rating-form-container {
+    /* border: 1px solid green; */
+    
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 238, 238);
+}
+
 .filled {
     width: 60px;
     height: 60px;
@@ -17,78 +58,24 @@
     display: flex;
 }
 
-.rating-form-page-container {
-    /* border: 1px solid green; */
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-
-.banner-display h1 {
-    /* font-family: 'DM Sans', sans-serif; */
-    font-family: 'Archivo', sans-serif;
-    font-weight: 700;
-    font-size: 30px;
-    position: absolute;
-    text-align: center;
-    width: 300px;
-    color: white;
-}
-.banner-display img {
-    width: 300px;
-    height: 300px;
-    object-fit:cover;
-    border-radius: 50%;
-
-}
-
-.form-container {
-    /* border: 1px solid green; */
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(240, 238, 238);
-}
-
-.banner-display, .fp-overlay{
-    width: 50%;
-    height: 100%;
-    /* border: 1px solid red; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.fp-overlay {
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.39);
-    border-radius: 50%;
-}
-
-.form-container h1 {
+.rating-form-container h1 {
     text-align: center;
     font-size: 24px;
     padding: 15px;
     border-bottom: 2px solid rgba(128, 128, 128, 0.397);
 }
 
-.form-container label {
+.rating-form-container label {
     padding: 15px 10px;
 }
 
-.form-container input {
+.rating-form-container input {
     padding: 5px;
     width: 80%;
     border-radius: 10px;
     outline: none;
     font-size: 12px;
 }
-
-
 
 .rating-submit-btn {
     width: 120px;
@@ -105,4 +92,98 @@
 .rating-submit-btn:hover {
     cursor: pointer;
     background-color: rgb(255, 255, 255);
+}
+@media (min-width: 600px) {
+    
+    .rating-form-page-container {
+        /* border: 1px solid green; */
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+    
+
+    .banner-display h1 {
+        /* font-family: 'DM Sans', sans-serif; */
+        font-family: 'Archivo', sans-serif;
+        font-weight: 700;
+        font-size: 30px;
+        position: absolute;
+        text-align: center;
+        width: 300px;
+        color: white;
+    }
+    .banner-display img {
+        width: 300px;
+        height: 300px;
+        object-fit:cover;
+        border-radius: 50%;
+    
+    }
+    
+    .rating-form-container {
+        /* border: 1px solid green; */
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(240, 238, 238);
+    }
+    
+    .banner-display, .fp-overlay{
+        width: 50%;
+        height: 100%;
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .fp-overlay {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.39);
+        border-radius: 50%;
+    }
+    
+    .rating-form-container h1 {
+        text-align: center;
+        font-size: 24px;
+        padding: 15px;
+        border-bottom: 2px solid rgba(128, 128, 128, 0.397);
+    }
+    
+    .rating-form-container label {
+        padding: 15px 10px;
+    }
+    
+    .rating-form-container input {
+        padding: 5px;
+        width: 80%;
+        border-radius: 10px;
+        outline: none;
+        font-size: 12px;
+    }
+    
+    
+    
+    .rating-submit-btn {
+        width: 120px;
+        background-color: rgba(216, 216, 216, 0.671);
+        border: 1px solid gray;
+        padding: 10px 25px;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        border-radius: 999px;
+        font-family: 'Archivo', sans-serif;
+        transition: all 0.3s ease
+    }
+    
+    .rating-submit-btn:hover {
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+    }
+    
 }

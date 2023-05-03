@@ -23,7 +23,7 @@
     position: absolute;
     width: 100vw;
     background-color:white;
-    z-index: 100;
+    z-index: 1000;
   }
 
   @media (min-width: 469px) {
@@ -47,5 +47,6 @@
     #modal-content {
         width: 100vh;
         height: 70vh;
+        z-index: 1000;
     }
   }

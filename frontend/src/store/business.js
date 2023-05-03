@@ -7,7 +7,7 @@ export const getBusiness = (businessId) => state => (
 
 // CONSTANTS
 export const RECEIVE_BUSINESS = 'businesses/RECEIVE_BUSINESS'
-
+export const GET_DB_BUSINESS = 'businesses/GET_DB_BUSINESS'
 // ACTION CREATORS
 export const receiveBusiness = (business) => ({
     type: RECEIVE_BUSINESS,
@@ -17,9 +17,9 @@ export const receiveBusiness = (business) => ({
 // THUNK ACTION CREATORS
 
 export const fetchBusiness = (businessId) => async dispatch => {
+    dispatch(createBusiness(businessId));
     const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();
-    dispatch(createBusiness(businessId));
     return dispatch(receiveBusiness(data));
 }
 
@@ -31,6 +31,7 @@ export const createBusiness = (businessId) => async dispatch => {
         body: JSON.stringify(newBusiness)
     });
 };
+
 
 // REDUCER
 const BusinessesReducer = (state={}, action) => {

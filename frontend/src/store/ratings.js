@@ -37,10 +37,11 @@ export const fetchRatings = () => async dispatch => {
 export const createRating = (rating) => async dispatch => {
     const res = await csrfFetch('/api/ratings', {
         method: 'POST',
-        body: JSON.stringify(rating)
+        body: rating
     });
     const data = await res.json();
-    return dispatch(receiveRating(data));
+    console.log(data, "create rating data from backend")
+    // return dispatch(receiveRating(data));
 };
 
 export const updateRating = (rating) => async dispatch => {

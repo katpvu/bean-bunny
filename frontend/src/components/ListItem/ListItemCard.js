@@ -13,16 +13,15 @@ const ListItemCard = ({listItem}) => {
     const dispatch = useDispatch();
     const {listId} = useParams();
 
-    const business = useSelector(getBusiness(listItem.businessYelpId))
+    const business = useSelector(getBusiness(listItem.businessYelpId));
 
     useEffect(() =>{
-        dispatch(fetchBusiness(listItem.businessYelpId))
-    }, [])
+        dispatch(fetchBusiness(listItem.businessYelpId));
+    }, []);
 
     return (
         <div className="list-item-card-container">
             <SearchResultItem business={business} prevPage={`/lists/${listId}`}/>
-
         </div>
     )
 };

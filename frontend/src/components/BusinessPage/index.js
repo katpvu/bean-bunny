@@ -12,6 +12,8 @@ import MapWrapper from "../Map";
 import { fetchBusiness, getBusiness } from "../../store/business";
 import { fetchSearches } from "../../store/search";
 import Header from "../Header";
+import { Modal } from "../../context/Modal"
+import RatingForm from "../Rating/RatingForm";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const BusinessPage = () => {
 
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
+    const [showModal, setShowModal] = useState(false);
     
     useEffect(() =>{
         dispatch(fetchLists())
@@ -102,7 +105,12 @@ const BusinessPage = () => {
                         <p>{business?.location.city}, {business?.location.state}</p>
                     </div>
                     <div className="buttons-container">
-                        <div className="rating-button">Create Rating</div>
+                        <div className="rating-button" onClick={() => setShowModal(true)}>Create Rating</div>
+                        {showModal && (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <RatingForm business={business}/>
+                            </Modal>
+                        )}
                         <div className="add-to-list-button" onClick={handleToggle}>{toggleMenu ? "x" : "+"}</div>
                     </div>
                     <ul className={toggleMenu ? "list-index-drop-down" : "hidden"}>

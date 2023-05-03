@@ -3,5 +3,6 @@ class Business < ApplicationRecord
     validates :business_yelp_id, presence: true
 
     # associations
-    has_many :ratings
+    has_many :ratings,
+        dependent: :destroy
 end

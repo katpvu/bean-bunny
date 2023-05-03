@@ -1,1 +1,1 @@
-json.extract! @business, :id, :name, :coordinates, :rating, :location, :image_url, :is_closed 
+json.extract! @business, :id, :business_yelp_id

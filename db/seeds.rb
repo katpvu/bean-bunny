@@ -9,6 +9,13 @@ ApplicationRecord.transaction do
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
     User.destroy_all
+    List.destroy_all
+    ListItem.destroy_all
+    Business.destroy_all
+    Rating.destroy_all
+
+    puts 'Destroying all ActiveStorage attachments'
+    ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
   
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1

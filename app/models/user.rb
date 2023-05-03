@@ -37,6 +37,9 @@ class User < ApplicationRecord
   has_many :lists,
     dependent: :destroy
 
+  has_many :ratings,
+    dependent: :destroy
+
   # SPIRE
   def self.find_by_credentials(credential, password)
     field = credential =~  URI::MailTo::EMAIL_REGEXP ? :email : :username

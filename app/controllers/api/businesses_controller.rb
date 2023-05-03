@@ -19,7 +19,7 @@ class Api::BusinessesController < ApplicationController
         response = http.request(request)
         @business = JSON.parse response.read_body, symbolize_names: true
 
-        render :show
+        render :fetch
     end
 
     def create
@@ -33,6 +33,11 @@ class Api::BusinessesController < ApplicationController
         else
             head :no_content
         end
+    end
+
+    def show
+        @business = Business.find_by(business_yelp_id: params[:business_yelp_id])
+        render :show
     end
 
     private

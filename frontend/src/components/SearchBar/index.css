@@ -1,13 +1,16 @@
 .search-bar-container {
     width: 100%;
     margin: 20px;
+    /* border: 1px solid green;
+    display: flex; */
 }
 
 .search-bar {
-    width: 60%;
+    width: 80%;
     padding: 10px;
     border-radius: 6px;
-    border: 1px solid gray
+    border: 1px solid gray;
+    margin-left:60px;
 }
 
 .search-bar:focus {
@@ -16,4 +19,11 @@
 
 .search-form {
     width: 100%;
+}
+
+@media(min-width: 600px) {
+    .search-bar {
+        width: 60%;
+        margin-left: 0;
+    }
 }

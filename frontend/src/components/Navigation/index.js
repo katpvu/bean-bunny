@@ -46,6 +46,8 @@ const Navigation = (props) => {
 
     return (
         <>
+
+
             <ul className="nav-container">
                 <li className="welcome-container">
                     <img src={bunnyAvatar} />
@@ -53,10 +55,10 @@ const Navigation = (props) => {
                         <p>Welcome,</p>
                         <h2 >{sessionUser.username}</h2>
                     </div>
-                    </li>
+                </li>
                 <NavLink to="/search"><li><FontAwesomeIcon icon={faMagnifyingGlass} className="icon"/>Search</li></NavLink>
                 <li><FontAwesomeIcon icon={faCheck} className="icon"/>Hopped</li>
-                <NavLink to="/lists"><li><FontAwesomeIcon icon={faList} className="icon"/>Your Collections</li></NavLink>
+                <NavLink to="/lists"><li><FontAwesomeIcon icon={faList} className="icon"/>My Collections</li></NavLink>
                 <li>
                     <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>Logout</div>
                 </li>

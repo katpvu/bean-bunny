@@ -21,7 +21,7 @@ const ListIndex = (props) => {
         <>
            <div className="list-index-section-container">
                 <div className="list-index-title">
-                    <h1>Your Collections</h1>
+                    <h1>My Collections</h1>
                 </div>
                 <div className="create-list-container">
                     <div 

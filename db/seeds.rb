@@ -217,17 +217,6 @@ require "open-uri"
         filename: "beanbunny-#{index + 11}.jpg"
       )
     end
-    
-    
-    # More users
-    # 10.times do 
-    #   User.create!({
-    #     username: Faker::Internet.unique.username(specifier: 3),
-    #     password: 'password'
-    #   }) 
-    # end
-
-
   
     puts "Done!"
   # end

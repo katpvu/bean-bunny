@@ -16,7 +16,7 @@ const SearchPage = (props) => {
     const sessionUser = useSelector(state => state.session.user);
     const searchResults = useSelector(state => Object.values(state.searches));
     const { location } = useParams();
-    
+    console.log(location, "location")
     if (sessionUser === null) return <Redirect to="/login" />;
 
     
@@ -31,7 +31,7 @@ const SearchPage = (props) => {
     }
 
     const markerEventHandlers = {
-        'click': (business) => history.push(`/businesses/${business?.id}`, {from: "/search"})
+        'click': (business) => history.push(`/businesses/${business?.id}`, {from: `/search${location}`})
     }
 
     return (

@@ -41,7 +41,7 @@ const BusinessPage = () => {
     useEffect(() =>{
         dispatch(fetchLists())
         dispatch(fetchBusiness(businessId)) //this will trigger createBusiness
-    }, [])
+    }, [showModal])
 
     let currentUserRating;
     ratings.forEach( rating => {
@@ -136,14 +136,17 @@ const BusinessPage = () => {
                         <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
                     </div>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
                 <div className="photos-section">
-                    <PhotoGallery ratings={ratings} sessionUser={sessionUser}/>
+                    <PhotoGallery ratings={ratings} business={business} sessionUser={sessionUser}/>
                 </div>
                 <div className="user-notes-section">
                     <UserNotes ratings={ratings} sessionUser={sessionUser} />
                 </div>
                 <div>
-                    <BeanBunnyMemberNotes ratings={ratings} sessionUser={sessionUser} />
+                    <BeanBunnyMemberNotes ratings={ratings} business={business} sessionUser={sessionUser} />
                 </div>
 
             </div>

@@ -10,10 +10,11 @@ const Hopped = (props) => {
     const sessionUser = useSelector(state => state.session.user);
     const businesses = useSelector(state => Object.values(state.businesses))
     const ratings = useSelector(state => Object.values(state.ratings))
-    console.log(ratings)
+
     useEffect(() => {
         dispatch(fetchUserBusinessesRated(sessionUser.id))
     }, [])
+    
     return (
         <>
             <Header />

@@ -4,7 +4,7 @@
     height: 82vh;
     box-sizing: border-box;
     padding: 30px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 .hopped-section-container h1 {
@@ -15,6 +15,7 @@
 .hopped-all-content {
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
     padding: 10px;
     line-height: 1.2rem;
     align-items: center;
@@ -33,13 +34,14 @@
 .hopped-text-content {
     display: flex;
     align-items: center;
+
 }
 .hopped-section-container div:not(:first-of-type) {
     border-top: 1px solid rgba(128, 128, 128, 0.703);
 }
 
 .hopped-text-content h2 {
-    font-weight: 700;
+    font-family: 'Archivo', sans-serif;
     font-size: 20px;
 }
 
@@ -51,6 +53,7 @@
 
 .text-content {
     margin: 0px 10px;
+    
 }
 .hopped-text-content h3 {
     color: rgb(98, 98, 98)

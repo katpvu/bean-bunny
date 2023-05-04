@@ -1,7 +1,7 @@
-const PhotoGallery = ({ratings, sessionUser}) => {
+const PhotoGallery = ({ratings, sessionUser, business}) => {
     let imageUrls = []
     ratings.forEach(rating => {
-        if (rating.userId !== sessionUser.id) imageUrls.push(rating?.photoUrls)
+        if (rating.userId !== sessionUser?.id && rating?.businessYelpId === business?.id) imageUrls.push(rating?.photoUrls)
     });
     
     return (

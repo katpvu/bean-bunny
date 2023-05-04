@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLists } from "../../store/list";
 
 
-const ListForm = ({listId}) => {
+const ListForm = ({listId, onClose}) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState([]);
@@ -40,6 +40,7 @@ const ListForm = ({listId}) => {
                 });
         }
         setTitle("");
+        onClose();
     }
 
     return (

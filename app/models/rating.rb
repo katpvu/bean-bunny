@@ -8,5 +8,6 @@ class Rating < ApplicationRecord
     # associations
     belongs_to :user
     belongs_to :business
-    has_many_attached :photos
+    has_many_attached :photos,
+        dependent: :destroy
 end

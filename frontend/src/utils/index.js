@@ -14,5 +14,6 @@ export const findAvg = (array) => {
     let total = 0;
     array.forEach(num => total += num)
     let average = total / array.length
-    return average
+
+    return Math.round(average, 1)
 }

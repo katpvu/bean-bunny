@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createRating } from "../../store/ratings";
+import { createRating, deleteRating } from "../../store/ratings";
 import BunnyRatingInput from "./BunnyRatingInput";
 import { createBusiness } from "../../store/business";
 import { useSelector } from "react-redux";
@@ -24,34 +24,39 @@ const RatingForm = ({business, closeModal, currentUserRating}) => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(photoFiles)
         const formData = new FormData();
         formData.append('rating[rating]', rating);
         formData.append('rating[notes]', notes);
         formData.append('rating[fav_orders]', favOrders);
         formData.append('business_yelp_id', business.id);
-        formData.append('rating[user_id]', sessionUser.id)
+        formData.append('rating[user_id]', sessionUser.id);
+        console.log(rating, "rating");
+        console.log(notes, "notes");
 
-        if (photoFiles.length !== 0) {   // <-- ADD THESE LINES
+        if (photoFiles.length !== 0) {
             photoFiles.forEach(photo => {
                 formData.append('rating[photos][]', photo);
-            })
+            });
         };
 
         if (currentUserRating) {
-            formData.append('rating[id]', currentUserRating.id)
-            dispatch(updateRating(formData))
+            formData.append('id', currentUserRating.id);
+            dispatch(updateRating(formData));
         } else {
-            dispatch(createBusiness(business.id))
-            dispatch(createRating(formData))
+            dispatch(createBusiness(business.id));
+            dispatch(createRating(formData));
         }
         closeModal();
-    }
+    };
 
     const onChange = (number) => {
-        setRating(parseInt(number))
-    }
+        setRating(parseInt(number));
+    };
 
+    const handleDelete = () => {
+        dispatch(deleteRating(currentUserRating.id));
+        closeModal();
+    }
     return (
         <div className="rating-form-page-container">
             <div className="banner-display">
@@ -63,7 +68,7 @@ const RatingForm = ({business, closeModal, currentUserRating}) => {
 
             <div className="rating-form-container">
                 <form>
-                    <h1>Creating a Rating</h1>
+                    <h1>{currentUserRating ? "Update Your Rating" : "Creating a Rating"}</h1>
                     <label>How would you rate your experience?
                         {/* for rating  */}
                         <BunnyRatingInput 
@@ -90,8 +95,12 @@ const RatingForm = ({business, closeModal, currentUserRating}) => {
                         {/* for adding photos */}
                         <input type="file" onChange={handleFiles} multiple />
                     </label>
-
-                    <div onClick={handleSubmit} className="rating-submit-btn">Submit!</div>
+                    <div className="rating-form-buttons-container">
+                        <div onClick={handleSubmit} className="rating-submit-btn">Submit!</div>
+                        {currentUserRating && (
+                            <div onClick={handleDelete}className="rating-delete-btn">Delete Rating</div>
+                        )}
+                    </div>
                 </form>
 
             </div>

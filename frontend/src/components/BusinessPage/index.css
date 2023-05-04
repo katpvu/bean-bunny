@@ -1,5 +1,5 @@
 .business-page-container {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     position: relative;
     width: 100%;
     top: 0;
@@ -16,7 +16,7 @@
 }
 
 .business-info-wrapper {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* overflow-y: scroll; */
     height: 63vh;
 
@@ -222,7 +222,7 @@
 .photos-section, .user-notes-section {
     position: relative;
     box-sizing: border-box;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     display: block;
     width: 100%;
 }
@@ -232,7 +232,7 @@
 
 .photo-gallery {
     display: grid;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     padding: 10px;
     grid-template-columns: 100px 100px 100px;
 
@@ -240,7 +240,8 @@
 .photo-gallery img {
     width: 100px;
     height: 100px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    border-radius: 10px;
     object-fit: cover;
 
 }
@@ -261,7 +262,7 @@
 
     .float-scores-and-map {
         position: static;
-        border: 1px solid orange;
+        /* border: 1px solid orange; */
         width: 100%;
         height: 250px;
     }
@@ -307,7 +308,7 @@
     }
     .photo-gallery {
         display: grid;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
         grid-template-columns: 100px 100px 100px 100px 100px;
         grid-gap: 10px;
     

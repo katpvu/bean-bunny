@@ -5,6 +5,8 @@ import "./index.css"
 import SearchResults from "../SearchResults";
 // import ListForm from "../List/ListForm";
 import MapWrapper from "../Map";
+import SearchBar from "../SearchBar";
+import Navigation from "../Navigation";
 // import { useEffect } from "react";
 // import { fetchSearches, getSearches } from "../../store/search";
 
@@ -35,11 +37,18 @@ const SearchPage = (props) => {
     return (
         <>
             <Header />
-            <div className="main-content-container">
-                <div className="placeholder-for-map">
-                    <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
+            <div className="below-header-content-container">
+                <Navigation />
+                <div className="search-page-section">
+                    <SearchBar />
+                    <div className="main-content-container">
+                        <SearchResults searchResults={searchResults} prevPage={location}/>
+                        <div className="placeholder-for-map">
+                            <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
+                        </div>
+                    </div>
+
                 </div>
-                <SearchResults searchResults={searchResults} prevPage={location}/>
             </div>
         </>
     )

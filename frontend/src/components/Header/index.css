@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     right: 0;
-    position: relative;
+    height: 18vh;
 }
 
 .bunny-logo {
@@ -13,9 +13,8 @@
 @media (min-width: 600px) {
     .header-container {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        /* border: 1px solid blue; */
+        justify-content: center;
+        border-bottom: 1px solid rgb(133, 133, 133);
     }
     .bunny-logo {
         width: 200px;

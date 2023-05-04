@@ -1,3 +1,11 @@
+.list-index-section-container {
+    width: 75%;
+    height: 83vh;
+    box-sizing: border-box;
+    /* border: 1px solid red */
+}
+
+
 .list-index-container {
     display: grid;
     grid-template-columns: 80%;
@@ -79,7 +87,7 @@
     font-family: 'Archivo', sans-serif;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 919px) {
     .page-container {
         /* border: 1px solid green; */
         display: flex;
@@ -102,6 +110,6 @@
 
 @media (min-width: 1050px) {
     .list-index-container {
-        grid-template-columns: 250px 250px 250px 250px;
+        grid-template-columns: 250px 250px 250px ;
     }
 }

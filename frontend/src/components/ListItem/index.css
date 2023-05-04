@@ -22,7 +22,8 @@
 }
 
 .list-main-content {
-    height: 72.5vh;
+    width: 75%;
+    height: 100%;
 }
 
 .list-header-container {
@@ -65,15 +66,21 @@
 }
 
 .list-item-card-container {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* border: 1px solid red; */
 }
 
 .remove-btn-container {
     cursor: pointer; 
-    color: red;
+    color: rgb(34, 33, 33);
+}
+
+.remove-btn-container:hover{
+    color: gray;
 }
 @media (min-width: 600px) {
     .list-title {

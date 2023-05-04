@@ -77,7 +77,7 @@
     font-size: 12px;
 }
 
-.rating-submit-btn {
+.rating-submit-btn, .rating-delete-btn {
     width: 120px;
     background-color: rgba(216, 216, 216, 0.671);
     border: 1px solid gray;
@@ -86,12 +86,28 @@
     color: rgb(0, 0, 0);
     border-radius: 999px;
     font-family: 'Archivo', sans-serif;
+
     transition: all 0.3s ease
 }
 
-.rating-submit-btn:hover {
+.rating-submit-btn:hover, .rating-delete-btn:hover {
     cursor: pointer;
     background-color: rgb(255, 255, 255);
+}
+
+.rating-delete-btn {
+    padding: 5px 15px;
+    margin-top: 15px;
+    font-size: 14px;
+
+    color: red;
+}
+
+.rating-form-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 @media (min-width: 600px) {
     
@@ -112,6 +128,8 @@
         text-align: center;
         width: 300px;
         color: white;
+        margin-top: 0px;
+        margin-left: 0px;
     }
     .banner-display img {
         width: 300px;

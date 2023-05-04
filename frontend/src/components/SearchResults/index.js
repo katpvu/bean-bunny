@@ -12,8 +12,8 @@ const SearchResults = ({searchResults, prevPage}) => {
     useEffect(() => {
         setUserSearch(true)
         if (userSearch) {
-            setSearchCity(searchResults[0].location.city)
-            setSearchState(searchResults[0].location.state)
+            setSearchCity(searchResults[0]?.location.city)
+            setSearchState(searchResults[0]?.location.state)
         }
 
         return () => {
@@ -27,7 +27,10 @@ const SearchResults = ({searchResults, prevPage}) => {
         <>
             {!searchCity && (
                 <div className="search-results-container">
-                    <h1>hi</h1>
+                    <div className="before-search-text">
+                    
+                        <h1>Go ahead and enter a location in the search bar!</h1>
+                    </div>
                 </div>
             )
 

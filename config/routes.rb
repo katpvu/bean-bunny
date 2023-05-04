@@ -13,8 +13,7 @@ Rails.application.routes.draw do
     resource :session, only: [:show, :create, :destroy]
     resources :lists
     resources :list_items, only: [:index, :create, :destroy]
-    
-    resources :ratings, only: [:show, :create, :index]
+    resources :ratings
   end
   
   get '*path', to: "static_pages#frontend_index"

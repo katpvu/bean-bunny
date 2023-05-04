@@ -29,7 +29,7 @@ class Api::ListsController < ApplicationController
     end
 
     def destroy
-        @list = List.find_by(id: params[:id]);
+        @list = List.find_by(id: params[:id])
         @list.destroy
         head :no_content
     end

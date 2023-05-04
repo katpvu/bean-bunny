@@ -18,6 +18,7 @@ import ListDropDown from "./ListDropDown";
 import { getBusinessRatings } from "../../store/ratings";
 import PhotoGallery from "./PhotoGallery";
 import UserNotes from "./UserNotes";
+import BeanBunnyMemberNotes from "./BeanBunnyMemberNotes";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const BusinessPage = () => {
         dispatch(fetchBusiness(businessId)) //this will trigger createBusiness
     }, [])
 
-    let currentUserRating = {};
+    let currentUserRating;
     ratings.forEach( rating => {
         if (rating.userId === sessionUser.id) {
             currentUserRating = rating
@@ -140,6 +141,9 @@ const BusinessPage = () => {
                 </div>
                 <div className="user-notes-section">
                     <UserNotes ratings={ratings} sessionUser={sessionUser} />
+                </div>
+                <div>
+                    <BeanBunnyMemberNotes ratings={ratings} sessionUser={sessionUser} />
                 </div>
 
             </div>

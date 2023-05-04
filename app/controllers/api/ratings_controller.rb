@@ -23,7 +23,21 @@ class Api::RatingsController < ActionController::API
     end
 
     def update
+        db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
+        db_business_id = db_business.id
+        params[:rating][:business_id] = db_business_id
         @rating = Rating.find_by(id: params[:id])
+        if @rating.update(rating_params)
+            render :show
+        else
+            render json: { errors: @rating.errors.full_messages}, status: 422
+        end
+    end
+
+    def destroy
+        @rating = Rating.find_by(id: params[:id])
+        @rating.destroy
+        head :no_content
     end
 
     private

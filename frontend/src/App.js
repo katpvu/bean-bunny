@@ -4,7 +4,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import HomePage from "./components/HomePage";
 import SignUpForm from "./components/SignUpForm";
 import ErrorPage from "./components/ErrorPage";
-import ListIndex from "./components/List/ListIndex";
+import ListIndexPage from "./components/List/ListIndexPage";
 import ListItemIndex from "./components/ListItem/ListItemIndex";
 import BusinessPage from "./components/BusinessPage";
 import SearchPage from "./components/SearchPage";
@@ -17,7 +17,7 @@ function App() {
       <Switch>
         <Route path="/error"><ErrorPage /></Route>
         <Route path="/lists/:listId"><ListItemIndex /></Route>
-        <Route path="/lists"><ListIndex /></Route>
+        <Route path="/lists"><ListIndexPage /></Route>
         <Route path="/businesses/:businessId"><BusinessPage /></Route>
         <Route path="/search/:location"><SearchPage /></Route>
         <Route exact path="/login"><LoginFormPage /></Route>

@@ -1,77 +1,67 @@
-.profile-drop-down-container {
-    /* border: 1px solid black; */
-    width: 10vw;
-    height: 38px;
-    position: absolute;
-    top: 40px;
-    right: 5vw;
+.nav-container {
+    /* border: 1px solid red; */
+    width: 25%;
+    height: 82vh;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: rgb(255, 188, 133);
+    display: flex;
+    flex-direction: column;
 }
 
-/* styled for mobile */
-.profile-dropdown {
-    position: absolute;
-    z-index: 90;
-    top: 0;
-    right: 0;
-    border: 1px solid rgb(230, 225, 225);
-    border-radius: 10px 0px 0px 10px;
-    padding: 10px;
-    width: 70vw;
-    height: 100vh;
-    background-color: white;
-    box-shadow: 0px 5px 5px rgb(187, 185, 185);
-}
-
-.profile-dropdown-list-item {
-    padding: 10px;
-    border-bottom: 1px solid gray;
+.nav-container li {
+    /* border: 1px solid red; */
+    padding: 10px 20px;
     transition: all 0.3s ease;
-
+    border-radius: 10px;
 }
 
-.profile-dropdown-list-item a {
+.nav-container li:not(:first-of-type):hover, .nav-container a:hover {
+    background-color: blanchedalmond;
+    cursor: pointer;
+}
+
+.nav-container a {
     text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    
 }
-
-.profile-dropdown-list-item a:visited {
+.nav-container a:visited {
     color: black;
 }
 
-.profile-dropdown-list-item:hover:not(:first-child) {
-    background-color: rgb(240, 240, 240);
-}
-
-.profile-dropdown-list-item:last-child {
-    border-bottom: 0;
-}
-
-.logout-button {
-    /* border: none; */
-    cursor: pointer;
+.nav-container a:active {
     font-weight: 700;
-
 }
 
-.username-profile-dd {
-    line-height: 2;
+.nav-container .icon {
+    margin-right: 10px;
+}
+
+.nav-container li h2 {
     font-size: 20px;
     font-weight: 700;
 }
 
-/* When the screen size is larger than 600px */
-@media (min-width: 600px) {
-    .profile-drop-down-container {
-        width: 10vw;
-        height: 38px;
-        position: static;
-    }
+.nav-container li:last-of-type {
+    margin-top: auto;
+}
 
-    .profile-dropdown {
-        top: 8vh; /* need to do some math on this*/
-        right: 4vw;
-        border-radius: 10px;
-        padding: 10px;
-        width: 200px;
-        height: auto;
-    }
+.nav-container img {
+    width: 80px;
+    height: 80px;
+}
+
+.welcome-container {
+    display: flex;
+}
+
+.welcome-container div {
+    margin-left: 15px;
+    padding-top: 20px;
+}
+
+.welcome-container div p {
+    text-align: center;
 }

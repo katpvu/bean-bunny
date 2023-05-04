@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { RECEIVE_USER_DETAIL } from "./users";
 
 // SELECTOR
 export const getBusiness = (businessId) => state => (

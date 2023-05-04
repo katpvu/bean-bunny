@@ -1,4 +1,4 @@
-import ProfileButton from "./ProfileButton";
+
 import { useSelector } from "react-redux";
 import './index.css'
 import bunnyAvatar from "../../assets/bunny-avatar.png"
@@ -57,7 +57,7 @@ const Navigation = (props) => {
                     </div>
                 </li>
                 <NavLink to="/search"><li><FontAwesomeIcon icon={faMagnifyingGlass} className="icon"/>Search</li></NavLink>
-                <li><FontAwesomeIcon icon={faCheck} className="icon"/>Hopped</li>
+                <NavLink to="/hopped"><li><FontAwesomeIcon icon={faCheck} className="icon"/>Hopped</li></NavLink>
                 <NavLink to="/lists"><li><FontAwesomeIcon icon={faList} className="icon"/>My Collections</li></NavLink>
                 <li>
                     <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>Logout</div>

@@ -68,7 +68,7 @@ const RatingsReducer = (state={}, action) => {
             newState = { ...newState, [action.rating.id]: action.rating}
             return newState
         case RECEIVE_BUSINESS: 
-            return { ...action.payload.ratings }
+            return { ...newState, ...action.payload.ratings }
         case REMOVE_RATING:
             delete newState[action.ratingId]
             return newState

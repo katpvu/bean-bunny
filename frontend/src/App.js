@@ -8,6 +8,7 @@ import ListIndexPage from "./components/List/ListIndexPage";
 import ListItemIndex from "./components/ListItem/ListItemIndex";
 import BusinessPage from "./components/BusinessPage";
 import SearchPage from "./components/SearchPage";
+import Hopped from "./components/List/Hopped";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/lists"><ListIndexPage /></Route>
         <Route path="/businesses/:businessId"><BusinessPage /></Route>
         <Route path="/search/:location"><SearchPage /></Route>
+        <Route path="/hopped"><Hopped /></Route>
         <Route exact path="/login"><LoginFormPage /></Route>
         <Route exact path="/signup"><SignUpForm /></Route>
         <Route exact path="/search"><SearchPage /></Route>

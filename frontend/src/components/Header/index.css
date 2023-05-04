@@ -10,8 +10,9 @@
         justify-content: center;
         align-items: center;
         border-bottom: 1px solid rgb(133, 133, 133);
+        height: 18vh;
     }
     .bunny-logo {
-        width: 200px;
+        width: 250px;
     }
 }

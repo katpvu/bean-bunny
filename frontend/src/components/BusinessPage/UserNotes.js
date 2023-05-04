@@ -3,7 +3,6 @@ const UserNotes = ({ratings, sessionUser}) => {
     ratings.forEach(rating => {
         if (rating.userId === sessionUser.id) currentUserNotes = rating
     })
-    console.log(currentUserNotes)
 
     return (
         <>

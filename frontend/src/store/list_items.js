@@ -50,7 +50,6 @@ export const createListItem = (listItem) => async dispatch => {
         body: JSON.stringify(listItem)
     });
     let data = await res.json();
-    // console.log(data)
     return dispatch(receiveListItem(data));
 };
 

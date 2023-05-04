@@ -14,7 +14,6 @@ const BeanBunnyMemberNotes = ({ratings, sessionUser, business}) => {
     let beanBunnyUsersRatings = [];
     ratings.forEach(rating => {
         if (rating?.userId !== sessionUser?.id && rating.businessYelpId === business?.id) {
-            console.log(rating)
             beanBunnyUsersRatings.push(rating)
         }
     })

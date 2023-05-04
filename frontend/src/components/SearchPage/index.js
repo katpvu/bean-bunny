@@ -16,7 +16,6 @@ const SearchPage = (props) => {
     const sessionUser = useSelector(state => state.session.user);
     const searchResults = useSelector(state => Object.values(state.searches));
     const { location } = useParams();
-    console.log(location, "location")
     if (sessionUser === null) return <Redirect to="/login" />;
 
     

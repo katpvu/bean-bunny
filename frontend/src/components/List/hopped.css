@@ -4,7 +4,7 @@
     height: 82vh;
     box-sizing: border-box;
     padding: 30px;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 .hopped-section-container h1 {

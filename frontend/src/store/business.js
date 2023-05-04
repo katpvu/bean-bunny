@@ -21,7 +21,6 @@ export const fetchBusiness = (businessId) => async dispatch => {
     dispatch(createBusiness(businessId));
     const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();
-    console.log(data, "from fetchBusiness backend")
     return dispatch(receiveBusiness(data));
 }
 

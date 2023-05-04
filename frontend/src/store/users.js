@@ -19,9 +19,7 @@ export const receiveUsers = (payload) => ({
 export const fetchUserBusinessesRated = (userId) => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`);
     const data = await res.json();
-    console.log(data)
     const businessesRated = Object.values(data.businessesRated)
-    // console.log(businessYelpIds)
     businessesRated.forEach(business => {
         dispatch(fetchBusiness(business.businessYelpId))
     })

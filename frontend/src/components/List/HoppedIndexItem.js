@@ -1,12 +1,12 @@
 import './hopped.css'
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 const HoppedIndexItem = ({business, index, ratings}) => {
+    const sessionUser = useSelector(state => state.session.user);
     let businessRating;
     ratings.forEach(rating => {
-        if (rating.businessYelpId === business.id) businessRating = rating 
+        if (rating.businessYelpId === business.id && rating.userId === sessionUser.id) businessRating = rating 
     })
-    console.log(business.id, "businessID from hopped index item")
 
     return (
         <Link className="hopped-all-content" to={{

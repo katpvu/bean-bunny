@@ -28,13 +28,10 @@ export const createRating = (rating) => async dispatch => {
         body: rating
     });
     const data = await res.json();
-    console.log(data, "create rating data from backend")
     return dispatch(receiveRating(data));
 };
 
 export const updateRating = (rating) => async dispatch => {
-    console.log(rating.get('id'))
-    console.log(JSON.stringify(rating))
     const newRating = {
         rating: {
             id: rating.get('id'),

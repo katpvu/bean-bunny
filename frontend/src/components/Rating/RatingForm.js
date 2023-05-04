@@ -11,7 +11,6 @@ const RatingForm = ({business, closeModal, currentUserRating}) => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log(business)
     const [rating, setRating] = useState(currentUserRating ? currentUserRating?.rating : 0);
     const [notes, setNotes] = useState(currentUserRating ? currentUserRating?.notes : "");
     const [favOrders, setFavOrders] = useState(currentUserRating ? currentUserRating?.favOrders : "");
@@ -30,8 +29,6 @@ const RatingForm = ({business, closeModal, currentUserRating}) => {
         formData.append('rating[fav_orders]', favOrders);
         formData.append('business_yelp_id', business.id);
         formData.append('rating[user_id]', sessionUser.id);
-        console.log(rating, "rating");
-        console.log(notes, "notes");
 
         if (photoFiles.length !== 0) {
             photoFiles.forEach(photo => {

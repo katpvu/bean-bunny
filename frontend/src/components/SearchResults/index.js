@@ -7,7 +7,6 @@ const SearchResults = ({searchResults, prevPage}) => {
     const [userSearch, setUserSearch] = useState(false)
     const [searchCity, setSearchCity] = useState("");
     const [searchState, setSearchState] = useState("")
-    // console.log(searchResults)
 
     useEffect(() => {
         setUserSearch(true)

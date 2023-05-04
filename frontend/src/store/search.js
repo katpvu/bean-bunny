@@ -23,7 +23,6 @@ export const fetchSearches = (location) => async dispatch => {
         body: JSON.stringify(location)
     });
     const data = await res.json();
-    // console.log(data)
     return dispatch(receiveSearches(data));
 }
 

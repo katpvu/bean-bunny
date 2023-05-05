@@ -3,6 +3,10 @@
     width: 0;
 }
 
+.nav-container a {
+    color: black;
+}
+
 @media (min-width: 600px) {
     .nav-container {
         /* border: 1px solid red; */

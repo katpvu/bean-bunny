@@ -47,11 +47,26 @@
     background-position-y: 100%;
 }
 
+.filled-small {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../assets/bunny-rating.png");
+    background-size: 29.5px;
+    background-position-y: 100%;
+}
+
 .empty {
     width: 60px;
     height: 60px;
     background-image: url("../../assets/bunny-rating.png");
     background-size: 58px;
+}
+
+.empty-small {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../assets/bunny-rating.png");
+    background-size: 29.5px;
 }
 
 .rating-input {

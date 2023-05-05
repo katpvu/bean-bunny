@@ -15,3 +15,7 @@
     height: 10vw;
     object-fit: cover;
 }
+
+.tooltip-container {
+    font-size: 20px;
+}

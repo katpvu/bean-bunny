@@ -9,7 +9,7 @@ const HoppedIndex = ({businesses, ratings}) => {
     const [sortedBusinesses, setSortedBusinesses] = useState([])
 
     const sessionUser = useSelector(state => state.session.user);
-
+    
     let currentUserRatings = []
     ratings.forEach(rating => {
         if (rating.userId === sessionUser.id) currentUserRatings.push(rating) 

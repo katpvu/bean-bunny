@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createRating, deleteRating } from "../../store/ratings";
 import BunnyRatingInput from "./BunnyRatingInput";
@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { updateRating } from "../../store/ratings";
 
 
-const RatingForm = ({business, closeModal, currentUserRating}) => {
+const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRating}) => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
@@ -52,12 +52,13 @@ const RatingForm = ({business, closeModal, currentUserRating}) => {
 
     const handleDelete = () => {
         dispatch(deleteRating(currentUserRating.id));
+        setCurrentUserRating(null)
         closeModal();
     }
     return (
         <div className="rating-form-page-container">
             <div className="banner-display">
-                <img src={business?.imageUrl} />
+                <img src={business?.imageUrl} alt={business?.imageUrl}/>
                 <div className="fp-overlay"></div>
                 <h1>{business?.name}</h1>
 

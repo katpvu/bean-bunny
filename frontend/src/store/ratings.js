@@ -1,5 +1,7 @@
 import csrfFetch from "./csrf";
 import { RECEIVE_BUSINESS } from "./business";
+import { RECEIVE_USERS_BUSINESSES_RATED } from "./business";
+import { RECEIVE_USER_DETAIL } from "./users";
 
 // SELECTORS
 export const getBusinessRatings = state => (
@@ -69,6 +71,10 @@ const RatingsReducer = (state={}, action) => {
         case REMOVE_RATING:
             delete newState[action.ratingId]
             return newState
+        case RECEIVE_USER_DETAIL:
+            return {...action.payload.ratings}
+        case RECEIVE_USERS_BUSINESSES_RATED:
+            return { ...newState, ...action.payload.ratings}
         default:
             return state;
     };

@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper"
 import { useEffect } from "react";
 import "./index.css"
+import orangeIcon from "../../assets/orange-marker.png"
+import coffeeIcon from "../../assets/cc-marker.png"
+import rabbitIcon from "../../assets/rabbit.png"
 
 const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandlers={}}) => {
     const [map, setMap] = useState(null);
@@ -18,6 +21,13 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
         }))
     },[mapRef, mapOptions, markers]);
 
+    const icon = {
+        url: coffeeIcon, // url
+        scaledSize: new window.google.maps.Size(40, 40), // scaled size
+        origin: new window.google.maps.Point(0,0), // origin
+        anchor: new window.google.maps.Point(0, 0) // anchor
+    };
+
 
     // for every business that pops up on the page, render markers or remove markers
     let businessIds = []
@@ -25,13 +35,15 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
         businesses.forEach(business => {
             if (!markers[business?.id]) {
                 // create new marker for business
+                
                 let marker = new window.google.maps.Marker({
                     position: {
                         lat: business?.coordinates.latitude,
                         lng: business?.coordinates.longitude
                     },
                     map: map,
-                    label: `${business?.rating}`
+                    icon: icon,
+                    title: {text: `${business?.rating}`, color: "white"}
                 });
 
                 // add info window for each business marker

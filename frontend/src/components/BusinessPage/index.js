@@ -43,16 +43,16 @@ const BusinessPage = () => {
     useEffect(() =>{
         dispatch(fetchLists())
         dispatch(fetchBusiness(businessId)) //this will trigger createBusiness
-    }, [showModal, businessId])
+    }, [dispatch, showModal, businessId])
     
     useEffect(() => {
         ratings.forEach( rating => {
-            if (rating.userId === sessionUser.id && rating.businessYelpId === business?.id) {
+            if (rating.userId === sessionUser.id && rating.businessYelpId === businessId) {
                 setCurrentUserRating(rating)
             }
         })
 
-    }, [ratings, businessId])
+    }, [dispatch, ratings, businessId, sessionUser.id])
 
     let mapOptions;
         mapOptions = {
@@ -123,7 +123,10 @@ const BusinessPage = () => {
                         </div>
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
-                                <RatingForm business={business} closeModal={() => setShowModal(false)} currentUserRating={currentUserRating}/>
+                                <RatingForm business={business} 
+                                closeModal={() => setShowModal(false)} 
+                                setCurrentUserRating={setCurrentUserRating}
+                                currentUserRating={currentUserRating}/>
                             </Modal>
                         )}
                         <div className="add-to-list-button" onClick={handleToggle}>{toggleMenu ? "x" : "+"}</div>
@@ -140,17 +143,23 @@ const BusinessPage = () => {
                         <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
                     </div>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <div className="photos-section">
-                    <PhotoGallery ratings={ratings} business={business} sessionUser={sessionUser}/>
-                </div>
-                <div className="user-notes-section">
-                    <UserNotes ratings={ratings} sessionUser={sessionUser} />
-                </div>
-                <div>
-                    <BeanBunnyMemberNotes ratings={ratings} business={business} sessionUser={sessionUser} />
+
+                {/* <br></br> */}
+                <hr></hr>
+                <div className="ratings-section-bp">
+                    <div className="user-notes-section">
+                        <UserNotes ratings={ratings} sessionUser={sessionUser} />
+                    </div>
+
+                    <div className="other-users-section">
+                        <div className="photos-section">
+                            <PhotoGallery ratings={ratings} business={business} sessionUser={sessionUser}/>
+                        </div>
+                        <hr></hr>
+                        <div>
+                            <BeanBunnyMemberNotes ratings={ratings} business={business} sessionUser={sessionUser} />
+                        </div>
+                    </div>
                 </div>
 
             </div>

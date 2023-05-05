@@ -1,8 +1,10 @@
 .list-index-section-container {
-    height: calc(82vh - 60px);
+    height: 82vh;
     box-sizing: border-box;
     width: 100%;
-
+    box-sizing: border-box;
+    padding: 30px;
+    overflow-y: scroll;
 }
 
 
@@ -26,7 +28,7 @@
     height: calc(100vh - 900px);
     border-radius: 15px;
     text-decoration: none;
-    color: rgb(87, 67, 37);
+    color: rgb(65, 65, 65);
     font-weight: 700;
     transition: all 0.3s ease;
 }
@@ -51,23 +53,20 @@
     transition: width 2s;
     outline: none;
     font-size: 18px;
-    margin: 5px 0px;
+
 }
 
 
 .create-list-container {
     display:flex;
-    justify-content: center;
-    align-items: center;
-
 }
 
 .list-add-to-list-button {
     font-size: 20px;
     padding: 10px;
-    margin: 20px;
+    margin: 15px 0px;
     border-radius: 999px;
-    background-color: rgba(91, 89, 89, 0.411);
+    background-color: rgba(156, 153, 153, 0.411);
     border: 1px solid rgb(216, 215, 215);
     transition: all 0.3s ease;
 }
@@ -79,10 +78,7 @@
 }
 
 .list-index-title {
-    text-align: center;
-    font-size: 30px;
-    margin: 15px 0px;
-    /* border: 1px solid black; */
+    font-size: 50px;
     font-family: 'Archivo', sans-serif;
 }
 
@@ -105,7 +101,7 @@
     }
     .list-index-title {
         font-size: 50px;
-        color: rgb(66, 65, 65);
+        color: rgb(0, 0, 0);
 
     }
     .list-item {

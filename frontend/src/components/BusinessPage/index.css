@@ -2,7 +2,10 @@
     /* border: 1px solid green; */
     position: relative;
     width: 100%;
+    height: auto;
     top: 0;
+
+
 }
 
 .fitting-image{
@@ -152,11 +155,12 @@
 }
 
 .score-item h3, .user-notes-section h2, .notes-orders h2 {
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .score-item p, .user-notes-section p, .notes-orders p{
     font-size: 14px;
+    font-weight: 300;
     color: rgb(97, 97, 97);
 }
 
@@ -219,7 +223,7 @@
     cursor: pointer;
 }
 
-.photos-section, .user-notes-section {
+.photos-section {
     position: relative;
     box-sizing: border-box;
     /* border: 1px solid green; */
@@ -252,6 +256,23 @@
 
 .user-notes-section h2 {
     font-size: 15px;
+}
+
+.user-notes-section {
+    width: 30%;
+}
+
+.ratings-section-bp {
+    display: flex;
+    width: 100%;
+}
+
+.input-notes-container h2 {
+    font-weight: 400;
+}
+
+.other-users-section {
+    width: 70%;
 }
 
 @media (min-width: 600px) {
@@ -313,9 +334,11 @@
     .photo-gallery {
         display: grid;
         /* border: 1px solid blue; */
-        grid-template-columns: 100px 100px 100px 100px 100px;
+        grid-template-columns: auto;
         grid-gap: 10px;
-    
+        width: 100%;
+        overflow-x: scroll;
+        box-sizing: border-box;
     }
 
     .input-notes-container {
@@ -323,15 +346,16 @@
         flex-direction: column;
         box-sizing: border-box;
         padding: 10px;
+        line-height: 1.3rem;
     }
 
     .input-notes-container div {
-        width: 50%;
+
         margin-bottom: 10px;
     }
 
     .input-notes-container h1 {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 18px;
     }
 

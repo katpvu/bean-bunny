@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { fetchUsers } from "../../store/users";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import BunnyRatingInput from "../Rating/BunnyRatingInput";
 
 const BeanBunnyMemberNotes = ({ratings, sessionUser, business}) => {
     const dispatch = useDispatch();
@@ -24,23 +25,29 @@ const BeanBunnyMemberNotes = ({ratings, sessionUser, business}) => {
             if (user1?.id === userId) user = user1
         })
         return user
+        console.log(user)
     }
 
     return (
         <>
-            <h1 className="business-section-title">Bean Bunny Member's Notes</h1>
+            <h1 className="business-section-title">Thoughts from other Bean Bunny Users</h1>
             <div className="current-user-notes">
                 {beanBunnyUsersRatings.map(user => (
                     <div className="input-notes-container">
-                        <h1>{findUser(user.userId)?.username}</h1>
-                            <div className="notes-orders">
-                                <h2>Notes:</h2>
-                                <p>{user?.notes}</p>
-                                <br></br>
-                                <h2>Favorite Orders:</h2>
-                                <p>{user?.favOrders}</p>
-
-                            </div>
+                        <div className="rating-input">
+                            <div className={user?.rating >= 1 ? "filled-small" : "empty-small"}/>
+                            <div className={user?.rating >= 2 ? "filled-small" : "empty-small"}/>
+                            <div className={user?.rating >= 3 ? "filled-small" : "empty-small"}/>
+                            <div className={user?.rating >= 4 ? "filled-small" : "empty-small"}/>
+                            <div className={user?.rating >= 5 ? "filled-small" : "empty-small"}/>
+                        </div>
+                        <h1>{user?.notes}</h1>
+                        <p>{findUser(user.userId)?.username}</p>
+                        <div className="notes-orders">
+                            <h2>Favorite Orders:</h2>
+                            <p>{user?.favOrders}</p>
+                        </div>
+                        <hr></hr>
                     </div>
                 ))}
        

@@ -4,6 +4,7 @@ import csrfFetch from "./csrf";
 // CONSTANTS
 export const RECEIVE_USER_DETAIL = 'users/RECEIVE_USER_DETAIL';
 export const RECEIVE_USERS = 'users/RECEIVE_USERS'
+
 // ACTION CREATOR
 export const receiveUserDetail = (payload) => ({
     type: RECEIVE_USER_DETAIL,
@@ -16,18 +17,15 @@ export const receiveUsers = (payload) => ({
 })
 
 // THUNK ACTION CREATOR
-export const fetchUserBusinessesRated = (userId) => async dispatch => {
+
+export const fetchUserDetail = (userId) => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`);
     const data = await res.json();
     const businessesRated = Object.values(data.businessesRated)
+    console.log(data)
     businessesRated.forEach(business => {
-        dispatch(fetchBusiness(business.businessYelpId))
+        dispatch(fetchBusiness(business.businessYelpId, userId))
     })
-};
-
-export const fetchUser = (userId) => async dispatch => {
-    const res = await csrfFetch(`/api/users/${userId}`);
-    const data = await res.json();
     dispatch(receiveUserDetail(data))
 }
 

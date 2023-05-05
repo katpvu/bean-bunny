@@ -9,7 +9,7 @@ class Api::ListItemsController < ApplicationController
         if @list_item.save
             render :show
         else
-            render json: {errors: @list_item.errors.full_messages}, status: 422
+            render json: { errors: ['Coffee shop already exists on this list'] }, status: 422
         end
     end
 

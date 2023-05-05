@@ -19,8 +19,9 @@ export const receiveBusiness = (payload) => ({
 
 export const fetchBusiness = (businessId) => async dispatch => {
     dispatch(createBusiness(businessId));
-    const res = await csrfFetch(`/api/businesses/${businessId}`);
+    const res = await csrfFetch(`/api/businesses/yelp/${businessId}`);
     const data = await res.json();
+    console.log(data)
     return dispatch(receiveBusiness(data));
 }
 

@@ -37,18 +37,22 @@ const BusinessPage = () => {
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [currentUserRating, setCurrentUserRating] = useState()
     
+
     useEffect(() =>{
         dispatch(fetchLists())
         dispatch(fetchBusiness(businessId)) //this will trigger createBusiness
-    }, [showModal])
+    }, [showModal, businessId])
+    
+    useEffect(() => {
+        ratings.forEach( rating => {
+            if (rating.userId === sessionUser.id && rating.businessYelpId === business?.id) {
+                setCurrentUserRating(rating)
+            }
+        })
 
-    let currentUserRating;
-    ratings.forEach( rating => {
-        if (rating.userId === sessionUser.id) {
-            currentUserRating = rating
-        }
-    })
+    }, [ratings, businessId])
 
     let mapOptions;
         mapOptions = {
@@ -80,7 +84,7 @@ const BusinessPage = () => {
     }
 
     const handleBackButton = () => {
-        if (from.includes(' ')) {
+        if (from?.includes(' ')) {
             const location = {
                 location: encodeURIComponent(from)
             }

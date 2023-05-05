@@ -15,7 +15,7 @@ const ListIndexPage = (props) => {
     const lists = useSelector(getLists);
 
     useEffect(() => {
-        dispatch(fetchLists(lists))
+        dispatch(fetchLists())
     }, [])
 
     

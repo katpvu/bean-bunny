@@ -28,8 +28,10 @@ const ListForm = ({listId, onClose}) => {
             newList.id = listId;
             dispatch(updateList(newList))
                 .then(setErrors(null))
+                .then(onClose())
                 .catch(async res => {
                     let errors = await checkErrors(res)
+                    console.log(errors)
                     setErrors(errors)
             });
         } else {
@@ -40,7 +42,7 @@ const ListForm = ({listId, onClose}) => {
                 });
         }
         setTitle("");
-        onClose();
+        
     }
 
     return (

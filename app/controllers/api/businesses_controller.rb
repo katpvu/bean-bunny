@@ -6,7 +6,6 @@ require 'json'
 
 class Api::BusinessesController < ApplicationController
     def fetch
-
         #fetch business from yelp api
         business_id = params[:business_yelp_id]
         url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
@@ -29,7 +28,7 @@ class Api::BusinessesController < ApplicationController
 
     def create
         if !Business.exists?(business_yelp_id: params[:business_yelp_id])
-            @business = Business.new(business_yelp_id: params[:business_yelp_id])
+            @business = Business.new(business_params)
             if @business.save
                 head :no_content
             else
@@ -41,12 +40,13 @@ class Api::BusinessesController < ApplicationController
     end
 
     def show
-        @business = Business.find_by(business_yelp_id: params[:business_yelp_id])
+        # debugger
+        @business = Business.find_by(business_yelp_id: params[:id])
         render :show
     end
 
     private
     def business_params
-        params.require(:business).permit(:business_yelp_id)
+        params.require(:business).permit(:business_yelp_id, :image_url,:is_closed, :name, :yelp_rating, coordinates: [:latitude, :longitude],  location: [:address1, :address2, :address3, :city, :zip_code, :country, :state, :display_address])
     end
 end

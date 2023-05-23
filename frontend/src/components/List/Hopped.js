@@ -5,22 +5,34 @@ import HoppedIndex from "./HoppedIndex";
 import { fetchUserDetail } from "../../store/users";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { restoreSession } from "../../store/session";
+import { getCurrentUserBusinessesRated, getCurrentUserRatings } from "../../store/session";
+
 const Hopped = (props) => {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const businesses = useSelector(state => Object.values(state.businesses))
-    const ratings = useSelector(state => Object.values(state.ratings))
+    useEffect(() => {
+        dispatch(restoreSession());
+        // dispatch(fetchUserDetail(sessionUser.id))
+    }, [dispatch])
+
+    const sessionUser = useSelector(state =>  state.session);
+    const businesses = useSelector(getCurrentUserBusinessesRated)
+    const ratings = useSelector(getCurrentUserRatings)
 
     useEffect(() => {
-        dispatch(fetchUserDetail(sessionUser.id))
-    }, [dispatch, sessionUser.id])
+        console.log(sessionUser);
+        console.log(businesses)
+    }, [])
+
     
     return (
         <>
             <Header />
             <div className="below-header-content-container">
                 <Navigation />
-                <HoppedIndex businesses={businesses} ratings={ratings}/>
+                <HoppedIndex 
+                    businesses={businesses} 
+                    currentUserRatings={ratings}/>
             </div>
         </>
     )

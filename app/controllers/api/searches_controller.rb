@@ -23,9 +23,21 @@ class Api::SearchesController < ApplicationController
         @businesses = []
     
         parsed[:businesses].each do |business_obj|
+            p business_obj
+            puts
+            # new_business = {
+            #     business_yelp_id: business_obj[:id],
+            #     image_url: business_obj[:image_url],
+            #     coordinates: business_obj[:coordinates],
+            #     is_closed: business_obj[:is_closed], 
+            #     location: business_obj[:location],
+            #     name: business_obj[:name],
+            #     yelp_rating: business_obj[:rating]
+            # }
+            # p new_business
             @businesses << business_obj
         end
-        p parsed
+        # p parsed
         render :index
     end
 

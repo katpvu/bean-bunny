@@ -8,6 +8,10 @@
 
 require "open-uri"
 require 'faker'
+require 'uri'
+require 'net/http'
+require 'openssl'
+require 'json'
 
 # ApplicationRecord.transaction do 
     puts "Destroying tables..."
@@ -100,12 +104,37 @@ require 'faker'
       )
     end
 
-    
+    def fetch(business_id)
+      url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
+
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+
+        request = Net::HTTP::Get.new(url)
+        request["accept"] = "application/json"
+        request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+
+        response = http.request(request)
+        business = JSON.parse response.read_body, symbolize_names: true
+        business
+    end
+
     business_ids = sf_businesses + la_businesses + ny_businesses
     business_object_ids = []
     puts "Creating businesses..."
+
     business_ids.each do |business_id|
-      business = Business.create!(business_yelp_id: business_id)
+      fetchedBusiness = fetch(business_id)
+      new_business = {
+        business_yelp_id: fetchedBusiness[:id],
+        image_url: fetchedBusiness[:image_url],
+        coordinates: fetchedBusiness[:coordinates],
+        is_closed: fetchedBusiness[:is_closed], 
+        location: fetchedBusiness[:location],
+        name: fetchedBusiness[:name],
+        yelp_rating: fetchedBusiness[:rating]
+      }
+      business = Business.create!(new_business)
       business_object_ids << business.id
     end
 

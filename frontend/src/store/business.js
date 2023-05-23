@@ -22,24 +22,31 @@ export const receiveUsersBusinessRated = (payload) => ({
 })
 // THUNK ACTION CREATORS
 
-export const fetchBusiness = (businessId, type=0) => async dispatch => {
-    console.log(type)
-    dispatch(createBusiness(businessId));
-    const res = await csrfFetch(`/api/businesses/yelp/${businessId}`);
+// export const fetchBusiness = (businessId, type=0) => async dispatch => {
+//     console.log(type)
+//     // dispatch(createBusiness(businessId));
+//     const res = await csrfFetch(`/api/businesses/yelp/${businessId}`);
+//     const data = await res.json();
+//     if (type) {
+//         return dispatch(receiveUsersBusinessRated(data))
+//     } else {
+//         return dispatch(receiveBusiness(data));
+//     }
+// }
+
+export const fetchBusiness = (businessId) => async dispatch => {
+    const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();
-    if (type) {
-        return dispatch(receiveUsersBusinessRated(data))
-    } else {
-        return dispatch(receiveBusiness(data));
-    }
+    console.log(data)
+    return dispatch(receiveBusiness(data));
 }
 
 // everytime a business is fetched (user clicks on business, a new business is created)
-export const createBusiness = (businessId) => async dispatch => {
-    const newBusiness = { businessYelpId: businessId }
+export const createBusiness = (business) => async dispatch => {
+    // const newBusiness = { businessYelpId: businessId }
     await csrfFetch('/api/businesses', {
         method: 'POST',
-        body: JSON.stringify(newBusiness)
+        body: JSON.stringify(business)
     });
 };
 

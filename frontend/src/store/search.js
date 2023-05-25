@@ -24,27 +24,28 @@ export const fetchSearches = (location) => async dispatch => {
         body: JSON.stringify(location)
     });
     const data = await res.json();
-    console.log(Object.values(data))
-    Object.values(data).forEach((business) => {
-        const newBusiness = {
-          business_yelp_id: business.id,
-          coordinates: business.coordinates,
-          location: {
-            address1: business.location.address1,
-            address2: business.location.address2, 
-            address3: business.location.address3,
-            city: business.location.city,
-            zipCode: business.location.zipCode,
-            country: business.location.country,
-            state: business.location.state
-          },
-          name: business.name,
-          yelp_rating: business.rating,
-          is_closed: business.isClosed,
-          image_url: business.imageUrl
-        }
-        dispatch(createBusiness(newBusiness))
-    })
+    // console.log(Object.values(data))
+    // Object.values(data).forEach((business) => {
+    //     const newBusiness = {
+    //       business_yelp_id: business.id,
+    //       coordinates: business.coordinates,
+    //       location: //business.location,
+    //       {
+    //         address1: business.location.address1,
+    //         address2: business.location.address2, 
+    //         address3: business.location.address3,
+    //         city: business.location.city,
+    //         zipCode: business.location.zipCode,
+    //         country: business.location.country,
+    //         state: business.location.state
+    //       },
+    //       name: business.name,
+    //       yelp_rating: business.rating,
+    //       is_closed: business.isClosed,
+    //       image_url: business.imageUrl
+    //     }
+    //     dispatch(createBusiness(newBusiness))
+    // })
     return dispatch(receiveSearches(data));
 }
 

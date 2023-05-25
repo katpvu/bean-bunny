@@ -5,26 +5,26 @@ require 'json'
 
 
 class Api::BusinessesController < ApplicationController
-    def fetch
-        #fetch business from yelp api
-        business_id = params[:business_yelp_id]
-        url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
+    # def fetch
+    #     #fetch business from yelp api
+    #     business_id = params[:business_yelp_id]
+    #     url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
 
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = true
+    #     http = Net::HTTP.new(url.host, url.port)
+    #     http.use_ssl = true
 
-        request = Net::HTTP::Get.new(url)
-        request["accept"] = "application/json"
-        request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+    #     request = Net::HTTP::Get.new(url)
+    #     request["accept"] = "application/json"
+    #     request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
 
-        response = http.request(request)
-        @business = JSON.parse response.read_body, symbolize_names: true
+    #     response = http.request(request)
+    #     @business = JSON.parse response.read_body, symbolize_names: true
 
-        #fetch ratings from Business model
-        @db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
+    #     #fetch ratings from Business model
+    #     @db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
 
-        render :fetch
-    end
+    #     render :fetch
+    # end
 
     def create
         if !Business.exists?(business_yelp_id: params[:business_yelp_id])
@@ -42,6 +42,7 @@ class Api::BusinessesController < ApplicationController
     def show
         # debugger
         @business = Business.find_by(business_yelp_id: params[:id])
+        p @business
         render :show
     end
 

@@ -42,9 +42,19 @@ const SearchResults = ({searchResults, prevPage}) => {
                             <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1>
                         </div>
                         
-                        {searchResults.map(business => (
-                            <SearchResultItem business={business} key={business.id} prevPage={prevPage}/>
-                        ))}
+                        {searchResults.map(searchBusiness => {
+                            const business = {
+                                businessYelpId: searchBusiness.id,
+                                coordinates: searchBusiness.coordinates,
+                                location: searchBusiness.location,
+                                name: searchBusiness.name,
+                                isClosed: searchBusiness.isClosed,
+                                yelpRating: searchBusiness.yelpRating,
+                                imageUrl: searchBusiness.imageUrl
+                            }
+                            return <SearchResultItem business={business} key={business.id} prevPage={prevPage}/>
+                        }
+                        )}
 
                         
                     </div>

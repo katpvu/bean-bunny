@@ -5,6 +5,10 @@ export const getBusiness = (businessId) => state => (
     state.businesses[businessId] ? state.businesses[businessId] : null
 )
 
+export const getBusinesses =  state => (
+    state.businesses ? Object.values(state.businesses) : []
+)
+
 // CONSTANTS
 export const RECEIVE_BUSINESS = 'businesses/RECEIVE_BUSINESS'
 export const GET_DB_BUSINESS = 'businesses/GET_DB_BUSINESS'
@@ -33,11 +37,14 @@ export const receiveUsersBusinessRated = (payload) => ({
 //         return dispatch(receiveBusiness(data));
 //     }
 // }
+export const fetchBusinesses = (businesses) => async dispatch => {
+
+}
 
 export const fetchBusiness = (businessId) => async dispatch => {
     const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();
-    console.log(data)
+    console.log(data, "fetching business")
     return dispatch(receiveBusiness(data));
 }
 
@@ -56,10 +63,11 @@ const BusinessesReducer = (state={}, action) => {
     let newState = { ...state }
     switch (action.type) {
         case RECEIVE_BUSINESS:
-            newState = { ...state, [action.payload.business.id]: action.payload.business}
-            return newState
+            // newState = { ...state, [action.payload.id]: action.payload}
+            // return newState
+            return {[action.payload.business.businessYelpId]: action.payload.business}
         case RECEIVE_USERS_BUSINESSES_RATED:
-            return { ...newState, [action.payload.business.id]: action.payload.business}
+            return { ...newState, [action.payload.business]: action.payload.business}
         default:
             return state;
     };

@@ -19,10 +19,10 @@ const Hopped = (props) => {
     const businesses = useSelector(getCurrentUserBusinessesRated)
     const ratings = useSelector(getCurrentUserRatings)
 
-    useEffect(() => {
-        console.log(sessionUser);
-        console.log(businesses)
-    }, [])
+    // useEffect(() => {
+    //     console.log(sessionUser);
+    //     console.log(businesses)
+    // }, [])
 
     
     return (

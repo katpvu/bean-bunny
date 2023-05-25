@@ -30,30 +30,36 @@ const BusinessPage = () => {
 
     const lists = useSelector(getLists);
     const business = useSelector(getBusiness(businessId))
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user.user);
+    const sessionUserRatings = useSelector(state => Object.values(state.session.user.ratings))
     const ratings = useSelector(getBusinessRatings);
 
 
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [currentUserRating, setCurrentUserRating] = useState()
+    const [currentUserRating, setCurrentUserRating] = useState({})
     
 
     useEffect(() =>{
         dispatch(fetchLists())
-        dispatch(fetchBusiness(businessId)) //this will trigger createBusiness
+        dispatch(fetchBusiness(businessId))
+        
     }, [dispatch, showModal, businessId])
+
+    useEffect(() => {
+        
+        console.log(sessionUserRatings)
+    }, [])
+
+    // useEffect(() => {
+    //     console.log(business)
+    // }, [business])
     
     useEffect(() => {
-        ratings.forEach( rating => {
-            if (rating.userId === sessionUser.id && rating.businessYelpId === businessId) {
-                setCurrentUserRating(rating)
-            }
-        })
-
-    }, [dispatch, ratings, businessId, sessionUser.id])
-
+        setCurrentUserRating(sessionUserRatings.find(rating => rating.businessYelpId === businessId))
+        console.log(currentUserRating)
+    }, [])
     let mapOptions;
         mapOptions = {
             center: {
@@ -137,7 +143,7 @@ const BusinessPage = () => {
                 </div>
                 <br></br>
                 <div className="float-scores-and-map">
-                    <ScoresPanel businessYelpRating={business?.rating} sessionUser={sessionUser} ratings={ratings}/>
+                    <ScoresPanel businessYelpRating={business?.yelpRating} currentUserRating={currentUserRating} ratings={ratings}/>
                     
                     <div className="bp-map-container">
                         <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
@@ -148,7 +154,7 @@ const BusinessPage = () => {
                 <hr></hr>
                 <div className="ratings-section-bp">
                     <div className="user-notes-section">
-                        <UserNotes ratings={ratings} sessionUser={sessionUser} />
+                        <UserNotes currentUserRating={currentUserRating} />
                     </div>
 
                     <div className="other-users-section">

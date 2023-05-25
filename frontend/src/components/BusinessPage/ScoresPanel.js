@@ -1,24 +1,28 @@
 
+import { useEffect } from "react";
 import { findAvg } from "../../utils";
 
-const ScoresPanel = ({businessYelpRating, sessionUser, ratings}) => {
+const ScoresPanel = ({businessYelpRating, currentUserRating, ratings}) => {
 
-    let currentUserRating;
+    // let currentUserRating;
     let ratingsArray = [];
     ratings.forEach( rating => {
-        if (rating.userId === sessionUser.id) {
-            currentUserRating = rating
-        }
+        // if (rating.userId === sessionUser.id) {
+        //     currentUserRating = rating
+        // }
         ratingsArray.push(rating.rating)
     })
     let averageRating = findAvg(ratingsArray);
 
+    useEffect(() => {
+        console.log(currentUserRating)
+    },[])
     return (
         <>
             <div className="scores">
                 <h1 className="business-section-title">Scores</h1>
                 <div className="score-item">
-                    <div className="rating">{currentUserRating ? currentUserRating.rating : "-"}</div>
+                    <div className="rating">{currentUserRating ? currentUserRating?.rating : "-"}</div>
                     <div className="rating-info">
                         <h3>Your Bean Rating</h3>
                         <p>What you think</p>

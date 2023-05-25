@@ -31,7 +31,7 @@ const ListForm = ({listId, onClose}) => {
                 .then(onClose())
                 .catch(async res => {
                     let errors = await checkErrors(res)
-                    console.log(errors)
+                    // console.log(errors)
                     setErrors(errors)
             });
         } else {

@@ -14,12 +14,26 @@ import { deleteListItem } from "../../store/list_items";
 const ListItemCard = ({listItem}) => {
     const dispatch = useDispatch();
     const {listId} = useParams();
+    const [business, setBusiness] = useState({})
 
-    const business = useSelector(getBusiness(listItem.businessYelpId));
+    useEffect(() => {
+        const business = {
+            name: listItem.name,
+            businessYelpId: listItem.businessYelpId,
+            imageUrl: listItem.imageUrl,
+            isClosed: listItem.isClosed,
+            location: listItem.location,
+            yelpRating: listItem.yelpRating,
+            coordinates: listItem.coordinates
+        }
+        setBusiness(business)
+    }, [])
 
-    useEffect(() =>{
-        dispatch(fetchBusiness(listItem.businessYelpId));
-    }, []);
+    // const business = useSelector(getBusiness(listItem.businessYelpId));
+
+    // useEffect(() =>{
+    //     dispatch(fetchBusiness(listItem.businessYelpId));
+    // }, []);
 
     return (
         <div className="list-item-card-container">

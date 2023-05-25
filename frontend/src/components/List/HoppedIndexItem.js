@@ -19,7 +19,7 @@ const HoppedIndexItem = ({businesses, index, rating}) => {
 
     return (
         <Link className="hopped-all-content" to={{
-            pathname: `/businesses/${business?.id}`,
+            pathname: `/businesses/${business?.businessYelpId}`,
             state: {from: "/hopped"}
         }}>
                 <div className="hopped-text-content">

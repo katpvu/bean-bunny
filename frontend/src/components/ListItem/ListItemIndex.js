@@ -11,6 +11,8 @@ import { faArrowLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-ico
 import ListForm from "../List/ListForm";
 import { deleteList } from "../../store/list";
 import "./index.css"
+import { getBusinesses } from "../../store/business";
+import { fetchBusiness } from "../../store/business";
 
 
 const ListItemIndex = (props) => {
@@ -19,13 +21,30 @@ const ListItemIndex = (props) => {
     const history = useHistory();
     const [openEditForm, setOpenEditForm] = useState(false);
     const [toggleMenu, setToggleMenu] = useState(false);
+    const [businesses, setBusinesses] = useState([])
 
     const listItems = useSelector(getListItems);
     const list = useSelector(getList(listId));
+    // const listBusinesses = useSelector(getBusinesses);
 
     useEffect(() => {
         dispatch(fetchListContents(listId));
     }, [dispatch, listId, openEditForm]);
+
+    // useEffect(() => {
+    //     listItems.forEach(listItem => {
+    //         dispatch(fetchBusiness(listItem.businessYelpId));
+    //     })
+    //     // console.log(listBusinesses, "hi")
+    // }, [])
+
+    // useEffect(() => {
+    //     if (listBusinesses) {
+    //         setBusinesses(listBusinesses)
+    //     }
+    // }, [listBusinesses])
+
+
 
     const handleToggle = () => {
         setToggleMenu(true)
@@ -59,9 +78,7 @@ const ListItemIndex = (props) => {
                     
                     <div className="list-contents-container">
                         {listItems.map(listItem => (
-                            <>
-                                <ListItemCard key={listItem.id} listItem={listItem} />
-                            </>
+                            <ListItemCard key={listItem.id} listItem={listItem} />
                         ))}
                     </div>
                 </div>

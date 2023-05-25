@@ -10,7 +10,7 @@ const ListIndexItem = ({list}) => {
     const listItemCount = listItems.length;
     return (
         <>
-            <Link  className="list-item" to={`/lists/${list.id}`}><h1>{list?.title}</h1></Link>
+            <Link className="list-item" to={`/lists/${list.id}`}><h1>{list?.title}</h1></Link>
         </>
     )
 };

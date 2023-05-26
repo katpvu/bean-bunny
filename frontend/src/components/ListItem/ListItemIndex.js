@@ -59,9 +59,9 @@ const ListItemIndex = (props) => {
     }
     return (
         <>
-            <Header />
-            <div className="below-header-content-container">
-                <Navigation />
+            {/* <Header /> */}
+            {/* <div className="below-header-content-container"> */}
+                {/* <Navigation /> */}
                 <div className="list-main-content">
                     <div className="list-title-container">
                         <div className="list-header-container">
@@ -82,7 +82,7 @@ const ListItemIndex = (props) => {
                         ))}
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
             
         </>
     )

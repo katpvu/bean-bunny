@@ -21,7 +21,7 @@ const ListIndex = (props) => {
         <>
            <div className="list-index-section-container">
                 <div className="list-index-title">
-                    <h1>My Collections</h1>
+                    <h1>Your Collections</h1>
                 </div>
                 <div className="create-list-container">
                     <div 
@@ -32,13 +32,13 @@ const ListIndex = (props) => {
                     </div>
                 </div>
                 
-                <div className="page-container">
+                {/* <div className="page-container"> */}
                     <div className="list-index-container">
                         { lists.map(list => 
                             <ListIndexItem key={list.id} list={list} />
                         )}
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         </>
     )

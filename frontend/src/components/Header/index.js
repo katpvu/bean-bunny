@@ -6,13 +6,10 @@ import bean from '../../assets/bean-logo-black.png'
 
 const Header = (props) => {
 
-    const styles = {
-        A: "bunny-logo",
-        B: "center"
-    }
     return (
         <div className="header-container">
-            <Link to="/" className={`${styles.B}`}><img src={bean} className={`${styles.A}`} alt="logo"/></Link>
+            <Link to="/" id="app-logo">bean bunny</Link>
+            <Navigation />
         </div>
     )
 };

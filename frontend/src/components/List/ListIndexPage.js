@@ -21,11 +21,7 @@ const ListIndexPage = (props) => {
     
     return (
         <>
-            <Header />
-            <div className="below-header-content-container">
-                <Navigation />
-                <ListIndex />
-            </div>
+        <ListIndex />
         </>
     )
 };

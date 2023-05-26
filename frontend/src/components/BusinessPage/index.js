@@ -30,8 +30,8 @@ const BusinessPage = () => {
 
     const lists = useSelector(getLists);
     const business = useSelector(getBusiness(businessId))
-    const sessionUser = useSelector(state => state.session.user.user);
-    const sessionUserRatings = useSelector(state => Object.values(state.session.user.ratings))
+    const sessionUser = useSelector(state => state.session.user);
+    const sessionUserRatings = useSelector(state => Object.values(state.session.currentUserRatings))
     const ratings = useSelector(getBusinessRatings);
 
 

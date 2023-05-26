@@ -9,12 +9,15 @@ import ListItemIndex from "./components/ListItem/ListItemIndex";
 import BusinessPage from "./components/BusinessPage";
 import SearchPage from "./components/SearchPage";
 import Hopped from "./components/List/Hopped";
+import Header from "./components/Header";
+import SplashPage from "./components/SplashPage";
 
 
 function App() {
 
   return (
     <>
+      <Header />
       <Switch>
         <Route path="/error"><ErrorPage /></Route>
         <Route path="/lists/:listId"><ListItemIndex /></Route>
@@ -25,7 +28,7 @@ function App() {
         <Route exact path="/login"><LoginFormPage /></Route>
         <Route exact path="/signup"><SignUpForm /></Route>
         <Route exact path="/search"><SearchPage /></Route>
-        <Route exact path="/"><HomePage /></Route>
+        <Route exact path="/"><SplashPage /></Route>
         <Redirect to={'/error'} />
       </Switch>
     </>

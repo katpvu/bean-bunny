@@ -35,9 +35,7 @@ const SearchPage = (props) => {
 
     return (
         <>
-            <Header />
             <div className="below-header-content-container">
-                <Navigation />
                 <div className="search-page-section">
                     <SearchBar />
                     <div className="main-content-container">

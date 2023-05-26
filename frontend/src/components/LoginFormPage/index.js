@@ -64,12 +64,12 @@ const LoginFormPage = (props) => {
 
         <>
 
-        {splash && (
+        {/* {splash && (
             <SplashPage eHandler={eventHandler}/>
             
-        )}
+        )} */}
         
-        {!splash && (
+        {/* {!splash && ( */}
         <div className={`${styles.H}`}>
             <div className="left-half">
                 <img src={loginBeans} />
@@ -108,7 +108,7 @@ const LoginFormPage = (props) => {
                 </form>
             </div>
         </div>
-        )}
+        {/* )} */}
         </>
     )
 

@@ -15,24 +15,27 @@ const Hopped = (props) => {
         // dispatch(fetchUserDetail(sessionUser.id))
     }, [dispatch])
 
-    const sessionUser = useSelector(state =>  state.session);
+    const sessionUser = useSelector(state => state.session);
     const businesses = useSelector(getCurrentUserBusinessesRated)
+    // const businesses = useSelector(state => state.session ? Object.values(state.session.currentUserBusinessesRated) : [])
     const ratings = useSelector(getCurrentUserRatings)
+    // const ratings = useSelector(state => state.session ? Object.values(state.session.currentUserRatings) : [])
 
-    // useEffect(() => {
-    //     console.log(sessionUser);
-    //     console.log(businesses)
-    // }, [])
-
+    useEffect(() => {
+        console.log(sessionUser.currentUserBusinessesRated);
+        // console.log(businesses)
+    }, [])
     
     return (
         <>
-            <Header />
             <div className="below-header-content-container">
-                <Navigation />
+                {/* <Navigation /> */}
                 <HoppedIndex 
                     businesses={businesses} 
+                    // businesses={Object.values(sessionUser.currentUserBusinessesRated)}
                     currentUserRatings={ratings}/>
+                    {/* // ratings={Object.values(sessionUser.currentUserRatings)} */}
+                    {/* /> */}
             </div>
         </>
     )

@@ -7,21 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 const HoppedIndex = ({businesses, currentUserRatings}) => {
     const dispatch = useDispatch();
     const [currentSort, setCurrentSort] = useState("Highest Rating");
-    const [sortedDescRatings, setSortedDescRatings] = useState([]);
+    const [sortedDescRatings, setSortedDescRatings] = useState(currentUserRatings);
 
-    let sortedRatings;
-    useEffect(() => {
-        if (currentSort === "Highest Rating") {
-            sortedRatings = currentUserRatings.sort((r1, r2) => 
-                (r1.rating < r2.rating) ? 1 : (r1.rating > r2.rating) ? -1 : 0
-            )
-            setSortedDescRatings(sortedRatings)
-        }
-    }, [currentUserRatings, currentSort]);
+//     let sortedRatings;
+//     useEffect(() => {
+//         if (currentSort === "Highest Rating") {
+//             sortedRatings = currentUserRatings.sort((r1, r2) => 
+//                 (r1.rating < r2.rating) ? 1 : (r1.rating > r2.rating) ? -1 : 0
+//             )
+//             setSortedDescRatings(sortedRatings)
+//         }
+//     }, [currentUserRatings, currentSort]);
 
-    useEffect(() => {
-        setSortedDescRatings(sortedDescRatings.reverse())
-   }, [currentSort])
+//     useEffect(() => {
+//         setSortedDescRatings(sortedDescRatings.reverse())
+//    }, [currentSort])
 
     return (
         <>

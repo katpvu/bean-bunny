@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import "./index.css"
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const SearchResultItem = ({business, prevPage}) => {
+    useEffect(() => {
+        console.log(prevPage)
+    }, [])
 
     return (
         <Link className="search-item-container" 

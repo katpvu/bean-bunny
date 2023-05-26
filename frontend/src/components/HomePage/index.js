@@ -17,7 +17,7 @@ const HomePage = (props) => {
         <>
             <Header />
             <div className="below-header-content-container">
-                <Navigation />
+                {/* <Navigation /> */}
                 <ListIndex />
             </div>
             

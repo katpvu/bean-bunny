@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post '/searches', to: 'searches#create'
     get '/searches/:business_id', to: 'searches#show'
     get '/businesses/yelp/:business_yelp_id', to: 'businesses#fetch'
-    resources :businesses, only: [:create, :show]
+    resources :businesses, only: [:index, :create, :show]
     resources :users, only: [:create, :show, :index]
     resource :session, only: [:show, :create, :destroy]
     resources :lists

@@ -28,6 +28,12 @@ require 'json'
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1
     ApplicationRecord.connection.reset_pk_sequence!('users')
+
+    businesses = {
+      "San Francisco" => [],
+      "Los Angeles" => [],
+      "New York City" => []
+    }
   
     puts "Creating demo user..."
     demo = User.create!(
@@ -46,66 +52,12 @@ require 'json'
       }) 
     end
 
-    puts "Creating lists.."
-    san_francisco = List.create!(
-      title: 'San Francisco',
-      user_id: demo.id
-    )
+    puts "Creating businesses..."
+    # cities = ["New York City", "San Francisco", "Los Angeles", "Austin", "Seattle"]
+    cities = ["San Francisco", "New York City" , "Los Angeles"]
 
-    los_angeles = List.create!(
-      title: 'Los Angeles',
-      user_id: demo.id
-    )
-
-    new_york = List.create!(
-      title: 'New York',
-      user_id: demo.id
-    )
-
-    puts "Creating list items..."
-    sf_businesses = [
-      'DaOQgNk4LjN2gbvYrLQGvA',
-      '-NbDKVqG170J19MqSQ5q_A'
-    ]
-
-    sf_businesses.each do |bus_id|
-      ListItem.create(
-        list_id: san_francisco.id,
-        business_yelp_id: bus_id
-      )
-    end
-
-    ny_businesses = [
-      'pimuUR-TEHIjUla3S3jemQ',
-      'ED7A7vDdg8yLNKJTSVHHmg',
-      'K6fkejf2ZBUdlsVrm5RbrA',
-      'jZZMmT7Mk3S-fNjXcq3Ksg',
-      'xpDp5zKQJHu7Ljgs1PKLJw'
-    ]
-
-    ny_businesses.each do |bus_id|
-      ListItem.create(
-        list_id: new_york.id,
-        business_yelp_id: bus_id
-      )
-    end
-
-    la_businesses = [
-      'gnRQ4d8RdMpr0wbhVBjEng',
-      'ZxFQnp-PidPRTf23Ss_ecA',
-      'KWuSIrgx9fx2m8JuqknZPA',
-      '4E7EsJwJ1wsiA4RRBJ3wBQ'
-    ]
-
-    la_businesses.each do |bus_id|
-      ListItem.create(
-        list_id: los_angeles.id,
-        business_yelp_id: bus_id
-      )
-    end
-
-    def fetch(business_id)
-      url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
+    def yelp_search_by_city(location)
+        url = URI("https://api.yelp.com/v3/businesses/search?location=#{location}&term=coffee%20shop&radius=10000&&sort_by=best_match&limit=20")
 
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = true
@@ -115,30 +67,71 @@ require 'json'
         request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
 
         response = http.request(request)
-        business = JSON.parse response.read_body, symbolize_names: true
-        business
+        return JSON.parse response.read_body, symbolize_names: true
     end
 
-    business_ids = sf_businesses + la_businesses + ny_businesses
-    business_object_ids = []
-    puts "Creating businesses..."
+    def yelp_single_business_fetch(yelp_id)
+        url = URI("https://api.yelp.com/v3/businesses/#{yelp_id}")
 
-    business_ids.each do |business_id|
-      fetchedBusiness = fetch(business_id)
-      new_business = {
-        business_yelp_id: fetchedBusiness[:id],
-        image_url: fetchedBusiness[:image_url],
-        coordinates: fetchedBusiness[:coordinates],
-        is_closed: fetchedBusiness[:is_closed], 
-        location: fetchedBusiness[:location],
-        name: fetchedBusiness[:name],
-        yelp_rating: fetchedBusiness[:rating]
-      }
-      business = Business.create!(new_business)
-      business_object_ids << business.id
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+
+        request = Net::HTTP::Get.new(url)
+        request["accept"] = "application/json"
+        request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
+
+        response = http.request(request)
+        return JSON.parse response.read_body, symbolize_names: true
     end
 
-    #demo user ratings
+    cities.each do |city|
+      parsed_searches = yelp_search_by_city(city)
+      parsed_searches[:businesses].each_with_index do |business_obj, i|
+        parsed_business = yelp_single_business_fetch(business_obj[:id])
+        new_business = {
+            business_yelp_id: business_obj[:id],
+            image_url: business_obj[:image_url],
+            coordinates: business_obj[:coordinates],
+            is_closed: business_obj[:is_closed], 
+            location: business_obj[:location],
+            name: business_obj[:name],
+            yelp_rating: business_obj[:rating],
+            additional_photos_urls: parsed_business[:photos],
+            price: parsed_business[:price],
+            hours: parsed_business[:hours],
+            phone_number: parsed_business[:display_phone]
+        }
+        new_bus = Business.create!(new_business)
+        if businesses[city] && ( i % 2 == 0)
+          businesses[city] << business_obj[:id]
+        end
+      end
+    end
+
+
+    puts "Creating lists and list items..."
+    def createListItems(listId, city, businesses)
+      p city
+      p businesses[city]
+      businesses[city].each do |business_id|
+        ListItem.create(
+          list_id: listId,
+          business_yelp_id: business_id
+        )
+      end
+    end
+
+    businesses.keys.each do |city|
+      list = List.create(
+        title: city,
+        user_id: demo.id
+      )
+      createListItems(list.id, city, businesses)
+    end
+
+    # demo user's ratings
+    business_object_ids = Business.order("RANDOM()").limit(11).pluck(:id)
+
     puts "Creating ratings..."
     rating_notes = [  
       "Amazing coffee and service!",  

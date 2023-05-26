@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_224544) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_211228) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_224544) do
     t.float "yelp_rating", null: false
     t.json "location", default: {}, null: false
     t.json "coordinates", default: {}, null: false
+    t.text "additional_photos_urls", default: [], array: true
+    t.string "price"
+    t.text "hours", default: [], array: true
+    t.string "phone_number"
     t.index ["business_yelp_id"], name: "index_businesses_on_business_yelp_id"
   end
 

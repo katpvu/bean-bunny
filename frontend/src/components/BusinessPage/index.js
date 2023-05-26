@@ -103,7 +103,6 @@ const BusinessPage = () => {
 
     return (
         <>
-        <Header />
         <div className="business-page-container">
             <img src={`${business?.imageUrl}`} alt={business?.name} className="fitting-image"/>
             <div className="bp-header-overlay">

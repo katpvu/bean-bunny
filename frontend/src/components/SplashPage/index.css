@@ -391,8 +391,9 @@
     height: 100%;
     object-fit: cover;
     object-position: 25% 10%; 
-    /* overflow: hidden; */
-    /* position: absolute; */
+    animation: fadeInAnimation ease .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 #splash-logo {
@@ -403,13 +404,6 @@
     margin-top: 70px;
 }
 
-@media (max-width: 920px) {
+/* @media (max-width: 920px) {
 
-    #splash-img {
-        /* max-width: 100%; */
-        /* min-height: 300px;
-        height: 50%;
-        position:relative; */
-    }
-
-}
+} */

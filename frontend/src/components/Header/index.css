@@ -26,6 +26,12 @@
     
 }
 
+.header-container div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
 #app-logo {
     text-decoration: none;
     font-size: 60px;
@@ -35,5 +41,5 @@
 }
 
 #app-logo:visited {
-    color: black;
+    color: #212427;
 }

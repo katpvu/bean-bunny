@@ -136,13 +136,25 @@
     width: 100%;
     flex-direction: column;
     text-align: center;
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
  }
+ @keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
 
 .list-index-title {
     text-transform: uppercase;
     font-size: 96px;
     font-weight: 700;
-    letter-spacing: -2px;;
+    letter-spacing: -2px;
+    cursor: default;
 }
 
 .list-index-container {
@@ -164,12 +176,17 @@
     justify-content: end;
     text-decoration: none;
     text-transform: lowercase;
-    color: black;
+    color: #212427;
     font-size: 36px;
     padding: 15px;
     font-weight: 700;
     letter-spacing: -2px;
-    border: 1px solid black;
+    border: 1px solid #212427;
+}
+
+.list-item p {
+    font-weight: 300;
+    font-size: 24px;
 }
 
 

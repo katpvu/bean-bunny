@@ -13,9 +13,10 @@
 body {
     font-family: 'Kanit', sans-serif;
     background-color: #FBFBF4;
+    color: #212427;
     overflow-x: hidden;
     box-sizing: border-box;
 }
 body * {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }

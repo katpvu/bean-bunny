@@ -42,8 +42,8 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
                         lng: business?.coordinates.longitude
                     },
                     map: map,
-                    icon: icon,
-                    title: {text: `${business?.rating}`, color: "white"}
+                    icon: icon
+                    // title: {text: `${business?.rating}`, color: "white"}
                 });
 
                 // add info window for each business marker

@@ -118,10 +118,18 @@
     font-size: 1.3em;
     letter-spacing: -1px;
     font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s all ease;
+
 }
 
 .nav-container a:visited {
-    color: black;
+    color: #212427;
+}
+
+.nav-container a:hover,
+.nav-container div:hover {
+    color: rgb(250, 150, 166);
 }
 
 /* @media (max-width: 920px) {

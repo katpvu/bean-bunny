@@ -29,7 +29,6 @@ const Hopped = (props) => {
     return (
         <>
             <div className="below-header-content-container">
-                {/* <Navigation /> */}
                 <HoppedIndex 
                     businesses={businesses} 
                     // businesses={Object.values(sessionUser.currentUserBusinessesRated)}

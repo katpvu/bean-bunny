@@ -26,21 +26,6 @@ export const receiveUsersBusinessRated = (payload) => ({
 })
 // THUNK ACTION CREATORS
 
-// export const fetchBusiness = (businessId, type=0) => async dispatch => {
-//     console.log(type)
-//     // dispatch(createBusiness(businessId));
-//     const res = await csrfFetch(`/api/businesses/yelp/${businessId}`);
-//     const data = await res.json();
-//     if (type) {
-//         return dispatch(receiveUsersBusinessRated(data))
-//     } else {
-//         return dispatch(receiveBusiness(data));
-//     }
-// }
-export const fetchBusinesses = (businesses) => async dispatch => {
-
-}
-
 export const fetchBusiness = (businessId) => async dispatch => {
     const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();

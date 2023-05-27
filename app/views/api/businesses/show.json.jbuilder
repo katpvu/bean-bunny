@@ -1,5 +1,5 @@
 json.business do
-    json.extract! @business, :id, :business_yelp_id, :name, :location, :coordinates, :yelp_rating, :is_closed, :image_url
+    json.extract! @business, :id, :business_yelp_id, :name, :location, :coordinates, :yelp_rating, :is_closed, :image_url, :hours, :price, :additional_photos_urls, :phone_number
 end
 
 json.ratings do

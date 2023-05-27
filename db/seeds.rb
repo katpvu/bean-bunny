@@ -224,9 +224,7 @@ require 'json'
       "Americano with a pump of white chocolate syrup and a splash of cream.",  
       "Mocha with a shot of peppermint syrup and whipped cream."
     ]
-
-
-
+    
     users_arr.each_with_index do |user, index|
       rating = Rating.create!(
         user_id: user.id,

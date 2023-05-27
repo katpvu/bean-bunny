@@ -7,9 +7,11 @@ export const getSearches = state => (
 )
 
 
+
 // CONSTANTS
-export const RECEIVE_SEARCHES = 'searches/RECEIVE_SEARCHES'
-export const RECEIVE_RECS = 'searches/RECEIVE_RECS'
+const RECEIVE_SEARCHES = 'searches/RECEIVE_SEARCHES'
+const RECEIVE_RECS = 'searches/RECEIVE_RECS'
+const CLEAR_SEARCHES = 'searches/CLEAR_SEARCHES'
 
 // ACTION CREATORS
 export const receiveSearches = (searches) => ({
@@ -20,6 +22,10 @@ export const receiveSearches = (searches) => ({
 export const receiveRecs = (recs) => ({
     type: RECEIVE_RECS,
     recs
+})
+
+export const clearSearches = () => ({
+    type: CLEAR_SEARCHES
 })
 
 // THUNK ACTION CREATORS
@@ -40,13 +46,16 @@ export const fetchRecs = (businessYelpId) => async dispatch => {
 }
 
 
+
 // REDUCER
 const SearchesReducer = (state={}, action) => {
     switch (action.type) {
         case RECEIVE_RECS:
-            return action.recs
+            return action.recs;
         case RECEIVE_SEARCHES:
             return action.searches;
+        case CLEAR_SEARCHES:
+            return {}
         default:
             return state;
     }

@@ -24,6 +24,7 @@
 .business-info-section-container {
     width: 80%;
     margin: 0 auto;
+
 }
 
 .business-info-section-container-header > div {
@@ -47,7 +48,7 @@
 
 .business-page-save-button {
     width: 100px;
-    border: 1px solid #212427;;
+    border: 1px solid #212427;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -60,7 +61,9 @@
 
 .business-page-save-button:hover {
     color:  #FBFBF4;
-    background-color: #212427;;
+    border: 1px solid rgb(240, 128, 147);
+    background-color: rgb(245, 156, 171);
+    /* background-color: #212427;; */
 }
 
 .business-info-section-container-details h2 {
@@ -73,10 +76,11 @@
 .business-info-section-container-details {
     display: grid;
     grid-template-columns: 0.75fr 1.25fr;
+    margin-top: 20px;
 }
 
 .business-info-section-container-details > div {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .bp-map-container {
@@ -161,8 +165,9 @@
     margin-top: 20px;
 }
 
-
-
+.map-address {
+    text-align: center;
+}
 
 
 @media (max-width: 920px) {

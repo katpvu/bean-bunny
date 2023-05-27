@@ -14,6 +14,7 @@ export const getListItem = listItemId => state => (
 export const RECEIVE_LIST_ITEMS = 'listItems/RECEIVE_LIST_ITEMS'
 export const RECEIVE_LIST_ITEM = 'listItems/RECEIVE_LIST_ITEM'
 export const REMOVE_LIST_ITEM = 'listItems/REMOVE_LIST_ITEM'
+export const CLEAR_LIST_ITEMS = 'listItems/CLEAR_LIST_ITEMS'
 
 // ACTION CREATORS
 export const receiveListItem = (listItem) => ({
@@ -30,6 +31,10 @@ export const removeListItem = (listItemId) => ({
     type: REMOVE_LIST_ITEM,
     listItemId
 });
+
+export const clearListItems = () => ({
+    type: CLEAR_LIST_ITEMS
+})
 
 // THUNK ACTION CREATORS
 export const fetchListItems = () => async dispatch => {
@@ -76,6 +81,8 @@ const ListItemsReducer = (state={}, action) => {
         case REMOVE_LIST_ITEM:
             delete newState[action.listItemId]
             return newState;
+        case CLEAR_LIST_ITEMS:
+            return {}
         default:
             return state;
     };

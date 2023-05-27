@@ -6,16 +6,9 @@ import Header from "../Header";
 import ListForm from "./ListForm";
 import "./index.css"
 
-const ListIndex = (props) => {
+const ListIndex = ({lists}) => {
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
-    
-    const lists = useSelector(getLists);
-
-    useEffect(() => {
-        dispatch(fetchLists(lists))
-    }, [])
-
     
     return (
         <>

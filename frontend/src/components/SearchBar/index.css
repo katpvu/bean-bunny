@@ -1,8 +1,8 @@
-.search-bar-container {
+/* .search-bar-container {
     width: 100%;
     margin: 20px;
-    /* border: 1px solid green;
-    display: flex; */
+    border: 1px solid green;
+    display: flex;
 }
 
 .search-bar {
@@ -26,4 +26,14 @@
         width: 60%;
         margin-left: 0;
     }
+} */
+
+.search-form {
+    width: 100%;
+}
+.search-bar {
+    width: 90%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid gray;
 }

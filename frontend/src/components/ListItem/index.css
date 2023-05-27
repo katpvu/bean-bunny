@@ -119,6 +119,7 @@
     letter-spacing: -5px;;
     overflow-wrap: break-word;
     width: 100%;
+    cursor: default;
 
 }
 

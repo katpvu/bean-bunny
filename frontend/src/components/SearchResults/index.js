@@ -27,7 +27,6 @@ const SearchResults = ({searchResults, prevPage}) => {
             {!searchCity && (
                 <div className="search-results-container">
                     <div className="before-search-text">
-                    
                         <h1>Go ahead and enter a location in the search bar!</h1>
                     </div>
                 </div>
@@ -44,7 +43,7 @@ const SearchResults = ({searchResults, prevPage}) => {
                         
                         {searchResults.map(searchBusiness => {
                             const business = {
-                                businessYelpId: searchBusiness.id,
+                                businessYelpId: searchBusiness.businessYelpId,
                                 coordinates: searchBusiness.coordinates,
                                 location: searchBusiness.location,
                                 name: searchBusiness.name,

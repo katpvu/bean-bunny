@@ -21,6 +21,7 @@ import UserNotes from "./UserNotes";
 import BeanBunnyMemberNotes from "./BeanBunnyMemberNotes";
 import BusinessHours from "./BusinessHours";
 import { Link } from "react-router-dom";
+import { clearSearches } from "../../store/search";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -47,20 +48,14 @@ const BusinessPage = () => {
         // dispatch(fetchLists())
         dispatch(fetchBusiness(businessId))
         dispatch(fetchRecs(businessId))
+
+        return () => {
+            console.log('cleaned up')
+            dispatch(clearSearches())
+        }
     }, [dispatch, showModal, businessId])
 
-    useEffect(() => {
-        console.log(recs)
-    }, [recs])
 
-    // useEffect(() => {
-        
-    //     console.log(sessionUserRatings)
-    // }, [])
-
-    // useEffect(() => {
-    //     console.log(business)
-    // }, [business])
     
     // useEffect(() => {
     //     setCurrentUserRating(sessionUserRatings.find(rating => rating.businessYelpId === businessId))
@@ -153,7 +148,7 @@ const BusinessPage = () => {
                             <div className="bp-map-container">
                                 <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
                             </div>
-                            <h3>{business?.location?.address1}, {business?.location?.city}, {business?.location?.state} {business?.location?.zipCode}</h3>
+                            <h3 className="map-address">{business?.location?.address1}, {business?.location?.city}, {business?.location?.state} {business?.location?.zipCode}</h3>
                         </div>
                     </div>
                 </div>

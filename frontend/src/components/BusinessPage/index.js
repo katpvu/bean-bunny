@@ -11,6 +11,9 @@ import ScoresPanel from "./ScoresPanel";
 import BusinessHours from "./BusinessHours";
 import { Link } from "react-router-dom";
 import { clearSearches } from "../../store/search";
+import { clearLists, createList, fetchLists, getLists } from "../../store/list";
+import { SuperBalls } from '@uiball/loaders'
+import { fetchListByTitle } from "../../store/list";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -23,27 +26,41 @@ const BusinessPage = () => {
     const business = useSelector(getBusiness(businessId))
     const sessionUser = useSelector(state => state.session.user); 
     const ratings = useSelector(state => state.ratings ? Object.values(state.ratings) : []);
-    const recs = useSelector(state => state.searches ? Object.values(state.searches) : [])
+    const recs = useSelector(state => state.searches ? Object.values(state.searches) : []);
+    const list = useSelector(state => state.lists ? Object.values(state.lists) : [])
+    const listItems = useSelector(state => state.listItems ? Object.values(state.listItems) : [])
 
+    const [currentList, setCurrentList] = useState(null);
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [currentUserRating, setCurrentUserRating] = useState({})
+    const [currentUserRating, setCurrentUserRating] = useState({});
+    const [saved, setSaved] = useState(false)
     
 
     useEffect(() =>{
-        // dispatch(fetchLists())
         dispatch(fetchBusiness(businessId))
         dispatch(fetchRecs(businessId))
-
         return () => {
             // console.log('cleaned up')
-            dispatch(clearSearches())
+            dispatch(clearSearches());
+            // setSaved(false)
         }
     }, [dispatch, showModal, businessId])
 
     useEffect(() => {
-        console.log(business)
+        dispatch(fetchListByTitle(business?.location?.city))
+    }, [business])
+
+
+    useEffect(() => {
+        if (listItems.length > 0) {
+            listItems.map((listItem) => {
+                if (listItem.businessYelpId === businessId) {
+                    setSaved(true)
+                }
+            })
+        }
     }, [])
 
     let mapOptions;
@@ -55,17 +72,29 @@ const BusinessPage = () => {
             zoom: 15
         }
 
-    const handleAddToList = (e, list) => {
-        setToggleMenu(false)
-        const newListItem = {
-            business_yelp_id: business?.id,
-            list_id: list?.id
-        };
-        dispatch(createListItem(newListItem))
-            .catch(async res => {
-                let errors = await checkErrors(res)
-                setErrors(errors)
-            });
+    const handleAddToList = () => {
+
+        console.log(list)
+        if (list.length === 0){
+            console.log("i am here")
+            dispatch(createList({
+                userId: sessionUser.id,
+                title: business.location.city
+            }))
+        } else if (list.length > 0){
+            console.log("currentList")
+            const newListItem = {
+                businessYelpId: businessId,
+                listId: list[0].id
+            }
+            dispatch(createListItem(newListItem))
+                .catch(async res => {
+                    let errors = await checkErrors(res)
+                    setErrors(errors)
+                })
+                .then(() => setSaved(true))
+            }
+
     }
 
     const handleToggle = () => {
@@ -99,14 +128,27 @@ const BusinessPage = () => {
         )
     }
 
+    const saveButton = () => {
+        if (!saved) {
+            return (
+                <div 
+                    className="business-page-save-button"
+                    onClick={handleAddToList}
+                >save</div>
+            )
+        } else {
+            return (<p>saved in {business?.location?.city} collection</p>)
+        }
+    }
+
     const businessInfoSection = () => {
         return (
+            <>
             <div className="business-info-section-container">
                 <div className="business-info-section-container-header">
                     <div>
                         <h1>{business?.name}</h1>
-                        {/* need to add conditional to check if user has already saved this business */}
-                        <div className="business-page-save-button">save</div>
+                        {saveButton()}
                     </div>
                     <h3>{business?.location?.city}, {business?.location?.state}</h3>
                     <p>{business?.phoneNumber}</p>
@@ -136,6 +178,7 @@ const BusinessPage = () => {
                 </div>
                 
             </div>
+            </>
         )
     }
 
@@ -147,7 +190,7 @@ const BusinessPage = () => {
                 {recs.map((rec, i) => (
                     <Link 
                         className="recs-image-container" 
-                        to={{pathname: `/businesses/${rec.businessYelpId}`, state: {from: `/busineeses/${businessId}`}}}
+                        to={{pathname: `/businesses/${rec?.businessYelpId}`, state: {from: `/busineeses/${businessId}`}}}
                     >
                         <img src={rec?.imageUrl} alt="rec" />
                         <div className="rec-overlay"></div>
@@ -162,11 +205,26 @@ const BusinessPage = () => {
 
     return (
         <>
+        {!business ? 
+            <div className="loader-container">
+                <SuperBalls 
+                    size={45}
+                    speed={1.4} 
+                    color="black" 
+                    
+                /> 
+            </div> 
+            : null}
+        {business ? (
         <div className="business-page-container">
             {headerImages()}
             {businessInfoSection()}
             {RecsPanel()}
         </div>
+        ) : null}
+
+
+
         {/* <div className="business-page-container">
             <img src={`${business?.imageUrl}`} alt={business?.name} className="fitting-image"/>
             <div className="bp-header-overlay">

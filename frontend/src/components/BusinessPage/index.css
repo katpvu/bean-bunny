@@ -169,6 +169,12 @@
     text-align: center;
 }
 
+.business-info-section-container {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
 
 @media (max-width: 920px) {
     .business-info-section-container-details {

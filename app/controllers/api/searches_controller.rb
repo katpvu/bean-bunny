@@ -53,24 +53,6 @@ class Api::SearchesController < ApplicationController
         render :recs
     end
 
-    # def show
-    #     business_id = params[:business_id]
-    #     url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
-
-    #     http = Net::HTTP.new(url.host, url.port)
-    #     http.use_ssl = true
-
-    #     request = Net::HTTP::Get.new(url)
-    #     request["accept"] = "application/json"
-    #     request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
-
-    #     response = http.request(request)
-    #     @business = JSON.parse response.read_body, symbolize_names: true
-
-    #     render :show
-    # end
-
-
     private
     def yelp_single_business_fetch(yelp_id)
         url = URI("https://api.yelp.com/v3/businesses/#{yelp_id}")

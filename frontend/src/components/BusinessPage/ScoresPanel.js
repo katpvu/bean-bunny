@@ -6,9 +6,7 @@ const ScoresPanel = ({currentUser, ratings, business}) => {
     const [currentUserRating, setCurrentUserRating] = useState({});
 
     useEffect(() => {
-        const ratings = Object.values(currentUser.ratings)
         setCurrentUserRating(ratings.find(rating => rating.businessYelpId === business?.businessYelpId))
-
     }, [])
 
     // let currentUserRating;

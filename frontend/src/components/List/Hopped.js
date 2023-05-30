@@ -14,10 +14,8 @@ import { clearBusinesses } from "../../store/business";
 const Hopped = (props) => {
     const dispatch = useDispatch();
 
-
     const sessionUser = useSelector(state => state.session.user);
     const businesses = useSelector(getBusinesses)
-    // const businesses = useSelector(state => state.businesses)
     const ratings = useSelector(getBusinessRatings)
 
     useEffect(() => {
@@ -33,13 +31,11 @@ const Hopped = (props) => {
     }, [sessionUser])
 
     return (
-        <>
-            <div className="below-header-content-container">
-                <HoppedIndex 
-                    businesses={businesses} 
-                    currentUserRatings={ratings}/>
-            </div>
-        </>
+        <div className="below-header-content-container">
+            <HoppedIndex 
+                businesses={businesses} 
+                currentUserRatings={ratings}/>
+        </div>
     )
 };
 

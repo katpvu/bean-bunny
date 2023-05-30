@@ -51,9 +51,12 @@ export const fetchListItem = (listItemId) => async dispatch => {
 };
 
 export const createListItem = (listItem) => async dispatch => {
+    const formData = new FormData();
+    formData.append("list_item[list_id]", listItem.listId);
+    formData.append("list_item[business_yelp_id]", listItem.businessYelpId)
     let res = await csrfFetch('/api/list_items', {
         method: 'POST',
-        body: JSON.stringify(listItem)
+        body: formData
     });
     let data = await res.json();
     console.log(data, "errors should be here")

@@ -10,6 +10,15 @@ class Api::ListsController < ApplicationController
         render :show
     end
 
+    def fetch_by_title
+        @list = List.find_by(title: params[:title])
+        if @list
+            render :show
+        else
+            render json: { errors: ['There are no lists that exist by that title']}, status: 422
+        end
+    end
+
     def create
         @list = List.new(list_params);
         if @list.save

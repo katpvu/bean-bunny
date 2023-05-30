@@ -5,6 +5,7 @@ import "./index.css"
 import orangeIcon from "../../assets/orange-marker.png"
 import coffeeIcon from "../../assets/cc-marker.png"
 import rabbitIcon from "../../assets/rabbit.png"
+import { SuperBalls } from '@uiball/loaders'
 
 const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandlers={}}) => {
     const [map, setMap] = useState(null);
@@ -86,7 +87,10 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
 
 
     return (
+        <>
         <div ref={mapRef} id="map"><h1>map</h1></div>
+        
+        </>
     );
 };
 

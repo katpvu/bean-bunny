@@ -8,10 +8,12 @@ Rails.application.routes.draw do
     post '/searches', to: 'searches#create'
     get '/searches/:business_id', to: 'searches#show'
     get '/searches/recs/:business_yelp_id', to: 'searches#recs'
+    get '/lists/title/:title', to: 'lists#fetch_by_title'
     resources :businesses, only: [:index, :create, :show]
     resources :users, only: [:create, :show, :index]
     resource :session, only: [:show, :create, :destroy]
     resources :lists
+    
     resources :list_items, only: [:index, :create, :destroy]
     resources :ratings
   end

@@ -80,7 +80,7 @@ const initialState = {
 const sessionReducer = (state= initialState, action) => {
     switch (action.type) {
         case SET_CURRENT_USER:
-            return { ...state, user: action.payload.user, currentUserRatings: action.payload.ratings, currentUserBusinessesRated: action.payload.businessesRated }
+            return { ...state, user: action.payload.user}
         case REMOVE_CURRENT_USER:
             return { ...state, user: null }
         default:

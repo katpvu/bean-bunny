@@ -5,9 +5,7 @@ const BusinessHours = ({hours}) => {
     const parseHours = () => {
         
     }
-    useEffect(() => {
-        console.log(hours)
-    })
+
     return (
         <></>
     );

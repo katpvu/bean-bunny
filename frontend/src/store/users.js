@@ -21,11 +21,11 @@ export const receiveUsers = (payload) => ({
 export const fetchUserDetail = (userId) => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`);
     const data = await res.json();
-    const businessesRated = Object.values(data.businessesRated)
+    // const businessesRated = Object.values(data.businessesRated)
     // console.log(data)
-    businessesRated.forEach(business => {
-        dispatch(fetchBusiness(business.businessYelpId, userId))
-    })
+    // businessesRated.forEach(business => {
+    //     dispatch(fetchBusiness(business.businessYelpId, userId))
+    // })
     dispatch(receiveUserDetail(data))
 }
 

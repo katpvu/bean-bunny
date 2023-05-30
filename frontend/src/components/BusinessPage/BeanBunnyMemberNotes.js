@@ -25,7 +25,6 @@ const BeanBunnyMemberNotes = ({ratings, sessionUser, business}) => {
             if (user1?.id === userId) user = user1
         })
         return user
-        console.log(user)
     }
 
     return (

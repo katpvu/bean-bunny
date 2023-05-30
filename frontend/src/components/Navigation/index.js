@@ -46,9 +46,17 @@ const Navigation = (props) => {
     const sessionLinks = () => {
         if (sessionUser) {
             return (
+                <>
+                <li>
+                    <NavLink to="/hopped">hopped</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/lists">collections</NavLink>
+                </li>
                 <li>
                     <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>logout</div>
                 </li>
+                </>
             )
         } else if (!sessionUser) {
             return (
@@ -71,12 +79,7 @@ const Navigation = (props) => {
                 <li>
                     <NavLink to="/search">search</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/hopped">hopped</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/lists">collections</NavLink>
-                </li>
+
                 {sessionLinks()}
                 {/* <li>
                     <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>logout</div>

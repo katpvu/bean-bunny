@@ -10,6 +10,7 @@ import { getBusiness } from "../../store/business";
 import SearchResultItem from "../SearchResultItem"
 import { deleteListItem } from "../../store/list_items";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { clearBusinesses } from "../../store/business";
 
 const ListItemCard = ({listItem}) => {
     const dispatch = useDispatch();
@@ -27,6 +28,10 @@ const ListItemCard = ({listItem}) => {
             coordinates: listItem.coordinates
         }
         setBusiness(business)
+
+        return () => {
+            dispatch(clearBusinesses())
+        }
     }, [])
 
     // const business = useSelector(getBusiness(listItem.businessYelpId));

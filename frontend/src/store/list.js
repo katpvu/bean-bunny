@@ -53,7 +53,7 @@ export const fetchList = (listId) => async dispatch => {
 export const fetchListContents = (listId) => async dispatch => {
     let res = await csrfFetch(`/api/lists/${listId}`)
     let data = await res.json();
-    console.log(data, "list content data")
+    // console.log(data, "list content data")
     dispatch(receiveListContents(data))
 }
 export const createList = (list) => async dispatch => {

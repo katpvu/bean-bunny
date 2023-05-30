@@ -2,23 +2,12 @@ import "./index.css"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { getLists, fetchLists } from "../../store/list";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { createListItem } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
 import { fetchBusiness, getBusiness } from "../../store/business";
 import { fetchRecs, fetchSearches } from "../../store/search";
-import Header from "../Header";
-import { Modal } from "../../context/Modal"
-import RatingForm from "../Rating/RatingForm";
 import ScoresPanel from "./ScoresPanel";
-import ListDropDown from "./ListDropDown";
-import { getBusinessRatings } from "../../store/ratings";
-import PhotoGallery from "./PhotoGallery";
-import UserNotes from "./UserNotes";
-import BeanBunnyMemberNotes from "./BeanBunnyMemberNotes";
 import BusinessHours from "./BusinessHours";
 import { Link } from "react-router-dom";
 import { clearSearches } from "../../store/search";
@@ -31,10 +20,8 @@ const BusinessPage = () => {
     const { from } = location.state;
     const { businessId } = useParams();
 
-    // const lists = useSelector(getLists);
     const business = useSelector(getBusiness(businessId))
     const sessionUser = useSelector(state => state.session.user); 
-    // const sessionUserRatings = useSelector(state => Object.values(state.session.currentUserRatings))
     const ratings = useSelector(state => state.ratings ? Object.values(state.ratings) : []);
     const recs = useSelector(state => state.searches ? Object.values(state.searches) : [])
 
@@ -50,17 +37,15 @@ const BusinessPage = () => {
         dispatch(fetchRecs(businessId))
 
         return () => {
-            console.log('cleaned up')
+            // console.log('cleaned up')
             dispatch(clearSearches())
         }
     }, [dispatch, showModal, businessId])
 
+    useEffect(() => {
+        console.log(business)
+    }, [])
 
-    
-    // useEffect(() => {
-    //     setCurrentUserRating(sessionUserRatings.find(rating => rating.businessYelpId === businessId))
-    //     console.log(currentUserRating)
-    // }, [])
     let mapOptions;
         mapOptions = {
             center: {
@@ -105,9 +90,6 @@ const BusinessPage = () => {
     const headerImages = () => {
         return (
             <div className="images-header-container">
-                {/* <div className="bp-img-container">
-                    <img src={business?.imageUrl} alt="coffee" />
-                </div> */}
                 {business?.additionalPhotosUrls.map((url, i) => (
                     <div key={i} className="bp-header-img-container">
                         <img src={url} alt="coffee" />

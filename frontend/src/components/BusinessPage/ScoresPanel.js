@@ -18,9 +18,6 @@ const ScoresPanel = ({currentUser, ratings, business}) => {
     })
     let averageRating = findAvg(ratingsArray);
 
-    useEffect(() => {
-        // console.log(currentUserRating)
-    },[])
     return (
         <>
         <div className="scores-panel-container">

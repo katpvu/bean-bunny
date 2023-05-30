@@ -8,6 +8,8 @@ export const getBusinessRatings = state => (
     state.ratings ? Object.values(state.ratings) : []
 );
 
+
+
 // CONSTANTS
 export const RECEIVE_RATING = 'ratings/RECEIVE_RATING';
 export const REMOVE_RATING = 'ratings/REMOVE_RATING';

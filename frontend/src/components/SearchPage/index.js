@@ -100,7 +100,7 @@ const SearchPage = (props) => {
                 )
 
                 }
-        } else if (searchResults.length === 0) {
+        } else if (!location || searchResults.length === 0) {
             return (
                 <div id="empty-search-page">
                     <SearchBar/>

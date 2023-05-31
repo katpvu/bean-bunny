@@ -21,6 +21,11 @@ class Api::SearchesController < ApplicationController
                 # Another live fetch to Yelp API to retrieve more business details
                 parsed_business = yelp_single_business_fetch(business_obj[:id])
                 p parsed_business
+                if (parsed_business[:hours])
+                    parsed_hours = parsed_business[:hours][0]
+                else
+                parsed_hours = {}
+                end
 
                 new_business = {
                     business_yelp_id: business_obj[:id],
@@ -32,7 +37,7 @@ class Api::SearchesController < ApplicationController
                     yelp_rating: business_obj[:rating],
                     additional_photos_urls: parsed_business[:photos],
                     price: parsed_business[:price],
-                    hours: parsed_business[:hours],
+                    hours: parsed_hours,
                     phone_number: parsed_business[:display_phone]
                 }
 

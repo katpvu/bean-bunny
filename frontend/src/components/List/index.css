@@ -195,3 +195,27 @@
     background-color: pink;
 }
 
+.list-item p,
+.list-item h1,
+.business-info-container h1,
+.rating-and-address-container p{
+    cursor: pointer;
+}
+
+@media (max-width: 1068px) {
+    .list-item {
+        width: 200px;
+        height: 200px;
+    }
+
+    .list-index-title {
+        font-size: 10vw;
+    }
+
+}
+
+@media (max-width: 540px) {
+    .list-item {
+        width: 100%;
+    }
+}

@@ -88,6 +88,13 @@ require 'json'
       parsed_searches = yelp_search_by_city(city)
       parsed_searches[:businesses].each_with_index do |business_obj, i|
         parsed_business = yelp_single_business_fetch(business_obj[:id])
+        p parsed_business[:hours]
+        if (parsed_business[:hours])
+          parsed_hours = parsed_business[:hours][0]
+        else
+          parsed_hours = {}
+        end
+
         new_business = {
             business_yelp_id: business_obj[:id],
             image_url: business_obj[:image_url],
@@ -98,7 +105,7 @@ require 'json'
             yelp_rating: business_obj[:rating],
             additional_photos_urls: parsed_business[:photos],
             price: parsed_business[:price],
-            hours: parsed_business[:hours],
+            hours: parsed_hours,
             phone_number: parsed_business[:display_phone]
         }
         new_bus = Business.create!(new_business)

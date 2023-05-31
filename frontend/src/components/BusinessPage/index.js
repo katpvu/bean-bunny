@@ -2,22 +2,21 @@ import "./index.css"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { clearListItems, createListItem, deleteListItem } from "../../store/list_items";
+import { clearListItems } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
 import { fetchBusiness, getBusiness } from "../../store/business";
 import { fetchRecs, fetchSearches } from "../../store/search";
 import ScoresPanel from "./ScoresPanel";
 import BusinessHours from "./BusinessHours";
-import { Link } from "react-router-dom";
 import { clearSearches } from "../../store/search";
-import { clearLists, createList, fetchLists, getLists } from "../../store/list";
+import { clearLists, fetchListByTitle } from "../../store/list";
 import { SuperBalls } from '@uiball/loaders'
-import { fetchListByTitle } from "../../store/list";
 import RatingsIndex from "../Rating/RatingsIndex";
 import RatingForm from '../Rating/RatingForm'
 import { Modal } from "../../context/Modal";
-import { Redirect } from "react-router-dom";
+import SaveButton from "./SaveButton";
+import RecsPanel from "./RecsPanel";
 
 
 const BusinessPage = () => {
@@ -41,9 +40,6 @@ const BusinessPage = () => {
     const [currentUserRating, setCurrentUserRating] = useState({});
     const [saved, setSaved] = useState(false)
 
-    // useEffect(() => {
-    //     if (sessionUser === null) return <Redirect to="/login" />;
-    // }, [sessionUser])
 
     useEffect(() =>{
         dispatch(fetchBusiness(businessId))
@@ -59,12 +55,14 @@ const BusinessPage = () => {
 
     useEffect(() => {
         dispatch(fetchListByTitle(business?.location?.city))
-        setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id))
+        if (sessionUser) {
+            setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id))
+        }
     }, [business])
 
 
     useEffect(() => {
-        if (Object.keys(list).length) {
+        if (list && Object.keys(list).length) {
             let listItemBusinesses = Object.values(list.listItemBusinesses)
             if (listItemBusinesses.includes(businessId)) {
                 setSaved(true);
@@ -81,38 +79,6 @@ const BusinessPage = () => {
         },
         zoom: 15
     }
-
-
-    const handleAddToList = () => {
-        console.log(sessionUser)
-        if (sessionUser === null) return history.push("/login");
-        if (!Object.keys(list).length){
-            dispatch(createList({
-                userId: sessionUser.id,
-                title: business.location.city
-            }, businessId))
-            .then(() => setSaved(true))
-        } else if (Object.keys(list).length){
-            const newListItem = {
-                businessYelpId: businessId,
-                listId: list.id
-            }
-            dispatch(createListItem(newListItem))
-                .then(() => setSaved(true))
-                .then(() => dispatch(fetchListByTitle(business?.location?.city)))
-                .catch(async res => {
-                    let errors = await checkErrors(res)
-                    setErrors(errors)
-                })
-            }
-    }
-
-    const handleRemoveFromList = () => {
-        dispatch(deleteListItem(currentListItem.id))
-            .then(() => setSaved(false))
-            .then(() => setCurrentListItem(null))
-    }
-
 
     const handleBackButton = () => {
         if (from?.includes(' ')) {
@@ -138,30 +104,6 @@ const BusinessPage = () => {
         )
     }
 
-    const saveButton = () => {
-        if (!saved) {
-            return (
-                <div 
-                    className="business-page-save-button"
-                    onClick={handleAddToList}
-                >save</div>
-            )
-        } else {
-            return (
-                <>
-                <div className="save-button-container">
-                    <p>saved in <Link 
-                        to={{pathname: `/lists/${list.id}`, state: {from: `/busineeses/${businessId}`}}}
-                        className="bold-and-uppercased">{business?.location?.city}</Link> collection</p>
-                    <div 
-                        className="business-page-save-button"
-                        onClick={handleRemoveFromList}
-                    >unsave</div>
-                </div>
-                </>
-            )
-        }
-    }
 
     const handleOpenRatingButton = () => {
         if (sessionUser === null) return history.push("/login");
@@ -194,7 +136,16 @@ const BusinessPage = () => {
                 <div className="business-info-section-container-header">
                     <div>
                         <h1>{business?.name}</h1>
-                        {saveButton()}
+                        <SaveButton saved={saved} 
+                            setSaved={setSaved} 
+                            history={history} 
+                            list={list} 
+                            sessionUser={sessionUser}
+                            business={business} 
+                            businessId={businessId} 
+                            setErrors={setErrors}
+                            currentListItem={currentListItem}
+                            setCurrentListItem={setCurrentListItem}/>
                     </div>
                     <h3>{business?.location?.city}, {business?.location?.state}</h3>
                     <p>{business?.phoneNumber}</p>
@@ -222,62 +173,39 @@ const BusinessPage = () => {
                         </div>
                     </div>
                 </div>
-                
             </div>
             </>
         )
     }
-
-    const RecsPanel = () => {
-        return (
-            <>
-            <h2 className="recs-panel-title">other coffee shops in {business?.location?.city}</h2>
-            <div className="recs-panel-container">
-                {recs.map((rec, i) => (
-                    <Link 
-                        className="recs-image-container" 
-                        to={{pathname: `/businesses/${rec?.businessYelpId}`, state: {from: `/busineeses/${businessId}`}}}
-                    >
-                        <img src={rec?.imageUrl} alt="rec" />
-                        <div className="rec-overlay"></div>
-                        <h2>{rec?.name}</h2>
-                    </Link>
-                ))}
-
-            </div>
-            </>
-        )
-    }
-
-
-
 
     return (
         <>
-        {!business ? 
-            <div className="loader-container">
-                <SuperBalls 
-                    size={45}
-                    speed={1.4} 
-                    color="black" 
-                    
-                /> 
-            </div> 
-            : null}
-        {business ? (
+        {business 
+        ? (
         <div className="business-page-container">
             {headerImages()}
             {businessInfoSection()}
-            {RecsPanel()}
+            <RecsPanel 
+                business={business}
+                businessId={businessId}
+                recs={recs}
+            />
             {ratingButton()}
             <RatingsIndex ratings={ratings} />
-        </div>
-        ) : null}
+        </div> ) 
+        : (
+        <div className="loader-container">
+        <SuperBalls 
+            size={45}
+            speed={1.4} 
+            color="black" 
+            
+        /> 
+        </div> ) }
 
 
 
         {/* <div className="business-page-container">
-            <img src={`${business?.imageUrl}`} alt={business?.name} className="fitting-image"/>
             <div className="bp-header-overlay">
                 <h1 className="business-page-title">{business?.name}</h1>
                 <FontAwesomeIcon 
@@ -286,62 +214,7 @@ const BusinessPage = () => {
                     icon={faArrowLeft} 
                     style={{color: "#ffffff",}} />
             </div>
-
-            <div className="business-info-wrapper">
-                <div className="business-info-header">
-                    <div>
-                        <h1 className="business-section-title">Location</h1>
-                        <p>{business?.location.address1}</p>
-                        <p>{business?.location.city}, {business?.location.state}</p>
-                    </div>
-                    <div className="buttons-container"> */}
-                        {/* <div className="rating-button" 
-                            onClick={() => setShowModal(true)}
-                            >{currentUserRating ? "Update Rating" : "Create Rating" }
-                        </div> */}
-                        {/* {showModal && (
-                            <Modal onClose={() => setShowModal(false)}>
-                                <RatingForm business={business} 
-                                closeModal={() => setShowModal(false)} 
-                                setCurrentUserRating={setCurrentUserRating}
-                                currentUserRating={currentUserRating}/>
-                            </Modal>
-                        )} */}
-                        {/* <div className="add-to-list-button" onClick={handleToggle}>{toggleMenu ? "x" : "+"}</div>
-                    </div> */}
-                    {/* <ul className={toggleMenu ? "list-index-drop-down" : "hidden"}>
-                        <ListDropDown lists={lists} handleAddToList={handleAddToList} />
-                    </ul> */}
-                {/* </div>
-                <br></br>
-                <div className="float-scores-and-map"> */}
-                    {/* <ScoresPanel businessYelpRating={business?.yelpRating} currentUserRating={currentUserRating} ratings={ratings}/>
-                     */}
-                    {/* <div className="bp-map-container">
-                        <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
-                    </div>
-                </div> */}
-
-
-                {/* <hr></hr>
-                <div className="ratings-section-bp">
-                    <div className="user-notes-section">
-                        <UserNotes currentUserRating={currentUserRating} />
-                    </div>
-
-                    <div className="other-users-section"> */}
-                        {/* <div className="photos-section">
-                            <PhotoGallery ratings={ratings} business={business} sessionUser={sessionUser}/>
-                        </div> */}
-             
-                        {/* <div>
-                            <BeanBunnyMemberNotes ratings={ratings} business={business} sessionUser={sessionUser} />
-                        </div> */}
-                    {/* </div>
-                </div>
-
-            </div>
-            </div>
+                    
             </> */}
             </>
     )

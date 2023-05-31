@@ -207,6 +207,12 @@
     align-items: flex-end;
     text-align: right;
 }
+
+.business-hours-and-pop-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 @media (max-width: 920px) {
     .business-info-section-container-details {
         display: flex;
@@ -227,5 +233,9 @@
         width: 100%;
         box-sizing: border-box;
         padding: 5px 20px;
+    }
+
+    .recs-panel-container h2 {
+        font-size: 5vw;
     }
 }

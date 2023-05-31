@@ -96,10 +96,12 @@
     font-weight: 700;
     letter-spacing: -2px;
     cursor: default;
+    text-align: center;
 }
 
 .preview-right h2 {
     font-size: 4rem;
+    text-align: right;
 }
 
 #hopped-content-container {
@@ -224,4 +226,19 @@
     /* color:  #FBFBF4; */
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);
+}
+
+@media (max-width: 1068px) {
+    .hopped-section-container h1 {
+        font-size: 10vw;
+    }
+
+    .hopped-section-container p {
+        font-size: 3vw;
+        letter-spacing: -1px;
+    }
+
+    .hopped-rating-list-container li {
+        font-size: 3.2vw;
+    }
 }

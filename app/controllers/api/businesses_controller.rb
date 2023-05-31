@@ -5,27 +5,6 @@ require 'json'
 
 
 class Api::BusinessesController < ApplicationController
-    # def fetch
-    #     #fetch business from yelp api
-    #     business_id = params[:business_yelp_id]
-    #     url = URI("https://api.yelp.com/v3/businesses/#{business_id}")
-
-    #     http = Net::HTTP.new(url.host, url.port)
-    #     http.use_ssl = true
-
-    #     request = Net::HTTP::Get.new(url)
-    #     request["accept"] = "application/json"
-    #     request["Authorization"] = "Bearer #{ENV['YELP_API_KEY']}"
-
-    #     response = http.request(request)
-    #     @business = JSON.parse response.read_body, symbolize_names: true
-
-    #     #fetch ratings from Business model
-    #     @db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
-
-    #     render :fetch
-    # end
-
     #fetch all businesses based on location
     def index 
         @businesses = Business.select {|business| business.location[:city] == params[:location] }
@@ -48,7 +27,6 @@ class Api::BusinessesController < ApplicationController
     def show
         # debugger
         @business = Business.find_by(business_yelp_id: params[:id])
-        p @business
         render :show
     end
 
@@ -65,6 +43,7 @@ class Api::BusinessesController < ApplicationController
             :hours,
             :phone_number,
             coordinates: [:latitude, :longitude],  
-            location: [:address1, :address2, :address3, :city, :zip_code, :country, :state, :display_address])
+            location: [:address1, :address2, :address3, :city, :zip_code, :country, :state, :display_address]
+        )
     end
 end

@@ -12,7 +12,8 @@ const SearchBar = ({location}) => {
 
     useEffect(() => {
         if (location) {
-            setSearch(location)
+            setSearch(location);
+            dispatch(fetchSearches({location: location}))
         }
     }, [])
 

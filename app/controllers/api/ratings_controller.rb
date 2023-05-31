@@ -2,13 +2,13 @@ class Api::RatingsController < ActionController::API
 
     wrap_parameters include: Rating.attribute_names + [:photos]
 
-    def index
-        @ratings = Ratings.all
-    end
+    # def index
+    #     @ratings = Ratings.all
+    # end
 
-    def show
-        @rating = Rating.find(params[:id])
-    end
+    # def show
+    #     @rating = Rating.find(params[:id])
+    # end
 
     def create 
         db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])

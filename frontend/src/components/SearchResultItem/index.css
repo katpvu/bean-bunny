@@ -6,7 +6,7 @@
 
 .search-item-container {
     display: flex;
-    width: 95%;
+    /* width: 95%; */
     /* border-radius: 10px; */
     border: 1px solid rgb(210, 214, 210);
     padding: 10px;

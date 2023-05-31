@@ -57,7 +57,8 @@
 }
 
 .business-page-save-button,
-.rating-button  {
+.rating-button,
+.delete-collection-button  {
     width: 100px;
     border: 1px solid #212427;
     height: 40px;
@@ -70,13 +71,15 @@
     transition: 0.3s all ease;
 }
 
-.rating-button {
+.rating-button,
+.delete-collection-button {
     width: 300px;
 
 }
 
 .business-page-save-button:hover,
-.rating-button:hover {
+.rating-button:hover,
+.delete-collection-button:hover {
     color:  #FBFBF4;
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);
@@ -156,6 +159,7 @@
     position: absolute;
     border-radius: inherit;
     transition: 0.3s all ease;
+    cursor: pointer;
 }
 
 .recs-image-container:hover .rec-overlay {
@@ -171,6 +175,7 @@
     text-align: center;
     color: rgb(240, 240, 229);
     text-shadow: rgb(32, 32, 31) 1px 0 10px;;
+    cursor: pointer;
 }
 
 .recs-panel-title,

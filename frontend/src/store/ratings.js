@@ -36,13 +36,15 @@ export const createRating = (rating) => async dispatch => {
 };
 
 export const updateRating = (rating) => async dispatch => {
+    // console.log(rating.get('rating[photos][]'), "photo files in action thunk")
     const newRating = {
         rating: {
             id: rating.get('id'),
             rating: rating.get('rating[rating]'),
             notes: rating.get('rating[notes]'),
             fav_orders: rating.get('rating[fav_orders]'),
-            user_id: rating.get('rating[user_id]')
+            user_id: rating.get('rating[user_id]'),
+            photoUrls: rating.get('rating[photos][]')
         },
         business_yelp_id: rating.get('business_yelp_id')
     }

@@ -61,27 +61,48 @@ const SearchPage = (props) => {
     }, []) 
 
     const searchContent = () => {
-        if (searchResults.length > 0) {
-            return (
-                <>
-                <SearchBar />
-                <div className="search-res-header">
-                    <p>coffee shops for</p>
-                    <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1>
-                </div>
-                <div className="search-page-section">
-                        <div className="placeholder-for-map">
-                            <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
-                        </div>
-                        <div>
-                            <SearchResults searchResults={searchResults} prevPage={location}/>
-                        </div>
-                </div>
-                </>
-            )
+        if (location) {
+            if (searchResults.length === 0) {
+                return (
+                    <>
+                    <div className="search-res-header">
+                        <p>coffee shops for</p>
+                        <SearchBar location={location}/>
+                        {/* <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1> */}
+                    </div>
+                    <div id="search-page" className="loader-container">
+                        <SuperBalls 
+                            size={45}
+                            speed={1.4} 
+                            color="black" 
+                            
+                        /> 
+                    </div> 
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                    <div className="search-res-header">
+                        <p>coffee shops for</p>
+                        <SearchBar location={location}/>
+                        {/* <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1> */}
+                    </div>
+                    <div className="search-page-section">
+                            <div className="placeholder-for-map">
+                                <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
+                            </div>
+                            <div>
+                                <SearchResults searchResults={searchResults} prevPage={location}/>
+                            </div>
+                    </div>
+                    </>
+                )
+
+                }
         } else if (searchResults.length === 0) {
             return (
-                <div>
+                <div id="empty-search-page">
                     <SearchBar/>
                 </div>
             )

@@ -183,6 +183,7 @@
     font-weight: 700;
     letter-spacing: -2px;
     border: 1px solid #212427;
+    transition: 0.3s all ease;
 }
 
 .list-item p {
@@ -190,4 +191,7 @@
     font-size: 24px;
 }
 
+.list-item:hover {
+    background-color: pink;
+}
 

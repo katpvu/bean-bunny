@@ -25,3 +25,7 @@
     font-size: 1.5em;
     letter-spacing: -1px;
 }
+
+.review-photo-gallery {
+    display: flex;
+}

@@ -4,7 +4,7 @@ import Navigation from "../Navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearLists, fetchListContents, getList } from "../../store/list";
-import { getListItems } from "../../store/list_items";
+import { clearListItems, getListItems } from "../../store/list_items";
 import ListItemCard from "./ListItemCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
@@ -32,6 +32,7 @@ const ListItemIndex = (props) => {
 
         return () => {
             dispatch(clearLists());
+            dispatch(clearListItems());
         }
     }, [dispatch, listId, openEditForm]);
 
@@ -69,13 +70,15 @@ const ListItemIndex = (props) => {
                 <div className="list-main-content">
                     <div className="list-title-container">
                         <div className="list-header-container">
-                            <FontAwesomeIcon onClick={()=> history.push("/lists")} className="back-button"icon={faArrowLeft} style={{color: "#404040",}} />
-                            <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list?.id} onClose={() => setOpenEditForm(false)}/> : list?.title}</h1>
-                            <FontAwesomeIcon className="more-options-icon" onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
-                        </div>
-                        <div className={toggleMenu ? "list-options-menu" : "hidden"}>
-                            <div onClick={handleDelete}>Delete Collection</div>
-                            <div onClick={() => setOpenEditForm(true)}>Edit Collection Name</div>
+                            <FontAwesomeIcon onClick={()=> history.push("/lists")} className="back-button" icon={faArrowLeft} style={{color: "#404040",}} />
+                            {/* <div className="left"> */}
+                                <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list?.id} onClose={() => setOpenEditForm(false)}/> : list?.title}</h1>
+                                <div 
+                                    className="delete-collection-button"
+                                    onClick={handleDelete}>Delete Collection</div>
+                            {/* </div> */}
+                            {/* <FontAwesomeIcon className="more-options-icon" onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} /> */}
+                            <div></div>
                         </div>
                     </div>
 

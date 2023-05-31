@@ -5,13 +5,20 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { clearSearches } from '../../store/search';
 
-const SearchBar = () => {
+const SearchBar = ({location}) => {
     const dispatch = useDispatch()
     const history = useHistory();
     const [search, setSearch] = useState("");
 
+    useEffect(() => {
+        if (location) {
+            setSearch(location)
+        }
+    }, [])
+
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        dispatch(clearSearches());
         const location = {
             location: encodeURIComponent(search)
         }
@@ -33,7 +40,12 @@ const SearchBar = () => {
     return (
         <div className={`${styles.B} ${styles.center}`}>
             <form className={`${styles.C} ${styles.center}`} onSubmit={handleSearchSubmit}>
-                <input className={`${styles.A}`} type="text" placeholder="Search a city" onChange={(e) => setSearch(capitalize(e.target.value))}/>
+                <input 
+                    className={`${styles.A}`} 
+                    type="text" 
+                    value={search} 
+                    placeholder="enter a city" 
+                    onChange={(e) => setSearch(capitalize(e.target.value))}/>
             </form>
         </div>
     )

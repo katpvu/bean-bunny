@@ -117,11 +117,9 @@
     text-transform: uppercase;
     font-size: 140px;
     font-weight: 700;
-    letter-spacing: -5px;;
-    overflow-wrap: break-word;
+    letter-spacing: -5px;
+    word-wrap: break-word;
     width: 100%;
-    cursor: default;
-
 }
 
 .list-header-container {
@@ -206,6 +204,17 @@
     font-size: 70px;
 }
 
+.back-button {
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: 0.3s all ease;
+    font-size: 20px;
+}
+
+.back-button:hover {
+    transform: scale(1.15)
+}
+
 @media (max-width: 1244px) {
     .list-header-container {
         position:static;
@@ -214,7 +223,12 @@
         justify-content: space-around;
         align-items: center;
         text-align: center;
+        position: relative;
+        padding-bottom: 40px;
+        margin-bottom: 20px;
     }
+
+
 
     .list-contents-container {
         display: flex;
@@ -225,4 +239,14 @@
         margin: 0 auto;
     
     }
+
+    .back-button {
+        margin-bottom: 0px;
+    }
+
+    .delete-collection-button {
+        position: absolute;
+        bottom: 0;
+    }
+
 }

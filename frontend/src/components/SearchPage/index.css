@@ -69,3 +69,15 @@
     height: calc(100vh - 178px)
     
  }
+
+ #empty-search-page {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 300px);
+    width: 100vw;
+ }
+
+#search-page.loader-container {
+    height: calc(100vh - 222px)
+}

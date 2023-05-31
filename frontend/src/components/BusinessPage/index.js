@@ -34,9 +34,7 @@ const BusinessPage = () => {
     const list = useSelector(state => state.lists)
     const listItems = useSelector(state => Object.values(state.listItems))
 
-    const [currentList, setCurrentList] = useState(null);
     const [currentListItem, setCurrentListItem] = useState(null)
-    const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [currentUserRating, setCurrentUserRating] = useState({});
@@ -61,16 +59,26 @@ const BusinessPage = () => {
     }, [business])
 
 
+    // useEffect(() => {
+    //     if (listItems.length > 0) {
+    //         listItems.forEach((listItem) => {
+    //             if (listItem.businessYelpId === businessId) {
+    //                 setSaved(true)
+    //                 setCurrentListItem(listItem)
+    //             }
+    //         })
+    //     }
+    // }, [currentListItem, saved])
+
     useEffect(() => {
-        if (listItems.length > 0) {
-            listItems.forEach((listItem) => {
-                if (listItem.businessYelpId === businessId) {
-                    setSaved(true)
-                    setCurrentListItem(listItem)
-                }
-            })
+        if (Object.keys(list).length) {
+            let listItemBusinesses = Object.values(list.listItemBusinesses)
+            if (listItemBusinesses.includes(businessId)) {
+                setSaved(true);
+                setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
+            }
         }
-    }, [currentListItem, saved])
+    },[list, businessId])
 
     let mapOptions;
     // useEffect(() => {
@@ -82,7 +90,7 @@ const BusinessPage = () => {
             zoom: 15
         }
 
-    // }, [business])
+    // }, [])
 
     const handleAddToList = () => {
         if (!Object.keys(list).length){

@@ -15,6 +15,7 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
     const [notes, setNotes] = useState(currentUserRating ? currentUserRating?.notes : "");
     const [favOrders, setFavOrders] = useState(currentUserRating ? currentUserRating?.favOrders : "");
     const [photoFiles, setPhotoFiles] = useState (currentUserRating ? currentUserRating?.photoUrls : []);
+    
 
     const handleFiles = ({ currentTarget }) => {
         const files = currentTarget.files;
@@ -23,7 +24,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(sessionUser.id)
         const formData = new FormData();
         formData.append('rating[rating]', rating);
         formData.append('rating[notes]', notes);
@@ -31,11 +31,13 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         formData.append('business_yelp_id', business.businessYelpId);
         formData.append('rating[user_id]', sessionUser.id);
 
+        console.log(photoFiles, "photo files i just attached")
         if (photoFiles.length !== 0) {
             photoFiles.forEach(photo => {
                 formData.append('rating[photos][]', photo);
             });
         };
+        console.log(formData.get('rating[photos][]'))
 
         if (currentUserRating) {
             formData.append('id', currentUserRating.id);

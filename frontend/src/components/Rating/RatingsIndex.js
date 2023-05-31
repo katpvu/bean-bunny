@@ -15,9 +15,13 @@ const RatingsIndex = ({ratings}) => {
                     <BunnyRatingInput rating={rating.rating} disabled={true} />
                     <h2>{rating.notes}</h2>
                     <p>FAVORITE ORDER: {rating.favOrders}</p>
-                    {/* {ratings.photoUrls.map((url) => (
-                        <img src={url} />
-                    ))} */}
+                    <div className="review-photo-gallery">
+                    {rating.photoUrls.map((url) => (
+                        <div className="search-item-img-container">
+                        <img src={url} className="item-img" alt="review"/>
+                        </div>
+                    ))}
+                    </div>
                 </div>
             ))}
         </div>

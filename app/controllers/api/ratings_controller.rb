@@ -23,6 +23,7 @@ class Api::RatingsController < ActionController::API
     end
 
     def update
+        # debugger
         db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
         db_business_id = db_business.id
         params[:rating][:business_id] = db_business_id

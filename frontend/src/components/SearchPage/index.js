@@ -3,15 +3,12 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./index.css"
 import SearchResults from "../SearchResults";
-// import ListForm from "../List/ListForm";
 import MapWrapper from "../Map";
 import SearchBar from "../SearchBar";
-import Navigation from "../Navigation";
+import { useState } from "react";
 import { useEffect } from "react";
-// import { fetchSearches } from "../../store/search";
-// import { useEffect } from "react";
 import { clearSearches, fetchSearches, getSearches } from "../../store/search";
-
+import { SuperBalls } from "@uiball/loaders";
 const SearchPage = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -20,9 +17,29 @@ const SearchPage = (props) => {
     const searchResults = useSelector(getSearches);
     const { location } = useParams();
     // if (sessionUser === null) return <Redirect to="/login" />;
+    const [userSearch, setUserSearch] = useState(false)
+    const [searchCity, setSearchCity] = useState("");
+    const [searchState, setSearchState] = useState("")
+    const [loading, setLoading] = useState(false)
 
+    useEffect(() => {
+        setUserSearch(true)
+        if (userSearch) {
+            setSearchCity(searchResults[0]?.location.city)
+            setSearchState(searchResults[0]?.location.state)
+        }
 
+        return () => {
+            setSearchCity("")
+            setSearchState("")
+        }
+    }, [searchResults])
 
+    useEffect(() => {
+        return () => {
+            dispatch(clearSearches());
+        }
+    }, [])
 
     let mapOptions;
     if (searchResults) {
@@ -39,25 +56,53 @@ const SearchPage = (props) => {
         'click': (business) => history.push(`/businesses/${business?.id}`, {from: `/search${location}`})
     }
 
-    return (
-        <>
+    useEffect(() => {
+        console.log(searchResults)
+    }, []) 
+
+    const searchContent = () => {
+        if (searchResults.length > 0) {
+            return (
+                <>
+                <SearchBar />
+                <div className="search-res-header">
+                    <p>coffee shops for</p>
+                    <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1>
+                </div>
                 <div className="search-page-section">
-                    
-                    {/* <div className="main-content-container"> */}
                         <div className="placeholder-for-map">
                             <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
-                            {/* <MapWrapper businesses={searchResults} markerEventHandlers={markerEventHandlers} /> */}
-
                         </div>
                         <div>
-                        <SearchBar />
-
-                        <SearchResults searchResults={searchResults} prevPage={location}/>
+                            <SearchResults searchResults={searchResults} prevPage={location}/>
                         </div>
-
-                    {/* </div> */}
                 </div>
+                </>
+            )
+        } else if (searchResults.length === 0) {
+            return (
+                <div>
+                    <SearchBar/>
+                </div>
+            )
+        }
+    }
+
+    return (
+        <>
+        {searchContent()}
         </>
+        // <>
+        //         <SearchBar />
+        //         <div className="search-page-section">
+        //             <div className="placeholder-for-map">
+        //                 <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
+        //             </div>
+        //             <div>
+        //                 <SearchResults searchResults={searchResults} prevPage={location}/>
+        //             </div>
+        //         </div>
+        // </>
     )
 };
 export default SearchPage

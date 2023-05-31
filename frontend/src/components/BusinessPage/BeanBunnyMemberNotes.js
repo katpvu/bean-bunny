@@ -46,7 +46,7 @@ const BeanBunnyMemberNotes = ({ratings, sessionUser, business}) => {
                             <h2>Favorite Orders:</h2>
                             <p>{user?.favOrders}</p>
                         </div>
-                        <hr></hr>
+         
                     </div>
                 ))}
        

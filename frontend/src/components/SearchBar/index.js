@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { clearSearches } from '../../store/search';
 
-const SearchBar = (props) => {
+const SearchBar = () => {
     const dispatch = useDispatch()
     const history = useHistory();
     const [search, setSearch] = useState("");
@@ -18,12 +18,6 @@ const SearchBar = (props) => {
         history.push(`/search/${location?.location}`)
         dispatch(fetchSearches(location))
     }
-
-    useEffect(() => {
-        return () => {
-            dispatch(clearSearches());
-        }
-    }, [])
 
     const styles = {
         center: "center",

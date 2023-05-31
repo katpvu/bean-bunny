@@ -30,6 +30,7 @@ class Api::RatingsController < ActionController::API
         if @rating.update(rating_params)
             render :show
         else
+            puts errors: @rating.errors.full_messages
             render json: { errors: @rating.errors.full_messages}, status: 422
         end
     end
@@ -42,7 +43,7 @@ class Api::RatingsController < ActionController::API
 
     private
     def rating_params
-        params.require(:rating).permit(:rating, :notes, :fav_orders, :user_id, :business_id, photos: [])
+        params.require(:rating).permit(:id, :rating, :notes, :fav_orders, :user_id, :business_id, photos: [])
     end
 
 end

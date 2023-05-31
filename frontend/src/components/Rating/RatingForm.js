@@ -5,7 +5,7 @@ import BunnyRatingInput from "./BunnyRatingInput";
 import { createBusiness } from "../../store/business";
 import { useSelector } from "react-redux";
 import { updateRating } from "../../store/ratings";
-
+import { fetchBusiness, getBusiness } from "../../store/business";
 
 const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRating}) => {
     const dispatch = useDispatch();
@@ -23,11 +23,12 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
     const handleSubmit = async e => {
         e.preventDefault();
+        console.log(sessionUser.id)
         const formData = new FormData();
         formData.append('rating[rating]', rating);
         formData.append('rating[notes]', notes);
         formData.append('rating[fav_orders]', favOrders);
-        formData.append('business_yelp_id', business.id);
+        formData.append('business_yelp_id', business.businessYelpId);
         formData.append('rating[user_id]', sessionUser.id);
 
         if (photoFiles.length !== 0) {
@@ -38,10 +39,12 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
         if (currentUserRating) {
             formData.append('id', currentUserRating.id);
-            dispatch(updateRating(formData));
+            dispatch(updateRating(formData))
+            .then(() => dispatch(fetchBusiness(business.businessYelpId)))
         } else {
-            dispatch(createBusiness(business.id));
-            dispatch(createRating(formData));
+            dispatch(createRating(formData))
+            .then(() => dispatch(fetchBusiness(business.businessYelpId)))
+            console.log("creating rating")
         }
         closeModal();
     };

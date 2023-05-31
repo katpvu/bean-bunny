@@ -3,7 +3,7 @@ import Header from "../Header";
 import Navigation from "../Navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchListContents, getList } from "../../store/list";
+import { clearLists, fetchListContents, getList } from "../../store/list";
 import { getListItems } from "../../store/list_items";
 import ListItemCard from "./ListItemCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,11 +24,15 @@ const ListItemIndex = (props) => {
     const [businesses, setBusinesses] = useState([])
 
     const listItems = useSelector(getListItems);
-    const list = useSelector(getList(listId));
+    const list = useSelector(state => state.lists);
     // const listBusinesses = useSelector(getBusinesses);
 
     useEffect(() => {
         dispatch(fetchListContents(listId));
+
+        return () => {
+            dispatch(clearLists());
+        }
     }, [dispatch, listId, openEditForm]);
 
     // useEffect(() => {

@@ -69,4 +69,18 @@
 
 .search-results-container {
     width: 100%;
+    box-sizing: border-box;
+    height: calc(100vh - 178px);
+    overflow-y: scroll;
+}
+
+.search-res-header {
+    text-align: center;
+}
+
+.search-res-header h1 {
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -2px;
 }

@@ -2,7 +2,7 @@ import "./index.css"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { createListItem } from "../../store/list_items";
+import { clearListItems, createListItem, deleteListItem } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
 import { fetchBusiness, getBusiness } from "../../store/business";
@@ -14,6 +14,10 @@ import { clearSearches } from "../../store/search";
 import { clearLists, createList, fetchLists, getLists } from "../../store/list";
 import { SuperBalls } from '@uiball/loaders'
 import { fetchListByTitle } from "../../store/list";
+import RatingsIndex from "../Rating/RatingsIndex";
+import RatingForm from '../Rating/RatingForm'
+import { Modal } from "../../context/Modal";
+
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -25,12 +29,13 @@ const BusinessPage = () => {
 
     const business = useSelector(getBusiness(businessId))
     const sessionUser = useSelector(state => state.session.user); 
-    const ratings = useSelector(state => state.ratings ? Object.values(state.ratings) : []);
-    const recs = useSelector(state => state.searches ? Object.values(state.searches) : []);
-    const list = useSelector(state => state.lists ? Object.values(state.lists) : [])
-    const listItems = useSelector(state => state.listItems ? Object.values(state.listItems) : [])
+    const ratings = useSelector(state => Object.values(state.ratings));
+    const recs = useSelector(state => Object.values(state.searches));
+    const list = useSelector(state => state.lists)
+    const listItems = useSelector(state => Object.values(state.listItems))
 
     const [currentList, setCurrentList] = useState(null);
+    const [currentListItem, setCurrentListItem] = useState(null)
     const [toggleMenu, setToggleMenu] = useState(false)
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -44,26 +49,31 @@ const BusinessPage = () => {
         return () => {
             // console.log('cleaned up')
             dispatch(clearSearches());
-            // setSaved(false)
+            dispatch(clearLists());
+            dispatch(clearListItems())
+            setSaved(false)
         }
-    }, [dispatch, showModal, businessId])
+    }, [dispatch, businessId])
 
     useEffect(() => {
         dispatch(fetchListByTitle(business?.location?.city))
+        setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id))
     }, [business])
 
 
     useEffect(() => {
         if (listItems.length > 0) {
-            listItems.map((listItem) => {
+            listItems.forEach((listItem) => {
                 if (listItem.businessYelpId === businessId) {
                     setSaved(true)
+                    setCurrentListItem(listItem)
                 }
             })
         }
-    }, [])
+    }, [currentListItem, saved])
 
     let mapOptions;
+    // useEffect(() => {
         mapOptions = {
             center: {
                 lat: business?.coordinates?.latitude,
@@ -72,37 +82,36 @@ const BusinessPage = () => {
             zoom: 15
         }
 
-    const handleAddToList = () => {
+    // }, [business])
 
-        console.log(list)
-        if (list.length === 0){
-            console.log("i am here")
+    const handleAddToList = () => {
+        if (!Object.keys(list).length){
             dispatch(createList({
                 userId: sessionUser.id,
                 title: business.location.city
-            }))
-        } else if (list.length > 0){
-            console.log("currentList")
+            }, businessId))
+            .then(() => setSaved(true))
+        } else if (Object.keys(list).length){
             const newListItem = {
                 businessYelpId: businessId,
-                listId: list[0].id
+                listId: list.id
             }
             dispatch(createListItem(newListItem))
+                .then(() => setSaved(true))
+                .then(() => dispatch(fetchListByTitle(business?.location?.city)))
                 .catch(async res => {
                     let errors = await checkErrors(res)
                     setErrors(errors)
                 })
-                .then(() => setSaved(true))
             }
-
     }
 
-    const handleToggle = () => {
-        setToggleMenu(true)
-        if (toggleMenu) {
-            setToggleMenu(false)
-        }
+    const handleRemoveFromList = () => {
+        dispatch(deleteListItem(currentListItem.id))
+            .then(() => setSaved(false))
+            .then(() => setCurrentListItem(null))
     }
+
 
     const handleBackButton = () => {
         if (from?.includes(' ')) {
@@ -137,8 +146,39 @@ const BusinessPage = () => {
                 >save</div>
             )
         } else {
-            return (<p>saved in {business?.location?.city} collection</p>)
+            return (
+                <>
+                <div className="save-button-container">
+                    <p>saved in <Link 
+                        to={{pathname: `/lists/${list.id}`, state: {from: `/busineeses/${businessId}`}}}
+                        className="bold-and-uppercased">{business?.location?.city}</Link> collection</p>
+                    <div 
+                        className="business-page-save-button"
+                        onClick={handleRemoveFromList}
+                    >unsave</div>
+                </div>
+                </>
+            )
         }
+    }
+
+    const ratingButton = () => {
+        return (
+            <>
+            <div className="rating-button" 
+                onClick={() => setShowModal(true)}
+                >{currentUserRating ? "update rating" : "create rating" }
+            </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <RatingForm business={business} 
+                    closeModal={() => setShowModal(false)} 
+                    setCurrentUserRating={setCurrentUserRating}
+                    currentUserRating={currentUserRating}/>
+                </Modal>
+            )}
+            </>
+        )
     }
 
     const businessInfoSection = () => {
@@ -166,7 +206,7 @@ const BusinessPage = () => {
                     <div className="scores-and-map-container">
                         <div>
                             <h2>Scores</h2>
-                            <ScoresPanel ratings={ratings} currentUser={sessionUser} business={business}/>
+                            <ScoresPanel ratings={ratings} currentUserRating={currentUserRating} currentUser={sessionUser} business={business}/>
                         </div>
                         <div>
                             <div className="bp-map-container">
@@ -203,6 +243,9 @@ const BusinessPage = () => {
         )
     }
 
+
+
+
     return (
         <>
         {!business ? 
@@ -220,6 +263,8 @@ const BusinessPage = () => {
             {headerImages()}
             {businessInfoSection()}
             {RecsPanel()}
+            {ratingButton()}
+            <RatingsIndex ratings={ratings} />
         </div>
         ) : null}
 
@@ -282,7 +327,7 @@ const BusinessPage = () => {
                         {/* <div className="photos-section">
                             <PhotoGallery ratings={ratings} business={business} sessionUser={sessionUser}/>
                         </div> */}
-                        <hr></hr>
+             
                         {/* <div>
                             <BeanBunnyMemberNotes ratings={ratings} business={business} sessionUser={sessionUser} />
                         </div> */}

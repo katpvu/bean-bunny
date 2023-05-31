@@ -80,7 +80,7 @@ export const createList = (list, businessId) => async dispatch => {
     console.log(data, "data about list creatd created")
     if (businessId) {
         await dispatch(createListItem({
-            listId: data.id,
+            listId: data.list.id,
             businessYelpId: businessId
         }))
     }
@@ -117,7 +117,8 @@ const ListsReducer = (state={}, action) => {
             delete newState[action.listId];
             return newState;
         case RECEIVE_LIST_CONTENTS:
-            return { [action.payload.list.id]: action.payload.list };
+            return { ...action.payload.list}
+            // return { [action.payload.list.id]: action.payload.list };
         case CLEAR_LISTS:
             return {};
         default:

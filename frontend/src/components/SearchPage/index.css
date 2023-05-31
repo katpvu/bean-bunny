@@ -62,9 +62,10 @@
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    box-sizing: border-box;
  }
 
  .placeholder-for-map {
-    height: calc(100vh - 80px)
+    height: calc(100vh - 178px)
     
  }

@@ -14,7 +14,9 @@ const SearchResultItem = ({business, prevPage}) => {
                 state: {from: prevPage}
             }} 
         >
-            <img src={`${business?.imageUrl}`} alt={business?.name} className="item-img"/>
+            <div className="search-item-img-container">
+                <img src={`${business?.imageUrl}`} alt={business?.name} className="item-img"/>
+            </div>
             <div className="search-item-info">
                 <h1 className="search-business-name">{business?.name}</h1>
                 <p>{business?.location?.address1}</p>

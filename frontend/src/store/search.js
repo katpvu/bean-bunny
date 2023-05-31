@@ -2,9 +2,7 @@ import { createBusiness } from "./business";
 import csrfFetch from "./csrf";
 
 // SELECTORS
-export const getSearches = state => (
-    state.searches ? Object.values(state.searches) : []
-)
+export const getSearches = state => Object.values(state.searches)
 
 
 

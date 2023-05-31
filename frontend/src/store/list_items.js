@@ -59,7 +59,6 @@ export const createListItem = (listItem) => async dispatch => {
         body: formData
     });
     let data = await res.json();
-    console.log(data, "errors should be here")
     return dispatch(receiveListItem(data));
 };
 

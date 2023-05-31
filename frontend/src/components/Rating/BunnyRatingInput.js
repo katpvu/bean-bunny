@@ -2,16 +2,31 @@ import { useState } from "react";
 import "./index.css"
 import { useEffect } from "react";
 
-const BunnyRatingInput = ({rating, onChange}) => {
+const BunnyRatingInput = ({rating, onChange, disabled=false}) => {
     const [activeRating, setActiveRating] = useState(rating);
 
     useEffect(() => {
         setActiveRating(rating);
       }, [rating]);
 
+    const setUpBunnyRating = () => {
+        return (
+            <>
+            {[1, 2, 3, 4, 5].map(num => (
+                <div className={activeRating >= num ? "filled" : "empty"}
+                    onMouseEnter={()=> {if (!disabled) setActiveRating(num)}}
+                    onMouseLeave={() => {if (!disabled) setActiveRating(rating)}}
+                    onClick={() => {if (!disabled) onChange(num)}}
+                    />
+            ))}
+            </>
+        )
+    }
+
     return (
         <div className="rating-input">
-            <div className={activeRating >= 1 ? "filled" : "empty"}
+            {setUpBunnyRating()}
+            {/* <div className={activeRating >= 1 ? "filled" : "empty"}
                 onMouseEnter={()=> setActiveRating(1)}
                 onMouseLeave={() => setActiveRating(rating)}
                 onClick={() => onChange(1)}
@@ -40,7 +55,7 @@ const BunnyRatingInput = ({rating, onChange}) => {
                 onMouseEnter={()=> setActiveRating(5)}
                 onMouseLeave={() => setActiveRating(rating)}
                 onClick={() => onChange(5)}
-                />
+                /> */}
         </div>
 
     )

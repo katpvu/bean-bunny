@@ -15,12 +15,13 @@ class Api::ListsController < ApplicationController
         if @list
             render :show
         else
-            render json: { errors: ['There are no lists that exist by that title']}, status: 422
+            render json: {}
         end
     end
 
     def create
         @list = List.new(list_params);
+        @list.user_id = current_user.id
         if @list.save
             render :show
         else

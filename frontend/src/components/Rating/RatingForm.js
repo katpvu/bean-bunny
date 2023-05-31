@@ -31,13 +31,13 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         formData.append('business_yelp_id', business.businessYelpId);
         formData.append('rating[user_id]', sessionUser.id);
 
-        console.log(photoFiles, "photo files i just attached")
+        // console.log(photoFiles, "photo files i just attached")
         if (photoFiles.length !== 0) {
             photoFiles.forEach(photo => {
                 formData.append('rating[photos][]', photo);
             });
         };
-        console.log(formData.get('rating[photos][]'))
+        // console.log(formData.get('rating[photos][]'))
 
         if (currentUserRating) {
             formData.append('id', currentUserRating.id);
@@ -46,7 +46,7 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         } else {
             dispatch(createRating(formData))
             .then(() => dispatch(fetchBusiness(business.businessYelpId)))
-            console.log("creating rating")
+            // console.log("creating rating")
         }
         closeModal();
     };

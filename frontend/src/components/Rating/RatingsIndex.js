@@ -3,9 +3,9 @@ import "./RatingsIndex.css"
 import BunnyRatingInput from "./BunnyRatingInput";
 const RatingsIndex = ({ratings}) => {
 
-    useEffect(() => {
-        console.log(ratings)
-    }, [])
+    // useEffect(() => {
+    //     console.log(ratings)
+    // }, [])
     return (
     <>
         <h1 className="ratings-container-title">THOUGHTS FROM OTHERS</h1>

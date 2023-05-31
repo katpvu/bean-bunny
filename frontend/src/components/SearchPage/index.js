@@ -53,12 +53,12 @@ const SearchPage = (props) => {
     }
 
     const markerEventHandlers = {
-        'click': (business) => history.push(`/businesses/${business?.id}`, {from: `/search${location}`})
+        'click': (business) => history.push(`/businesses/${business?.businessYelpId}`, {from: `/search${location}`})
     }
 
-    useEffect(() => {
-        console.log(searchResults)
-    }, []) 
+    // useEffect(() => {
+    //     console.log(searchResults)
+    // }, []) 
 
     const searchContent = () => {
         if (location) {

@@ -34,7 +34,7 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
     let businessIds = []
     useEffect(()=>{
         businesses.forEach(business => {
-            if (!markers[business?.id]) {
+            if (!markers[business?.businessYelpId]) {
                 // create new marker for business
                 
                 let marker = new window.google.maps.Marker({
@@ -70,8 +70,8 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
 
 
                 // add marker to markers ref
-                markers.current[business?.id] = marker
-                businessIds.push(business?.id)
+                markers.current[business?.businessYelpId] = marker
+                businessIds.push(business?.businessYelpId)
             };
         });
     }, [map, markers, businesses, markerEventHandlers])

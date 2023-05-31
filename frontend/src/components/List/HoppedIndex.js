@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import SortForm from '../SortForm';
 import './hopped.css'
 import HoppedIndexItem from "./HoppedIndexItem";
-import { useDispatch, useSelector } from 'react-redux';
-import ScoresPanel from '../BusinessPage/ScoresPanel';
 import {BsArrowRight} from 'react-icons/bs'
 import { Link } from 'react-router-dom';
 
@@ -11,15 +8,6 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
     const [ratingsByNum, setRatingsByNum] = useState({});
     const [ratingsLoaded, setRatingsLoaded] = useState(false);
     const [currentPreviewId, setCurrentPreviewId] = useState("");
-    const [currentPreviewBusiness, setCurrentPreviewBusiness] = useState({});
-
-    // useEffect(() => {
-        // console.log(Object.values(businesses.currentPreviewId))\
-        // console.log(businesses)
-        // setCurrentPreviewBusiness(businesses.find(business => business.businessYelpId === currentPreviewId))
-        // setCurrentPreviewBusiness(businesses.currentPreviewId);
-    //     console.log(currentPreviewBusiness, "clicking preview")
-    // }, [currentPreviewId])
 
     const sortByRating = () => {
         let ratings = {

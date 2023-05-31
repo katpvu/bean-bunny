@@ -17,6 +17,7 @@ import { fetchListByTitle } from "../../store/list";
 import RatingsIndex from "../Rating/RatingsIndex";
 import RatingForm from '../Rating/RatingForm'
 import { Modal } from "../../context/Modal";
+import { Redirect } from "react-router-dom";
 
 
 const BusinessPage = () => {
@@ -39,13 +40,16 @@ const BusinessPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentUserRating, setCurrentUserRating] = useState({});
     const [saved, setSaved] = useState(false)
-    
+
+    // useEffect(() => {
+    //     if (sessionUser === null) return <Redirect to="/login" />;
+    // }, [sessionUser])
 
     useEffect(() =>{
         dispatch(fetchBusiness(businessId))
         dispatch(fetchRecs(businessId))
         return () => {
-            // console.log('cleaned up')
+
             dispatch(clearSearches());
             dispatch(clearLists());
             dispatch(clearListItems())
@@ -59,17 +63,6 @@ const BusinessPage = () => {
     }, [business])
 
 
-    // useEffect(() => {
-    //     if (listItems.length > 0) {
-    //         listItems.forEach((listItem) => {
-    //             if (listItem.businessYelpId === businessId) {
-    //                 setSaved(true)
-    //                 setCurrentListItem(listItem)
-    //             }
-    //         })
-    //     }
-    // }, [currentListItem, saved])
-
     useEffect(() => {
         if (Object.keys(list).length) {
             let listItemBusinesses = Object.values(list.listItemBusinesses)
@@ -81,18 +74,18 @@ const BusinessPage = () => {
     },[list, businessId])
 
     let mapOptions;
-    // useEffect(() => {
-        mapOptions = {
-            center: {
-                lat: business?.coordinates?.latitude,
-                lng: business?.coordinates?.longitude
-            },
-            zoom: 15
-        }
+    mapOptions = {
+        center: {
+            lat: business?.coordinates?.latitude,
+            lng: business?.coordinates?.longitude
+        },
+        zoom: 15
+    }
 
-    // }, [])
 
     const handleAddToList = () => {
+        console.log(sessionUser)
+        if (sessionUser === null) return history.push("/login");
         if (!Object.keys(list).length){
             dispatch(createList({
                 userId: sessionUser.id,
@@ -170,11 +163,16 @@ const BusinessPage = () => {
         }
     }
 
+    const handleOpenRatingButton = () => {
+        if (sessionUser === null) return history.push("/login");
+        setShowModal(true)
+    }
+
     const ratingButton = () => {
         return (
             <>
             <div className="rating-button" 
-                onClick={() => setShowModal(true)}
+                onClick={handleOpenRatingButton}
                 >{currentUserRating ? "update rating" : "create rating" }
             </div>
             {showModal && (

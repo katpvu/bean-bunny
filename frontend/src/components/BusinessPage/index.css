@@ -16,7 +16,9 @@
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
 }
-
+.images-header-container-2 {
+    width: 100%;
+}
 .bp-header-img-container {
     /* width: 33%; */
     height: 300px;
@@ -97,12 +99,15 @@
     display: grid;
     grid-template-columns: 0.75fr 1.25fr;
     margin-top: 20px;
+    gap: 10px;
 }
 
-.business-info-section-container-details > div {
-    /* border: 1px solid red; */
-}
+.pop-items-list {
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 6px;
 
+}
 .bp-map-container {
     box-sizing: border-box;
     width: 100%;

@@ -12,8 +12,8 @@ const BunnyRatingInput = ({rating, onChange, disabled=false}) => {
     const setUpBunnyRating = () => {
         return (
             <>
-            {[1, 2, 3, 4, 5].map(num => (
-                <div className={activeRating >= num ? "filled" : "empty"}
+            {[1, 2, 3, 4, 5].map((num, i) => (
+                <div key={i} className={activeRating >= num ? "filled" : "empty"}
                     onMouseEnter={()=> {if (!disabled) setActiveRating(num)}}
                     onMouseLeave={() => {if (!disabled) setActiveRating(rating)}}
                     onClick={() => {if (!disabled) onChange(num)}}

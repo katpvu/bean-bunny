@@ -65,7 +65,6 @@ export const fetchListByTitle = (title) => async dispatch => {
 export const fetchListContents = (listId) => async dispatch => {
     let res = await csrfFetch(`/api/lists/${listId}`)
     let data = await res.json();
-    // console.log(data, "list content data")
     dispatch(receiveListContents(data))
 }
 export const createList = (list, businessId) => async dispatch => {
@@ -77,7 +76,6 @@ export const createList = (list, businessId) => async dispatch => {
         body: formData
     });
     let data = await res.json();
-    console.log(data, "data about list creatd created")
     if (businessId) {
         await dispatch(createListItem({
             listId: data.list.id,

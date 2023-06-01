@@ -23,7 +23,9 @@ const Hopped = (props) => {
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(fetchUserDetail(sessionUser.id))
+        if (sessionUser) {
+            dispatch(fetchUserDetail(sessionUser.id))
+        }
 
         return () => {
             dispatch(clearBusinesses())

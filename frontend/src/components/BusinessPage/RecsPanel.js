@@ -13,6 +13,7 @@ const RecsPanel = ({
             <div className="recs-panel-container">
                 {recs.map((rec, i) => (
                     <Link 
+                        key={i}
                         className="recs-image-container" 
                         to={{pathname: `/businesses/${rec?.businessYelpId}`, state: {from: `/busineeses/${businessId}`}}}
                     >

@@ -3,14 +3,12 @@ import { useState } from "react";
 import SearchResultItem from "../SearchResultItem";
 import "./index.css"
 
-const SearchResults = ({searchResults, prevPage}) => {
-
-    
+const SearchResults = ({searchResults, prevPage, setHoveredBusiness}) => {
 
     return (
         <>
             <div className="search-results-container">
-                {searchResults.map(searchBusiness => {
+                {searchResults.map((searchBusiness, i) => {
                     const business = {
                         businessYelpId: searchBusiness.businessYelpId,
                         coordinates: searchBusiness.coordinates,
@@ -20,7 +18,7 @@ const SearchResults = ({searchResults, prevPage}) => {
                         yelpRating: searchBusiness.yelpRating,
                         imageUrl: searchBusiness.imageUrl
                     }
-                    return <SearchResultItem business={business} key={business.id} prevPage={prevPage}/>
+                    return <SearchResultItem setHoveredBusiness={setHoveredBusiness} business={business} key={business.id} prevPage={prevPage}/>
                 })}
             </div>
         </>

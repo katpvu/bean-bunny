@@ -29,11 +29,13 @@ require 'json'
     # For easy testing, so that after seeding, the first `User` has `id` of 1
     ApplicationRecord.connection.reset_pk_sequence!('users')
 
-    businesses = {
-      "San Francisco" => [],
-      "Los Angeles" => [],
-      "New York City" => []
-    }
+    # businesses = {
+    #   "San Francisco" => [],
+    #   "Los Angeles" => [],
+    #   "New York City" => []
+    # }
+    businesses = {};
+    # cities = ["San Francisco", "New York City" , "Los Angeles"]
   
     puts "Creating demo user..."
     demo = User.create!(
@@ -53,9 +55,9 @@ require 'json'
     end
 
     puts "Creating businesses..."
-    # cities = ["New York City", "San Francisco", "Los Angeles", "Austin", "Seattle"]
-    cities = ["San Francisco", "New York City" , "Los Angeles"]
-
+    cities = ["New York City", "San Francisco", "Los Angeles"]
+    cities_for_lists = []
+    
     def yelp_search_by_city(location)
         url = URI("https://api.yelp.com/v3/businesses/search?location=#{location}&term=coffee%20shop&radius=10000&&sort_by=best_match&limit=20")
 
@@ -88,7 +90,6 @@ require 'json'
       parsed_searches = yelp_search_by_city(city)
       parsed_searches[:businesses].each_with_index do |business_obj, i|
         parsed_business = yelp_single_business_fetch(business_obj[:id])
-        p parsed_business[:hours]
         if (parsed_business[:hours])
           parsed_hours = parsed_business[:hours][0]
         else
@@ -108,10 +109,15 @@ require 'json'
             hours: parsed_hours,
             phone_number: parsed_business[:display_phone]
         }
+        p business_obj[:location][:city]
         new_bus = Business.create!(new_business)
-        if businesses[city] && ( i % 2 == 0)
-          businesses[city] << business_obj[:id]
+        if businesses[business_obj[:location][:city]] && ( i % 2 == 0)
+          businesses[business_obj[:location][:city]] << business_obj[:id]
+        elsif !businesses[city] && (i % 2 == 0)
+          businesses[business_obj[:location][:city]] = [business_obj[:id]]
+          cities_for_lists << city
         end
+        p businesses
       end
     end
 

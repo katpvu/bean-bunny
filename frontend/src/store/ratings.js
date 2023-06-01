@@ -36,7 +36,6 @@ export const createRating = (rating) => async dispatch => {
 };
 
 export const updateRating = (rating) => async dispatch => {
-    // console.log(rating.get('rating[photos][]'), "photo files in action thunk")
     const newRating = {
         rating: {
             id: rating.get('id'),

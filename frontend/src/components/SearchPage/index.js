@@ -13,27 +13,9 @@ const SearchPage = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const sessionUser = useSelector(state => state.session.user);
     const searchResults = useSelector(getSearches);
     const { location } = useParams();
-    // if (sessionUser === null) return <Redirect to="/login" />;
-    const [userSearch, setUserSearch] = useState(false)
-    const [searchCity, setSearchCity] = useState("");
-    const [searchState, setSearchState] = useState("")
-    const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-        setUserSearch(true)
-        if (userSearch) {
-            setSearchCity(searchResults[0]?.location.city)
-            setSearchState(searchResults[0]?.location.state)
-        }
-
-        return () => {
-            setSearchCity("")
-            setSearchState("")
-        }
-    }, [searchResults])
+    const [mapOptions, setMapOptions] = useState({});
 
     useEffect(() => {
         return () => {
@@ -41,24 +23,23 @@ const SearchPage = (props) => {
         }
     }, [])
 
-    let mapOptions;
-    if (searchResults) {
-        mapOptions = {
-            center: {
-                lat: searchResults[0]?.coordinates?.latitude,
-                lng: searchResults[0]?.coordinates?.longitude
-            },
-            zoom: 12
+    useEffect(() => {
+        let mapOptions;
+        if (searchResults) {
+            mapOptions = {
+                center: {
+                    lat: searchResults[0]?.coordinates?.latitude,
+                    lng: searchResults[0]?.coordinates?.longitude
+                },
+                zoom: 12
+            }
+            setMapOptions(mapOptions)
         }
-    }
+    }, [searchResults])
 
     const markerEventHandlers = {
         'click': (business) => history.push(`/businesses/${business?.businessYelpId}`, {from: `/search${location}`})
     }
-
-    // useEffect(() => {
-    //     console.log(searchResults)
-    // }, []) 
 
     const searchContent = () => {
         if (location) {
@@ -68,7 +49,6 @@ const SearchPage = (props) => {
                     <div className="search-res-header">
                         <p>coffee shops for</p>
                         <SearchBar location={location}/>
-                        {/* <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1> */}
                     </div>
                     <div id="search-page" className="loader-container">
                         <SuperBalls 
@@ -86,11 +66,10 @@ const SearchPage = (props) => {
                     <div className="search-res-header">
                         <p>coffee shops for</p>
                         <SearchBar location={location}/>
-                        {/* <h1 className="search-location">{`${searchCity}, ${searchState}`}</h1> */}
                     </div>
                     <div className="search-page-section">
                             <div className="placeholder-for-map">
-                                <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
+                                <MapWrapper  businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
                             </div>
                             <div>
                                 <SearchResults searchResults={searchResults} prevPage={location}/>
@@ -113,17 +92,6 @@ const SearchPage = (props) => {
         <>
         {searchContent()}
         </>
-        // <>
-        //         <SearchBar />
-        //         <div className="search-page-section">
-        //             <div className="placeholder-for-map">
-        //                 <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
-        //             </div>
-        //             <div>
-        //                 <SearchResults searchResults={searchResults} prevPage={location}/>
-        //             </div>
-        //         </div>
-        // </>
     )
 };
 export default SearchPage

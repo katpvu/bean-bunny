@@ -17,7 +17,7 @@ import RatingForm from '../Rating/RatingForm'
 import { Modal } from "../../context/Modal";
 import SaveButton from "./SaveButton";
 import RecsPanel from "./RecsPanel";
-
+import PopularItems from "./PopularItems";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -54,7 +54,9 @@ const BusinessPage = () => {
     }, [dispatch, businessId])
 
     useEffect(() => {
-        dispatch(fetchListByTitle(business?.location?.city))
+        if (business) {
+            dispatch(fetchListByTitle(business?.location?.city))
+        }
         if (sessionUser) {
             setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id))
         }
@@ -62,12 +64,13 @@ const BusinessPage = () => {
 
 
     useEffect(() => {
-        if (list && Object.keys(list).length) {
-            let listItemBusinesses = Object.values(list.listItemBusinesses)
+        if (list) {
+            if (Object?.keys(list).length > 0){
+            let listItemBusinesses = Object?.values(list.listItemBusinesses)
             if (listItemBusinesses.includes(businessId)) {
                 setSaved(true);
                 setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
-            }
+            }}
         }
     },[list, businessId])
 
@@ -93,15 +96,25 @@ const BusinessPage = () => {
     }
 
     const headerImages = () => {
-        return (
-            <div className="images-header-container">
-                {business?.additionalPhotosUrls.map((url, i) => (
-                    <div key={i} className="bp-header-img-container">
-                        <img src={url} alt="coffee" />
+        if (business?.additionalPhotosUrls) {
+            return (
+                <div className="images-header-container">
+                    {business?.additionalPhotosUrls.map((url, i) => (
+                        <div key={i} className="bp-header-img-container">
+                            <img src={url} alt="coffee" />
+                        </div>
+                    ))}
+                </div>
+            )
+        } else if (!business?.additionalPhotosUrls) {
+            return (
+                <div className="images-header-container-2">
+                    <div className="bp-header-img-container">
+                    <img src={business?.imageUrl} alt="coffee" />
                     </div>
-                ))}
-            </div>
-        )
+                </div>
+            )
+        }
     }
 
 
@@ -158,6 +171,7 @@ const BusinessPage = () => {
                         </div>
                         <div>
                             <h2>Popular Items</h2>
+                            <PopularItems ratings={ratings}/>
                         </div>
                     </div>
                     <div className="scores-and-map-container">

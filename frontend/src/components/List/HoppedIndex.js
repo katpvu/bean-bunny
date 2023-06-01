@@ -16,10 +16,10 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
             3: [],
             2: [],
             1: []
-        }
+        };
 
         currentUserRatings.forEach(rating => {
-            ratings[rating.rating].push(rating)
+            ratings[rating.rating].push(rating);
         });
         setRatingsByNum(ratings);
         setRatingsLoaded(true);
@@ -27,7 +27,7 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
 
     useEffect(() => {
         sortByRating();
-    }, [currentUserRatings])
+    }, [currentUserRatings]);
 
     const hoppedPreview = () => {
         if (currentPreviewId) {
@@ -61,9 +61,7 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
                     </div>
                 </div>
             )
-        } else {
-            // console.log("empty")
-        }
+        } 
     }
 
     return (
@@ -77,6 +75,7 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
                        {ratingsLoaded && 
                        [5, 4, 3, 2, 1].map((numRating, i) => (
                             <HoppedIndexItem 
+                                key={i}
                                 numRating={numRating} 
                                 businesses={businesses}
                                 ratings={ratingsByNum[numRating]} 

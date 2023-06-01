@@ -40,7 +40,6 @@ export const clearListItems = () => ({
 export const fetchListItems = () => async dispatch => {
     let res = await csrfFetch('/api/list_items');
     let data = await res.json();
-    // console.log(data)
     return dispatch(receiveListItems(data));
 };
 

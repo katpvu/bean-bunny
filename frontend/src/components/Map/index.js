@@ -2,12 +2,15 @@ import { useRef, useState } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper"
 import { useEffect } from "react";
 import "./index.css"
-import orangeIcon from "../../assets/orange-marker.png"
 import coffeeIcon from "../../assets/cc-marker.png"
-import rabbitIcon from "../../assets/rabbit.png"
-import { SuperBalls } from '@uiball/loaders'
 
-const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandlers={}}) => {
+const BeanMap = ({ 
+    mapOptions={}, 
+    businesses, 
+    mapEventHandlers, 
+    markerEventHandlers={},
+}) => {
+
     const [map, setMap] = useState(null);
     const mapRef = useRef(null);
     const markers = useRef({});
@@ -21,6 +24,7 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
             ...mapOptions
         }))
     },[mapRef, mapOptions, markers]);
+
 
     const icon = {
         url: coffeeIcon, // url

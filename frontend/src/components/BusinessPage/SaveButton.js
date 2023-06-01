@@ -21,7 +21,6 @@ const SaveButton = ({
     const dispatch = useDispatch();
 
     const handleAddToList = () => {
-        console.log(sessionUser)
         if (sessionUser === null) return history.push("/login");
         if (!Object.keys(list).length){
             dispatch(createList({

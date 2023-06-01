@@ -63,7 +63,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                 <img src={business?.imageUrl} alt={business?.imageUrl}/>
                 <div className="fp-overlay"></div>
                 <h1>{business?.name}</h1>
-
             </div>
 
             <div className="rating-form-container">
@@ -76,14 +75,14 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                             onChange={onChange}/>
                     </label>
 
-                    <label>Add notes: <br></br>
+                    <label>Add notes:
                         <input type="text"
                         value={notes}
                         placeholder="Drinks are delicious, ambience is perfect"
                         onChange={(e) => setNotes(e.target.value)} />
                     </label>
 
-                    <label>Add your favorite orders:<br></br>
+                    <label>Add your favorite orders:
                         {/* for fav orders */}
                         <input type="text"
                         value={favOrders}
@@ -91,12 +90,13 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                         onChange={(e) => setFavOrders(e.target.value)} />
                     </label>
 
-                    <label> Upload photos <br></br> 
+                    <label className="photos-upload-label"> Upload photos 
                         {/* for adding photos */}
                         <input type="file" onChange={handleFiles} multiple />
                     </label>
+
                     <div className="rating-form-buttons-container">
-                        <div onClick={handleSubmit} className="rating-submit-btn">Submit!</div>
+                        <div onClick={handleSubmit} className="rating-submit-btn">submit</div>
                         {currentUserRating && (
                             <div onClick={handleDelete}className="rating-delete-btn">Delete Rating</div>
                         )}

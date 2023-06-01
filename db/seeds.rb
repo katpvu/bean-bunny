@@ -109,7 +109,6 @@ require 'json'
             hours: parsed_hours,
             phone_number: parsed_business[:display_phone]
         }
-        p business_obj[:location][:city]
         new_bus = Business.create!(new_business)
         if businesses[business_obj[:location][:city]] && ( i % 2 == 0)
           businesses[business_obj[:location][:city]] << business_obj[:id]
@@ -117,15 +116,12 @@ require 'json'
           businesses[business_obj[:location][:city]] = [business_obj[:id]]
           cities_for_lists << city
         end
-        p businesses
       end
     end
 
 
     puts "Creating lists and list items..."
     def createListItems(listId, city, businesses)
-      p city
-      p businesses[city]
       businesses[city].each do |business_id|
         ListItem.create(
           list_id: listId,

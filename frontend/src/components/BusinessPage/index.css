@@ -60,7 +60,8 @@
 
 .business-page-save-button,
 .rating-button,
-.delete-collection-button  {
+.delete-collection-button,
+.rating-submit-btn, .rating-delete-btn  {
     width: 100px;
     border: 1px solid #212427;
     height: 40px;
@@ -82,7 +83,9 @@
 .business-page-save-button:hover,
 .rating-button:hover,
 .delete-collection-button:hover,
-.login-button:hover {
+.login-button:hover,
+.rating-submit-btn:hover, 
+.rating-delete-btn:hover {
     color:  #FBFBF4;
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);

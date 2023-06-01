@@ -15,27 +15,8 @@ import './index.css'
 
 const Navigation = (props) => {
     const sessionUser = useSelector(state => state.session.user);
-    const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
-      
-    useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-        setShowMenu(false);
-    };
-
-    const doc = document.querySelector("#root")
-    doc.addEventListener('click', closeMenu);
-    
-    return () => doc.removeEventListener("click", closeMenu);
-    }, [showMenu]);
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -74,18 +55,12 @@ const Navigation = (props) => {
 
 
     return (
-        <>
-            <ul className="nav-container">
-                <li>
-                    <NavLink to="/search">search</NavLink>
-                </li>
-
-                {sessionLinks()}
-                {/* <li>
-                    <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>logout</div>
-                </li> */}
-            </ul>
-        </>
+    <ul className="nav-container">
+        <li>
+            <NavLink to="/search">search</NavLink>
+        </li>
+        {sessionLinks()}
+    </ul>
     )
 };
 

@@ -12,7 +12,9 @@ class Api::SearchesController < ApplicationController
         # If the city has been searched already, redirect to business controller index then fetch from database 
         if Business.select {|business| business.location[:city] == string_location}.count > 0
             redirect_to controller: 'businesses', action: 'index', location: string_location
+            return true
         else 
+            p "is this being hit?"
             parsed = yelp_search_by_city(location)
             @businesses = []
         

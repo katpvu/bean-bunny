@@ -1,0 +1,31 @@
+.bp-ratings-index-container {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.rating-item-container {
+    border: 1px solid rgb(190, 180, 160);
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.rating-item-container h2 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.5em;
+    letter-spacing: -1px;
+}
+
+.review-photo-gallery {
+    display: flex;
+}

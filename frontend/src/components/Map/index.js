@@ -2,11 +2,15 @@ import { useRef, useState } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper"
 import { useEffect } from "react";
 import "./index.css"
-import orangeIcon from "../../assets/orange-marker.png"
 import coffeeIcon from "../../assets/cc-marker.png"
-import rabbitIcon from "../../assets/rabbit.png"
 
-const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandlers={}}) => {
+const BeanMap = ({ 
+    mapOptions={}, 
+    businesses, 
+    mapEventHandlers, 
+    markerEventHandlers={},
+}) => {
+
     const [map, setMap] = useState(null);
     const mapRef = useRef(null);
     const markers = useRef({});
@@ -21,6 +25,7 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
         }))
     },[mapRef, mapOptions, markers]);
 
+
     const icon = {
         url: coffeeIcon, // url
         scaledSize: new window.google.maps.Size(40, 40), // scaled size
@@ -33,7 +38,7 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
     let businessIds = []
     useEffect(()=>{
         businesses.forEach(business => {
-            if (!markers[business?.id]) {
+            if (!markers[business?.businessYelpId]) {
                 // create new marker for business
                 
                 let marker = new window.google.maps.Marker({
@@ -42,8 +47,8 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
                         lng: business?.coordinates.longitude
                     },
                     map: map,
-                    icon: icon,
-                    title: {text: `${business?.rating}`, color: "white"}
+                    icon: icon
+                    // title: {text: `${business?.rating}`, color: "white"}
                 });
 
                 // add info window for each business marker
@@ -69,8 +74,8 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
 
 
                 // add marker to markers ref
-                markers.current[business?.id] = marker
-                businessIds.push(business?.id)
+                markers.current[business?.businessYelpId] = marker
+                businessIds.push(business?.businessYelpId)
             };
         });
     }, [map, markers, businesses, markerEventHandlers])
@@ -86,7 +91,10 @@ const BeanMap = ({ mapOptions={}, businesses, mapEventHandlers, markerEventHandl
 
 
     return (
+        <>
         <div ref={mapRef} id="map"><h1>map</h1></div>
+        
+        </>
     );
 };
 

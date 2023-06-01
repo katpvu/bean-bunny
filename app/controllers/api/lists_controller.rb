@@ -10,8 +10,18 @@ class Api::ListsController < ApplicationController
         render :show
     end
 
+    def fetch_by_title
+        @list = List.find_by(title: params[:title])
+        if @list
+            render :show
+        else
+            render json: {}
+        end
+    end
+
     def create
         @list = List.new(list_params);
+        @list.user_id = current_user.id
         if @list.save
             render :show
         else

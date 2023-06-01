@@ -8,6 +8,8 @@ export const getBusinessRatings = state => (
     state.ratings ? Object.values(state.ratings) : []
 );
 
+
+
 // CONSTANTS
 export const RECEIVE_RATING = 'ratings/RECEIVE_RATING';
 export const REMOVE_RATING = 'ratings/REMOVE_RATING';
@@ -40,7 +42,8 @@ export const updateRating = (rating) => async dispatch => {
             rating: rating.get('rating[rating]'),
             notes: rating.get('rating[notes]'),
             fav_orders: rating.get('rating[fav_orders]'),
-            user_id: rating.get('rating[user_id]')
+            user_id: rating.get('rating[user_id]'),
+            photoUrls: rating.get('rating[photos][]')
         },
         business_yelp_id: rating.get('business_yelp_id')
     }

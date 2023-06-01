@@ -1,0 +1,16 @@
+#social-links-container {
+    display: flex;
+    gap: 5px;
+    position: sticky;
+    bottom: 0;
+    margin: 10px;
+    
+}
+
+#social-links-container * {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    /* color: #212427; */
+    color: rgb(250, 150, 166);
+}

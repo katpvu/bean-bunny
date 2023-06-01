@@ -1,13 +1,19 @@
 import csrfFetch from "./csrf";
+import { RECEIVE_USER_DETAIL } from "./users";
 
 // SELECTOR
 export const getBusiness = (businessId) => state => (
     state.businesses[businessId] ? state.businesses[businessId] : null
 )
 
+export const getBusinesses =  state => (
+    state.businesses ? Object.values(state.businesses) : []
+)
+
 // CONSTANTS
 export const RECEIVE_BUSINESS = 'businesses/RECEIVE_BUSINESS'
 export const GET_DB_BUSINESS = 'businesses/GET_DB_BUSINESS'
+export const CLEAR_BUSINESSES = 'businesses/CLEAR_BUSINESSES'
 export const RECEIVE_USERS_BUSINESSES_RATED = 'business/RECEIVE_USERS_BUSINESSES_RATED'
 
 // ACTION CREATORS
@@ -16,30 +22,22 @@ export const receiveBusiness = (payload) => ({
     payload
 });
 
-export const receiveUsersBusinessRated = (payload) => ({
-    type: RECEIVE_USERS_BUSINESSES_RATED,
-    payload
+export const clearBusinesses = () => ({
+    type: CLEAR_BUSINESSES
 })
+
 // THUNK ACTION CREATORS
 
-export const fetchBusiness = (businessId, type=0) => async dispatch => {
-    console.log(type)
-    dispatch(createBusiness(businessId));
-    const res = await csrfFetch(`/api/businesses/yelp/${businessId}`);
+export const fetchBusiness = (businessId) => async dispatch => {
+    const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();
-    if (type) {
-        return dispatch(receiveUsersBusinessRated(data))
-    } else {
-        return dispatch(receiveBusiness(data));
-    }
+    return dispatch(receiveBusiness(data));
 }
 
-// everytime a business is fetched (user clicks on business, a new business is created)
-export const createBusiness = (businessId) => async dispatch => {
-    const newBusiness = { businessYelpId: businessId }
+export const createBusiness = (business) => async dispatch => {
     await csrfFetch('/api/businesses', {
         method: 'POST',
-        body: JSON.stringify(newBusiness)
+        body: JSON.stringify(business)
     });
 };
 
@@ -49,10 +47,11 @@ const BusinessesReducer = (state={}, action) => {
     let newState = { ...state }
     switch (action.type) {
         case RECEIVE_BUSINESS:
-            newState = { ...state, [action.payload.business.id]: action.payload.business}
-            return newState
-        case RECEIVE_USERS_BUSINESSES_RATED:
-            return { ...newState, [action.payload.business.id]: action.payload.business}
+            return {[action.payload.business.businessYelpId]: action.payload.business}
+        case RECEIVE_USER_DETAIL: 
+            return {...action.payload.businessesRated}
+        case CLEAR_BUSINESSES:
+            return {};
         default:
             return state;
     };

@@ -1,13 +1,11 @@
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import Header from "../Header";
-import Navigation from "../Navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchListContents, getList } from "../../store/list";
-import { getListItems } from "../../store/list_items";
+import { clearLists, fetchListContents} from "../../store/list";
+import { clearListItems, getListItems } from "../../store/list_items";
 import ListItemCard from "./ListItemCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import ListForm from "../List/ListForm";
 import { deleteList } from "../../store/list";
 import "./index.css"
@@ -18,21 +16,18 @@ const ListItemIndex = (props) => {
     const { listId } = useParams();
     const history = useHistory();
     const [openEditForm, setOpenEditForm] = useState(false);
-    const [toggleMenu, setToggleMenu] = useState(false);
 
     const listItems = useSelector(getListItems);
-    const list = useSelector(getList(listId));
+    const list = useSelector(state => state.lists);
 
     useEffect(() => {
         dispatch(fetchListContents(listId));
-    }, [dispatch, listId, openEditForm]);
 
-    const handleToggle = () => {
-        setToggleMenu(true)
-        if (toggleMenu) {
-            setToggleMenu(false)
+        return () => {
+            dispatch(clearLists());
+            dispatch(clearListItems());
         }
-    }
+    }, [dispatch, listId, openEditForm]);
 
     const handleDelete = () => {
         dispatch(deleteList(list?.id))
@@ -40,33 +35,25 @@ const ListItemIndex = (props) => {
     }
     return (
         <>
-            <Header />
-            <div className="below-header-content-container">
-                <Navigation />
-                <div className="list-main-content">
-                    <div className="list-title-container">
-                        <div className="list-header-container">
-                            <FontAwesomeIcon onClick={()=> history.push("/lists")} className="back-button"icon={faArrowLeft} style={{color: "#404040",}} />
-                            <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list?.id} onClose={() => setOpenEditForm(false)}/> : list?.title}</h1>
-                            <FontAwesomeIcon className="more-options-icon" onClick={handleToggle} icon={faEllipsisVertical} size="2xl" style={{color: "#2a2b2d",}} />
-                        </div>
-                        <div className={toggleMenu ? "list-options-menu" : "hidden"}>
-                            <div onClick={handleDelete}>Delete Collection</div>
-                            <div onClick={() => setOpenEditForm(true)}>Edit Collection Name</div>
-                        </div>
-                    </div>
-
-                    
-                    <div className="list-contents-container">
-                        {listItems.map(listItem => (
-                            <>
-                                <ListItemCard key={listItem.id} listItem={listItem} />
-                            </>
-                        ))}
-                    </div>
+        <div className="list-main-content">
+            <div className="list-title-container">
+                <div className="list-header-container">
+                    <FontAwesomeIcon onClick={()=> history.push("/lists")} className="back-button" icon={faArrowLeft} style={{color: "#404040",}} />
+                        <h1 className={openEditForm ? "list-title-edit" : "list-title"}>{openEditForm ? <ListForm listId={list?.id} onClose={() => setOpenEditForm(false)}/> : list?.title}</h1>
+                        <div 
+                            className="delete-collection-button"
+                            onClick={handleDelete}>Delete Collection</div>
+                    <div></div>
                 </div>
             </div>
+
             
+            <div className="list-contents-container">
+                {listItems.map(listItem => (
+                    <ListItemCard key={listItem.id} listItem={listItem} />
+                ))}
+            </div>
+        </div>
         </>
     )
 };

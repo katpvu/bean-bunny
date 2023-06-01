@@ -5,24 +5,39 @@ import HoppedIndex from "./HoppedIndex";
 import { fetchUserDetail } from "../../store/users";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { restoreSession } from "../../store/session";
+import { getCurrentUserBusinessesRated, getCurrentUserRatings } from "../../store/session";
+import { getBusinesses } from "../../store/business";
+import { getBusinessRatings } from "../../store/ratings";
+import { clearBusinesses } from "../../store/business";
+
 const Hopped = (props) => {
     const dispatch = useDispatch();
+
     const sessionUser = useSelector(state => state.session.user);
-    const businesses = useSelector(state => Object.values(state.businesses))
-    const ratings = useSelector(state => Object.values(state.ratings))
+    const businesses = useSelector(getBusinesses)
+    const ratings = useSelector(getBusinessRatings)
 
     useEffect(() => {
-        dispatch(fetchUserDetail(sessionUser.id))
-    }, [dispatch, sessionUser.id])
-    
+        dispatch(restoreSession());
+    }, [dispatch])
+
+    useEffect(() => {
+        if (sessionUser) {
+            dispatch(fetchUserDetail(sessionUser.id))
+        }
+
+        return () => {
+            dispatch(clearBusinesses())
+        }
+    }, [sessionUser])
+
     return (
-        <>
-            <Header />
-            <div className="below-header-content-container">
-                <Navigation />
-                <HoppedIndex businesses={businesses} ratings={ratings}/>
-            </div>
-        </>
+        <div className="below-header-content-container">
+            <HoppedIndex 
+                businesses={businesses} 
+                currentUserRatings={ratings}/>
+        </div>
     )
 };
 

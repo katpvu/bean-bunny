@@ -1,12 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import ListIndexItem from "./ListIndexItem";
 import { useEffect, useState } from "react";
 import { getLists, fetchLists } from "../../store/list";
-import Header from "../Header";
-import ListForm from "./ListForm";
 import "./index.css"
-import Navigation from "../Navigation";
 import ListIndex from "./ListIndex";
+import { clearListItems } from "../../store/list_items";
 
 const ListIndexPage = (props) => {
     const dispatch = useDispatch();
@@ -16,17 +13,15 @@ const ListIndexPage = (props) => {
 
     useEffect(() => {
         dispatch(fetchLists())
+
+        return () => {
+            dispatch(clearListItems())
+        }
     }, [])
 
     
     return (
-        <>
-            <Header />
-            <div className="below-header-content-container">
-                <Navigation />
-                <ListIndex />
-            </div>
-        </>
+        <ListIndex lists={lists}/>
     )
 };
 

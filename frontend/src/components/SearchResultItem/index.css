@@ -1,34 +1,42 @@
 .search-business-name {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 2rem;
+    text-transform: uppercase;
 }
 
 .search-item-container {
     display: flex;
-    width: 80%;
-    border-radius: 10px;
+    /* width: 95%; */
+    /* border-radius: 10px; */
     border: 1px solid rgb(210, 214, 210);
     padding: 10px;
-    line-height: 1.3;
-    margin: 8px 5px;
-    box-shadow: 0px 5px 5px rgb(187, 185, 185);
+    line-height: 0.8;
+    /* margin: 8px 5px; */
+    /* box-shadow: 0px 5px 5px rgb(187, 185, 185); */
     transition: all 0.3s ease;
     text-decoration: none;
-    color: black;
+    color: #212427;
 }
 
 .search-item-container:hover {
     background-color: rgba(221, 221, 221, 0.61);
 }
 
-
-
-.item-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    margin-right: 10px;
-    margin-left: 10px;
-    box-shadow: 0px 2px 5px rgb(187, 185, 185);
+.search-item-img-container {
+    width: 150px;
+    height: 150px;
 }
 
+.item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* border-radius: 8px; */
+    /* margin-right: 10px;
+    margin-left: 10px; */
+    /* box-shadow: 0px 2px 5px rgb(187, 185, 185); */
+}
+
+.search-item-info {
+    /* width: 100%; */
+}

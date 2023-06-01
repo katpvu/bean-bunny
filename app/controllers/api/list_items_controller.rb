@@ -1,6 +1,9 @@
 class Api::ListItemsController < ApplicationController
     def index
         @list_items = ListItem.all
+        @businesses = @list_items.map do |list_item|
+            Business.find_by(business_yelp_id: list_item.business_yelp_id)
+        end
         render :index
     end
 

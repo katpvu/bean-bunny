@@ -1,5 +1,6 @@
 
 import csrfFetch from "./csrf";
+import { createListItem } from "./list_items";
 
 // SELECTORS
 export const getList = (listId) => state => (
@@ -15,6 +16,7 @@ export const RECEIVE_LIST = 'lists/RECEIVE_LIST';
 export const RECEIVE_LISTS = 'lists/RECEIVE_LISTS';
 export const REMOVE_LIST = 'lists/REMOVE_LIST';
 export const RECEIVE_LIST_CONTENTS = 'lists/RECEIVE_LIST_CONTENTS';
+export const CLEAR_LISTS = 'lists/CLEAR_LISTS'
 
 // ACTION CREATORS
 export const receiveList = (list) => ({
@@ -37,6 +39,10 @@ export const receiveListContents = payload => ({
     payload
 })
 
+export const clearLists = () => ({
+    type: CLEAR_LISTS
+})
+
 // THUNK ACTION CREATORS
 export const fetchLists = () => async dispatch => {
     let res = await csrfFetch('/api/lists');
@@ -50,17 +56,32 @@ export const fetchList = (listId) => async dispatch => {
     dispatch(receiveList(data))
 };
 
+export const fetchListByTitle = (title) => async dispatch => {
+    let res = await csrfFetch(`/api/lists/title/${title}`);
+    let data = await res.json();
+    dispatch(receiveListContents(data));
+}
+
 export const fetchListContents = (listId) => async dispatch => {
     let res = await csrfFetch(`/api/lists/${listId}`)
     let data = await res.json();
     dispatch(receiveListContents(data))
 }
-export const createList = (list) => async dispatch => {
+export const createList = (list, businessId) => async dispatch => {
+    const formData = new FormData();
+    formData.append("list[title]", list.title);
+    formData.append("list[user_id]", list.userId)
     let res = await csrfFetch('/api/lists', {
         method: 'POST',
-        body: JSON.stringify(list)
+        body: formData
     });
     let data = await res.json();
+    if (businessId) {
+        await dispatch(createListItem({
+            listId: data.list.id,
+            businessYelpId: businessId
+        }))
+    }
     return dispatch(receiveList(data.list));
 };
 
@@ -94,7 +115,10 @@ const ListsReducer = (state={}, action) => {
             delete newState[action.listId];
             return newState;
         case RECEIVE_LIST_CONTENTS:
-            return { [action.payload.list.id]: action.payload.list }
+            return { ...action.payload.list}
+            // return { [action.payload.list.id]: action.payload.list };
+        case CLEAR_LISTS:
+            return {};
         default:
             return state;
     };

@@ -1,54 +1,96 @@
 import Header from "../Header";
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./index.css"
 import SearchResults from "../SearchResults";
-// import ListForm from "../List/ListForm";
 import MapWrapper from "../Map";
 import SearchBar from "../SearchBar";
-import Navigation from "../Navigation";
-// import { useEffect } from "react";
-// import { fetchSearches, getSearches } from "../../store/search";
-
+import { useState } from "react";
+import { useEffect } from "react";
+import { clearSearches, fetchSearches, getSearches } from "../../store/search";
+import { SuperBalls } from "@uiball/loaders";
 const SearchPage = (props) => {
     const history = useHistory();
+    const dispatch = useDispatch();
 
-    const sessionUser = useSelector(state => state.session.user);
-    const searchResults = useSelector(state => Object.values(state.searches));
+    const searchResults = useSelector(getSearches);
     const { location } = useParams();
-    if (sessionUser === null) return <Redirect to="/login" />;
+    const [mapOptions, setMapOptions] = useState({});
 
-    
+    useEffect(() => {
+        return () => {
+            dispatch(clearSearches());
+        }
+    }, [])
 
-    let mapOptions;
-    mapOptions = {
-        center: {
-            lat: searchResults[0]?.coordinates.latitude,
-            lng: searchResults[0]?.coordinates.longitude
-        },
-        zoom: 12
-    }
+    useEffect(() => {
+        let mapOptions;
+        if (searchResults) {
+            mapOptions = {
+                center: {
+                    lat: searchResults[0]?.coordinates?.latitude,
+                    lng: searchResults[0]?.coordinates?.longitude
+                },
+                zoom: 12
+            }
+            setMapOptions(mapOptions)
+        }
+    }, [searchResults])
 
     const markerEventHandlers = {
-        'click': (business) => history.push(`/businesses/${business?.id}`, {from: `/search${location}`})
+        'click': (business) => history.push(`/businesses/${business?.businessYelpId}`, {from: `/search${location}`})
+    }
+
+    const searchContent = () => {
+        if (location) {
+            if (searchResults.length === 0) {
+                return (
+                    <>
+                    <div className="search-res-header">
+                        <p>coffee shops for</p>
+                        <SearchBar location={location}/>
+                    </div>
+                    <div id="search-page" className="loader-container">
+                        <SuperBalls 
+                            size={45}
+                            speed={1.4} 
+                            color="black" 
+                            
+                        /> 
+                    </div> 
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                    <div className="search-res-header">
+                        <p>coffee shops for</p>
+                        <SearchBar location={location}/>
+                    </div>
+                    <div className="search-page-section">
+                            <div className="placeholder-for-map">
+                                <MapWrapper  businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
+                            </div>
+                            <div>
+                                <SearchResults searchResults={searchResults} prevPage={location}/>
+                            </div>
+                    </div>
+                    </>
+                )
+
+                }
+        } else if (!location || searchResults.length === 0) {
+            return (
+                <div id="empty-search-page">
+                    <SearchBar/>
+                </div>
+            )
+        }
     }
 
     return (
         <>
-            <Header />
-            <div className="below-header-content-container">
-                <Navigation />
-                <div className="search-page-section">
-                    <SearchBar />
-                    <div className="main-content-container">
-                        <SearchResults searchResults={searchResults} prevPage={location}/>
-                        <div className="placeholder-for-map">
-                            <MapWrapper businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        {searchContent()}
         </>
     )
 };

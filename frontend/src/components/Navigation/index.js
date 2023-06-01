@@ -43,25 +43,47 @@ const Navigation = (props) => {
             .then(history.push("/login"))
     }
 
+    const sessionLinks = () => {
+        if (sessionUser) {
+            return (
+                <>
+                <li>
+                    <NavLink to="/hopped">hopped</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/lists">collections</NavLink>
+                </li>
+                <li>
+                    <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>logout</div>
+                </li>
+                </>
+            )
+        } else if (!sessionUser) {
+            return (
+                <>
+                <li>
+                    <NavLink to="/login">login</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/signup">signup</NavLink>
+                </li>
+                </>
+            )
+        }
+    }
+
 
     return (
         <>
-
-
             <ul className="nav-container">
-                <li className="welcome-container">
-                    <img src={bunnyAvatar} />
-                    <div>
-                        <p>Welcome,</p>
-                        <h2 >{sessionUser.username}</h2>
-                    </div>
-                </li>
-                <NavLink to="/search"><li><FontAwesomeIcon icon={faMagnifyingGlass} className="icon"/>Search</li></NavLink>
-                <NavLink to="/hopped"><li><FontAwesomeIcon icon={faCheck} className="icon"/>Hopped</li></NavLink>
-                <NavLink to="/lists"><li><FontAwesomeIcon icon={faList} className="icon"/>My Collections</li></NavLink>
                 <li>
-                    <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>Logout</div>
+                    <NavLink to="/search">search</NavLink>
                 </li>
+
+                {sessionLinks()}
+                {/* <li>
+                    <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>logout</div>
+                </li> */}
             </ul>
         </>
     )

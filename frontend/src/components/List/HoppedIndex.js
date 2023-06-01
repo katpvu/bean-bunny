@@ -1,51 +1,89 @@
 import { useEffect, useState } from 'react';
-import SortForm from '../SortForm';
 import './hopped.css'
 import HoppedIndexItem from "./HoppedIndexItem";
-import { useSelector } from 'react-redux';
+import {BsArrowRight} from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 
-const HoppedIndex = ({businesses, ratings}) => {
-    const [currentSort, setCurrentSort] = useState("Highest Rating");
-    const [sortedBusinesses, setSortedBusinesses] = useState([])
+const HoppedIndex = ({businesses, currentUserRatings}) => {
+    const [ratingsByNum, setRatingsByNum] = useState({});
+    const [ratingsLoaded, setRatingsLoaded] = useState(false);
+    const [currentPreviewId, setCurrentPreviewId] = useState("");
 
-    const sessionUser = useSelector(state => state.session.user);
-    
-    let currentUserRatings = []
-    ratings.forEach(rating => {
-        if (rating.userId === sessionUser.id) currentUserRatings.push(rating) 
-    })
+    const sortByRating = () => {
+        let ratings = {
+            5: [],
+            4: [],
+            3: [],
+            2: [],
+            1: []
+        };
 
-    // sort users ratings 
-    const sortedRatings = currentUserRatings.sort((r1, r2) => 
-        (r1.rating < r2.rating) ? 1 : (r1.rating > r2.rating) ? -1 : 0
-    )
-
-    // loop through ratings and check if business IDs match, push business into array
-    let sortedDescBusinesses = [];
-    sortedRatings.forEach(rating => {
-        businesses.forEach(business => {
-            if (rating.businessYelpId === business.id) sortedDescBusinesses.push(business)
-        })
-    })
+        currentUserRatings.forEach(rating => {
+            ratings[rating.rating].push(rating);
+        });
+        setRatingsByNum(ratings);
+        setRatingsLoaded(true);
+    };
 
     useEffect(() => {
-        // get current user's ratings
-        if (currentSort === "Highest Rating") {
-            setSortedBusinesses(sortedDescBusinesses)
-        } else if (currentSort === "Lowest Rating") {
-            setSortedBusinesses(sortedDescBusinesses.reverse())
-        }
-   }, [currentSort])
+        sortByRating();
+    }, [currentUserRatings]);
+
+    const hoppedPreview = () => {
+        if (currentPreviewId) {
+            return (
+                <div id="hopped-preview-container">
+                    <div className="preview-left">
+                        <div className="preview-left-photo-1">
+                            <img 
+                                src={currentPreviewId.additionalPhotosUrls[0]} 
+                                alt="preview"/>
+                        </div>
+                        {/* <ScoresPanel /> */}
+                    </div>
+                    <div className="preview-right">
+                        <div>
+                            <h2>{currentPreviewId.name}</h2>
+                            <h3>{currentPreviewId.location.city}, {currentPreviewId.location.state}</h3>
+                            <Link 
+                                to={{
+                                    pathname: `/businesses/${currentPreviewId.businessYelpId}`,
+                                    state: {from: '/hopped'}
+                                }}
+                                className="view-business-button"
+                            >
+                                view business <BsArrowRight />
+                            </Link>
+                        </div>
+                        <div className="preview-left-photo-2">
+                            <img src={currentPreviewId.additionalPhotosUrls[1]} alt="preview-2" />
+                        </div>
+                    </div>
+                </div>
+            )
+        } 
+    }
 
     return (
         <>
             <div className="hopped-section-container">
                 <h1>Hopped Coffee Shops</h1>
-                <br></br>
-                <SortForm setCurrentSort={setCurrentSort}/>
-                {sortedBusinesses?.map((business, index) => (
-                    <HoppedIndexItem business={business} index={index} ratings={ratings} />
-                ))}
+                <p>All the coffee shops that you've rated</p>
+
+                <div id="hopped-content-container">
+                    <div id="hopped-based-on-ratings-container">
+                       {ratingsLoaded && 
+                       [5, 4, 3, 2, 1].map((numRating, i) => (
+                            <HoppedIndexItem 
+                                key={i}
+                                numRating={numRating} 
+                                businesses={businesses}
+                                ratings={ratingsByNum[numRating]} 
+                                setCurrentPreviewId={setCurrentPreviewId} />
+                        ))}
+                    </div>
+                    {hoppedPreview()}
+                </div>
             </div>
         </>
     )

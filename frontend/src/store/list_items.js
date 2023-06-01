@@ -14,6 +14,7 @@ export const getListItem = listItemId => state => (
 export const RECEIVE_LIST_ITEMS = 'listItems/RECEIVE_LIST_ITEMS'
 export const RECEIVE_LIST_ITEM = 'listItems/RECEIVE_LIST_ITEM'
 export const REMOVE_LIST_ITEM = 'listItems/REMOVE_LIST_ITEM'
+export const CLEAR_LIST_ITEMS = 'listItems/CLEAR_LIST_ITEMS'
 
 // ACTION CREATORS
 export const receiveListItem = (listItem) => ({
@@ -31,6 +32,10 @@ export const removeListItem = (listItemId) => ({
     listItemId
 });
 
+export const clearListItems = () => ({
+    type: CLEAR_LIST_ITEMS
+})
+
 // THUNK ACTION CREATORS
 export const fetchListItems = () => async dispatch => {
     let res = await csrfFetch('/api/list_items');
@@ -45,12 +50,14 @@ export const fetchListItem = (listItemId) => async dispatch => {
 };
 
 export const createListItem = (listItem) => async dispatch => {
+    const formData = new FormData();
+    formData.append("list_item[list_id]", listItem.listId);
+    formData.append("list_item[business_yelp_id]", listItem.businessYelpId)
     let res = await csrfFetch('/api/list_items', {
         method: 'POST',
-        body: JSON.stringify(listItem)
+        body: formData
     });
     let data = await res.json();
-    console.log(data, "errors should be here")
     return dispatch(receiveListItem(data));
 };
 
@@ -75,6 +82,8 @@ const ListItemsReducer = (state={}, action) => {
         case REMOVE_LIST_ITEM:
             delete newState[action.listItemId]
             return newState;
+        case CLEAR_LIST_ITEMS:
+            return {}
         default:
             return state;
     };

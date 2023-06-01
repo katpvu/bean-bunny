@@ -1,8 +1,8 @@
-.search-bar-container {
+/* .search-bar-container {
     width: 100%;
     margin: 20px;
-    /* border: 1px solid green;
-    display: flex; */
+    border: 1px solid green;
+    display: flex;
 }
 
 .search-bar {
@@ -26,4 +26,32 @@
         width: 60%;
         margin-left: 0;
     }
+} */
+
+.search-form {
+    width: 100%;
 }
+.search-bar {
+    width: 90%;
+    border: none;
+    background-color: transparent;
+    font-size: 5rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -3px;
+}
+
+#empty-search-page .search-bar-container {
+    width: 100%;
+ }
+
+.search-bar:focus{
+    outline: none;
+}
+/*  
+.search-res-header .search-bar {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -3px;
+} */

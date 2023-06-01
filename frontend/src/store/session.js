@@ -1,13 +1,22 @@
 import csrfFetch, { storeCSRFToken } from "./csrf";
 
+// SELECTORS 
+export const getCurrentUserBusinessesRated = state => (
+    state.session.currentUserBusinessesRated ? Object.values(state.session.currentUserBusinessesRated) : []
+)
+
+export const getCurrentUserRatings = state => (
+    state.session.currentUserRatings ? Object.values(state.session.currentUserRatings) : []
+)
+
 // CONSTANTS
 export const SET_CURRENT_USER = 'session/SET_CURRENT_USER'
 export const REMOVE_CURRENT_USER = 'session/REMOVE_CURRENT_USER'
 
 // ACTION CREATORS
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = (payload) => ({
     type: SET_CURRENT_USER,
-    user
+    payload
 });
 
 export const removeCurrentUser = () => ({
@@ -15,7 +24,6 @@ export const removeCurrentUser = () => ({
 })
 
 // HELPER FUNCTIONS
-
 const storeCurrentUser = (user) => {
     if (user) {
         sessionStorage.setItem("currentUser", JSON.stringify(user));
@@ -31,8 +39,8 @@ export const login = (user) => async dispatch => {
         body: JSON.stringify(user)
     });
     let data = await res.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
+    storeCurrentUser(data);
+    dispatch(setCurrentUser(data));
     return res
 };
 
@@ -60,8 +68,8 @@ export const restoreSession = () => async dispatch => {
     let res = await csrfFetch('/api/session');
     storeCSRFToken(res);
     const data = await res.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
+    storeCurrentUser(data);
+    dispatch(setCurrentUser(data));
     return res
 };
 
@@ -72,7 +80,7 @@ const initialState = {
 const sessionReducer = (state= initialState, action) => {
     switch (action.type) {
         case SET_CURRENT_USER:
-            return { ...state, user: action.user }
+            return { ...state, user: action.payload.user}
         case REMOVE_CURRENT_USER:
             return { ...state, user: null }
         default:

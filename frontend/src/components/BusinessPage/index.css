@@ -81,7 +81,8 @@
 
 .business-page-save-button:hover,
 .rating-button:hover,
-.delete-collection-button:hover {
+.delete-collection-button:hover,
+.login-button:hover {
     color:  #FBFBF4;
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);

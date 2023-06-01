@@ -138,14 +138,7 @@
     text-align: center;
 
  }
- @keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-     }
-}
+
 
 .list-index-title {
     text-transform: uppercase;

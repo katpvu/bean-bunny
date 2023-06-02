@@ -18,15 +18,15 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
     const [photoFiles, setPhotoFiles] = useState ([]);
     const [currentPhotoFiles, setCurrentPhotoFiles] = useState(currentUserRating ? currentUserRating.photoUrls : [])
     const [errors, setErrors] = useState([]);
-
-
+    const [imagesToDelete, setImagesToDelete] = useState([])
 
     useEffect(() => {
-        // console.log(photoFiles)
-    }, [currentUserRating])
+        console.log(imagesToDelete)
+    }, [imagesToDelete])
 
     const handleSubmit = async e => {
         e.preventDefault();
+        console.log(photoFiles)
         const formData = new FormData();
         formData.append('rating[rating]', rating);
         formData.append('rating[notes]', notes);
@@ -42,11 +42,19 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
         if (currentUserRating) {
             formData.append("id", currentUserRating.id);
+            console.log(imagesToDelete, "hi")
+            if (imagesToDelete.length > 0) {
+                imagesToDelete.forEach(image => {
+                    formData.append('images_to_delete[]', image)
+                })
+            }
+            // if (imagesToDelete.length > 0) {
+            //     formData.append('ratomg[images_to_delete][]', imagesToDelete)
+            // }
             dispatch(updateRating(formData))
             .then(() => dispatch(fetchBusiness(business.businessYelpId)))
             .then(() => closeModal())
         } else {
-            console.log(formData.get('rating[photos][]'), "hi")
             dispatch(createRating(formData))
                 .then(() => dispatch(fetchBusiness(business.businessYelpId)))
                 .then(() => closeModal())
@@ -90,11 +98,17 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
 
     const handleRemoveClick = (e, index) => {
+        // frontend rendering
         const newCurrentPhotoFiles = [...currentPhotoFiles];
         newCurrentPhotoFiles.splice(index, 1);
+        setCurrentPhotoFiles(newCurrentPhotoFiles);
 
-        
-        setCurrentPhotoFiles();
+        // info to be sent to backend
+        const newImagesToDelete = [...imagesToDelete]
+        newImagesToDelete.push(currentUserRating.photoIds[index])
+        setImagesToDelete(newImagesToDelete)
+        // console.log(currentUserRating.photoIds[index])
+        console.log(imagesToDelete)
       }
 
 

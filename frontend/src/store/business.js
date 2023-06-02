@@ -41,10 +41,14 @@ export const createBusiness = (business) => async dispatch => {
     });
 };
 
-
+const clearEmpty = (obj) => {
+    delete obj.EMPTY
+    return obj
+}
 // REDUCER
 const BusinessesReducer = (state={}, action) => {
     let newState = { ...state }
+
     switch (action.type) {
         case RECEIVE_BUSINESS:
             return {[action.payload.business.businessYelpId]: action.payload.business}

@@ -7,6 +7,7 @@ import { getBusinesses } from "../../store/business";
 import { getBusinessRatings } from "../../store/ratings";
 import { clearBusinesses } from "../../store/business";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useState } from "react";
 
 const Hopped = (props) => {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Hopped = (props) => {
     const sessionUser = useSelector(state => state.session.user);
     const businesses = useSelector(getBusinesses)
     const ratings = useSelector(getBusinessRatings)
+    const [loaded, setLoaded] = useState(false) 
 
     useEffect(() => {
         dispatch(restoreSession());
@@ -22,6 +24,7 @@ const Hopped = (props) => {
     useEffect(() => {
         if (sessionUser) {
             dispatch(fetchUserDetail(sessionUser.id))
+                .then(() => setLoaded(true))
         }
 
         return () => {
@@ -33,7 +36,8 @@ const Hopped = (props) => {
         <div className="below-header-content-container">
         <HoppedIndex 
             businesses={businesses} 
-            currentUserRatings={ratings}/>
+            currentUserRatings={ratings}
+            loaded={loaded}/>
         </div>
     )
     

@@ -10,4 +10,5 @@ class Rating < ApplicationRecord
     belongs_to :business
     has_many_attached :photos,
         dependent: :destroy
+
 end

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { SuperBalls } from "@uiball/loaders";
 
-const HoppedIndex = ({businesses, currentUserRatings}) => {
+const HoppedIndex = ({businesses, currentUserRatings, loaded}) => {
     const history = useHistory();
 
     const [ratingsByNum, setRatingsByNum] = useState({});
@@ -69,7 +69,7 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
     }
 
     const ifEmptyContent = () => {
-        if (businesses.length > 0) {
+        if (Object.keys(businesses).length > 1) {
             return (
                 <div id="hopped-content-container">
                     <div id="hopped-based-on-ratings-container">
@@ -88,23 +88,11 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
             )
         } else {
             return (
-                <>
-                {businesses.length === 0 ? 
-                    <div className="loader-container">
-                    <SuperBalls 
-                        size={45}
-                        speed={1.4} 
-                        color="black" 
-                    /> 
-                    </div>
-                :
                 <div id="empty-hopped" className="full-page">
-                    <h2 className="empty-collections-text">once you start rating coffee shops, we'll keep track of them here!</h2>
-                    <div className="start-discovering-btn" onClick={() => history.push("/search")} >start discovering</div>
-                </div>
-
-                }
-                            </>
+                <h2 className="empty-collections-text">once you start rating coffee shops, we'll keep track of them here!</h2>
+                <div className="start-discovering-btn" onClick={() => history.push("/search")} >start discovering</div>
+            </div>
+                
             )
         }
     }
@@ -115,27 +103,17 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
                 <h1>Hopped Coffee Shops</h1>
                 <p>All the coffee shops that you've rated</p>
 
-                {businesses && ifEmptyContent()}
-
-                {/* <div id="hopped-content-container">
-                    <div id="hopped-based-on-ratings-container">
-                       {ratingsLoaded && 
-                       [5, 4, 3, 2, 1].map((numRating, i) => (
-                            <HoppedIndexItem 
-                                key={i}
-                                numRating={numRating} 
-                                businesses={businesses}
-                                ratings={ratingsByNum[numRating]} 
-                                setCurrentPreviewId={setCurrentPreviewId} />
-                        ))}
+                {loaded ?
+                    ifEmptyContent()
+                    :
+                    <div className="loader-container">
+                    <SuperBalls 
+                        size={45}
+                        speed={1.4} 
+                        color="black" 
+                    /> 
                     </div>
-                    {hoppedPreview()}
-                </div>
-                 :
-                 <div id="empty-hopped" className="full-page">
-                 <h2 className="empty-collections-text">once you start rating coffee shops, we'll keep track of them here!</h2>
-                 <div className="start-discovering-btn" onClick={() => history.push("/search")} >start discovering</div>
-             </div> */}
+                }
             </div>
         </>
     )

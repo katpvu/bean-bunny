@@ -19,11 +19,14 @@
 }
 
 .rating-form-container form {
+
     display: flex;
     flex-direction: column;
     width: 100%;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    margin-top: 20px;
+
     gap: 15px;
 }
 
@@ -70,6 +73,10 @@
     transition: 0.3s all ease;
 }
 
+.rating-delete-btn {
+    margin-bottom: 30px;
+}
+
 
 .rating-form-buttons-container {
     display: flex;
@@ -108,10 +115,12 @@
     width: 50%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     background-color: rgb(240, 238, 238);
-    border-radius: inherit; 
+    border-radius: 0px 15px 15px 0px; 
+    overflow: auto;
+    
 }
 
 .banner-display, .fp-overlay{
@@ -122,8 +131,14 @@
     align-items: center;
 }
 .review-photo-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
+
+    width: 100%;
 }
 .fp-overlay {
     width: 50%;

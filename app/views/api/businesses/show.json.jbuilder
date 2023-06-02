@@ -8,6 +8,7 @@ json.ratings do
             json.extract! rating, :id, :notes, :user_id, :created_at, :business_id, :fav_orders, :rating
             json.business_yelp_id rating.business.business_yelp_id
             json.photoUrls rating.photos.map {|file| file.url}
+            json.photoIds rating.photos.map {|file| file.id}
             json.author rating.user.username
         end
     end

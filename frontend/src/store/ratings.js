@@ -9,7 +9,6 @@ export const getBusinessRatings = state => (
 );
 
 
-
 // CONSTANTS
 export const RECEIVE_RATING = 'ratings/RECEIVE_RATING';
 export const REMOVE_RATING = 'ratings/REMOVE_RATING';
@@ -36,7 +35,7 @@ export const createRating = (rating) => async dispatch => {
 };
 
 export const updateRating = (rating) => async dispatch => {
-    const res = await csrfFetch(`/api/ratings/${rating.id}`, {
+    const res = await csrfFetch(`/api/ratings/${rating.get('id')}`, {
         method: 'PATCH',
         body: rating
     });

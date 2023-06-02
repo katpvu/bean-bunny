@@ -121,7 +121,10 @@
     justify-content: center;
     align-items: center;
 }
-
+.review-photo-gallery {
+    display: flex;
+    gap: 10px;
+}
 .fp-overlay {
     width: 50%;
     height: 100%;
@@ -167,7 +170,26 @@
     background-size: 29.5px;
 }
 
-.remove-image-button {
-   color: pink;
-    top: 0;
+.remove-img-button {
+   background-color: transparent;
+   position: absolute;
+   top: 40%;
+   right: 40%;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
 }
+
+.review-hover-remove-overlay {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    background-color: #21242763;
+    transition: 0.3s ease all;
+}
+
+.search-item-img-container:hover .review-hover-remove-overlay {
+    background-color: #212427ab;
+    cursor: pointer;
+}
+

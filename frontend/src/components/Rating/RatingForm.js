@@ -89,6 +89,15 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
     };
 
 
+    const handleRemoveClick = (e, index) => {
+        const newCurrentPhotoFiles = [...currentPhotoFiles];
+        newCurrentPhotoFiles.splice(index, 1);
+
+        
+        setCurrentPhotoFiles();
+      }
+
+
     return (
         <div className="rating-form-page-container">
             <div className="banner-display">
@@ -131,9 +140,12 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                     </label>
                     <div className="review-photo-gallery">
                     {currentPhotoFiles.map((url, i) => (
-                        <div key={i} className="search-item-img-container">
+                        <div key={i} className="search-item-img-container" onClick={(e) => handleRemoveClick(e, i)}>
                             <img src={url} className="item-img" alt="review"/>
-                            <IoIosRemoveCircle className="remove-img-button" size={20}/>
+                            <div className="review-hover-remove-overlay"></div>
+                            <div className="remove-img-button">
+                                <IoIosRemoveCircle  size={22}/>
+                            </div>
                         </div>
                     ))}
                     </div>

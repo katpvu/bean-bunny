@@ -22,8 +22,11 @@ body * {
     /* border: 1px solid red; */
 }
 
-h1, h2, h3, h4, h5, h6, li, p {
+h1, h2, h3, h4, h5, h6, li, p, div {
     cursor: default;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 a {
@@ -67,3 +70,15 @@ li {
 .error-message {
     color: red;
 }
+
+.full-page {
+    width: 100vw;
+    height: calc(100vh - 910px)
+}
+
+/* prevent select */
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }

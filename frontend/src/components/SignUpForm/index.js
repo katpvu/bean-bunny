@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import './index.css'
-import { signup } from '../../store/session';
+import { restoreSession, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -17,6 +17,10 @@ const SignUpForm = (props) => {
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState([]);
 
+    
+    useEffect(() => {
+        dispatch(restoreSession())
+    }, [])
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = e => {
@@ -37,7 +41,7 @@ const SignUpForm = (props) => {
         <div className="login-container">
                 <h2 className="login-form-title">Create an Account</h2>
                 <form onSubmit={handleSubmit} className="form-container">
-                    <ul className="errors">
+                    <ul className="error-message">
                         {errors.map(error => <li key={error}>{error}</li>)}
                     </ul>
                     <input 

@@ -5,7 +5,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-r
 import { clearListItems } from "../../store/list_items";
 import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
-import { fetchBusiness, getBusiness } from "../../store/business";
+import { clearBusinesses, fetchBusiness, getBusiness } from "../../store/business";
 import { fetchRecs, fetchSearches } from "../../store/search";
 import ScoresPanel from "./ScoresPanel";
 import BusinessHours from "./BusinessHours";
@@ -49,7 +49,7 @@ const BusinessPage = () => {
         dispatch(fetchBusiness(businessId))
         dispatch(fetchRecs(businessId))
         return () => {
-
+            dispatch(clearBusinesses());
             dispatch(clearSearches());
             dispatch(clearLists());
             dispatch(clearListItems())

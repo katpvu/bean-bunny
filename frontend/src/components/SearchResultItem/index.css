@@ -17,6 +17,12 @@
     text-decoration: none;
     color: #212427;
     gap: 10px;
+    cursor: pointer;
+}
+
+.search-item-info h1,
+.search-item-info p {
+    cursor: pointer;
 }
 
 .search-item-info .filled {

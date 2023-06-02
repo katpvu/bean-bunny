@@ -50,8 +50,8 @@ export const signup = (user) => async dispatch => {
         body: JSON.stringify(user)
     });
     let data = await res.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
+    storeCurrentUser(data);
+    dispatch(setCurrentUser(data));
     return res;
 };
 

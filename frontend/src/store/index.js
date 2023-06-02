@@ -7,6 +7,7 @@ import ListItemsReducer from "./list_items.js";
 import BusinessesReducer from "./business.js";
 import RatingsReducer from "./ratings.js";
 import UsersReducer from "./users.js";
+import errorsReducer from "./errors.js"
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
     listItems: ListItemsReducer,
     businesses: BusinessesReducer,
     ratings: RatingsReducer,
-    users: UsersReducer
+    users: UsersReducer,
+    errors: errorsReducer
 })
 
 // ENHANCER

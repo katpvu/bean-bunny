@@ -14,6 +14,7 @@ const SearchPage = (props) => {
     const dispatch = useDispatch();
 
     const searchResults = useSelector(getSearches);
+    const errors = useSelector(state => state.errors.searches)
     const { location } = useParams();
     const [mapOptions, setMapOptions] = useState({});
 
@@ -31,7 +32,7 @@ const SearchPage = (props) => {
                     lat: searchResults[0]?.coordinates?.latitude,
                     lng: searchResults[0]?.coordinates?.longitude
                 },
-                zoom: 12
+                zoom: 13
             }
             setMapOptions(mapOptions)
         }
@@ -51,12 +52,20 @@ const SearchPage = (props) => {
                         <SearchBar location={location}/>
                     </div>
                     <div id="search-page" className="loader-container">
-                        <SuperBalls 
-                            size={45}
-                            speed={1.4} 
-                            color="black" 
-                            
-                        /> 
+                    {errors 
+                    ?
+                    <div>
+                        {errors.map((error, i) => (
+                            <p id="search-error" key={i}>{error}</p>
+                        ))}
+                    </div>
+                    :
+                    <SuperBalls 
+                        size={45}
+                        speed={1.4} 
+                        color="black" 
+                    /> 
+                    }
                     </div> 
                     </>
                 )
@@ -67,6 +76,7 @@ const SearchPage = (props) => {
                         <p>coffee shops for</p>
                         <SearchBar location={location}/>
                     </div>
+
                     <div className="search-page-section">
                             <div className="placeholder-for-map">
                                 <MapWrapper  businesses={searchResults} mapOptions={mapOptions} markerEventHandlers={markerEventHandlers} />
@@ -76,9 +86,7 @@ const SearchPage = (props) => {
                             </div>
                     </div>
                     </>
-                )
-
-                }
+            )}
         } else if (!location || searchResults.length === 0) {
             return (
                 <div id="empty-search-page">

@@ -36,20 +36,9 @@ export const createRating = (rating) => async dispatch => {
 };
 
 export const updateRating = (rating) => async dispatch => {
-    const newRating = {
-        rating: {
-            id: rating.get('id'),
-            rating: rating.get('rating[rating]'),
-            notes: rating.get('rating[notes]'),
-            fav_orders: rating.get('rating[fav_orders]'),
-            user_id: rating.get('rating[user_id]'),
-            photoUrls: rating.get('rating[photos][]')
-        },
-        business_yelp_id: rating.get('business_yelp_id')
-    }
-    const res = await csrfFetch(`/api/ratings/${newRating.rating.id}`, {
+    const res = await csrfFetch(`/api/ratings/${rating.id}`, {
         method: 'PATCH',
-        body: JSON.stringify(newRating)
+        body: rating
     });
     const data = await res.json();
     return dispatch(receiveRating(data));

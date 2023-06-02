@@ -16,6 +16,25 @@
     transition: all 0.3s ease;
     text-decoration: none;
     color: #212427;
+    gap: 10px;
+}
+
+.search-item-info .filled {
+    width: 30px;
+    height: 30px;
+    background-size: 29.5px;
+    background-position-y: 100%;
+}
+
+.search-item-info .empty {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../assets/bunny-rating.png");
+    background-size: 29.5px;
+}
+
+.search-item-info .rating-input {
+    margin-top: auto;
 }
 
 .search-item-container:hover {
@@ -39,4 +58,6 @@
 
 .search-item-info {
     /* width: 100%; */
+    display: flex;
+    flex-flow: column nowrap;
 }

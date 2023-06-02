@@ -15,7 +15,6 @@ const LoginFormPage = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const [splash, setSplash] = useState(true);
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -49,7 +48,7 @@ const LoginFormPage = (props) => {
             <h2 className="login-form-title">Welcome back</h2>
             <form onSubmit={handleSubmit} className="form-container">
                 <ul>
-                    {errors.map(error => <li key={error}>{error}</li>)}
+                    {errors.map(error => <li key={error} className="error-message">{error}</li>)}
                 </ul>
                 <input 
                     required 

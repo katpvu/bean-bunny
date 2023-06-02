@@ -18,7 +18,7 @@ class Api::RatingsController < ActionController::API
         if @rating.save
             render :show
         else
-            render json: { errors: @rating.errors.full_messages }, status: 422
+            render json: { errors: ['Must submit a rating from 1-5'] }, status: 422
         end
     end
 
@@ -27,7 +27,7 @@ class Api::RatingsController < ActionController::API
         db_business = Business.find_by(business_yelp_id: params[:business_yelp_id])
         db_business_id = db_business.id
         params[:rating][:business_id] = db_business_id
-        @rating = Rating.find_by(id: params[:id])
+        @rating = Rating.find_by(user_id: params[:rating][:user_id], business_id: db_business_id)
         if @rating.update(rating_params)
             render :show
         else

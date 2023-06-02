@@ -4,13 +4,14 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 20px auto;
 }
 
 .rating-item-container {
     border: 1px solid rgb(190, 180, 160);
-    width: 49%;
+    width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;

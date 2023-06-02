@@ -247,6 +247,67 @@ require 'json'
         filename: "beanbunny-#{index + 11}.jpg"
       )
     end
-  
+
+    
+
+    #dummy users bad ratings
+    dummy_bad_ratings = {
+      3 => [ "Decent coffee, but nothing exceptional.",  
+            "Average service, nothing to complain about but nothing to praise either.",  
+            "The ambiance was okay, neither cozy nor particularly inviting.",  
+            "Reasonably priced drinks, but lacked a wow factor.",  
+            "Decent selection of pastries, but nothing extraordinary.",  
+            "The baristas were friendly, but seemed a bit inexperienced.",  
+            "The coffee shop had a relaxed atmosphere, but could use some improvements.",  
+            "The coffee tasted fine, but it didn't leave a lasting impression.",  
+            "The seating was comfortable enough, but could be more spacious.",  
+            "Overall, an okay coffee shop experience, but I've had better elsewhere."],
+      2 => [ "Subpar coffee with a bitter aftertaste.",  
+            "Poor service, staff seemed disinterested and inattentive.",  
+            "The ambiance was lackluster, felt more like a cafeteria than a cozy coffee shop.",  
+            "Overpriced drinks that did not live up to the cost.",  
+            "Limited and unimpressive selection of pastries.",  
+            "The baristas lacked basic coffee-making skills and knowledge.",  
+            "Uncomfortable seating and outdated furniture.",  
+            "The coffee tasted watered down and weak.",  
+            "Chaotic atmosphere and long wait times.",  
+            "Overall, a disappointing coffee shop experience that I won't be returning to."], 
+      1 => [ "The coffee had an unpleasant taste, not to my liking.",
+            "The service was lacking, and the staff could benefit from more friendliness and attentiveness.",
+            "The ambiance could use improvement to create a more comfortable and inviting atmosphere.",
+            "The drinks were overpriced compared to the quality and value provided.",
+            "The selection of pastries was limited and could be more appealing.",
+            "The baristas seemed to struggle with consistency and could benefit from additional training.",
+            "The seating area was not as clean and tidy as expected, which affected the overall experience.",
+            "The coffee lacked flavor and depth, leaving much to be desired.",
+            "There were delays and disorganization that impacted the overall efficiency of the service.",
+            "This coffee shop fell short of my expectations and left me disappointed."]
+    }
+    business_object_ids = Business.order("RANDOM()").limit(30).pluck(:id)
+
+    until dummy_bad_ratings.values.flatten.length === 0
+      users_arr.each_with_index do |user, index|
+        return false if dummy_bad_ratings.values.flatten.length === 0 
+        randomRating = rand(1..3)
+        randomBusinessId = business_object_ids[rand(30)]
+        p [randomRating, "random rating"]
+        ratingNotes = dummy_bad_ratings[randomRating]
+        return false if Rating.exists?(user_id: user.id, business_id: randomBusinessId)
+
+        rating = Rating.new(
+          user_id: user.id,
+          business_id: randomBusinessId,
+          rating: randomRating,
+          notes: ratingNotes.last
+        )
+        if rating.save
+          dummy_bad_ratings[randomRating].pop
+        end
+        p dummy_bad_ratings
+        puts
+      end
+    end
+
+    
     puts "Done!"
   # end

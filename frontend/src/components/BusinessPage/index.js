@@ -18,6 +18,7 @@ import { Modal } from "../../context/Modal";
 import SaveButton from "./SaveButton";
 import RecsPanel from "./RecsPanel";
 import PopularItems from "./PopularItems";
+import { restoreSession } from "../../store/session";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -40,6 +41,9 @@ const BusinessPage = () => {
     const [currentUserRating, setCurrentUserRating] = useState({});
     const [saved, setSaved] = useState(false)
 
+    useEffect(() => {
+        dispatch(restoreSession());
+    }, [dispatch])
 
     useEffect(() =>{
         dispatch(fetchBusiness(businessId))

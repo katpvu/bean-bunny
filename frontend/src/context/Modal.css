@@ -29,7 +29,7 @@
   @media (min-width: 469px) {
     #modal-content {
         width: 100vw;
-        height: 70vh;
+        height: 80vh;
     }
   }
 
@@ -46,7 +46,7 @@
     }
     #modal-content {
         width: 100vh;
-        height: 70vh;
+        height: 80vh;
         z-index: 1000;
     }
   }

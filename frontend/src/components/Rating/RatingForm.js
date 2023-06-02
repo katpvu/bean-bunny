@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createRating, deleteRating } from "../../store/ratings";
 import BunnyRatingInput from "./BunnyRatingInput";
-import { createBusiness } from "../../store/business";
+import { checkErrors } from "../../utils";
 import { useSelector } from "react-redux";
 import { updateRating } from "../../store/ratings";
 import { fetchBusiness, getBusiness } from "../../store/business";
+import {IoIosRemoveCircle} from "react-icons/io"
 
 const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRating}) => {
     const dispatch = useDispatch();
@@ -14,13 +15,15 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
     const [rating, setRating] = useState(currentUserRating ? currentUserRating?.rating : 0);
     const [notes, setNotes] = useState(currentUserRating ? currentUserRating?.notes : "");
     const [favOrders, setFavOrders] = useState(currentUserRating ? currentUserRating?.favOrders : "");
-    const [photoFiles, setPhotoFiles] = useState (currentUserRating ? currentUserRating?.photoUrls : []);
-    
+    const [photoFiles, setPhotoFiles] = useState ([]);
+    const [currentPhotoFiles, setCurrentPhotoFiles] = useState(currentUserRating ? currentUserRating.photoUrls : [])
+    const [errors, setErrors] = useState([]);
 
-    const handleFiles = ({ currentTarget }) => {
-        const files = currentTarget.files;
-        setPhotoFiles(Array.from(files));
-    }
+
+
+    useEffect(() => {
+        // console.log(photoFiles)
+    }, [currentUserRating])
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -38,14 +41,20 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         };
 
         if (currentUserRating) {
-            formData.append('id', currentUserRating.id);
+            formData.append("id", currentUserRating.id);
             dispatch(updateRating(formData))
             .then(() => dispatch(fetchBusiness(business.businessYelpId)))
+            .then(() => closeModal())
         } else {
+            console.log(formData.get('rating[photos][]'), "hi")
             dispatch(createRating(formData))
-            .then(() => dispatch(fetchBusiness(business.businessYelpId)))
+                .then(() => dispatch(fetchBusiness(business.businessYelpId)))
+                .then(() => closeModal())
+                .catch(async res => {
+                    let errors = await checkErrors(res)
+                    setErrors(errors)
+                })
         }
-        closeModal();
     };
 
     const onChange = (number) => {
@@ -57,6 +66,29 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         setCurrentUserRating(null)
         closeModal();
     }
+
+    const handleFiles = async ({currentTarget}) => {
+        console.log("hi")
+        const files = currentTarget.files;
+        setPhotoFiles(Array.from(files));
+        if (files.length !== 0) {
+            let filesLoaded = 0;
+            const urls = [];
+            Array.from(files).forEach((file, index) => {
+              const fileReader = new FileReader();
+              fileReader.readAsDataURL(file);
+              fileReader.onload = () => {
+                urls[index] = fileReader.result;
+                if (++filesLoaded === files.length)
+                  setCurrentPhotoFiles(currentPhotoFiles.concat(urls));
+              }
+            });
+          }
+          else setCurrentPhotoFiles([]);
+          console.log(photoFiles)
+    };
+
+
     return (
         <div className="rating-form-page-container">
             <div className="banner-display">
@@ -68,6 +100,9 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
             <div className="rating-form-container">
                 <form>
                     <h1>{currentUserRating ? "Update Your Rating" : "Creating a Rating"}</h1>
+                    <ul>
+                        {errors.map(error => <li key={error} className="error-message">{error}</li>)}
+                    </ul>
                     <label>How would you rate your experience?
                         {/* for rating  */}
                         <BunnyRatingInput 
@@ -90,15 +125,24 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                         onChange={(e) => setFavOrders(e.target.value)} />
                     </label>
 
-                    <label className="photos-upload-label"> Upload photos 
+                    <label className="photos-upload-label">Upload Photos 
                         {/* for adding photos */}
                         <input type="file" onChange={handleFiles} multiple />
                     </label>
+                    <div className="review-photo-gallery">
+                    {currentPhotoFiles.map((url, i) => (
+                        <div key={i} className="search-item-img-container">
+                            <img src={url} className="item-img" alt="review"/>
+                            <IoIosRemoveCircle className="remove-img-button" size={20}/>
+                        </div>
+                    ))}
+                    </div>
 
                     <div className="rating-form-buttons-container">
                         <div onClick={handleSubmit} className="rating-submit-btn">submit</div>
+                        <div onClick={() => closeModal()}className="rating-submit-btn">cancel</div>
                         {currentUserRating && (
-                            <div onClick={handleDelete}className="rating-delete-btn">Delete Rating</div>
+                            <div onClick={handleDelete} className="rating-delete-btn">Delete Rating</div>
                         )}
                     </div>
                 </form>

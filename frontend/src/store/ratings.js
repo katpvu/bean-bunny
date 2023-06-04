@@ -12,6 +12,7 @@ export const getBusinessRatings = state => (
 // CONSTANTS
 export const RECEIVE_RATING = 'ratings/RECEIVE_RATING';
 export const REMOVE_RATING = 'ratings/REMOVE_RATING';
+export const CLEAR_RATINGS = 'ratings/CLEAR_RATINGS';
 
 // ACTION CREATORS
 export const receiveRating = (rating) => ({
@@ -24,6 +25,9 @@ export const removeRating = (ratingId) => ({
     ratingId
 });
 
+export const clearRatings = () => ({
+    type: CLEAR_RATINGS
+})
 // THUNK ACTION CREATORS
 export const createRating = (rating) => async dispatch => {
     const res = await csrfFetch('/api/ratings', {
@@ -66,6 +70,8 @@ const RatingsReducer = (state={}, action) => {
             return {...action.payload.ratings}
         case RECEIVE_USERS_BUSINESSES_RATED:
             return { ...newState, ...action.payload.ratings}
+        case CLEAR_RATINGS:
+            return {};
         default:
             return state;
     };

@@ -290,7 +290,6 @@ require 'json'
         return false if dummy_bad_ratings.values.flatten.length === 0 
         randomRating = rand(1..3)
         randomBusinessId = business_object_ids[rand(30)]
-        p [randomRating, "random rating"]
         ratingNotes = dummy_bad_ratings[randomRating]
         return false if Rating.exists?(user_id: user.id, business_id: randomBusinessId)
 
@@ -303,8 +302,6 @@ require 'json'
         if rating.save
           dummy_bad_ratings[randomRating].pop
         end
-        p dummy_bad_ratings
-        puts
       end
     end
 

@@ -3,8 +3,12 @@ import './hopped.css'
 import HoppedIndexItem from "./HoppedIndexItem";
 import {BsArrowRight} from 'react-icons/bs'
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { SuperBalls } from "@uiball/loaders";
 
-const HoppedIndex = ({businesses, currentUserRatings}) => {
+const HoppedIndex = ({businesses, currentUserRatings, loaded}) => {
+    const history = useHistory();
+
     const [ratingsByNum, setRatingsByNum] = useState({});
     const [ratingsLoaded, setRatingsLoaded] = useState(false);
     const [currentPreviewId, setCurrentPreviewId] = useState("");
@@ -64,12 +68,9 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
         } 
     }
 
-    return (
-        <>
-            <div className="hopped-section-container">
-                <h1>Hopped Coffee Shops</h1>
-                <p>All the coffee shops that you've rated</p>
-
+    const ifEmptyContent = () => {
+        if (Object.keys(businesses).length > 1) {
+            return (
                 <div id="hopped-content-container">
                     <div id="hopped-based-on-ratings-container">
                        {ratingsLoaded && 
@@ -84,6 +85,35 @@ const HoppedIndex = ({businesses, currentUserRatings}) => {
                     </div>
                     {hoppedPreview()}
                 </div>
+            )
+        } else {
+            return (
+                <div id="empty-hopped" className="full-page">
+                <h2 className="empty-collections-text">once you start rating coffee shops, we'll keep track of them here!</h2>
+                <div className="start-discovering-btn" onClick={() => history.push("/search")} >start discovering</div>
+            </div>
+                
+            )
+        }
+    }
+
+    return (
+        <>
+            <div className="hopped-section-container">
+                <h1>Hopped Coffee Shops</h1>
+                <p>All the coffee shops that you've rated</p>
+
+                {loaded ?
+                    ifEmptyContent()
+                    :
+                    <div className="loader-container">
+                    <SuperBalls 
+                        size={45}
+                        speed={1.4} 
+                        color="black" 
+                    /> 
+                    </div>
+                }
             </div>
         </>
     )

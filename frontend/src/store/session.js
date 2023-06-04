@@ -1,14 +1,5 @@
 import csrfFetch, { storeCSRFToken } from "./csrf";
 
-// SELECTORS 
-export const getCurrentUserBusinessesRated = state => (
-    state.session.currentUserBusinessesRated ? Object.values(state.session.currentUserBusinessesRated) : []
-)
-
-export const getCurrentUserRatings = state => (
-    state.session.currentUserRatings ? Object.values(state.session.currentUserRatings) : []
-)
-
 // CONSTANTS
 export const SET_CURRENT_USER = 'session/SET_CURRENT_USER'
 export const REMOVE_CURRENT_USER = 'session/REMOVE_CURRENT_USER'
@@ -59,8 +50,8 @@ export const signup = (user) => async dispatch => {
         body: JSON.stringify(user)
     });
     let data = await res.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
+    storeCurrentUser(data);
+    dispatch(setCurrentUser(data));
     return res;
 };
 

@@ -79,5 +79,10 @@
  }
 
 #search-page.loader-container {
-    height: calc(100vh - 222px)
+    height: calc(100vh - 510px)
+}
+
+#search-error {
+    font-size: 5vw;
+    text-align: center;
 }

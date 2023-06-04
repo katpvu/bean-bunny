@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import './index.css'
-import { fetchSearches } from '../../store/search';
+import { clearSearchesErrors, fetchSearches } from '../../store/search';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { clearSearches } from '../../store/search';
+import { checkErrors } from '../../utils';
 
 const SearchBar = ({location}) => {
     const dispatch = useDispatch()
     const history = useHistory();
+
     const [search, setSearch] = useState("");
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         if (location) {
@@ -19,6 +22,7 @@ const SearchBar = ({location}) => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        dispatch(clearSearchesErrors())
         dispatch(clearSearches());
         const location = {
             location: encodeURIComponent(search)

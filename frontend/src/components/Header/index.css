@@ -37,7 +37,11 @@
     font-size: 60px;
     letter-spacing: -5px;
     font-weight: 700;
+    width: 200px;
+}
 
+#logo {
+    width: 100%;
 }
 
 #app-logo:visited {

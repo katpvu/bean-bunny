@@ -12,42 +12,50 @@ class Api::SearchesController < ApplicationController
         # If the city has been searched already, redirect to business controller index then fetch from database 
         if Business.select {|business| business.location[:city] == string_location}.count > 0
             redirect_to controller: 'businesses', action: 'index', location: string_location
+            return true
         else 
             parsed = yelp_search_by_city(location)
-            @businesses = []
-        
-            # After live fetching, create business objects and persist them into DB
-            parsed[:businesses].each do |business_obj|
-                # Another live fetch to Yelp API to retrieve more business details
-                parsed_business = yelp_single_business_fetch(business_obj[:id])
-                p parsed_business
-                if (parsed_business[:hours])
-                    parsed_hours = parsed_business[:hours][0]
-                else
-                parsed_hours = {}
-                end
 
-                new_business = {
-                    business_yelp_id: business_obj[:id],
-                    image_url: business_obj[:image_url],
-                    coordinates: business_obj[:coordinates],
-                    is_closed: business_obj[:is_closed], 
-                    location: business_obj[:location],
-                    name: business_obj[:name],
-                    yelp_rating: business_obj[:rating],
-                    additional_photos_urls: parsed_business[:photos],
-                    price: parsed_business[:price],
-                    hours: parsed_hours,
-                    phone_number: parsed_business[:display_phone]
-                }
-
-                if !Business.exists?(business_yelp_id:  business_obj[:id])
-                    business = Business.create!(new_business)
+            # Render error when user enters invalid input
+            if (parsed[:error])
+                render json: {errors: ["Hmm.. try specifying a more exact location"]}, status: :unprocessable_entity
+                return false
+            else
+                @businesses = []
+            
+                # After live fetching, create business objects and persist them into DB
+                parsed[:businesses].each do |business_obj|
+                    # Another live fetch to Yelp API to retrieve more business details
+                    parsed_business = yelp_single_business_fetch(business_obj[:id])
+                    p parsed_business
+                    if (parsed_business[:hours])
+                        parsed_hours = parsed_business[:hours][0]
+                    else
+                        parsed_hours = {}
+                    end
+    
+                    new_business = {
+                        business_yelp_id: business_obj[:id],
+                        image_url: business_obj[:image_url],
+                        coordinates: business_obj[:coordinates],
+                        is_closed: business_obj[:is_closed], 
+                        location: business_obj[:location],
+                        name: business_obj[:name],
+                        yelp_rating: business_obj[:rating],
+                        additional_photos_urls: parsed_business[:photos],
+                        price: parsed_business[:price],
+                        hours: parsed_hours,
+                        phone_number: parsed_business[:display_phone]
+                    }
+    
+                    if !Business.exists?(business_yelp_id:  business_obj[:id])
+                        business = Business.create!(new_business)
+                    end
+                    
+                    @businesses << business_obj
                 end
-                
-                @businesses << business_obj
+                render :index
             end
-            render :index
         end
     end
 

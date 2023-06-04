@@ -41,6 +41,7 @@
 .business-info-section-container-header > div {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .business-info-section-container h1 {
@@ -60,7 +61,7 @@
 
 .business-page-save-button,
 .rating-button,
-.delete-collection-button  {
+.delete-collection-button {
     width: 100px;
     border: 1px solid #212427;
     height: 40px;
@@ -81,7 +82,10 @@
 
 .business-page-save-button:hover,
 .rating-button:hover,
-.delete-collection-button:hover {
+.delete-collection-button:hover,
+.login-button:hover,
+.rating-submit-btn:hover, 
+.rating-delete-btn:hover {
     color:  #FBFBF4;
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);
@@ -141,6 +145,8 @@
     width: 90%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    display:flex;
+    justify-content: center;
     gap: 15px;
     margin: 20px auto;
     

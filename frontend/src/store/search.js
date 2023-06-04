@@ -10,6 +10,8 @@ export const getSearches = state => Object.values(state.searches)
 const RECEIVE_SEARCHES = 'searches/RECEIVE_SEARCHES'
 const RECEIVE_RECS = 'searches/RECEIVE_RECS'
 const CLEAR_SEARCHES = 'searches/CLEAR_SEARCHES'
+const RECEIVE_SEARCHES_ERRORS = 'searches/RECEIVE_SEARCHES_ERRORS'
+const CLEAR_SEARCHES_ERRORS = 'searches/CLEAR_SEARCHES_ERRORS'
 
 // ACTION CREATORS
 export const receiveSearches = (searches) => ({
@@ -26,15 +28,30 @@ export const clearSearches = () => ({
     type: CLEAR_SEARCHES
 })
 
+export const receiveErrors = (errors) => ({
+    type: RECEIVE_SEARCHES_ERRORS,
+    errors
+})
+
+export const clearSearchesErrors = (errors) => ({
+    type: CLEAR_SEARCHES_ERRORS,
+    errors
+  });
+
 // THUNK ACTION CREATORS
 
 export const fetchSearches = (location) => async dispatch => {
-    const res = await csrfFetch('/api/searches', {
-        method: "POST",
-        body: JSON.stringify(location)
-    });
-    const data = await res.json();
-    return dispatch(receiveSearches(data));
+    try {
+        const res = await csrfFetch('/api/searches', {
+            method: "POST",
+            body: JSON.stringify(location)
+        });
+        const data = await res.json();
+        return dispatch(receiveSearches(data));
+    } catch (err) {
+        const resBody = await err.json();
+        dispatch(receiveErrors(resBody.errors))
+    }
 }
 
 export const fetchRecs = (businessYelpId) => async dispatch => {
@@ -43,9 +60,7 @@ export const fetchRecs = (businessYelpId) => async dispatch => {
     return dispatch(receiveRecs(data))
 }
 
-
-
-// REDUCER
+// REDUCERS
 const SearchesReducer = (state={}, action) => {
     switch (action.type) {
         case RECEIVE_RECS:
@@ -58,4 +73,16 @@ const SearchesReducer = (state={}, action) => {
             return state;
     }
 };
+
+const nullErrors = null;
+export const searchesErrorsReducer = (state = nullErrors, action) => {
+    switch (action.type) {
+      case RECEIVE_SEARCHES_ERRORS:
+        return action.errors;
+      case CLEAR_SEARCHES_ERRORS:
+        return nullErrors;
+      default:
+        return state;
+    }
+  };
 export default SearchesReducer;

@@ -1,6 +1,6 @@
 
-import {fetchBusiness} from './business';
 import csrfFetch from "./csrf";
+
 // CONSTANTS
 export const RECEIVE_USER_DETAIL = 'users/RECEIVE_USER_DETAIL';
 export const RECEIVE_USERS = 'users/RECEIVE_USERS'

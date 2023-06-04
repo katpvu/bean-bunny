@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { clearListItems } from "../../store/list_items";
-import { checkErrors } from '../../utils';
 import MapWrapper from "../Map";
-import { fetchBusiness, getBusiness } from "../../store/business";
+import { clearBusinesses, fetchBusiness, getBusiness } from "../../store/business";
 import { fetchRecs, fetchSearches } from "../../store/search";
 import ScoresPanel from "./ScoresPanel";
 import BusinessHours from "./BusinessHours";
@@ -18,6 +17,7 @@ import { Modal } from "../../context/Modal";
 import SaveButton from "./SaveButton";
 import RecsPanel from "./RecsPanel";
 import PopularItems from "./PopularItems";
+import { restoreSession } from "../../store/session";
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -34,18 +34,22 @@ const BusinessPage = () => {
     const list = useSelector(state => state.lists)
     const listItems = useSelector(state => Object.values(state.listItems))
 
-    const [currentListItem, setCurrentListItem] = useState(null)
-    const [errors, setErrors] = useState([]);
+    const [currentListItem, setCurrentListItem] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [currentUserRating, setCurrentUserRating] = useState({});
-    const [saved, setSaved] = useState(false)
+    const [saved, setSaved] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
+    useEffect(() => {
+        dispatch(restoreSession());
+    }, [dispatch])
 
     useEffect(() =>{
         dispatch(fetchBusiness(businessId))
+            .then(() => setLoaded(true))
         dispatch(fetchRecs(businessId))
         return () => {
-
+            dispatch(clearBusinesses());
             dispatch(clearSearches());
             dispatch(clearLists());
             dispatch(clearListItems())
@@ -64,7 +68,7 @@ const BusinessPage = () => {
 
 
     useEffect(() => {
-        if (list) {
+        if (list && loaded) {
             if (Object?.keys(list).length > 0){
             let listItemBusinesses = Object?.values(list.listItemBusinesses)
             if (listItemBusinesses.includes(businessId)) {
@@ -156,7 +160,6 @@ const BusinessPage = () => {
                             sessionUser={sessionUser}
                             business={business} 
                             businessId={businessId} 
-                            setErrors={setErrors}
                             currentListItem={currentListItem}
                             setCurrentListItem={setCurrentListItem}/>
                     </div>
@@ -194,7 +197,7 @@ const BusinessPage = () => {
 
     return (
         <>
-        {business 
+        {loaded 
         ? (
         <div className="business-page-container">
             {headerImages()}
@@ -216,21 +219,7 @@ const BusinessPage = () => {
             
         /> 
         </div> ) }
-
-
-
-        {/* <div className="business-page-container">
-            <div className="bp-header-overlay">
-                <h1 className="business-page-title">{business?.name}</h1>
-                <FontAwesomeIcon 
-                    onClick={handleBackButton} 
-                    className="bp-back-button" 
-                    icon={faArrowLeft} 
-                    style={{color: "#ffffff",}} />
-            </div>
-                    
-            </> */}
-            </>
+        </>
     )
 };
 

@@ -125,7 +125,10 @@
     height: 70vh;
     display: flex;
     justify-content: space-between;
-
+    position: sticky;
+    top: 20px;
+    right: 20px;
+    /* width: 60%; */
 }
 
 #hopped-based-on-ratings-container,
@@ -226,6 +229,20 @@
     /* color:  #FBFBF4; */
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);
+}
+
+#empty-hopped {
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 147px;
+    gap: 30px;
+}
+
+.hopped-section-container .loader-container {
+    height: calc(100vh - 510px)
 }
 
 @media (max-width: 1068px) {

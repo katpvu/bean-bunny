@@ -1,46 +1,36 @@
 
 import { useSelector } from "react-redux";
 import './index.css'
-import bunnyAvatar from "../../assets/bunny-avatar.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faList, faCheck, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import {  useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import './index.css'
+import { clearBusinesses } from "../../store/business";
+import { clearSearches } from "../../store/search";
+import { clearLists } from "../../store/list";
+import { clearListItems } from "../../store/list_items";
+import { clearRatings } from "../../store/ratings";
 
 
 const Navigation = (props) => {
     const sessionUser = useSelector(state => state.session.user);
-    const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
-      
-    useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-        setShowMenu(false);
-    };
-
-    const doc = document.querySelector("#root")
-    doc.addEventListener('click', closeMenu);
-    
-    return () => doc.removeEventListener("click", closeMenu);
-    }, [showMenu]);
 
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout())
-            .then(history.push("/login"))
+            .then(() => history.push("/login"))
+            .then(() => {
+                dispatch(clearBusinesses());
+                dispatch(clearSearches());
+                dispatch(clearLists());
+                dispatch(clearListItems());
+                dispatch(clearRatings());
+            })
     }
 
     const sessionLinks = () => {
@@ -74,18 +64,12 @@ const Navigation = (props) => {
 
 
     return (
-        <>
-            <ul className="nav-container">
-                <li>
-                    <NavLink to="/search">search</NavLink>
-                </li>
-
-                {sessionLinks()}
-                {/* <li>
-                    <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} className="icon"/>logout</div>
-                </li> */}
-            </ul>
-        </>
+    <ul className="nav-container">
+        <li>
+            <NavLink to="/search">search</NavLink>
+        </li>
+        {sessionLinks()}
+    </ul>
     )
 };
 

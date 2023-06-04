@@ -20,7 +20,7 @@ const BeanMap = ({
         mapRef.current, 
         {
             center: { lat: 37.7749, lng: -122.4194 },
-            zoom: 12,
+            zoom: 40,
             ...mapOptions
         }))
     },[mapRef, mapOptions, markers]);

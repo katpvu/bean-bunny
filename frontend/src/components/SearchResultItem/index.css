@@ -6,13 +6,9 @@
 
 .search-item-container {
     display: flex;
-    /* width: 95%; */
-    /* border-radius: 10px; */
     border: 1px solid rgb(210, 214, 210);
     padding: 10px;
     line-height: 0.8;
-    /* margin: 8px 5px; */
-    /* box-shadow: 0px 5px 5px rgb(187, 185, 185); */
     transition: all 0.3s ease;
     text-decoration: none;
     color: #212427;
@@ -30,6 +26,7 @@
     height: 30px;
     background-size: 29.5px;
     background-position-y: 100%;
+    cursor: pointer;
 }
 
 .search-item-info .empty {
@@ -37,6 +34,7 @@
     height: 30px;
     background-image: url("../../assets/bunny-rating.png");
     background-size: 29.5px;
+    cursor: pointer;
 }
 
 .search-item-info .rating-input {
@@ -50,6 +48,7 @@
 .search-item-img-container {
     width: 150px;
     height: 150px;
+    cursor: pointer;
 }
 
 .item-img {
@@ -66,4 +65,5 @@
     /* width: 100%; */
     display: flex;
     flex-flow: column nowrap;
+    cursor: pointer;
 }

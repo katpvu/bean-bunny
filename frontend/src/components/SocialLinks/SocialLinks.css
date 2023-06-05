@@ -1,4 +1,4 @@
-#social-links-container {
+.social-links-container {
     display: flex;
     gap: 5px;
     position: sticky;
@@ -7,10 +7,16 @@
     
 }
 
-#social-links-container * {
+.social-links-container * {
     width: 35px;
     height: 35px;
     cursor: pointer;
     /* color: #212427; */
     color: rgb(250, 150, 166);
+}
+
+@media (max-width: 920px) {
+    .header-container .social-links-container {
+        display: none;
+    }
 }

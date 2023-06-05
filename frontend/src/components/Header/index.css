@@ -1,32 +1,11 @@
-/* 
-
-.bunny-logo {
-    width: 200px;
-}
-
-@media (min-width: 600px) {
-    .header-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid rgb(133, 133, 133);
-        height: 18vh;
-    }
-    .bunny-logo {
-        width: 200px;
-    }
-} */
-
-
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    
 }
 
-.header-container div {
+.header-container > div {
     display: flex;
     gap: 20px;
     align-items: center;

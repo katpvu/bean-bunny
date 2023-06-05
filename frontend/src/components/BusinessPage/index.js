@@ -24,7 +24,7 @@ const BusinessPage = () => {
     const history = useHistory();
     const location = useLocation();
     
-    const { from } = location.state;
+    // const { from } = location.state;
     const { businessId } = useParams();
 
     const business = useSelector(getBusiness(businessId))
@@ -87,17 +87,17 @@ const BusinessPage = () => {
         zoom: 15
     }
 
-    const handleBackButton = () => {
-        if (from?.includes(' ')) {
-            const location = {
-                location: encodeURIComponent(from)
-            }
-            history.push(`/search/${location?.location}`)
-            dispatch(fetchSearches(location))
-        } else {
-            history.push(from)
-        }
-    }
+    // const handleBackButton = () => {
+    //     if (from?.includes(' ')) {
+    //         const location = {
+    //             location: encodeURIComponent(from)
+    //         }
+    //         history.push(`/search/${location?.location}`)
+    //         dispatch(fetchSearches(location))
+    //     } else {
+    //         history.push(from)
+    //     }
+    // }
 
     const headerImages = () => {
         if (business?.additionalPhotosUrls) {

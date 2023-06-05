@@ -208,3 +208,11 @@
     cursor: pointer;
 }
 
+@media (max-width: 486px) {
+    .review-photo-gallery .search-item-img-container {
+        min-width: 100px;
+        width: 100px;
+        min-height: 100px;
+        height: 100px;
+    }
+}

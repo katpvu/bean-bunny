@@ -45,9 +45,10 @@ const SaveButton = ({
     }
 
     const handleRemoveFromList = () => {
-        dispatch(deleteListItem(currentListItem.id))
+        dispatch(deleteListItem(currentListItem?.id))
             .then(() => setSaved(false))
             .then(() => setCurrentListItem(null))
+            .then(() => dispatch(fetchListByTitle(business?.location?.city)))
     }
 
 

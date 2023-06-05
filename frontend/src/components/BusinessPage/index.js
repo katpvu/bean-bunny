@@ -72,8 +72,9 @@ const BusinessPage = () => {
     useEffect(() => {
         if (listsLoaded) {
             if (Object.keys(list).length > 0){
-                let listItemBusinesses = Object.values(list?.listItemBusinesses)
-                if (listItemBusinesses.includes(businessId)) {
+                let listValues = Object.values(list)
+                let listItemBusinesses = listValues[(listValues.length - 1)]
+                if (listItemBusinesses.length > 0 && listItemBusinesses.includes(businessId)) {
                     setSaved(true);
                     setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
                 }

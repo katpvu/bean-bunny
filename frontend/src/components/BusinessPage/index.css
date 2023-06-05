@@ -250,3 +250,48 @@
         font-size: 5vw;
     }
 }
+
+@media (max-width: 653px) {
+    .business-info-section-container-header > div {
+        flex-direction: column;
+        gap: 0px;
+    }
+    .business-page-save-button {
+        margin: 10px 0px;
+    }
+    .save-button-container {
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+
+    .rec-overlay, 
+    .recs-image-container {
+        height: 170px;
+    }
+}
+
+@media (max-width: 486px) {
+    .business-info-section-container h1 {
+        font-size: 3rem;
+    }
+
+    .rec-overlay, 
+    .recs-image-container {
+        height: 100px;
+    }
+
+    .recs-panel-container {
+        gap: 5px;
+    }
+
+    .recs-panel-title {
+        font-size: 1.6em;
+    }
+
+    .business-hours-and-pop-items {
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+}

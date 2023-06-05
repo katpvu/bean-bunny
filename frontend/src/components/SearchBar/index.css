@@ -22,3 +22,9 @@
 .search-bar:focus{
     outline: none;
 }
+
+@media (max-width: 535px) {
+    .search-bar {
+        font-size: 13vw;
+    }
+}

@@ -30,7 +30,7 @@ const Hopped = (props) => {
         return () => {
             dispatch(clearBusinesses())
         }
-    }, [])
+    }, [dispatch, sessionUser])
 
     return (
         <div className="below-header-content-container">

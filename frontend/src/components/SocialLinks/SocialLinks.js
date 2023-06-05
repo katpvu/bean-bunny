@@ -6,7 +6,7 @@ const SocialLinks = () => {
 
 
     return (
-        <div id="social-links-container">
+        <div className="social-links-container">
             <Link to={{pathname: "https://github.com/katpvu" }} target="_blank">
                 <BsGithub />
             </Link>

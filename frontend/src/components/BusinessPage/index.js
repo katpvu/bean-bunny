@@ -39,6 +39,7 @@ const BusinessPage = () => {
     const [currentUserRating, setCurrentUserRating] = useState({});
     const [saved, setSaved] = useState(false);
     const [loaded, setLoaded] = useState(false);
+    const [listsLoaded, setListsLoaded] = useState(false);
 
     useEffect(() => {
         dispatch(restoreSession());
@@ -46,44 +47,47 @@ const BusinessPage = () => {
 
     useEffect(() =>{
         dispatch(fetchBusiness(businessId))
-            .then(() => setLoaded(true))
-        dispatch(fetchRecs(businessId))
+            .then(() => setLoaded(true));
+        dispatch(fetchRecs(businessId));
         return () => {
             dispatch(clearBusinesses());
             dispatch(clearSearches());
             dispatch(clearLists());
-            dispatch(clearListItems())
-            setSaved(false)
-        }
+            dispatch(clearListItems());
+            setSaved(false);
+        };
     }, [dispatch, businessId])
 
     useEffect(() => {
         if (business) {
             dispatch(fetchListByTitle(business?.location?.city))
-        }
+                .then(() => setListsLoaded(true));
+        };
         if (sessionUser) {
-            setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id))
-        }
+            setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id));
+        };
     }, [business])
 
 
     useEffect(() => {
-        if (list && loaded) {
-            if (Object?.keys(list).length > 0){
-            let listItemBusinesses = Object?.values(list.listItemBusinesses)
-            if (listItemBusinesses.includes(businessId)) {
-                setSaved(true);
-                setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
-            }}
+        if (listsLoaded) {
+            if (Object.keys(list).length > 0){
+                let listItemBusinesses = Object.values(list?.listItemBusinesses)
+                if (listItemBusinesses.includes(businessId)) {
+                    setSaved(true);
+                    setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
+                }
+            }
         }
     },[list, businessId])
 
     let mapOptions;
     mapOptions = {
-        center: {
-            lat: business?.coordinates?.latitude,
-            lng: business?.coordinates?.longitude
-        },
+        // center: {
+        //     lat: business?.coordinates?.latitude,
+        //     lng: business?.coordinates?.longitude
+        // },
+        center: new window.google.maps.LatLng(business?.coordinates?.latitude, business?.coordinates?.longitude),
         zoom: 15
     }
 
@@ -161,7 +165,8 @@ const BusinessPage = () => {
                             business={business} 
                             businessId={businessId} 
                             currentListItem={currentListItem}
-                            setCurrentListItem={setCurrentListItem}/>
+                            setCurrentListItem={setCurrentListItem}
+                            listsLoaded={listsLoaded}/>
                     </div>
                     <h3>{business?.location?.city}, {business?.location?.state}</h3>
                     <p>{business?.phoneNumber}</p>

@@ -195,8 +195,8 @@
 }
 
 .review-hover-remove-overlay {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     position: absolute;
     top: 0;
     background-color: #21242763;

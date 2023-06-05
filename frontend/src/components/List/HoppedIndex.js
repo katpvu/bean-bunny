@@ -69,7 +69,7 @@ const HoppedIndex = ({businesses, currentUserRatings, loaded}) => {
     }
 
     const ifEmptyContent = () => {
-        if (Object.keys(businesses).length > 1) {
+        if (Object.keys(businesses).length >= 1) {
             return (
                 <div id="hopped-content-container">
                     <div id="hopped-based-on-ratings-container">

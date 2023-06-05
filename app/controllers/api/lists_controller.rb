@@ -2,6 +2,7 @@ class Api::ListsController < ApplicationController
     def index
         # debugger
         @lists = List.where(user_id: current_user.id)
+        p current_user.id
         render :index
     end
 
@@ -11,7 +12,7 @@ class Api::ListsController < ApplicationController
     end
 
     def fetch_by_title
-        @list = List.find_by(title: params[:title])
+        @list = List.find_by(title: params[:title], user_id: current_user.id)
         if @list
             render :show
         else

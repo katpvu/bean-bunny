@@ -27,7 +27,6 @@ class Api::SearchesController < ApplicationController
                 parsed[:businesses].each do |business_obj|
                     # Another live fetch to Yelp API to retrieve more business details
                     parsed_business = yelp_single_business_fetch(business_obj[:id])
-                    p parsed_business
                     if (parsed_business[:hours])
                         parsed_hours = parsed_business[:hours][0]
                     else

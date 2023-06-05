@@ -20,13 +20,8 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
     const [errors, setErrors] = useState([]);
     const [imagesToDelete, setImagesToDelete] = useState([])
 
-    useEffect(() => {
-        console.log(imagesToDelete)
-    }, [imagesToDelete])
-
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(photoFiles)
         const formData = new FormData();
         formData.append('rating[rating]', rating);
         formData.append('rating[notes]', notes);
@@ -42,15 +37,11 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
         if (currentUserRating) {
             formData.append("id", currentUserRating.id);
-            console.log(imagesToDelete, "hi")
             if (imagesToDelete.length > 0) {
                 imagesToDelete.forEach(image => {
                     formData.append('images_to_delete[]', image)
                 })
             }
-            // if (imagesToDelete.length > 0) {
-            //     formData.append('ratomg[images_to_delete][]', imagesToDelete)
-            // }
             dispatch(updateRating(formData))
             .then(() => dispatch(fetchBusiness(business.businessYelpId)))
             .then(() => closeModal())
@@ -76,7 +67,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
     }
 
     const handleFiles = async ({currentTarget}) => {
-        console.log("hi")
         const files = currentTarget.files;
         setPhotoFiles(Array.from(files));
         if (files.length !== 0) {
@@ -93,7 +83,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
             });
           }
           else setCurrentPhotoFiles([]);
-          console.log(photoFiles)
     };
 
 
@@ -107,11 +96,7 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         const newImagesToDelete = [...imagesToDelete]
         newImagesToDelete.push(currentUserRating.photoIds[index])
         setImagesToDelete(newImagesToDelete)
-        // console.log(currentUserRating.photoIds[index])
-        console.log(imagesToDelete)
       }
-
-
     return (
         <div className="rating-form-page-container">
             <div className="banner-display">

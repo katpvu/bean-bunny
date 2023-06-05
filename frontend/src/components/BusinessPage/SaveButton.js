@@ -16,13 +16,14 @@ const SaveButton = ({
     businessId, 
     setErrors,
     currentListItem,
-    setCurrentListItem
+    setCurrentListItem,
+    listsLoaded
 }) => {
     const dispatch = useDispatch();
 
     const handleAddToList = () => {
         if (sessionUser === null) return history.push("/login");
-        if (!Object.keys(list).length){
+        if (listsLoaded && !Object.keys(list).length){
             dispatch(createList({
                 userId: sessionUser.id,
                 title: business.location.city

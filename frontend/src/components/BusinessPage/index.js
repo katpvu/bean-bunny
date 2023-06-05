@@ -83,11 +83,11 @@ const BusinessPage = () => {
 
     let mapOptions;
     mapOptions = {
-        // center: {
-        //     lat: business?.coordinates?.latitude,
-        //     lng: business?.coordinates?.longitude
-        // },
-        center: new window.google.maps.LatLng(business?.coordinates?.latitude, business?.coordinates?.longitude),
+        center: {
+            lat: business?.coordinates?.latitude,
+            lng: business?.coordinates?.longitude
+        },
+        // center: new window.google.maps.LatLng(business?.coordinates?.latitude, business?.coordinates?.longitude),
         zoom: 15
     }
 

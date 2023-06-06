@@ -32,7 +32,7 @@ class Api::SearchesController < ApplicationController
                     else
                         parsed_hours = {}
                     end
-    
+
                     new_business = {
                         business_yelp_id: business_obj[:id],
                         image_url: business_obj[:image_url],
@@ -46,7 +46,7 @@ class Api::SearchesController < ApplicationController
                         hours: parsed_hours,
                         phone_number: parsed_business[:display_phone]
                     }
-    
+
                     if !Business.exists?(business_yelp_id:  business_obj[:id])
                         business = Business.create!(new_business)
                     end

@@ -20,7 +20,7 @@ const BeanMap = ({
         mapRef.current, 
         {
             center: { lat: 37.7749, lng: -122.4194 },
-            zoom: 40,
+            zoom: 12,
             ...mapOptions
         }));
     },[mapRef, mapOptions, markers]);
@@ -41,7 +41,6 @@ const BeanMap = ({
         businesses.forEach(business => {
             if (!markers[business?.businessYelpId]) {
                 // create new marker for business
-
                 let marker = new window.google.maps.Marker({
                     position: {
                         lat: business?.coordinates?.latitude,
@@ -49,7 +48,6 @@ const BeanMap = ({
                     },
                     map: map,
                     icon: icon
-
                 });
 
                 // add info window for each business marker
@@ -67,12 +65,10 @@ const BeanMap = ({
                 marker.addListener('mouseover', () => infoWindow.open(map, marker))
                 marker.addListener('mouseout', () => infoWindow.close());
 
-
                 // add event handlers to each marker
                 Object.entries(markerEventHandlers).forEach(([event, handler]) => {
                     marker.addListener(event, () => handler(business));
                 });
-
 
                 // add marker to markers ref
                 markers.current[business?.businessYelpId] = marker;

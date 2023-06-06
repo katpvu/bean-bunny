@@ -28,21 +28,21 @@ const SaveButton = ({
                 userId: sessionUser.id,
                 title: business.location.city
             }, businessId))
-            .then(() => setSaved(true))
+            .then(() => setSaved(true));
         } else if (Object.keys(list).length){
             const newListItem = {
                 businessYelpId: businessId,
                 listId: list.id
-            }
+            };
             dispatch(createListItem(newListItem))
                 .then(() => setSaved(true))
                 .then(() => dispatch(fetchListByTitle(business?.location?.city)))
                 .catch(async res => {
-                    let errors = await checkErrors(res)
-                    setErrors(errors)
-                })
-            }
-    }
+                    let errors = await checkErrors(res);
+                    setErrors(errors);
+                });
+            };
+    };
 
     const handleRemoveFromList = () => {
         dispatch(deleteListItem(currentListItem?.id))

@@ -111,6 +111,7 @@ const BusinessPage = () => {
     // }
 
     const headerImages = () => {
+        console.log(business)
         if (business?.additionalPhotosUrls) {
             return (
                 <div className="images-header-container">

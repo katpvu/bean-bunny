@@ -7,6 +7,9 @@ const BusinessHours = ({hours}) => {
     const convertTime = (timeStr) => {
         if (timeStr) {
             let hour = (parseInt(timeStr.substring(0, 2))) % 12
+            if (hour === 0) {
+                hour = 12
+            }
             let min = timeStr.substring(2)
             let ampm;
             parseInt(timeStr.substring(0, 2)) < 12 ? ampm = "am" : ampm = "pm"

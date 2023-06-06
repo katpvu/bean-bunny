@@ -19,7 +19,12 @@ const BusinessHours = ({hours}) => {
         DAYS.forEach((day, i) => {
             let open = convertTime(hours?.open[i]?.start) 
             let end = convertTime(hours?.open[i]?.end) 
-            businessHours[day] = `${open} - ${end}`
+
+            if (open && end) {
+                return businessHours[day] = `${open} - ${end}`
+            } else {
+                return businessHours[day] = "closed"
+            }
         })
     }
 

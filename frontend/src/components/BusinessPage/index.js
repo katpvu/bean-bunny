@@ -29,7 +29,7 @@ const BusinessPage = () => {
 
     const business = useSelector(getBusiness(businessId))
     const sessionUser = useSelector(state => state.session.user); 
-    const ratings = useSelector(state => Object.values(state.ratings));
+    const ratings = useSelector(state => Object.values(state.ratings).reverse());
     const recs = useSelector(state => Object.values(state.searches));
     const list = useSelector(state => state.lists)
     const listItems = useSelector(state => Object.values(state.listItems))

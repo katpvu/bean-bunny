@@ -76,9 +76,10 @@ const BusinessPage = () => {
             let listItemBusinesses = listValues[(listValues.length - 1)]
             if (listItemBusinesses.length > 0 && listItemBusinesses.includes(businessId)) {
                 setSaved(true);
+                console.log(saved)
                 setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
             }
-    }
+        }
     },[list])
 
     
@@ -111,7 +112,6 @@ const BusinessPage = () => {
     // }
 
     const headerImages = () => {
-        console.log(business)
         if (business?.additionalPhotosUrls) {
             return (
                 <div className="images-header-container">

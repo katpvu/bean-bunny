@@ -1,15 +1,14 @@
-import Header from "../Header";
 import {  useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./index.css"
 import SearchResults from "../SearchResults";
 import MapWrapper from "../Map";
 import SearchBar from "../SearchBar";
 import { useState } from "react";
 import { useEffect } from "react";
-import { clearSearches, fetchSearches, getSearches } from "../../store/search";
+import { clearSearches, getSearches } from "../../store/search";
 import { SuperBalls } from "@uiball/loaders";
-const SearchPage = (props) => {
+const SearchPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -22,7 +21,7 @@ const SearchPage = (props) => {
         return () => {
             dispatch(clearSearches());
         }
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         let mapOptions;

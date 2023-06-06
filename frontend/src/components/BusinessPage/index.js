@@ -72,6 +72,7 @@ const BusinessPage = () => {
 
     useEffect(() => {
         if (listsLoaded && Object.keys(list).length > 0) {
+            console.log(Object.values(list))
             let listValues = Object.values(list)
             let listItemBusinesses = listValues[(listValues.length - 1)]
             if (listItemBusinesses.length > 0 && listItemBusinesses.includes(businessId)) {

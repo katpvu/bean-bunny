@@ -81,7 +81,7 @@ const BusinessPage = () => {
                 setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
             }
         }
-    },[list])
+    },[list, listsLoaded])
 
     
     useEffect(() => {

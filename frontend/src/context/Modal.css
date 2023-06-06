@@ -22,7 +22,6 @@
     border-radius: 15px;
     position: absolute;
     width: 100vw;
-    /* background-color:white; */
     z-index: 1000;
   }
 
@@ -45,7 +44,6 @@
         background-color: rgba(0, 0, 0, 0.7);
     }
     #modal-content {
-        /* width: 80vh; */
         height: 80vh;
         z-index: 1000;
     }

@@ -13,7 +13,7 @@ const SearchPage = () => {
     const dispatch = useDispatch();
 
     const searchResults = useSelector(getSearches);
-    const errors = useSelector(state => state.errors.searches)
+    const errors = useSelector(state => state.errors.searches);
     const { location } = useParams();
     const [mapOptions, setMapOptions] = useState({});
 
@@ -21,7 +21,7 @@ const SearchPage = () => {
         return () => {
             dispatch(clearSearches());
         }
-    }, [dispatch])
+    }, [dispatch]);
 
     useEffect(() => {
         let mapOptions;
@@ -32,14 +32,14 @@ const SearchPage = () => {
                     lng: searchResults[0]?.coordinates?.longitude
                 },
                 zoom: 13
-            }
-            setMapOptions(mapOptions)
-        }
-    }, [searchResults])
+            };
+            setMapOptions(mapOptions);
+        };
+    }, [searchResults]);
 
     const markerEventHandlers = {
         'click': (business) => history.push(`/businesses/${business?.businessYelpId}`, {from: `/search${location}`})
-    }
+    };
 
     const searchContent = () => {
         if (location) {
@@ -91,14 +91,12 @@ const SearchPage = () => {
                 <div id="empty-search-page">
                     <SearchBar/>
                 </div>
-            )
-        }
-    }
+            );
+        };
+    };
 
     return (
-        <>
-        {searchContent()}
-        </>
-    )
+        <>{searchContent()}</>
+    );
 };
 export default SearchPage

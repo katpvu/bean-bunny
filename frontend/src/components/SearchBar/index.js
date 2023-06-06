@@ -4,14 +4,12 @@ import { clearSearchesErrors, fetchSearches } from '../../store/search';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { clearSearches } from '../../store/search';
-import { checkErrors } from '../../utils';
 
 const SearchBar = ({location}) => {
     const dispatch = useDispatch()
     const history = useHistory();
 
     const [search, setSearch] = useState("");
-    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         if (location) {

@@ -1,15 +1,6 @@
-
-import { useEffect, useState } from "react";
 import { findAvg } from "../../utils";
 
-const ScoresPanel = ({currentUser, currentUserRating, ratings, business}) => {
-    // const [currentUserRating, setCurrentUserRating] = useState({});
-
-    // useEffect(() => {
-    //     setCurrentUserRating(ratings.find(rating => rating.businessYelpId === business?.businessYelpId))
-    // }, [])
-
-    // let currentUserRating;
+const ScoresPanel = ({currentUserRating, ratings, business}) => {
     let ratingsArray = [];
     ratings.forEach( rating => {
         ratingsArray.push(rating.rating)

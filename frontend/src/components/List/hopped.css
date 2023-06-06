@@ -45,7 +45,6 @@
     position: sticky;
     top: 20px;
     right: 20px;
-    /* width: 60%; */
 }
 
 #hopped-based-on-ratings-container,
@@ -129,7 +128,6 @@
 .view-business-button {
     width: 300px;
     text-align: center;
-    /* margin: 10px 0px; */
     margin-top: 30px;
     padding: 15px 0px;
     padding-left: 15px;
@@ -143,7 +141,6 @@
 }
 
 .view-business-button:hover {
-    /* color:  #FBFBF4; */
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);
 }

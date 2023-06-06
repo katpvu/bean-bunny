@@ -43,7 +43,6 @@ const HoppedIndex = ({businesses, currentUserRatings, loaded}) => {
                                 src={currentPreviewId.additionalPhotosUrls[0]} 
                                 alt="preview"/>
                         </div>
-                        {/* <ScoresPanel /> */}
                     </div>
                     <div className="preview-right">
                         <div>

@@ -27,7 +27,6 @@ export const clearBusinesses = () => ({
 })
 
 // THUNK ACTION CREATORS
-
 export const fetchBusiness = (businessId) => async dispatch => {
     const res = await csrfFetch(`/api/businesses/${businessId}`);
     const data = await res.json();

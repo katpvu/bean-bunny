@@ -20,7 +20,6 @@
     width: 100%;
 }
 .bp-header-img-container {
-    /* width: 33%; */
     height: 300px;
 }
 
@@ -89,7 +88,6 @@
     color:  #FBFBF4;
     border: 1px solid rgb(240, 128, 147);
     background-color: rgb(245, 156, 171);
-    /* background-color: #212427;; */
 }
 
 .business-info-section-container-details h2 {

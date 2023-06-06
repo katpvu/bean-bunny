@@ -1,13 +1,10 @@
 import './index.css'
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import SearchBar from "../SearchBar";
 import Navigation from '../Navigation';
-import bean from '../../assets/bean-logo-black.png'
 import SocialLinks from '../SocialLinks/SocialLinks';
 import logo from '../../assets/logo.png'
 
-const Header = (props) => {
-
+const Header = () => {
     return (
         <div className="header-container">
             <div>

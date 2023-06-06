@@ -6,7 +6,6 @@ import { restoreSession } from "../../store/session";
 import { getBusinesses } from "../../store/business";
 import { getBusinessRatings } from "../../store/ratings";
 import { clearBusinesses } from "../../store/business";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
 
 const Hopped = (props) => {

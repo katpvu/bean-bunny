@@ -1,10 +1,8 @@
-import { useEffect } from "react";
 import "./index.css"
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import BunnyRatingInput from "../Rating/BunnyRatingInput";
 
 const SearchResultItem = ({business, prevPage}) => {
-    
     return (
         <Link className="search-item-container" 
             to={{
@@ -24,4 +22,4 @@ const SearchResultItem = ({business, prevPage}) => {
     );
 };
 
-export default SearchResultItem
+export default SearchResultItem;

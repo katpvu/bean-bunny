@@ -1,7 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import LoginFormPage from "./components/LoginFormPage";
-import HomePage from "./components/HomePage";
 import SignUpForm from "./components/SignUpForm";
 import ErrorPage from "./components/ErrorPage";
 import ListIndexPage from "./components/List/ListIndexPage";

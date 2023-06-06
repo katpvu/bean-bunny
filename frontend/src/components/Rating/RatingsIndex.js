@@ -15,6 +15,8 @@ const RatingsIndex = ({ratings}) => {
         );
     };
 
+    console.log(ratings)
+
     return (
     <>
         <h1 className="ratings-container-title">THOUGHTS FROM OTHERS</h1>

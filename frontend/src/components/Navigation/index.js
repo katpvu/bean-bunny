@@ -17,7 +17,6 @@ import { useState, useEffect } from "react";
 import { GiHamburgerMenu } from 'react-icons/gi'
 import NavPanel from "./NavPanel";
 
-
 const Navigation = (props) => {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -35,8 +34,8 @@ const Navigation = (props) => {
                 dispatch(clearLists());
                 dispatch(clearListItems());
                 dispatch(clearRatings());
-            })
-    }
+            });
+    };
 
     const sessionLinks = () => {
         if (sessionUser) {
@@ -78,9 +77,6 @@ const Navigation = (props) => {
             )
         }
     }
-
-
-
 
     return (
     <>

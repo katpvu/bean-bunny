@@ -22,7 +22,7 @@ const BeanMap = ({
             center: { lat: 37.7749, lng: -122.4194 },
             zoom: 40,
             ...mapOptions
-        }))
+        }));
     },[mapRef, mapOptions, markers]);
 
 
@@ -75,12 +75,12 @@ const BeanMap = ({
 
 
                 // add marker to markers ref
-                markers.current[business?.businessYelpId] = marker
-                businessIds.push(business?.businessYelpId)
+                markers.current[business?.businessYelpId] = marker;
+                businessIds.push(business?.businessYelpId);
             };
         });
-        }   
-    }, [map, markers, businesses, markerEventHandlers])
+        };
+    }, [map, markers, businesses, markerEventHandlers]);
 
     useEffect(() => {
         let markerKeys = Object.keys(markers.current)        
@@ -93,24 +93,19 @@ const BeanMap = ({
 
 
     return (
-        <>
-        <div ref={mapRef} id="map"><h1>map</h1></div>
-        
-        </>
+    <div ref={mapRef} id="map"><h1>map</h1></div>
     );
 };
 
 const MapWrapper = ({businesses, mapOptions, mapEventHandlers, markerEventHandlers}) => {
     return (
-        <>
-            <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} >
-                <BeanMap 
-                    businesses={businesses} 
-                    mapOptions={mapOptions} 
-                    mapEventHandlers={mapEventHandlers} 
-                    markerEventHandlers={markerEventHandlers}/>
-            </Wrapper> 
-        </>
+    <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} >
+        <BeanMap 
+            businesses={businesses} 
+            mapOptions={mapOptions} 
+            mapEventHandlers={mapEventHandlers} 
+            markerEventHandlers={markerEventHandlers}/>
+    </Wrapper> 
     );
 };
 export default MapWrapper;

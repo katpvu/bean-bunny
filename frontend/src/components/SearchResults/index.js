@@ -2,7 +2,6 @@ import SearchResultItem from "../SearchResultItem";
 import "./index.css"
 
 const SearchResults = ({searchResults, prevPage, setHoveredBusiness}) => {
-
     return (
         <>
             <div className="search-results-container">
@@ -20,7 +19,7 @@ const SearchResults = ({searchResults, prevPage, setHoveredBusiness}) => {
                 })}
             </div>
         </>
-    )
-}
+    );
+};
 
 export default SearchResults;

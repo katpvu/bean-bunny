@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-// import './index.css'
 import { restoreSession, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import spilledBeans from "../../assets/spilled-beans.png"
 
-
-const SignUpForm = (props) => {
+const SignUpForm = () => {
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
@@ -20,7 +18,7 @@ const SignUpForm = (props) => {
     
     useEffect(() => {
         dispatch(restoreSession())
-    }, [])
+    }, []);
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = e => {
@@ -74,7 +72,7 @@ const SignUpForm = (props) => {
 
 
         </div>
-    )
+    );
 };
 
 export default SignUpForm;

@@ -1,9 +1,8 @@
-import { BsGithub, BsLinkedin } from "react-icons/bs"
+import { BsGithub, BsLinkedin } from "react-icons/bs";
 import "./SocialLinks.css"
 import { Link } from "react-router-dom";
 
 const SocialLinks = () => {
-
 
     return (
         <div className="social-links-container">
@@ -14,7 +13,7 @@ const SocialLinks = () => {
                 <BsLinkedin />
             </Link>
         </div>
-    )
+    );
 };
 
 export default SocialLinks;

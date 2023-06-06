@@ -1,9 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
 import ListIndexItem from "./ListIndexItem";
-import { useEffect, useState } from "react";
-import { getLists, fetchLists } from "../../store/list";
-import Header from "../Header";
-import ListForm from "./ListForm";
 import "./index.css"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 

@@ -5,19 +5,19 @@ import { login } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import spilledBeans from "../../assets/spilled-beans.png"
+import spilledBeans from "../../assets/spilled-beans.png";
 
 const LoginFormPage = (props) => {
-    // hooks
     const dispatch = useDispatch();
     const history = useHistory();
+
     const sessionUser = useSelector(state => state.session.user);
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
-
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -37,9 +37,9 @@ const LoginFormPage = (props) => {
         const demoUser = {
             username: 'demobunny',
             password: 'password'
-        }
+        };
         dispatch(login(demoUser))
-            .then(history.push("/"))
+            .then(history.push("/"));
     };
 
     return (
@@ -76,7 +76,7 @@ const LoginFormPage = (props) => {
             <img className="login-beans" src={spilledBeans} alt="background" />
         </div>
         </>
-    )
+    );
 
 };
 

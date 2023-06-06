@@ -1,8 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
 import "./index.css"
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { getListItem, getListItems } from "../../store/list_items";
 
 const ListIndexItem = ({list}) => {
 

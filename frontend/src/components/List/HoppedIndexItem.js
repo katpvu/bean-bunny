@@ -30,7 +30,6 @@ const HoppedIndexItem = ({numRating, ratings, businesses, setCurrentPreviewId}) 
             <ul>
                 {ratings?.map((rating, i) => (
                     <li 
-                        // onClick={() => setCurrentPreviewId(businesses.find(business => business.businessYelpId === rating.businessYelpId))}
                         onClick={() => handleClick(rating.businessYelpId)}
                         key={i}
                     >

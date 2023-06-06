@@ -10,7 +10,7 @@ export function ModalProvider({ children }) {
 
   useEffect(() => {
     setValue(modalRef.current);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -35,4 +35,4 @@ export function Modal({ onClose, children }) {
     </div>,
     modalNode
   );
-}
+};

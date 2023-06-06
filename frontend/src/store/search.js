@@ -2,16 +2,14 @@ import { createBusiness } from "./business";
 import csrfFetch from "./csrf";
 
 // SELECTORS
-export const getSearches = state => Object.values(state.searches)
-
-
+export const getSearches = state => Object.values(state.searches);
 
 // CONSTANTS
-const RECEIVE_SEARCHES = 'searches/RECEIVE_SEARCHES'
-const RECEIVE_RECS = 'searches/RECEIVE_RECS'
-const CLEAR_SEARCHES = 'searches/CLEAR_SEARCHES'
-const RECEIVE_SEARCHES_ERRORS = 'searches/RECEIVE_SEARCHES_ERRORS'
-const CLEAR_SEARCHES_ERRORS = 'searches/CLEAR_SEARCHES_ERRORS'
+const RECEIVE_SEARCHES = 'searches/RECEIVE_SEARCHES';
+const RECEIVE_RECS = 'searches/RECEIVE_RECS';
+const CLEAR_SEARCHES = 'searches/CLEAR_SEARCHES';
+const RECEIVE_SEARCHES_ERRORS = 'searches/RECEIVE_SEARCHES_ERRORS';
+const CLEAR_SEARCHES_ERRORS = 'searches/CLEAR_SEARCHES_ERRORS';
 
 // ACTION CREATORS
 export const receiveSearches = (searches) => ({
@@ -39,7 +37,6 @@ export const clearSearchesErrors = (errors) => ({
   });
 
 // THUNK ACTION CREATORS
-
 export const fetchSearches = (location) => async dispatch => {
     try {
         const res = await csrfFetch('/api/searches', {
@@ -50,8 +47,8 @@ export const fetchSearches = (location) => async dispatch => {
         return dispatch(receiveSearches(data));
     } catch (err) {
         const resBody = await err.json();
-        dispatch(receiveErrors(resBody.errors))
-    }
+        dispatch(receiveErrors(resBody.errors));
+    };
 }
 
 export const fetchRecs = (businessYelpId) => async dispatch => {
@@ -85,4 +82,5 @@ export const searchesErrorsReducer = (state = nullErrors, action) => {
         return state;
     }
   };
+  
 export default SearchesReducer;

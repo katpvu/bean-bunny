@@ -19,7 +19,7 @@ export const rootReducer = combineReducers({
     ratings: RatingsReducer,
     users: UsersReducer,
     errors: errorsReducer
-})
+});
 
 // ENHANCER
 let enhancer;
@@ -33,10 +33,11 @@ if (process.env.NODE_ENV === 'production') {
     const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     enhancer = composeEnhancers(applyMiddleware(thunk, logger));
-}
+};
 
 // CONFIGURE STORE 
 const configureStore = (preloadedState) => {
     return createStore(rootReducer, preloadedState, enhancer);
 };
+
 export default configureStore;

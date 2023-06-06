@@ -40,11 +40,11 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
             if (imagesToDelete.length > 0) {
                 imagesToDelete.forEach(image => {
                     formData.append('images_to_delete[]', image)
-                })
-            }
+                });
+            };
             dispatch(updateRating(formData))
             .then(() => dispatch(fetchBusiness(business.businessYelpId)))
-            .then(() => closeModal())
+            .then(() => closeModal());
         } else {
             dispatch(createRating(formData))
                 .then(() => dispatch(fetchBusiness(business.businessYelpId)))
@@ -52,8 +52,8 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                 .catch(async res => {
                     let errors = await checkErrors(res)
                     setErrors(errors)
-                })
-        }
+                });
+        };
     };
 
     const onChange = (number) => {
@@ -114,7 +114,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                         {errors.map(error => <li key={error} className="error-message">{error}</li>)}
                     </ul>
                     <label>How would you rate your experience?
-                        {/* for rating  */}
                         <BunnyRatingInput 
                             rating={rating} 
                             onChange={onChange}/>
@@ -128,7 +127,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                     </label>
 
                     <label>Add your favorite orders:
-                        {/* for fav orders */}
                         <input type="text"
                         value={favOrders}
                         placeholder="Orange blossom cold brew"
@@ -136,7 +134,6 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
                     </label>
 
                     <label className="photos-upload-label">Upload Photos 
-                        {/* for adding photos */}
                         <input type="file" onChange={handleFiles} multiple />
                     </label>
                     <div className="review-photo-gallery">

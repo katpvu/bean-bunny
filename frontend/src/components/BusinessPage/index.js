@@ -85,12 +85,12 @@ const BusinessPage = () => {
     useEffect(() => {
         let mapOps;
         if (business && loaded) {
-            const lat = business?.coordinates?.latitude;
-            const lng = business?.coordinates?.longitude
+            // const lat = business?.coordinates?.latitude;
+            // const lng = business?.coordinates?.longitude
             mapOps = {
                 center: {
-                    lat: +lat,
-                    lng: +lng
+                    lat: business?.coordinates?.latitude,
+                    lng: business?.coordinates?.longitude
                 },
                 zoom: 15
             }

@@ -67,6 +67,7 @@ export const fetchListContents = (listId) => async dispatch => {
     let data = await res.json();
     dispatch(receiveListContents(data))
 }
+
 export const createList = (list, businessId) => async dispatch => {
     const formData = new FormData();
     formData.append("list[title]", list.title);

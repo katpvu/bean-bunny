@@ -25,17 +25,16 @@ const ListIndexPage = (props) => {
     return (
         <>
         {loaded ? 
-            <ListIndex lists={lists}/>
+        <ListIndex lists={lists}/>
         : 
         <div className="loader-container">
-        <SuperBalls 
-            size={45}
-            speed={1.4} 
-            color="black" 
-        /> 
+            <SuperBalls 
+                size={45}
+                speed={1.4} 
+                color="black" 
+            /> 
         </div>
         }
-        
         </>
     )
 };

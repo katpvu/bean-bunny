@@ -5,7 +5,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom/cjs/react-r
 import { clearListItems } from "../../store/list_items";
 import MapWrapper from "../Map";
 import { clearBusinesses, fetchBusiness, getBusiness } from "../../store/business";
-import { fetchRecs, fetchSearches } from "../../store/search";
+import { fetchRecs } from "../../store/search";
 import ScoresPanel from "./ScoresPanel";
 import BusinessHours from "./BusinessHours";
 import { clearSearches } from "../../store/search";
@@ -22,7 +22,7 @@ import { restoreSession } from "../../store/session";
 const BusinessPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const location = useLocation();
+    // const location = useLocation();
     
     // const { from } = location.state;
     const { businessId } = useParams();
@@ -40,14 +40,15 @@ const BusinessPage = () => {
     const [saved, setSaved] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [listsLoaded, setListsLoaded] = useState(false);
+    const [mapOptions, setMapOptions] = useState({});
 
     useEffect(() => {
         dispatch(restoreSession());
     }, [dispatch])
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(fetchBusiness(businessId))
-            .then(() => setLoaded(true));
+            .then(() => setLoaded(true))
         dispatch(fetchRecs(businessId));
         return () => {
             dispatch(clearBusinesses());
@@ -66,31 +67,36 @@ const BusinessPage = () => {
         if (sessionUser) {
             setCurrentUserRating(ratings.find(rating => rating.userId === sessionUser.id));
         };
-    }, [business])
+    }, [dispatch, business])
 
 
     useEffect(() => {
-        if (listsLoaded) {
-            if (Object.keys(list).length > 0){
-                let listValues = Object.values(list)
-                let listItemBusinesses = listValues[(listValues.length - 1)]
-                if (listItemBusinesses.length > 0 && listItemBusinesses.includes(businessId)) {
-                    setSaved(true);
-                    setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
-                }
+        if (listsLoaded && Object.keys(list).length > 0) {
+            let listValues = Object.values(list)
+            let listItemBusinesses = listValues[(listValues.length - 1)]
+            if (listItemBusinesses.length > 0 && listItemBusinesses.includes(businessId)) {
+                setSaved(true);
+                setCurrentListItem(listItems.find(listItem => listItem.businessYelpId === businessId))
             }
-        }
-    },[list, businessId])
-
-    let mapOptions;
-    mapOptions = {
-        center: {
-            lat: business?.coordinates?.latitude,
-            lng: business?.coordinates?.longitude
-        },
-        // center: new window.google.maps.LatLng(business?.coordinates?.latitude, business?.coordinates?.longitude),
-        zoom: 15
     }
+    },[list])
+
+    
+    useEffect(() => {
+        let mapOps;
+        if (business && loaded) {
+            const lat = business?.coordinates?.latitude;
+            const lng = business?.coordinates?.longitude
+            mapOps = {
+                center: {
+                    lat: +lat,
+                    lng: +lng
+                },
+                zoom: 15
+            }
+            setMapOptions(mapOps)
+        }
+    }, [business])
 
     // const handleBackButton = () => {
     //     if (from?.includes(' ')) {
@@ -190,7 +196,7 @@ const BusinessPage = () => {
                         </div>
                         <div>
                             <div className="bp-map-container">
-                                <MapWrapper businesses={[business]} mapOptions={mapOptions}/>
+                                {business && Object.keys(business).length > 0 && <MapWrapper businesses={[business]} mapOptions={mapOptions}/>}
                             </div>
                             <h3 className="map-address">{business?.location?.address1}, {business?.location?.city}, {business?.location?.state} {business?.location?.zipCode}</h3>
                         </div>

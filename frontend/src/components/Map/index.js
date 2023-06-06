@@ -37,18 +37,19 @@ const BeanMap = ({
     // for every business that pops up on the page, render markers or remove markers
     let businessIds = []
     useEffect(()=>{
+        if (businesses) {
         businesses.forEach(business => {
             if (!markers[business?.businessYelpId]) {
                 // create new marker for business
-                
+
                 let marker = new window.google.maps.Marker({
                     position: {
-                        lat: business?.coordinates.latitude,
-                        lng: business?.coordinates.longitude
+                        lat: business?.coordinates?.latitude,
+                        lng: business?.coordinates?.longitude
                     },
                     map: map,
                     icon: icon
-                    // title: {text: `${business?.rating}`, color: "white"}
+
                 });
 
                 // add info window for each business marker
@@ -78,6 +79,7 @@ const BeanMap = ({
                 businessIds.push(business?.businessYelpId)
             };
         });
+        }   
     }, [map, markers, businesses, markerEventHandlers])
 
     useEffect(() => {

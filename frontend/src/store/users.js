@@ -32,7 +32,6 @@ export const fetchUsers = () => async dispatch => {
 
 // REDUCER 
 const UsersReducer = (state={}, action) => {
-    let newState = { ...state };
     switch (action.type) {
         case RECEIVE_USER_DETAIL:
             return action.payload.user

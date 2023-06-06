@@ -93,9 +93,11 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
         setCurrentPhotoFiles(newCurrentPhotoFiles);
 
         // info to be sent to backend
-        const newImagesToDelete = [...imagesToDelete]
-        newImagesToDelete.push(currentUserRating.photoIds[index])
-        setImagesToDelete(newImagesToDelete)
+        if (currentUserRating?.photoIds?.length > 0) {
+            const newImagesToDelete = [...imagesToDelete]
+            newImagesToDelete.push(currentUserRating.photoIds[index])
+            setImagesToDelete(newImagesToDelete)
+        }
       }
     return (
         <div className="rating-form-page-container">

@@ -52,14 +52,14 @@ const SaveButton = ({
     }
 
 
-    if (!saved) {
+    if (listsLoaded && !saved) {
         return (
             <div 
                 className="business-page-save-button"
                 onClick={handleAddToList}
             >save</div>
         )
-    } else {
+    } else if (listsLoaded && saved){
         return (
             <>
             <div className="save-button-container">

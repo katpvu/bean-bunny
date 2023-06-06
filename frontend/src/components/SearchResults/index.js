@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useState } from "react";
 import SearchResultItem from "../SearchResultItem";
 import "./index.css"
 

@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import spilledBeans from "../../assets/spilled-beans.png";
-import { Ring } from '@uiball/loaders'
+import { Ring } from '@uiball/loaders';
 
 const LoginFormPage = (props) => {
     const dispatch = useDispatch();
@@ -31,9 +31,9 @@ const LoginFormPage = (props) => {
         };
         dispatch(login(user))
             .catch(async res => {
-                let errors = await checkErrors(res)
-                setErrors(errors)
-                setLoginLoad(false)
+                let errors = await checkErrors(res);
+                setErrors(errors);
+                setLoginLoad(false);
             });
     };
 

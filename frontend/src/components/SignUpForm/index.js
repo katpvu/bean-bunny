@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { checkErrors } from '../../utils';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import spilledBeans from "../../assets/spilled-beans.png"
+import { Ring } from '@uiball/loaders';
+
 
 const SignUpForm = () => {
 
@@ -14,6 +16,7 @@ const SignUpForm = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState([]);
+    const [loginLoad, setLoginLoad] = useState(false);
 
     
     useEffect(() => {
@@ -23,6 +26,7 @@ const SignUpForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        setLoginLoad(true);
         const newUser = {
             username: username,
             email: email,
@@ -30,8 +34,9 @@ const SignUpForm = () => {
         };
         dispatch(signup(newUser))
             .catch(async res => {
-                let errors = await checkErrors(res)
-                setErrors(errors)
+                let errors = await checkErrors(res);
+                setErrors(errors);
+                setLoginLoad(false);
             });
     };
 
@@ -66,7 +71,17 @@ const SignUpForm = () => {
                     <div className="create-acc-line">
                         <p>Already have an account? <Link to="/login">Sign in here!</Link></p>
                     </div>
-                    <button className="login-button">Sign Up</button>
+                    <button className="login-button">
+                        {loginLoad ?
+                        <Ring 
+                            size={20}
+                            lineWeight={5}
+                            speed={2} 
+                            color="white" 
+                            />
+                        : "Sign Up"
+                        }
+                    </button>
                 </form>
                 <img className="login-beans" src={spilledBeans} alt="background" />
 

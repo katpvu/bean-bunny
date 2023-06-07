@@ -96,7 +96,7 @@ const BusinessPage = () => {
             }
             setMapOptions(mapOps)
         }
-    }, [business])
+    }, [business, loaded])
 
     // const handleBackButton = () => {
     //     if (from?.includes(' ')) {

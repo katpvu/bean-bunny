@@ -6,6 +6,9 @@
     left: 0;
     bottom: 0;
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   #modal-background {
@@ -14,22 +17,16 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 40
   }
   
   #modal-content {
     border-radius: 15px;
     position: absolute;
-    width: 100vw;
+    width: 99vw;
+    height: 95vh;
     z-index: 1000;
-  }
-
-  @media (min-width: 469px) {
-    #modal-content {
-        width: 100vw;
-        height: 80vh;
-    }
   }
 
   @media (min-width: 698px) {
@@ -44,7 +41,6 @@
         background-color: rgba(0, 0, 0, 0.7);
     }
     #modal-content {
-        height: 80vh;
         z-index: 1000;
     }
   }
@@ -52,5 +48,6 @@
   @media (min-width: 900px) {
     #modal-content {
       width: 80vw;
+      height: 80vh;
   }
   }

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { updateRating } from "../../store/ratings";
 import { fetchBusiness, getBusiness } from "../../store/business";
 import {IoIosRemoveCircle} from "react-icons/io"
+import "./index.css"
 
 const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRating}) => {
     const dispatch = useDispatch();

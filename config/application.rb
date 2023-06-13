@@ -32,6 +32,7 @@ module BeanBunny
       secure: Rails.env.production?
 
     # Configuration for the application, engines, and railties goes here.
+    config.railties_order = [:all, :main_app]
 
     #may need to do something else
     # config.active_storage.replace_on_assign_to_many = false

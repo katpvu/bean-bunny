@@ -26,5 +26,6 @@
 @media (max-width: 535px) {
     .search-bar {
         font-size: 13vw;
+        letter-spacing: -1px;
     }
 }

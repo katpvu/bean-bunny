@@ -131,6 +131,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .review-photo-gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -140,6 +141,7 @@
     justify-content: center;
     width: 100%;
 }
+
 .fp-overlay {
     width: 50%;
     height: 100%;

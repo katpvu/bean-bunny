@@ -7,17 +7,21 @@ import { getBusinesses } from "../../store/business";
 import { getBusinessRatings } from "../../store/ratings";
 import { clearBusinesses } from "../../store/business";
 import { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Hopped = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
     const businesses = useSelector(getBusinesses)
     const ratings = useSelector(getBusinessRatings)
     const [loaded, setLoaded] = useState(false) 
 
+    if (!sessionUser) history.push("/")
+
     useEffect(() => {
-        dispatch(restoreSession());
+        dispatch(restoreSession())
     }, [dispatch])
 
     useEffect(() => {

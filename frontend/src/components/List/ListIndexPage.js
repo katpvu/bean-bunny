@@ -5,22 +5,36 @@ import "./index.css"
 import ListIndex from "./ListIndex";
 import { clearListItems } from "../../store/list_items";
 import { SuperBalls } from "@uiball/loaders";
+import { restoreSession } from "../../store/session";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 const ListIndexPage = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    
+    const lists = useSelector(getLists);
+    const sessionUser = useSelector(state => state.session.user.user)
 
     const [loaded, setLoaded] = useState(false);
     
-    const lists = useSelector(getLists);
+    
+    if (!sessionUser) history.push("/")
+    
+    useEffect(() => {
+        dispatch(restoreSession());
+    }, [dispatch])
 
     useEffect(() => {
-        dispatch(fetchLists())
-            .then(() => setLoaded(true));
+        if (sessionUser) {
+            dispatch(fetchLists())
+                .then(() => setLoaded(true));
+        }
 
         return () => {
             dispatch(clearListItems());
         };
-    }, []);
+    }, [dispatch, sessionUser]);
 
     return (
         <>

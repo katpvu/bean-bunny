@@ -15,29 +15,41 @@ const RatingsIndex = ({ratings}) => {
         );
     };
 
+    const ratingsContent = () => {
+        if (ratings.length) {
+            return (
+                ratings.map((rating, i) => (
+                    <div key={i} className="rating-item-container">
+                        <BunnyRatingInput rating={rating.rating} disabled={true} />
+                        {convertDate(rating.createdAt)}
+                        <p>{rating.author}</p>
+                        <h2>{rating.notes}</h2>
+                        {rating.favOrders 
+                            ? <p>FAVORITE ORDER: {rating.favOrders}</p>
+                            : "no favorite orders :("
+                        }
+                        <div className="review-photo-gallery">
+                        {rating.photoUrls.map((url, i) => (
+                            <div key={i} className="search-item-img-container">
+                                <img src={url} className="item-img" alt="review"/>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                ))
+            )
+        } else {
+            return (
+                <h2>Be the first to leave a review</h2>
+            )
+        }
+    }
+
     return (
     <>
         <h1 className="ratings-container-title">THOUGHTS FROM OTHERS</h1>
         <div className="bp-ratings-index-container">
-            {ratings.map((rating, i) => (
-                <div key={i} className="rating-item-container">
-                    <BunnyRatingInput rating={rating.rating} disabled={true} />
-                    {convertDate(rating.createdAt)}
-                    <p>{rating.author}</p>
-                    <h2>{rating.notes}</h2>
-                    {rating.favOrders 
-                        ? <p>FAVORITE ORDER: {rating.favOrders}</p>
-                        : "no favorite orders :("
-                    }
-                    <div className="review-photo-gallery">
-                    {rating.photoUrls.map((url, i) => (
-                        <div key={i} className="search-item-img-container">
-                            <img src={url} className="item-img" alt="review"/>
-                        </div>
-                    ))}
-                    </div>
-                </div>
-            ))}
+            {ratingsContent()}
             {openPhotoModal && (
                 <Modal onClose={() => setOpenPhotoModal(false)}>
                     <PhotoModal />

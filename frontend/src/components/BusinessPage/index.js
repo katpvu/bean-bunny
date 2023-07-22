@@ -60,7 +60,7 @@ const BusinessPage = () => {
     }, [dispatch, businessId])
 
     useEffect(() => {
-        if (business) {
+        if (business && sessionUser) {
             dispatch(fetchListByTitle(business?.location?.city))
                 .then(() => setListsLoaded(true));
         };

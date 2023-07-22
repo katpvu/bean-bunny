@@ -31,7 +31,7 @@ const ListItemIndex = (props) => {
 
     const handleDelete = () => {
         dispatch(deleteList(list?.id))
-        history.push("/lists")
+            .then(() => history.push("/lists"))
     }
     return (
         <>

@@ -10,6 +10,7 @@ import SearchPage from "./components/SearchPage";
 import Hopped from "./components/List/Hopped";
 import Header from "./components/Header";
 import SplashPage from "./components/SplashPage";
+import { ProtectedRoute } from "./components/Routes/Routes";
 
 
 function App() {
@@ -19,11 +20,11 @@ function App() {
       <Header />
       <Switch>
         <Route path="/error"><ErrorPage /></Route>
-        <Route path="/lists/:listId"><ListItemIndex /></Route>
-        <Route path="/lists"><ListIndexPage /></Route>
+        <ProtectedRoute path="/lists/:listId" comp={ListItemIndex} />
+        <ProtectedRoute path="/lists" comp={ListIndexPage} />
         <Route path="/businesses/:businessId"><BusinessPage /></Route>
         <Route path="/search/:location"><SearchPage /></Route>
-        <Route path="/hopped"><Hopped /></Route>
+        <ProtectedRoute path="/hopped" comp={Hopped}/>
         <Route exact path="/login"><LoginFormPage /></Route>
         <Route exact path="/signup"><SignUpForm /></Route>
         <Route exact path="/search"><SearchPage /></Route>

@@ -13,27 +13,21 @@ const ListIndexPage = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     
+    const sessionUser = useSelector(state => state.session.user)
     const lists = useSelector(getLists);
-    const sessionUser = useSelector(state => state.session.user.user)
 
     const [loaded, setLoaded] = useState(false);
-    
-    
-    if (!sessionUser) history.push("/")
-    
-    useEffect(() => {
-        dispatch(restoreSession());
-    }, [dispatch])
+
 
     useEffect(() => {
         if (sessionUser) {
             dispatch(fetchLists())
                 .then(() => setLoaded(true));
         }
-
         return () => {
             dispatch(clearListItems());
         };
+
     }, [dispatch, sessionUser]);
 
     return (

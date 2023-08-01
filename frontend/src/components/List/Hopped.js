@@ -18,14 +18,10 @@ const Hopped = (props) => {
     const ratings = useSelector(getBusinessRatings)
     const [loaded, setLoaded] = useState(false) 
 
-    if (!sessionUser) history.push("/")
-
     useEffect(() => {
-        dispatch(restoreSession())
-    }, [dispatch])
-
-    useEffect(() => {
+        console.log(sessionUser)
         if (sessionUser) {
+            console.log("hello")
             dispatch(fetchUserDetail(sessionUser.id))
                 .then(() => setLoaded(true))
         }

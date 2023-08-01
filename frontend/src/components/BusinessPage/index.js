@@ -44,6 +44,7 @@ const BusinessPage = () => {
 
     useEffect(() => {
         dispatch(restoreSession());
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, [dispatch])
 
     useEffect(() => {
@@ -60,6 +61,7 @@ const BusinessPage = () => {
     }, [dispatch, businessId])
 
     useEffect(() => {
+        window.scrollTo({ top: 0, left: 0 });
         if (business && sessionUser) {
             dispatch(fetchListByTitle(business?.location?.city))
                 .then(() => setListsLoaded(true));

@@ -15,7 +15,7 @@ const RecsPanel = ({
                     <Link 
                         key={i}
                         className="recs-image-container" 
-                        to={{pathname: `/businesses/${rec?.businessYelpId}`, state: {from: `/busineeses/${businessId}`}}}
+                        to={{pathname: `/businesses/${rec?.businessYelpId}`, state: {from: `/businesses/${businessId}`}}}
                     >
                         <img src={rec?.imageUrl} alt="rec" />
                         <div className="rec-overlay"></div>

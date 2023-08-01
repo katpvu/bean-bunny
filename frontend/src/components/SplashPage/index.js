@@ -7,6 +7,7 @@ import { restoreSession } from "../../store/session";
 const SplashPage = () => {
 
     const dispatch = useDispatch();
+    // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
     useEffect(() => {
         dispatch(restoreSession())

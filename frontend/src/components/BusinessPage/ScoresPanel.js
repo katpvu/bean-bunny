@@ -1,6 +1,6 @@
 import { findAvg } from "../../utils";
 
-const ScoresPanel = ({currentUserRating, ratings, business}) => {
+const ScoresPanel = ({currentUserRating, ratings, business, currentUser}) => {
     let ratingsArray = [];
     ratings.forEach( rating => {
         ratingsArray.push(rating.rating)
@@ -11,7 +11,7 @@ const ScoresPanel = ({currentUserRating, ratings, business}) => {
         <>
         <div className="scores-panel-container">
                 <div className="score-item">
-                    <div className="rating">{currentUserRating ? currentUserRating?.rating : "-"}</div>
+                    <div className="rating">{currentUser && currentUserRating ? currentUserRating?.rating : "-"}</div>
                     <div className="rating-info">
                         <h3>Your Rating</h3>
                         <p>What you think</p>

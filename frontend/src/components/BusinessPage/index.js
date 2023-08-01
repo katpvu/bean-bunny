@@ -143,7 +143,7 @@ const BusinessPage = () => {
             <>
             <div className="rating-button" 
                 onClick={handleOpenRatingButton}
-                >{currentUserRating ? "update rating" : "create rating" }
+                >{currentUserRating && sessionUser? "update rating" : "create rating" }
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

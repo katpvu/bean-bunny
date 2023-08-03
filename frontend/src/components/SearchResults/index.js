@@ -15,7 +15,7 @@ const SearchResults = ({searchResults, prevPage, setHoveredBusiness}) => {
                         yelpRating: searchBusiness.yelpRating,
                         imageUrl: searchBusiness.imageUrl
                     }
-                    return <SearchResultItem setHoveredBusiness={setHoveredBusiness} business={business} key={business.id} prevPage={prevPage}/>
+                    return <SearchResultItem setHoveredBusiness={setHoveredBusiness} business={business} key={i} prevPage={prevPage}/>
                 })}
             </div>
         </>

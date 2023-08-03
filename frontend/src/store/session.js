@@ -59,7 +59,7 @@ export const restoreSession = () => async dispatch => {
     let res = await csrfFetch('/api/session');
     storeCSRFToken(res);
     const data = await res.json();
-    storeCurrentUser(data);
+    storeCurrentUser(data.user);
     dispatch(setCurrentUser(data));
     return res;
 };
@@ -69,14 +69,14 @@ const initialState = {
     user: JSON.parse(sessionStorage.getItem("currentUser"))
 }
 
-const sessionReducer = (state= initialState, action) => {
+const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_CURRENT_USER:
-            return { ...state, user: action.payload.user}
+            return { ...state, user: action.payload.user }
         case REMOVE_CURRENT_USER:
-            return { ...state, user: null }
+            return { ...state, user: null };;
         default:
-            return state;
+            return { ...state };
     }
 }
 

@@ -44,6 +44,7 @@ const BusinessPage = () => {
 
     useEffect(() => {
         dispatch(restoreSession());
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, [dispatch])
 
     useEffect(() => {
@@ -60,7 +61,8 @@ const BusinessPage = () => {
     }, [dispatch, businessId])
 
     useEffect(() => {
-        if (business) {
+        window.scrollTo({ top: 0, left: 0 });
+        if (business && sessionUser) {
             dispatch(fetchListByTitle(business?.location?.city))
                 .then(() => setListsLoaded(true));
         };
@@ -143,7 +145,7 @@ const BusinessPage = () => {
             <>
             <div className="rating-button" 
                 onClick={handleOpenRatingButton}
-                >{currentUserRating ? "update rating" : "create rating" }
+                >{currentUserRating && sessionUser? "update rating" : "create rating" }
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

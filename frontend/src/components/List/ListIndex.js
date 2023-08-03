@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const ListIndex = ({lists}) => {
     const history = useHistory();
 
+
     return (
         <>
            <div className="list-index-section-container">

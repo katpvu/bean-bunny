@@ -1,9 +1,9 @@
 class Api::ListsController < ApplicationController
     def index
         # debugger
-        @lists = List.where(user_id: current_user.id)
-        p current_user.id
-        render :index
+            @lists = List.where(user_id: current_user.id)
+            p current_user.id
+            render :index
     end
 
     def show

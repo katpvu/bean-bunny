@@ -45,6 +45,7 @@
     position: sticky;
     top: 20px;
     right: 20px;
+    width: 80%;
 }
 
 #hopped-based-on-ratings-container,
@@ -52,6 +53,11 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+}
+
+#hopped-based-on-ratings-container {
+    max-width: 580px;
+    /* min-width: 480px; */
 }
 
 .hopped-rating-list-container {
@@ -166,6 +172,9 @@
 
     .preview-right {
         justify-content: flex-start;
+    }
+    #hopped-preview-container {
+        justify-content: flex-end;
     }
 }
 

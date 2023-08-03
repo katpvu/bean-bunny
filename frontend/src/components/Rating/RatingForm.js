@@ -110,7 +110,7 @@ const RatingForm = ({business, closeModal, setCurrentUserRating, currentUserRati
 
             <div className="rating-form-container">
                 <form>
-                    <h1>{currentUserRating ? "Update Your Rating" : "Creating a Rating"}</h1>
+                    <h1>{currentUserRating && sessionUser ? "Update Your Rating" : "Creating a Rating"}</h1>
                     <ul>
                         {errors.map(error => <li key={error} className="error-message">{error}</li>)}
                     </ul>
